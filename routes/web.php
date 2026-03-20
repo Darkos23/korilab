@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\ContactController;
+
+// Public
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/missions', [HomeController::class, 'missions']);
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/team/{slug}', [TeamController::class, 'show']);
+Route::get('/mentions-legales', [HomeController::class, 'mentions'])->name('mentions');
+Route::get('/confidentialite', [HomeController::class, 'privacy'])->name('privacy');
+
+// Auth
+Route::get('/login', [AuthController::class, 'show'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+
+// Dashboard (protégé)
+Route::middleware('auth.admin')->prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/portfolio', [DashboardController::class, 'portfolio']);
+    Route::get('/services', [DashboardController::class, 'services']);
+    Route::get('/site', [DashboardController::class, 'site']);
+
+    // CRUD Portfolio
+    Route::post('/portfolio', [DashboardController::class, 'storePortfolio']);
+    Route::patch('/portfolio/{id}', [DashboardController::class, 'updatePortfolio']);
+    Route::delete('/portfolio/{id}', [DashboardController::class, 'destroyPortfolio']);
+
+    // CRUD Services
+    Route::post('/services', [DashboardController::class, 'storeService']);
+    Route::patch('/services/{id}', [DashboardController::class, 'updateService']);
+    Route::delete('/services/{id}', [DashboardController::class, 'destroyService']);
+
+    // Site settings
+    Route::patch('/site', [DashboardController::class, 'updateSite']);
+
+    // CRUD Team Members (CV)
+    Route::get('/team', [DashboardController::class, 'team']);
+    Route::patch('/team/{id}', [DashboardController::class, 'updateTeamMember']);
+});

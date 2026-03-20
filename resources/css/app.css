@@ -1,0 +1,55 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../**/*.jsx';
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { background: #0a1628; color: #e2e8f0; overflow-x: hidden; }
+}
+
+@layer utilities {
+  .gradient-text { background: linear-gradient(to right, #60a5fa, #93c5fd, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .glass { background: rgba(15,23,42,0.5); backdrop-filter: blur(24px); border: 1px solid rgba(59,130,246,0.12); }
+  .section-padding { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .glow-blue { box-shadow: 0 0 40px rgba(59,130,246,0.3); }
+  .glow-blue-sm { box-shadow: 0 0 20px rgba(59,130,246,0.2); }
+  .card-sl { background: rgba(15,23,42,0.4); border: 1px solid rgba(59,130,246,0.1); border-radius: 1rem; }
+  .sys-label { font-family: monospace; font-size: 0.75rem; color: #60a5fa; letter-spacing: 0.25em; text-transform: uppercase; }
+}
+
+@media (min-width: 768px) {
+  .section-padding { padding-left: 3rem; padding-right: 3rem; }
+}
+@media (min-width: 1024px) {
+  .section-padding { padding-left: 6rem; padding-right: 6rem; }
+}
+@media (min-width: 1280px) {
+  .section-padding { padding-left: 8rem; padding-right: 8rem; }
+}
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 30s linear infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+.animate-float { animation: float 5s ease-in-out infinite; }
+@keyframes pulse-ring { 0% { transform: scale(0.9); opacity: 0.8; } 100% { transform: scale(2); opacity: 0; } }
+.animate-pulse-ring { animation: pulse-ring 2.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
+@keyframes rune-glow { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.5; } }
+.animate-rune { animation: rune-glow 3s ease-in-out infinite; }
+@keyframes gate { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.9; } }
+.animate-gate { animation: gate 4s ease-in-out infinite; }
+@keyframes spin-cw  { to { transform: rotate(360deg);  } }
+@keyframes spin-ccw { to { transform: rotate(-360deg); } }
+.animate-spin-30s { animation: spin-cw  30s linear infinite; }
+.animate-spin-20s { animation: spin-ccw 20s linear infinite; }
+.animate-spin-12s { animation: spin-cw  12s linear infinite; }
+.animate-spin-6s  { animation: spin-cw   6s linear infinite; }
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
