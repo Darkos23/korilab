@@ -83,7 +83,11 @@ export default function Footer({ footer, contactInfo }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-12 border-b border-sky-500/[0.08]">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-5">
-              <CauriLogo color="#38bdf8" />
+              {!isAuth ? (
+                <Link href="/login"><CauriLogo color="#38bdf8" /></Link>
+              ) : (
+                <CauriLogo color="#38bdf8" />
+              )}
               <div>
                 <span className="font-bold text-xl text-white">{header?.logoName ?? "KoriLab"}<span className="text-sky-400">.</span></span>
                 <div className="font-mono text-[9px] text-sky-400/50 tracking-[0.2em] uppercase">{header?.logoSub ?? "Creative Studio"}</div>
@@ -115,9 +119,6 @@ export default function Footer({ footer, contactInfo }) {
           <div className="flex gap-6 items-center">
             <Link href="/mentions-legales" className="text-xs hover:text-sky-400 transition-colors">Mentions légales</Link>
             <Link href="/confidentialite" className="text-xs hover:text-sky-400 transition-colors">Confidentialité</Link>
-            {!isAuth && (
-              <Link href="/login" className="text-slate-800 hover:text-slate-600 transition-colors text-[10px]">·</Link>
-            )}
           </div>
         </div>
       </div>
