@@ -58,6 +58,7 @@ function CauriLogo({ color = "#60a5fa" }) {
 export default function Footer({ footer, contactInfo }) {
   const { url, props } = usePage();
   const header = props.header ?? {};
+  const isAuth = props.auth?.user;
   if (url.startsWith("/dashboard") || url === "/login") return null;
 
   const tagline      = footer?.tagline      ?? "Nous forgeons des expériences numériques légendaires.";
@@ -111,9 +112,12 @@ export default function Footer({ footer, contactInfo }) {
 
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <p className="font-mono text-xs text-slate-700">© {new Date().getFullYear()} {copyright}</p>
-          <div className="flex gap-6">
+          <div className="flex gap-6 items-center">
             <Link href="/mentions-legales" className="text-xs hover:text-sky-400 transition-colors">Mentions légales</Link>
             <Link href="/confidentialite" className="text-xs hover:text-sky-400 transition-colors">Confidentialité</Link>
+            {!isAuth && (
+              <Link href="/login" className="text-slate-800 hover:text-slate-600 transition-colors text-[10px]">·</Link>
+            )}
           </div>
         </div>
       </div>
