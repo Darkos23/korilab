@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { router } from '@inertiajs/react';
 import { Plus, Trash2, ChevronDown, ChevronUp, Save, CheckCircle } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
+import WhatsAppFloat from '@/Components/WhatsAppFloat';
 import { SystemGrid, SystemOrbs, ParticleNetwork, SysWin, SysInput, SysTextarea, SysSelect, SysBtn, SysDivider, Scanlines, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 // ─── helpers ───────────────────────────────────────────────
@@ -330,7 +331,7 @@ export default function DashboardTeam({ admin, members }) {
             <ParticleNetwork />
             <Sidebar admin={admin} />
 
-            <main className="relative z-10 flex-1 p-8 overflow-auto">
+            <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
                 <div className="mb-8">
                     <div className="flex items-center gap-2 mb-1">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)]" />
@@ -348,6 +349,7 @@ export default function DashboardTeam({ admin, members }) {
                     ))}
                 </div>
             </main>
+            <WhatsAppFloat />
             <StatusBar admin={admin} />
         </div>
     );

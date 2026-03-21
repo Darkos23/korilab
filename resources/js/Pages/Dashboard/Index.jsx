@@ -2,6 +2,7 @@ import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, Activity, ExternalLink } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
+import WhatsAppFloat from "@/Components/WhatsAppFloat";
 import { SystemGrid, SystemOrbs, ParticleNetwork, SysWin, StatBadge, SysNotif, SysDivider, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
 
 const QUESTS = [
@@ -114,6 +115,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount })
         </div>
 
       </main>
+      <WhatsAppFloat />
       <StatusBar admin={admin} />
     </div>
   );

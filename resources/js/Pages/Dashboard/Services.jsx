@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { router } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
+import WhatsAppFloat from '@/Components/WhatsAppFloat';
 import { SystemGrid, SystemOrbs, ParticleNetwork, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 const ACCENTS = [
@@ -53,7 +54,7 @@ export default function DashboardServices({ admin, services }) {
             <ParticleNetwork />
             <Sidebar admin={admin} />
 
-            <main className="relative z-10 flex-1 p-8 overflow-auto">
+            <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <div>
@@ -182,6 +183,7 @@ export default function DashboardServices({ admin, services }) {
                     </div>
                 )}
             </main>
+            <WhatsAppFloat />
             <StatusBar admin={admin} />
         </div>
     );
