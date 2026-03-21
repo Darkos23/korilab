@@ -1,7 +1,8 @@
 import { Link, router, usePage } from "@inertiajs/react";
-import { motion } from "framer-motion";
-import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X } from "lucide-react";
 import { Scanlines } from "./SystemLayout";
+import { useState } from "react";
 
 /* ── Cauri traditionnel animé ───────────────────────────── */
 function CauriLogo({ color = "#00a8ff" }) {
@@ -66,8 +67,9 @@ export default function Sidebar({ admin }) {
   const { url } = usePage();
   const logout = () => router.post("/logout");
   const rankColor = RANK_COLOR[admin?.rank] ?? "#00a8ff";
+  const [open, setOpen] = useState(false);
 
-  return (
+  const SidebarContent = () => (
     <aside className="w-64 min-h-screen flex flex-col relative border-r border-[#00a8ff]/10 bg-[#040d1a]">
       <Scanlines />
 
@@ -162,5 +164,51 @@ export default function Sidebar({ admin }) {
         </p>
       </div>
     </aside>
+  );
+
+  return (
+    <>
+      {/* Desktop */}
+      <div className="hidden md:flex">
+        <SidebarContent />
+      </div>
+
+      {/* Mobile toggle button */}
+      <button
+        onClick={() => setOpen(true)}
+        className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center
+          rounded-lg border border-[#00a8ff]/30 bg-[#040d1a] text-[#00a8ff]
+          shadow-[0_0_12px_rgba(0,168,255,0.2)]">
+        <Menu size={18} />
+      </button>
+
+      {/* Mobile overlay + sidebar */}
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              className="md:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ x: -280 }} animate={{ x: 0 }} exit={{ x: -280 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="md:hidden fixed top-0 left-0 z-50 h-full">
+              <div className="relative">
+                <SidebarContent />
+                <button
+                  onClick={() => setOpen(false)}
+                  className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center
+                    rounded-lg border border-[#00a8ff]/20 text-[#00a8ff]/60 hover:text-[#00a8ff]
+                    bg-[#040d1a] transition-colors z-20">
+                  <X size={14} />
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

@@ -26,7 +26,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount })
 
       <Sidebar admin={admin} />
 
-      <main className="relative z-10 flex-1 p-8 overflow-auto">
+      <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
 
         {/* ── Header ── */}
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
@@ -61,7 +61,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount })
         </motion.div>
 
         {/* ── Stats ── */}
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           {stats.map((s, i) => (
             <motion.div key={s.label}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount })
 
         {/* ── Quests ── */}
         <SysWin title="MENU PRINCIPAL" subtitle="Sélectionnez une quête" delay={0.3} glow>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {QUESTS.map((q, i) => (
               <motion.div key={q.href}
                 initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
