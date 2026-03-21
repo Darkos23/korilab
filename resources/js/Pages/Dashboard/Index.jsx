@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
-import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, Activity } from "lucide-react";
+import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, Activity, ExternalLink } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
 import { SystemGrid, SystemOrbs, ParticleNetwork, SysWin, StatBadge, SysNotif, SysDivider, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
 
@@ -31,9 +31,16 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount })
         {/* ── Header ── */}
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
           className="mb-8">
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)] animate-pulse" />
-            <span className="text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">System — Tableau de bord</span>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)] animate-pulse" />
+              <span className="text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">System — Tableau de bord</span>
+            </div>
+            <a href="/" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 px-3 py-1.5 rounded border border-[#00a8ff]/30 text-[#00a8ff] text-xs font-mono hover:bg-[#00a8ff]/10 hover:border-[#00a8ff]/60 transition-all duration-200">
+              <ExternalLink size={12} />
+              Voir le site
+            </a>
           </div>
 
           <h1 className="text-4xl font-black text-white mb-2" style={{ textShadow: "0 0 30px rgba(0,168,255,0.2)" }}>
