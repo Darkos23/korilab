@@ -31,6 +31,14 @@ function SystemFlash({ show }) {
     );
 }
 
+/* ── Protection images ───────────────────────────────────── */
+document.addEventListener('contextmenu', (e) => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+});
+document.addEventListener('dragstart', (e) => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+});
+
 /* ── App root ────────────────────────────────────────────── */
 function Root({ App, props }) {
     const [flash, setFlash] = useState(false);

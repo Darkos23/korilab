@@ -8,6 +8,14 @@
 
 @layer base {
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+  }
   html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   body { background: #040d1a; color: #e2e8f0; overflow-x: hidden; }
 }
