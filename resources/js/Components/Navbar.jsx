@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LayoutDashboard } from "lucide-react";
 import { Link, usePage } from "@inertiajs/react";
 
 /* ── Cauri plein avec motif en découpe ──────────────────── */
@@ -64,7 +64,8 @@ const NAV_LINKS = [
 function cn(...classes) { return classes.filter(Boolean).join(" "); }
 
 export default function Navbar({ header }) {
-  const { url } = usePage();
+  const { url, props } = usePage();
+  const isAuth = props.auth?.user;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -112,6 +113,11 @@ export default function Navbar({ header }) {
         </ul>
 
         <div className="hidden md:flex items-center gap-3">
+          {isAuth && (
+            <Link href="/dashboard" title="Dashboard" className="p-2 rounded-lg text-sky-400/50 hover:text-sky-400 hover:bg-sky-500/[0.08] transition-all duration-200">
+              <LayoutDashboard className="w-4 h-4" />
+            </Link>
+          )}
           <a href="/#contact" className="relative px-5 py-2.5 text-sm font-semibold rounded-xl text-white overflow-hidden group transition-all duration-300 hover:scale-[1.03] premium-border glow-blue-sm hover:glow-blue">
             <span className="relative z-10 bg-gradient-to-r from-sky-300 to-indigo-300 bg-clip-text text-transparent group-hover:from-white group-hover:to-white transition-all">{ctaText}</span>
             <span className="absolute inset-0 bg-gradient-to-r from-sky-600/20 to-indigo-600/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
@@ -135,6 +141,14 @@ export default function Navbar({ header }) {
                   </a>
                 </li>
               ))}
+              {isAuth && (
+                <li>
+                  <Link href="/dashboard" onClick={() => setOpen(false)} className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-sky-400/70 hover:text-sky-400 hover:bg-sky-500/[0.06] rounded-xl transition-all">
+                    <LayoutDashboard className="w-4 h-4" />
+                    Dashboard
+                  </Link>
+                </li>
+              )}
               <li className="pt-2">
                 <a href="/#contact" onClick={() => setOpen(false)} className="block px-4 py-3 text-sm font-semibold text-center rounded-xl premium-border text-sky-300">
                   {ctaText}
