@@ -77,15 +77,15 @@ export default function Footer({ footer, contactInfo }) {
   ];
 
   return (
-    <footer className="bg-[#030308] text-slate-500 border-t border-blue-500/[0.08]">
+    <footer className="bg-[#030308] text-slate-500 border-t border-sky-500/[0.08]">
       <div className="section-padding mx-auto max-w-7xl py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-12 border-b border-blue-500/[0.08]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-12 border-b border-sky-500/[0.08]">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-5">
-              <CauriLogo color="#60a5fa" />
+              <CauriLogo color="#38bdf8" />
               <div>
-                <span className="font-bold text-xl text-white">{header?.logoName ?? "KoriLab"}<span className="text-blue-400">.</span></span>
-                <div className="font-mono text-[9px] text-blue-400/50 tracking-[0.2em] uppercase">{header?.logoSub ?? "Creative Studio"}</div>
+                <span className="font-bold text-xl text-white">{header?.logoName ?? "KoriLab"}<span className="text-sky-400">.</span></span>
+                <div className="font-mono text-[9px] text-sky-400/50 tracking-[0.2em] uppercase">{header?.logoSub ?? "Creative Studio"}</div>
               </div>
             </div>
             <p className="text-sm leading-relaxed max-w-sm mb-6">{tagline}</p>
@@ -93,14 +93,14 @@ export default function Footer({ footer, contactInfo }) {
 
           {footerCols.map(({ title, items }) => (
             <div key={title}>
-              <h3 className="font-mono text-xs text-blue-400 font-semibold mb-4 uppercase tracking-wider">[ {title} ]</h3>
+              <h3 className="font-mono text-xs text-sky-400 font-semibold mb-4 uppercase tracking-wider">[ {title} ]</h3>
               <ul className="space-y-3">
                 {items.map((item) => (
                   <li key={item}>
                     {item.includes("@") || item.startsWith("+") ? (
-                      <span className="text-sm hover:text-blue-400 transition-colors cursor-default">{item}</span>
+                      <span className="text-sm hover:text-sky-400 transition-colors cursor-default">{item}</span>
                     ) : (
-                      <a href="#" className="text-sm hover:text-blue-400 transition-colors">{item}</a>
+                      <a href="#" className="text-sm hover:text-sky-400 transition-colors">{item}</a>
                     )}
                   </li>
                 ))}
@@ -112,8 +112,8 @@ export default function Footer({ footer, contactInfo }) {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <p className="font-mono text-xs text-slate-700">© {new Date().getFullYear()} {copyright}</p>
           <div className="flex gap-6">
-            <Link href="/mentions-legales" className="text-xs hover:text-blue-400 transition-colors">Mentions légales</Link>
-            <Link href="/confidentialite" className="text-xs hover:text-blue-400 transition-colors">Confidentialité</Link>
+            <Link href="/mentions-legales" className="text-xs hover:text-sky-400 transition-colors">Mentions légales</Link>
+            <Link href="/confidentialite" className="text-xs hover:text-sky-400 transition-colors">Confidentialité</Link>
           </div>
         </div>
       </div>

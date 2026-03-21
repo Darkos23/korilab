@@ -51,7 +51,7 @@ function CauriHero() {
   );
 }
 
-const STAT_COLORS = ["text-blue-400", "text-violet-400", "text-amber-400", "text-blue-300"];
+const STAT_COLORS = ["text-sky-400", "text-indigo-400", "text-violet-400", "text-sky-300"];
 const runes = ["ᚠ","ᚢ","ᚦ","ᚨ","ᚱ","ᚲ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ","ᛇ","ᛈ","ᛉ","ᛊ","ᛏ","ᛒ","ᛖ","ᛗ","ᛚ","ᛜ","ᛞ","ᛟ"];
 const floatingCards = [
   { icon: "⚔️",  label: "Design System",    delay: 0,   top: "12%",    right: "-4%"  },
@@ -82,14 +82,15 @@ export default function Hero({ hero, heroStats }) {
   const opacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden bg-[#050814]">
+    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden bg-[#040d1a]">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px)", backgroundSize: "70px 70px" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/[0.06] rounded-full blur-3xl animate-gate" />
-        <div className="absolute top-1/4 -left-64 w-[400px] h-[400px] bg-blue-700/10 rounded-full blur-2xl" />
-        <div className="absolute bottom-1/4 -right-64 w-[360px] h-[360px] bg-violet-700/10 rounded-full blur-2xl" />
+        <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56,189,248,0.06) 0%, transparent 60%)" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-sky-600/[0.04] rounded-full blur-3xl animate-gate" />
+        <div className="absolute top-1/4 -left-64 w-[500px] h-[500px] bg-sky-700/[0.07] rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-64 w-[400px] h-[400px] bg-indigo-700/[0.07] rounded-full blur-3xl" />
         {runes.slice(0, 12).map((r, i) => (
-          <span key={i} className="absolute text-blue-400 font-mono animate-rune select-none"
+          <span key={i} className="absolute text-sky-400/40 font-mono animate-rune select-none"
             style={{ left: `${5 + (i * 8.5) % 90}%`, top: `${10 + (i * 13) % 80}%`, animationDelay: `${i * 0.4}s`, fontSize: `${12 + (i % 3) * 4}px` }}>
             {r}
           </span>
@@ -100,10 +101,10 @@ export default function Hero({ hero, heroStats }) {
         <div className="grid lg:grid-cols-[3fr_2fr] gap-16 items-center">
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="inline-flex items-center gap-2 mb-6">
-              <span className="font-mono text-blue-500/60 text-sm">[</span>
-              <Zap className="w-3.5 h-3.5 text-blue-400" />
+              <span className="font-mono text-sky-500/50 text-sm">[</span>
+              <Zap className="w-3.5 h-3.5 text-sky-400" />
               <span className="sys-label">{badge}</span>
-              <span className="font-mono text-blue-500/60 text-sm">]</span>
+              <span className="font-mono text-sky-500/50 text-sm">]</span>
             </motion.div>
 
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
@@ -119,17 +120,17 @@ export default function Hero({ hero, heroStats }) {
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }} className="flex flex-wrap gap-4 mb-14">
-              <a href="#portfolio" className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 text-white font-semibold glow-blue-sm hover:glow-blue hover:scale-[1.03] transition-all duration-200">
+              <a href="#portfolio" className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-500 text-white font-semibold glow-blue-sm hover:glow-blue hover:scale-[1.03] transition-all duration-300 shadow-lg shadow-sky-500/20">
                 {cta1}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
-              <a href="#contact" className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-500/[0.08] border border-blue-500/20 text-white font-semibold hover:bg-blue-500/[0.15] hover:border-blue-400/40 transition-all duration-200">
+              <a href="#contact" className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl premium-border text-slate-300 font-semibold hover:text-white transition-all duration-300 hover:glow-blue-sm">
                 {cta2}
               </a>
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-blue-500/[0.1]">
+              className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-sky-500/[0.08]">
               {stats.map((s, i) => (
                 <motion.div key={s.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 + i * 0.08 }}>
                   <div className={`text-2xl font-bold ${s.color}`}>{s.value}</div>
@@ -142,19 +143,19 @@ export default function Hero({ hero, heroStats }) {
           <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2 }}
             className="relative hidden lg:flex items-center justify-center">
             <div className="relative w-full aspect-square max-w-[420px] mx-auto">
-              <div className="absolute inset-0 rounded-full bg-blue-500/[0.06] blur-2xl animate-gate" />
-              <div className="absolute inset-0 rounded-full border border-blue-500/20 animate-spin-30s" />
-              <div className="absolute inset-10 rounded-full border border-blue-400/15 animate-spin-20s" />
-              <div className="absolute inset-20 rounded-full border border-violet-500/20 animate-spin-12s" />
+              <div className="absolute inset-0 rounded-full bg-sky-500/[0.05] blur-3xl animate-gate" />
+              <div className="absolute inset-0 rounded-full border border-sky-500/15 animate-spin-30s" />
+              <div className="absolute inset-10 rounded-full border border-indigo-400/10 animate-spin-20s" />
+              <div className="absolute inset-20 rounded-full border border-violet-500/15 animate-spin-12s" />
               <div className="absolute inset-10 animate-spin-6s">
-                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-blue-400 glow-blue-sm" />
+                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-sky-400 glow-blue-sm" />
               </div>
               {/* ── Portail SL autour du cauri ── */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative flex items-center justify-center">
 
                   {/* Anneau externe — tourne lentement */}
-                  <motion.div className="absolute rounded-full border border-blue-400/30"
+                  <motion.div className="absolute rounded-full border border-sky-400/20"
                     style={{ width: 200, height: 200 }}
                     animate={{ rotate: 360 }}
                     transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
@@ -165,7 +166,7 @@ export default function Hero({ hero, heroStats }) {
                         style={{
                           top: "50%", left: "50%",
                           transform: `rotate(${deg}deg) translateY(-100px) translate(-50%,-50%)`,
-                          boxShadow: "0 0 8px 2px rgba(96,165,250,0.8)",
+                          boxShadow: "0 0 8px 2px rgba(56,189,248,0.6)",
                         }}
                       />
                     ))}
@@ -176,7 +177,7 @@ export default function Hero({ hero, heroStats }) {
                     style={{
                       width: 155, height: 155,
                       border: "1px solid transparent",
-                      background: "linear-gradient(#0a1628,#0a1628) padding-box, linear-gradient(to right, rgba(96,165,250,0.4), rgba(139,92,246,0.4), rgba(96,165,250,0.4)) border-box",
+                      background: "linear-gradient(#040d1a,#040d1a) padding-box, linear-gradient(135deg, rgba(56,189,248,0.3), rgba(129,140,248,0.3), rgba(56,189,248,0.2)) border-box",
                     }}
                     animate={{ rotate: -360 }}
                     transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
@@ -187,15 +188,15 @@ export default function Hero({ hero, heroStats }) {
                         style={{
                           top: "50%", left: "50%",
                           transform: `rotate(${deg}deg) translateY(-77px) translate(-50%,-50%)`,
-                          background: "radial-gradient(circle, #a78bfa, #60a5fa)",
-                          boxShadow: "0 0 10px 3px rgba(139,92,246,0.7)",
+                          background: "radial-gradient(circle, #818cf8, #38bdf8)",
+                          boxShadow: "0 0 10px 3px rgba(129,140,248,0.6)",
                         }}
                       />
                     ))}
                   </motion.div>
 
                   {/* Anneau interne — pulse */}
-                  <motion.div className="absolute rounded-full border border-violet-500/25"
+                  <motion.div className="absolute rounded-full border border-indigo-500/20"
                     style={{ width: 118, height: 118 }}
                     animate={{ scale: [1, 1.04, 1], opacity: [0.5, 1, 0.5] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -203,7 +204,7 @@ export default function Hero({ hero, heroStats }) {
 
                   {/* Glow central */}
                   <motion.div className="absolute rounded-full"
-                    style={{ width: 90, height: 90, background: "radial-gradient(circle, rgba(96,165,250,0.12) 0%, transparent 70%)", filter: "blur(8px)" }}
+                    style={{ width: 90, height: 90, background: "radial-gradient(circle, rgba(56,189,248,0.1) 0%, rgba(129,140,248,0.08) 50%, transparent 70%)", filter: "blur(8px)" }}
                     animate={{ scale: [0.9, 1.15, 0.9], opacity: [0.5, 1, 0.5] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   />
@@ -216,11 +217,11 @@ export default function Hero({ hero, heroStats }) {
                       transition={{ duration: 8 + i * 1.2, repeat: Infinity, ease: "linear" }}
                       style={{ width: 130 + i * 4, height: 130 + i * 4, position: "absolute" }}
                     >
-                      <div className="absolute w-1 h-1 rounded-full bg-blue-300"
+                      <div className="absolute w-1 h-1 rounded-full bg-sky-300"
                         style={{
                           top: 0, left: "50%", transform: "translate(-50%,-50%)",
-                          opacity: 0.4 + (i % 3) * 0.2,
-                          boxShadow: "0 0 6px rgba(147,197,253,0.8)",
+                          opacity: 0.3 + (i % 3) * 0.15,
+                          boxShadow: "0 0 6px rgba(56,189,248,0.6)",
                         }}
                       />
                     </motion.div>
@@ -245,9 +246,9 @@ export default function Hero({ hero, heroStats }) {
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5">
-        <span className="font-mono text-[10px] text-blue-500/50 tracking-[0.3em] uppercase">Scroll</span>
+        <span className="font-mono text-[10px] text-sky-500/40 tracking-[0.3em] uppercase">Scroll</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-px h-8 bg-gradient-to-b from-blue-500/50 to-transparent" />
+          className="w-px h-8 bg-gradient-to-b from-sky-400/40 to-transparent" />
       </motion.div>
     </section>
   );

@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Link, usePage } from "@inertiajs/react";
 
 /* ── Cauri plein avec motif en découpe ──────────────────── */
-function CauriLogo({ color = "#60a5fa" }) {
+function CauriLogo({ color = "#38bdf8" }) {
   const C = color;
   return (
     <motion.div className="relative flex items-center justify-center" style={{ width: 28, height: 40 }}>
@@ -83,7 +83,7 @@ export default function Navbar({ header }) {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-      scrolled ? "py-3 bg-[#050814]/85 backdrop-blur-xl border-b border-blue-500/[0.12] shadow-lg shadow-blue-900/20" : "py-5 bg-transparent"
+      scrolled ? "py-3 bg-[#040d1a]/90 backdrop-blur-2xl border-b border-sky-500/[0.1] shadow-lg shadow-black/40" : "py-5 bg-transparent"
     )}>
       <nav className="section-padding mx-auto max-w-7xl flex items-center justify-between">
         <Link href="/" className="group flex items-center gap-2.5">
@@ -91,12 +91,12 @@ export default function Navbar({ header }) {
           <div className="flex flex-col leading-none">
             <motion.span
               className="font-extrabold text-lg tracking-tight text-white"
-              animate={{ textShadow: ["0 0 8px rgba(96,165,250,0.2)", "0 0 18px rgba(96,165,250,0.6)", "0 0 8px rgba(96,165,250,0.2)"] }}
+              animate={{ textShadow: ["0 0 8px rgba(56,189,248,0.2)", "0 0 20px rgba(56,189,248,0.5)", "0 0 8px rgba(56,189,248,0.2)"] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              {logoName}<span className="text-blue-400">.</span>
+              {logoName}<span className="text-sky-400">.</span>
             </motion.span>
-            <span className="font-mono text-[9px] text-blue-400/60 tracking-[0.2em] uppercase">{tagline}</span>
+            <span className="font-mono text-[9px] text-sky-400/50 tracking-[0.25em] uppercase">{tagline}</span>
           </div>
         </Link>
 
@@ -105,20 +105,20 @@ export default function Navbar({ header }) {
             <li key={link.href}>
               <a href={link.href} className="relative px-4 py-2 text-sm font-medium text-slate-400 hover:text-white rounded-lg transition-all duration-200 group">
                 <span className="relative z-10">{link.label}</span>
-                <span className="absolute inset-0 rounded-lg bg-blue-500/0 group-hover:bg-blue-500/[0.08] transition-colors border border-transparent group-hover:border-blue-500/20" />
+                <span className="absolute inset-0 rounded-lg bg-sky-500/0 group-hover:bg-sky-500/[0.06] transition-all duration-300 border border-transparent group-hover:border-sky-500/15" />
               </a>
             </li>
           ))}
         </ul>
 
         <div className="hidden md:flex items-center gap-3">
-          <a href="/#contact" className="relative px-5 py-2.5 text-sm font-semibold rounded-xl bg-blue-600 text-white overflow-hidden group transition-all duration-200 hover:scale-[1.03] glow-blue-sm hover:glow-blue">
-            <span className="relative z-10">{ctaText}</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <a href="/#contact" className="relative px-5 py-2.5 text-sm font-semibold rounded-xl text-white overflow-hidden group transition-all duration-300 hover:scale-[1.03] premium-border glow-blue-sm hover:glow-blue">
+            <span className="relative z-10 bg-gradient-to-r from-sky-300 to-indigo-300 bg-clip-text text-transparent group-hover:from-white group-hover:to-white transition-all">{ctaText}</span>
+            <span className="absolute inset-0 bg-gradient-to-r from-sky-600/20 to-indigo-600/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
           </a>
         </div>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-blue-500/[0.08] transition-colors">
+        <button onClick={() => setOpen(!open)} className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-sky-500/[0.08] transition-colors">
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </nav>
@@ -126,17 +126,17 @@ export default function Navbar({ header }) {
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden bg-[#050814]/95 backdrop-blur-xl border-t border-blue-500/[0.1]">
+            className="md:hidden overflow-hidden bg-[#040d1a]/95 backdrop-blur-2xl border-t border-sky-500/[0.08]">
             <ul className="section-padding py-4 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} onClick={() => setOpen(false)} className="block px-4 py-3 text-sm font-medium text-slate-400 hover:text-white hover:bg-blue-500/[0.06] rounded-xl transition-all">
+                  <a href={link.href} onClick={() => setOpen(false)} className="block px-4 py-3 text-sm font-medium text-slate-400 hover:text-white hover:bg-sky-500/[0.06] rounded-xl transition-all">
                     {link.label}
                   </a>
                 </li>
               ))}
               <li className="pt-2">
-                <a href="/#contact" onClick={() => setOpen(false)} className="block px-4 py-3 text-sm font-semibold text-center rounded-xl bg-blue-600 text-white">
+                <a href="/#contact" onClick={() => setOpen(false)} className="block px-4 py-3 text-sm font-semibold text-center rounded-xl premium-border text-sky-300">
                   {ctaText}
                 </a>
               </li>
