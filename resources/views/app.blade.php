@@ -9,6 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="KoriLab">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="description" content="KoriLab — Studio de design et développement web. Nous créons des expériences digitales de haut niveau pour les startups et entreprises.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
