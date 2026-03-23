@@ -198,14 +198,14 @@ export default function Portfolio({ projects }) {
               <motion.div key={project.id} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }} whileHover={project.comingSoon ? {} : { y: -6 }}
                 className={cn(
-                  "group transition-all duration-300 relative",
-                  project.category === "Mobile" || project.category === "Desktop" ? "flex flex-col items-center" : "card-sl overflow-hidden",
+                  "group card-sl overflow-hidden transition-all duration-300 relative",
+                  project.category === "Mobile" ? "flex flex-col items-center" : "",
                   project.comingSoon ? "cursor-default" : "cursor-pointer hover:border-blue-400/25"
                 )}
-                style={project.comingSoon && project.category !== "Mobile" && project.category !== "Desktop" ? { borderColor: "rgba(139,92,246,0.15)", boxShadow: "0 0 12px rgba(139,92,246,0.04)" } : {}}
+                style={project.comingSoon ? { borderColor: "rgba(139,92,246,0.15)", boxShadow: "0 0 12px rgba(139,92,246,0.04)" } : {}}
                 onClick={() => !project.comingSoon && project.link && window.open(project.link, "_blank")}>
 
-                {project.comingSoon && project.category !== "Mobile" && project.category !== "Desktop" && (
+                {project.comingSoon && (
                   <motion.div className="absolute inset-0 rounded-[inherit] pointer-events-none z-20"
                     animate={{ opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     style={{ boxShadow: "inset 0 0 0 1px rgba(139,92,246,0.15)" }} />
@@ -214,8 +214,10 @@ export default function Portfolio({ projects }) {
                 {project.category === "Desktop" ? (
                   /* ── iMac SL card ── */
                   <>
-                    <IMacCard project={project} />
-                    <div className={cn("p-5 w-full text-center card-sl rounded-2xl mt-3", project.comingSoon && "opacity-40 blur-[1.5px] select-none")}>
+                    <div className="bg-[#06080f] flex justify-center px-4 pt-4 pb-1">
+                      <IMacCard project={project} />
+                    </div>
+                    <div className={cn("p-5 text-center", project.comingSoon && "opacity-40 blur-[1.5px] select-none")}>
                       <div className="flex flex-col items-center gap-1 mb-2">
                         <h3 className="font-bold text-white">{project.title}</h3>
                         <span className="text-xs font-mono px-2 py-1 rounded-md bg-blue-500/[0.08] text-blue-400 border border-blue-500/[0.12]">{project.category}</span>
