@@ -243,7 +243,6 @@ export default function Missions({ projects = [] }) {
                   )}
                 </motion.div>
               ))}
-            </AnimatePresence>
           </div>
         </div>
       </div>

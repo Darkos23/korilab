@@ -192,8 +192,7 @@ export default function Portfolio({ projects }) {
           </div>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          <AnimatePresence>
+        <div key={active} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {visible.map((project) => (
               <motion.div key={project.id} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }} whileHover={project.comingSoon ? {} : { y: -6 }}
@@ -363,7 +362,6 @@ export default function Portfolio({ projects }) {
                 </div>
               </motion.div>
             ))}
-          </AnimatePresence>
         </div>
 
         <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.4 }} className="text-center mt-10">
