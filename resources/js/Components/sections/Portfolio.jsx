@@ -344,7 +344,7 @@ export default function Portfolio({ projects }) {
                   </div>
                 )}
 
-                <div className={cn("p-5 w-full", project.category === "Mobile" && "text-center card-sl rounded-2xl mt-3", project.comingSoon && "opacity-40 blur-[1.5px] select-none")}>
+                {project.category !== "Desktop" && <div className={cn("p-5 w-full", project.category === "Mobile" && "text-center card-sl rounded-2xl mt-3", project.comingSoon && "opacity-40 blur-[1.5px] select-none")}>
                   <div className={cn("flex mb-2", project.category === "Mobile" ? "flex-col items-center gap-1" : "items-start justify-between")}>
                     <h3 className="font-bold text-white">{project.title}</h3>
                     {project.comingSoon ? (
@@ -359,7 +359,7 @@ export default function Portfolio({ projects }) {
                       <span key={tag} className="text-xs px-2 py-1 bg-blue-500/[0.06] text-blue-400 rounded-md font-medium border border-blue-500/[0.1]">{tag}</span>
                     ))}
                   </div>
-                </div>
+                </div>}
               </motion.div>
             ))}
         </div>
