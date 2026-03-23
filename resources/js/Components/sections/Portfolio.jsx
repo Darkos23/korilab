@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "@inertiajs/react";
 import { cn } from "../../lib/utils";
 
-const categories = ["Tous", "Web", "Mobile", "Branding", "UI/UX"];
+const categories = ["Tous", "Web", "Mobile", "Branding", "Desktop"];
 const RUNES = ["ᚦ","ᚨ","ᚱ","ᚲ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ","ᛇ","ᛈ","ᛉ","ᛊ","ᛏ","ᛒ","ᛖ","ᛗ","ᛚ","ᛜ","ᛞ","ᛟ"];
 
 function ComingSoonOverlay() {
