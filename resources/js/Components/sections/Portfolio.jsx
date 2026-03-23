@@ -192,10 +192,10 @@ export default function Portfolio({ projects }) {
           </div>
         </motion.div>
 
-        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          <AnimatePresence mode="popLayout">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <AnimatePresence>
             {visible.map((project) => (
-              <motion.div key={project.id} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
+              <motion.div key={project.id} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }} whileHover={project.comingSoon ? {} : { y: -6 }}
                 className={cn(
                   "group card-sl overflow-hidden transition-all duration-300 relative",
@@ -364,7 +364,7 @@ export default function Portfolio({ projects }) {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
         <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.4 }} className="text-center mt-10">
           <Link href="/missions" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-blue-500/30 text-blue-400 font-semibold hover:bg-blue-500/[0.1] hover:border-blue-400/50 transition-all duration-200">

@@ -166,10 +166,10 @@ export default function Missions({ projects = [] }) {
       {/* Grid */}
       <div className="section-padding py-16">
         <div className="mx-auto max-w-7xl">
-          <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <AnimatePresence mode="popLayout">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <AnimatePresence>
               {filtered.map((project) => (
-                <motion.div key={project.id} layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
+                <motion.div key={project.id} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }} whileHover={project.comingSoon ? {} : { y: -6 }}
                   className={cn(
                     "group card-sl overflow-hidden transition-all duration-300 relative",
@@ -244,7 +244,7 @@ export default function Missions({ projects = [] }) {
                 </motion.div>
               ))}
             </AnimatePresence>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
