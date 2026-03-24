@@ -1,13 +1,75 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ArrowLeft } from "lucide-react";
+import { ArrowUpRight, ArrowLeft, ChevronLeft, ChevronRight, X, Expand } from "lucide-react";
 import { Link } from "@inertiajs/react";
 import { cn } from "../lib/utils";
 
 const categories = ["Tous", "Web", "Mobile", "Branding", "Desktop"];
 const RUNES = ["ᚦ","ᚨ","ᚱ","ᚲ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ","ᛇ","ᛈ","ᛉ","ᛊ"];
 
-function IMacCard({ project }) {
+function Lightbox({ images, startIdx, title, onClose }) {
+  const [idx, setIdx] = useState(startIdx);
+
+  useEffect(() => {
+    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  const prev = () => setIdx(i => (i - 1 + images.length) % images.length);
+  const next = () => setIdx(i => (i + 1) % images.length);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{ background: "rgba(2,4,12,0.95)", backdropFilter: "blur(8px)" }}
+      onClick={onClose}
+    >
+      <button onClick={onClose} className="absolute top-5 right-5 w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all z-10">
+        <X className="w-5 h-5" />
+      </button>
+      <div className="absolute top-5 left-1/2 -translate-x-1/2 font-mono text-xs text-slate-500 tracking-widest">
+        {title} — {idx + 1} / {images.length}
+      </div>
+      <div className="relative w-full h-full flex items-center justify-center px-16 py-16" onClick={e => e.stopPropagation()}>
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={idx}
+            src={images[idx]}
+            alt={`${title} ${idx + 1}`}
+            className="max-w-full max-h-full rounded-xl object-contain"
+            style={{ boxShadow: "0 0 60px rgba(59,130,246,0.15), 0 24px 64px rgba(0,0,0,0.8)" }}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ duration: 0.25 }}
+          />
+        </AnimatePresence>
+      </div>
+      {images.length > 1 && (
+        <>
+          <button onClick={e => { e.stopPropagation(); prev(); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all">
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button onClick={e => { e.stopPropagation(); next(); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all">
+            <ChevronRight className="w-5 h-5" />
+          </button>
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5">
+            {images.map((_, i) => (
+              <button key={i} onClick={e => { e.stopPropagation(); setIdx(i); }}
+                className={cn("w-1.5 h-1.5 rounded-full transition-all", i === idx ? "bg-blue-400 scale-125" : "bg-slate-600 hover:bg-slate-400")} />
+            ))}
+          </div>
+        </>
+      )}
+    </motion.div>
+  );
+}
+
+function IMacCard({ project, onOpen }) {
   const images = project.images?.length ? project.images : [project.image];
   const [idx, setIdx] = useState(0);
 
@@ -31,7 +93,7 @@ function IMacCard({ project }) {
             padding: "6px 6px 10px 6px",
             boxShadow: "0 0 40px rgba(59,130,246,0.12), 0 12px 32px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.07)"
           }}>
-          <div className="relative overflow-hidden rounded-lg bg-black" style={{ aspectRatio: "16/10" }}>
+          <div className="relative overflow-hidden rounded-lg bg-black cursor-pointer" style={{ aspectRatio: "16/10" }} onClick={e => { e.stopPropagation(); onOpen(idx); }}>
             <AnimatePresence mode="crossfade">
               <motion.img
                 key={idx}
@@ -54,9 +116,14 @@ function IMacCard({ project }) {
               className="absolute inset-0 z-20 flex flex-col justify-between p-3"
               style={{ background: "linear-gradient(180deg, rgba(5,8,20,0.88) 0%, transparent 45%, rgba(5,8,20,0.92) 100%)" }}
             >
-              <div className="flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-                <span className="font-mono text-[8px] text-blue-400 tracking-[0.25em] uppercase">[ Système — Desktop ]</span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+                  <span className="font-mono text-[8px] text-blue-400 tracking-[0.25em] uppercase">[ Système — Desktop ]</span>
+                </div>
+                <div className="w-5 h-5 rounded bg-blue-500/20 border border-blue-400/30 flex items-center justify-center">
+                  <Expand className="w-2.5 h-2.5 text-blue-400" />
+                </div>
               </div>
               <div className="space-y-1.5">
                 <div className="flex justify-between">
@@ -130,10 +197,14 @@ function ComingSoonOverlay() {
 
 export default function Missions({ projects = [] }) {
   const [active, setActive] = useState("Tous");
+  const [lightbox, setLightbox] = useState(null);
   const filtered = active === "Tous" ? projects : projects.filter((p) => p.category === active);
 
   return (
     <div className="min-h-screen bg-[#050814]">
+      <AnimatePresence>
+        {lightbox && <Lightbox images={lightbox.images} startIdx={lightbox.startIdx} title={lightbox.title} onClose={() => setLightbox(null)} />}
+      </AnimatePresence>
       {/* Header */}
       <div className="section-padding pt-24 pb-12 border-b border-blue-500/[0.08]">
         <div className="mx-auto max-w-7xl">
@@ -186,7 +257,7 @@ export default function Missions({ projects = [] }) {
                   {project.category === "Desktop" ? (
                     <>
                       <div className="bg-[#06080f] flex justify-center px-4 pt-4 pb-1">
-                        <IMacCard project={project} />
+                        <IMacCard project={project} onOpen={(i) => setLightbox({ images: project.images?.length ? project.images : [project.image], startIdx: i, title: project.title })} />
                       </div>
                       <div className={cn("p-5 text-center", project.comingSoon && "opacity-40 blur-[1.5px] select-none")}>
                         <div className="flex flex-col items-center gap-1 mb-2">
