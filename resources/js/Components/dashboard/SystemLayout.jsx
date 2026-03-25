@@ -88,8 +88,8 @@ export function ParticleNetwork() {
 /* ─── Scanlines ─────────────────────────────────────────── */
 export function Scanlines() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.025]"
-      style={{ backgroundImage: "repeating-linear-gradient(0deg,#00cfff,#00cfff 1px,transparent 1px,transparent 4px)" }} />
+    <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.04]"
+      style={{ backgroundImage: "repeating-linear-gradient(0deg,#ffffff,#ffffff 1px,transparent 1px,transparent 5px)" }} />
   );
 }
 
@@ -141,24 +141,25 @@ export function SysWin({ title, subtitle, children, className = "", glow = false
     <motion.div
       initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
-      className={`relative border border-[#00a8ff]/20 rounded-xl overflow-hidden
-        bg-[#0d2a42]/70 backdrop-blur-sm
-        ${glow ? "shadow-[0_0_30px_rgba(0,168,255,0.08),0_0_0_1px_rgba(0,168,255,0.05),inset_0_0_30px_rgba(0,168,255,0.02)]" : ""}
+      className={`relative border border-white/20 rounded-sm overflow-hidden
+        bg-white/[0.03] backdrop-blur-sm
+        ${glow ? "shadow-[0_0_30px_rgba(255,255,255,0.06),inset_0_0_30px_rgba(255,255,255,0.02)]" : ""}
         ${className}`}
-      style={{ outline: "1px solid rgba(0,168,255,0.06)", outlineOffset: "3px" }}
+      style={{ boxShadow: glow ? "0 0 30px rgba(255,255,255,0.06)" : "0 0 0 1px rgba(255,255,255,0.05)" }}
     >
       <Scanlines />
       {/* Top bar */}
-      <div className="relative z-10 flex items-center gap-3 px-4 py-2.5 border-b border-[#00a8ff]/10 bg-[#00a8ff]/[0.04]">
+      <div className="relative z-10 flex items-center gap-3 px-4 py-2.5 border-b border-white/10 bg-white/[0.03]">
         <div className="flex gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)]" />
-          <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff]/30" />
-          <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff]/15" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.6)]" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/15" />
         </div>
-        <span className="text-[10px] font-mono text-[#00a8ff]/60 uppercase tracking-[0.25em]">{title}</span>
-        {subtitle && <span className="text-[10px] font-mono text-[#00a8ff]/30 ml-1">— {subtitle}</span>}
+        <span className="text-[10px] font-mono text-white/60 uppercase tracking-[0.25em]"
+          style={{ textShadow: "0 0 8px rgba(255,255,255,0.4)" }}>{title}</span>
+        {subtitle && <span className="text-[10px] font-mono text-white/30 ml-1">— {subtitle}</span>}
         <div className="ml-auto flex gap-1">
-          {[...Array(4)].map((_, i) => <div key={i} className="w-3 h-px bg-[#00a8ff]/20" />)}
+          {[...Array(4)].map((_, i) => <div key={i} className="w-3 h-px bg-white/15" />)}
         </div>
       </div>
       <div className="relative z-10 p-5">{children}</div>
@@ -169,20 +170,19 @@ export function SysWin({ title, subtitle, children, className = "", glow = false
 /* ─── Stat badge ────────────────────────────────────────── */
 export function StatBadge({ label, value, icon: Icon, sub }) {
   return (
-    <div className="relative border border-[#00a8ff]/15 rounded-xl bg-[#0d2a42]/70 p-5 overflow-hidden group hover:border-[#00a8ff]/35 transition-all duration-300">
+    <div className="relative border border-white/15 rounded-sm bg-white/[0.03] p-5 overflow-hidden group hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all duration-300">
       <Scanlines />
       <div className="relative z-10">
         <div className="flex items-start justify-between mb-3">
-          {Icon && <Icon className="w-4 h-4 text-[#00a8ff]/60" />}
-          <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)] animate-pulse" />
+          {Icon && <Icon className="w-4 h-4 text-white/40" />}
+          <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.6)] animate-pulse" />
         </div>
         <div className="text-3xl font-black text-white mb-1"
-          style={{ textShadow: "0 0 20px rgba(0,168,255,0.4)" }}>{value}</div>
-        <div className="text-[10px] font-mono text-[#00a8ff]/50 uppercase tracking-[0.2em]">{label}</div>
+          style={{ textShadow: "0 0 20px rgba(255,255,255,0.5)" }}>{value}</div>
+        <div className="text-[10px] font-mono text-white/40 uppercase tracking-[0.2em]">{label}</div>
         {sub && <div className="text-[10px] text-white/20 mt-1">{sub}</div>}
       </div>
-      {/* Corner glow */}
-      <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full bg-[#00a8ff]/5 blur-xl group-hover:bg-[#00a8ff]/10 transition-all" />
+      <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full bg-white/[0.03] blur-xl group-hover:bg-white/[0.06] transition-all" />
     </div>
   );
 }
@@ -193,10 +193,10 @@ export function SysNotif({ children }) {
     <motion.div
       initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 1.2, duration: 0.5 }}
-      className="border border-[#00a8ff]/15 rounded-lg px-4 py-3 bg-[#00a8ff]/[0.04] flex items-center gap-3"
+      className="border border-white/15 rounded-sm px-4 py-3 bg-white/[0.03] flex items-center gap-3"
     >
-      <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)] animate-pulse flex-shrink-0" />
-      <p className="text-xs font-mono text-[#00a8ff]/40 italic">{children}</p>
+      <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.6)] animate-pulse flex-shrink-0" />
+      <p className="text-xs font-mono text-white/40 italic">{children}</p>
     </motion.div>
   );
 }
@@ -205,10 +205,11 @@ export function SysNotif({ children }) {
 export function SysInput({ label, ...props }) {
   return (
     <div>
-      {label && <label className="block text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">{label}</label>}
+      {label && <label className="block text-[10px] font-mono text-white/40 uppercase tracking-widest mb-1.5"
+        style={{ textShadow: "0 0 6px rgba(255,255,255,0.2)" }}>{label}</label>}
       <input
-        className="w-full bg-white/[0.04] border border-[#00a8ff]/20 rounded-lg px-3 py-2 text-white text-sm
-          focus:border-[#00a8ff]/50 focus:shadow-[0_0_10px_rgba(0,168,255,0.1)] outline-none transition-all
+        className="w-full bg-white/[0.04] border border-white/15 rounded-sm px-3 py-2 text-white text-sm
+          focus:border-white/40 focus:shadow-[0_0_10px_rgba(255,255,255,0.08)] outline-none transition-all
           placeholder-white/10 font-mono"
         {...props}
       />
@@ -219,10 +220,11 @@ export function SysInput({ label, ...props }) {
 export function SysTextarea({ label, rows = 3, ...props }) {
   return (
     <div>
-      {label && <label className="block text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">{label}</label>}
+      {label && <label className="block text-[10px] font-mono text-white/40 uppercase tracking-widest mb-1.5"
+        style={{ textShadow: "0 0 6px rgba(255,255,255,0.2)" }}>{label}</label>}
       <textarea rows={rows}
-        className="w-full bg-white/[0.04] border border-[#00a8ff]/20 rounded-lg px-3 py-2 text-white text-sm
-          focus:border-[#00a8ff]/50 focus:shadow-[0_0_10px_rgba(0,168,255,0.1)] outline-none resize-none transition-all
+        className="w-full bg-white/[0.04] border border-white/15 rounded-sm px-3 py-2 text-white text-sm
+          focus:border-white/40 focus:shadow-[0_0_10px_rgba(255,255,255,0.08)] outline-none resize-none transition-all
           placeholder-white/10 font-mono"
         {...props}
       />
@@ -233,13 +235,14 @@ export function SysTextarea({ label, rows = 3, ...props }) {
 export function SysSelect({ label, options, ...props }) {
   return (
     <div>
-      {label && <label className="block text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">{label}</label>}
+      {label && <label className="block text-[10px] font-mono text-white/40 uppercase tracking-widest mb-1.5"
+        style={{ textShadow: "0 0 6px rgba(255,255,255,0.2)" }}>{label}</label>}
       <select
-        className="w-full bg-white/[0.04] border border-[#00a8ff]/20 rounded-lg px-3 py-2 text-white text-sm
-          focus:border-[#00a8ff]/50 outline-none transition-all font-mono"
+        className="w-full bg-white/[0.06] border border-white/15 rounded-sm px-3 py-2 text-white text-sm
+          focus:border-white/40 outline-none transition-all font-mono"
         {...props}
       >
-        {options.map(o => <option key={o.value ?? o} value={o.value ?? o}>{o.label ?? o}</option>)}
+        {options.map(o => <option key={o.value ?? o} value={o.value ?? o} className="bg-[#0e2f4a]">{o.label ?? o}</option>)}
       </select>
     </div>
   );
@@ -249,9 +252,9 @@ export function SysSelect({ label, options, ...props }) {
 export function SysBtn({ children, variant = "primary", className = "", ...props }) {
   const base = "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-mono transition-all duration-200 disabled:opacity-50";
   const variants = {
-    primary: "border border-[#00a8ff]/40 bg-[#00a8ff]/10 text-[#00a8ff] hover:bg-[#00a8ff]/20 hover:border-[#00a8ff]/60 hover:shadow-[0_0_15px_rgba(0,168,255,0.15)]",
-    danger:  "border border-red-500/30 bg-red-500/5 text-red-400 hover:bg-red-500/15 hover:border-red-500/50",
-    ghost:   "border border-white/5 bg-white/[0.03] text-white/40 hover:bg-white/[0.06] hover:text-white/60",
+    primary: "border border-white/30 bg-white/[0.06] text-white hover:bg-white/[0.12] hover:border-white/50 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]",
+    danger:  "border border-red-400/30 bg-red-400/[0.05] text-red-300 hover:bg-red-400/10 hover:border-red-400/50",
+    ghost:   "border border-white/10 bg-white/[0.02] text-white/40 hover:bg-white/[0.06] hover:text-white/60",
   };
   return <button className={`${base} ${variants[variant]} ${className}`} {...props}>{children}</button>;
 }
@@ -281,24 +284,24 @@ export function StatusBar({ admin }) {
   }, []);
   const rankColor = RANK_COLORS[admin?.rank] ?? '#00a8ff';
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#00a8ff]/10 bg-[#091e30]/95 backdrop-blur-sm flex items-center px-5 gap-4"
+    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-black/50 backdrop-blur-sm flex items-center px-5 gap-4"
       style={{ height: 26 }}>
       <div className="flex items-center gap-2">
-        <motion.div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff]"
-          animate={{ opacity: [1, 0.3, 1], boxShadow: ['0 0 4px #00a8ff', '0 0 8px #00a8ff', '0 0 4px #00a8ff'] }}
+        <motion.div className="w-1.5 h-1.5 rounded-full bg-white"
+          animate={{ opacity: [1, 0.3, 1], boxShadow: ['0 0 4px rgba(255,255,255,0.8)', '0 0 8px rgba(255,255,255,0.8)', '0 0 4px rgba(255,255,255,0.8)'] }}
           transition={{ duration: 1.8, repeat: Infinity }} />
-        <span className="text-[8px] font-mono text-[#00a8ff]/70 uppercase tracking-[0.35em]">Système Actif</span>
+        <span className="text-[8px] font-mono text-white/50 uppercase tracking-[0.35em]">Système Actif</span>
       </div>
-      <span className="text-[#00a8ff]/20 text-[8px]">·</span>
-      <span className="text-[8px] font-mono text-[#00a8ff]/40 uppercase tracking-widest">Joueur : {admin?.name ?? '—'}</span>
-      <span className="text-[#00a8ff]/20 text-[8px]">·</span>
-      <span className="text-[8px] font-mono uppercase tracking-widest" style={{ color: rankColor + 'aa' }}>
+      <span className="text-white/15 text-[8px]">·</span>
+      <span className="text-[8px] font-mono text-white/30 uppercase tracking-widest">Joueur : {admin?.name ?? '—'}</span>
+      <span className="text-white/15 text-[8px]">·</span>
+      <span className="text-[8px] font-mono uppercase tracking-widest" style={{ color: rankColor + 'cc', textShadow: `0 0 8px ${rankColor}80` }}>
         Rang {admin?.rank ?? '—'}-Class
       </span>
       <div className="ml-auto flex items-center gap-3">
-        <span className="text-[8px] font-mono text-white/20 tabular-nums">{time}</span>
-        <span className="text-[#00a8ff]/15 text-[8px]">·</span>
-        <span className="text-[8px] font-mono text-[#00a8ff]/20 tracking-widest">KoriLab v1.0</span>
+        <span className="text-[8px] font-mono text-white/25 tabular-nums">{time}</span>
+        <span className="text-white/10 text-[8px]">·</span>
+        <span className="text-[8px] font-mono text-white/15 tracking-widest">KoriLab v1.0</span>
       </div>
     </div>
   );
@@ -307,10 +310,11 @@ export function StatusBar({ admin }) {
 /* ─── Section divider ───────────────────────────────────── */
 export function SysDivider({ label }) {
   return (
-    <div className="flex items-center gap-3 my-5 opacity-30">
-      <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#00a8ff]" />
-      <span className="text-[10px] font-mono text-[#00a8ff] tracking-widest">◈ {label} ◈</span>
-      <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#00a8ff]" />
+    <div className="flex items-center gap-3 my-5 opacity-40">
+      <div className="flex-1 h-px bg-gradient-to-r from-transparent to-white/50" />
+      <span className="text-[10px] font-mono text-white/60 tracking-widest"
+        style={{ textShadow: "0 0 8px rgba(255,255,255,0.4)" }}>◈ {label} ◈</span>
+      <div className="flex-1 h-px bg-gradient-to-l from-transparent to-white/50" />
     </div>
   );
 }

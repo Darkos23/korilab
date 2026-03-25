@@ -36,11 +36,11 @@ function SkillsEditor({ skills, onChange }) {
             {skills.map((sk,i) => (
                 <div key={i} className="flex gap-2 items-center">
                     <input value={sk.name} onChange={e=>update(i,'name',e.target.value)} placeholder="Compétence"
-                        className="flex-1 bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10" />
+                        className="flex-1 bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10" />
                     <input value={sk.category} onChange={e=>update(i,'category',e.target.value)} placeholder="Catégorie" style={{width:100}}
-                        className="bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10" />
+                        className="bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10" />
                     <input type="number" min={0} max={100} value={sk.level} onChange={e=>update(i,'level',e.target.value)} style={{width:60}}
-                        className="bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-2 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 text-center" />
+                        className="bg-white/[0.04] border border-white/15 rounded-sm px-2 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 text-center" />
                     <span className="text-[9px] font-mono text-[#00a8ff]/30 w-6">{sk.level}%</span>
                     <button onClick={()=>remove(i)} className="text-red-400/30 hover:text-red-400 transition-colors"><Trash2 className="w-3.5 h-3.5"/></button>
                 </div>
@@ -84,7 +84,7 @@ function ExperienceEditor({ experience, onChange }) {
                                 {(exp.missions??[]).map((m,j) => (
                                     <div key={j} className="flex gap-2">
                                         <input value={m} onChange={e=>updM(i,j,e.target.value)}
-                                            className="flex-1 bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10" />
+                                            className="flex-1 bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10" />
                                         <button onClick={()=>removeM(i,j)} className="text-red-400/30 hover:text-red-400"><Trash2 className="w-3.5 h-3.5"/></button>
                                     </div>
                                 ))}
@@ -113,11 +113,11 @@ function EducationEditor({ education, onChange }) {
             {education.map((edu,i) => (
                 <div key={i} className="grid grid-cols-[80px_1fr_1fr_auto] gap-2 items-center">
                     <input value={edu.year}   onChange={e=>update(i,'year',e.target.value)}   placeholder="Année"
-                        className="bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10"/>
+                        className="bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
                     <input value={edu.school} onChange={e=>update(i,'school',e.target.value)} placeholder="École"
-                        className="bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10"/>
+                        className="bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
                     <input value={edu.degree} onChange={e=>update(i,'degree',e.target.value)} placeholder="Diplôme"
-                        className="bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10"/>
+                        className="bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
                     <button onClick={()=>remove(i)} className="text-red-400/30 hover:text-red-400"><Trash2 className="w-3.5 h-3.5"/></button>
                 </div>
             ))}
@@ -138,11 +138,11 @@ function LanguagesEditor({ languages, onChange }) {
             {languages.map((lang,i) => (
                 <div key={i} className="flex gap-2 items-center">
                     <input value={lang.name}  onChange={e=>update(i,'name',e.target.value)}  placeholder="Langue"
-                        className="flex-1 bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10"/>
+                        className="flex-1 bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
                     <input value={lang.level} onChange={e=>update(i,'level',e.target.value)} placeholder="Natif / Courant..."
-                        className="flex-1 bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10"/>
+                        className="flex-1 bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
                     <input type="number" min={0} max={100} value={lang.percent} onChange={e=>update(i,'percent',e.target.value)} style={{width:60}}
-                        className="bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-2 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 text-center"/>
+                        className="bg-white/[0.04] border border-white/15 rounded-sm px-2 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 text-center"/>
                     <button onClick={()=>remove(i)} className="text-red-400/30 hover:text-red-400"><Trash2 className="w-3.5 h-3.5"/></button>
                 </div>
             ))}
@@ -207,7 +207,7 @@ function MemberEditor({ member }) {
     ];
 
     return (
-        <div className="relative border rounded-xl overflow-hidden bg-[#0d2540]/90 backdrop-blur-sm"
+        <div className="relative border rounded-sm overflow-hidden bg-white/[0.03] backdrop-blur-sm"
             style={{ borderColor: ACCENT + '25', boxShadow:`0 0 30px ${ACCENT}08` }}>
             <Scanlines />
 
@@ -336,7 +336,7 @@ function AddMemberForm({ onClose }) {
     };
 
     return (
-        <div className="relative border border-[#00a8ff]/20 rounded-xl bg-[#0d2540]/90 p-6 mb-6">
+        <div className="relative border border-white/20 rounded-sm bg-white/[0.03] p-6 mb-6">
             <Scanlines />
             <div className="relative z-10">
                 <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
