@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
-import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, Activity, ExternalLink } from "lucide-react";
+import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, Activity, ExternalLink, MessageSquare } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
 import WhatsAppFloat from "@/Components/WhatsAppFloat";
 import { SystemGrid, SystemOrbs, ParticleNetwork, SysWin, StatBadge, SysNotif, SysDivider, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
@@ -9,14 +9,15 @@ const QUESTS = [
   { href: "/dashboard/portfolio", icon: FolderOpen, label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",     tag: "PORTFOLIO"  },
   { href: "/dashboard/services",  icon: Wrench,     label: "Modifier les services", desc: "Offres et capacités de la guilde",         tag: "SERVICES"   },
   { href: "/dashboard/team",      icon: Users,      label: "Éditer les CV",         desc: "Dossiers et profils des chasseurs",        tag: "ÉQUIPE"     },
-  { href: "/dashboard/site",      icon: Globe,      label: "Paramètres du site",    desc: "Infos de contact et configuration",        tag: "SYSTÈME"    },
+  { href: "/dashboard/site",      icon: Globe,           label: "Paramètres du site",    desc: "Infos de contact et configuration",        tag: "SYSTÈME"    },
+  { href: "/dashboard/messages",  icon: MessageSquare,   label: "Messages reçus",        desc: "Demandes clients via le formulaire",        tag: "INBOX"      },
 ];
 
-export default function DashboardIndex({ admin, portfolioCount, servicesCount }) {
+export default function DashboardIndex({ admin, portfolioCount, servicesCount, unreadMessages }) {
   const stats = [
-    { label: "Projets actifs",  value: portfolioCount, icon: FolderOpen, sub: "Réalisations en ligne"    },
-    { label: "Services actifs", value: servicesCount,  icon: Wrench,     sub: "Capacités de la guilde"   },
-    { label: "Statut système",  value: "ONLINE",       icon: Activity,   sub: "Tous systèmes opérationnels" },
+    { label: "Projets actifs",  value: portfolioCount,  icon: FolderOpen,     sub: "Réalisations en ligne"       },
+    { label: "Services actifs", value: servicesCount,   icon: Wrench,         sub: "Capacités de la guilde"      },
+    { label: "Messages non lus", value: unreadMessages, icon: MessageSquare,  sub: "Demandes en attente"         },
   ];
 
   return (

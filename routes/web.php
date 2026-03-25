@@ -43,4 +43,9 @@ Route::middleware('auth.admin')->prefix('dashboard')->group(function () {
     // CRUD Team Members (CV)
     Route::get('/team', [DashboardController::class, 'team']);
     Route::patch('/team/{id}', [DashboardController::class, 'updateTeamMember']);
+
+    // Messages de contact
+    Route::get('/messages', [DashboardController::class, 'messages']);
+    Route::patch('/messages/{id}/read', [DashboardController::class, 'markMessageRead']);
+    Route::delete('/messages/{id}', [DashboardController::class, 'destroyMessage']);
 });

@@ -8,15 +8,17 @@ use App\Models\Portfolio;
 use App\Models\Service;
 use App\Models\Site;
 use App\Models\TeamMember;
+use App\Models\ContactMessage;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         return Inertia::render('Dashboard/Index', [
-            'admin'          => session('admin'),
-            'portfolioCount' => Portfolio::count(),
-            'servicesCount'  => Service::count(),
+            'admin'           => session('admin'),
+            'portfolioCount'  => Portfolio::count(),
+            'servicesCount'   => Service::count(),
+            'unreadMessages'  => ContactMessage::whereNull('read_at')->count(),
         ]);
     }
 
@@ -104,6 +106,27 @@ class DashboardController extends Controller
     {
         $site = Site::firstOrCreate([]);
         $site->update($request->all());
+        return back();
+    }
+
+    // ── Messages de contact ────────────────────────────────────
+    public function messages()
+    {
+        return Inertia::render('Dashboard/Messages', [
+            'admin'    => session('admin'),
+            'messages' => ContactMessage::orderByDesc('created_at')->get(),
+        ]);
+    }
+
+    public function markMessageRead($id)
+    {
+        ContactMessage::findOrFail($id)->update(['read_at' => now()]);
+        return back();
+    }
+
+    public function destroyMessage($id)
+    {
+        ContactMessage::findOrFail($id)->delete();
         return back();
     }
 

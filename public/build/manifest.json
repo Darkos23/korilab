@@ -3,8 +3,8 @@
     "file": "assets/vendor-inertia-x5TMZwdV.js",
     "name": "vendor-inertia"
   },
-  "_vendor-lucide-CXfIfWGN.js": {
-    "file": "assets/vendor-lucide-CXfIfWGN.js",
+  "_vendor-lucide-XBYuhiq5.js": {
+    "file": "assets/vendor-lucide-XBYuhiq5.js",
     "name": "vendor-lucide",
     "imports": [
       "_vendor-inertia-x5TMZwdV.js"
@@ -22,7 +22,7 @@
     "name": "vendor-react"
   },
   "resources/css/app.css": {
-    "file": "assets/app-oV6gES5f.css",
+    "file": "assets/app-ajhP7Zf9.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -31,17 +31,17 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-B4dziyDB.js",
+    "file": "assets/app-CxVzwX4m.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "imports": [
       "_vendor-motion-C72kTcpW.js",
       "_vendor-inertia-x5TMZwdV.js",
-      "_vendor-lucide-CXfIfWGN.js"
+      "_vendor-lucide-XBYuhiq5.js"
     ],
     "css": [
-      "assets/app-oV6gES5f.css"
+      "assets/app-ajhP7Zf9.css"
     ]
   }
 }

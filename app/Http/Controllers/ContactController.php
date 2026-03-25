@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mail\ContactFormMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Site;
+use App\Models\ContactMessage;
 
 class ContactController extends Controller
 {
@@ -18,6 +19,8 @@ class ContactController extends Controller
             'budget'  => 'required|string|max:50',
             'message' => 'required|string|min:10|max:2000',
         ]);
+
+        ContactMessage::create($validated);
 
         $site = Site::first();
         $to   = $site?->contactInfo['email'] ?? config('mail.from.address');

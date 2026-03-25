@@ -1,6 +1,6 @@
 import { Link, router, usePage } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X } from "lucide-react";
+import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, MessageSquare } from "lucide-react";
 import { Scanlines } from "./SystemLayout";
 import { useState } from "react";
 
@@ -59,6 +59,7 @@ const nav = [
   { href: "/dashboard/services",  icon: Wrench,          label: "Services",         quest: "Capacités de guilde" },
   { href: "/dashboard/team",      icon: Users,           label: "Équipe / CV",      quest: "Dossiers chasseurs"  },
   { href: "/dashboard/site",      icon: Globe,           label: "Paramètres site",  quest: "Config. du système"  },
+  { href: "/dashboard/messages",  icon: MessageSquare,   label: "Messages",          quest: "Boîte de réception"  },
 ];
 
 const RANK_COLOR = { S: "#a855f7", A: "#00a8ff", B: "#22c55e", C: "#f59e0b" };
