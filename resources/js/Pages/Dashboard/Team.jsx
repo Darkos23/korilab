@@ -322,8 +322,59 @@ function MemberEditor({ member }) {
     );
 }
 
+const THEMES_VALUES = THEMES.map(t => t.value);
+const defaultNewMember = { slug:'', name:'', role:'', rank:'A', initials:'', theme:'shadow', shadow_title:'' };
+
+// ─── Add member form ────────────────────────────────────────
+function AddMemberForm({ onClose }) {
+    const [form, setForm] = useState(defaultNewMember);
+    const set = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
+
+    const submit = e => {
+        e.preventDefault();
+        router.post('/dashboard/team', form, { onSuccess: onClose });
+    };
+
+    return (
+        <div className="relative border border-[#00a8ff]/20 rounded-xl bg-[#020b18]/90 p-6 mb-6">
+            <Scanlines />
+            <div className="relative z-10">
+                <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
+                    <Plus className="w-4 h-4 text-[#00a8ff]" /> Nouveau membre
+                </h3>
+                <form onSubmit={submit} className="grid grid-cols-2 gap-3">
+                    <SysInput label="Slug (identifiant unique)" name="slug" value={form.slug} onChange={set} required />
+                    <SysInput label="Nom complet" name="name" value={form.name} onChange={set} required />
+                    <SysInput label="Poste / Rôle" name="role" value={form.role} onChange={set} required />
+                    <SysInput label="Initiales" name="initials" value={form.initials} onChange={set} />
+                    <SysSelect label="Rang" options={RANKS} name="rank" value={form.rank} onChange={set} />
+                    <SysSelect label="Thème" options={THEMES} name="theme" value={form.theme} onChange={set} />
+                    <div className="col-span-2">
+                        <SysInput label="Titre spécial" name="shadow_title" value={form.shadow_title} onChange={set} />
+                    </div>
+                    <div className="col-span-2 flex gap-3 justify-end mt-2">
+                        <button type="button" onClick={onClose}
+                            className="px-4 py-2 text-xs font-mono border border-white/10 text-white/30 rounded-lg hover:text-white/60 transition-colors">
+                            Annuler
+                        </button>
+                        <SysBtn type="submit">[ CRÉER ]</SysBtn>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+}
+
 // ─── Page ──────────────────────────────────────────────────
 export default function DashboardTeam({ admin, members }) {
+    const [showAdd, setShowAdd] = useState(false);
+
+    const deleteMember = (id, name) => {
+        if (confirm(`Supprimer "${name}" ? Cette action est irréversible.`)) {
+            router.delete(`/dashboard/team/${id}`);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#0d2235] flex relative overflow-hidden">
             <SystemGrid />
@@ -332,20 +383,37 @@ export default function DashboardTeam({ admin, members }) {
             <Sidebar admin={admin} />
 
             <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
-                <div className="mb-8">
-                    <div className="flex items-center gap-2 mb-1">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)]" />
-                        <span className="text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">Dossiers chasseurs</span>
+                <div className="flex items-start justify-between mb-8">
+                    <div>
+                        <div className="flex items-center gap-2 mb-1">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)]" />
+                            <span className="text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">Dossiers chasseurs</span>
+                        </div>
+                        <h1 className="text-2xl font-black text-white" style={{ textShadow:'0 0 20px rgba(0,168,255,0.2)' }}>Équipe / CV</h1>
+                        <p className="text-[#00a8ff]/30 text-xs font-mono mt-1">{members.length} membre{members.length !== 1 ? 's' : ''} enregistré{members.length !== 1 ? 's' : ''}</p>
                     </div>
-                    <h1 className="text-2xl font-black text-white" style={{ textShadow:'0 0 20px rgba(0,168,255,0.2)' }}>Équipe / CV</h1>
-                    <p className="text-[#00a8ff]/30 text-xs font-mono mt-1">Modifier les profils et CV des membres</p>
+                    <button onClick={() => setShowAdd(p => !p)}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono border border-[#00a8ff]/30 text-[#00a8ff] bg-[#00a8ff]/[0.06] hover:bg-[#00a8ff]/[0.12] transition-all">
+                        <Plus className="w-3.5 h-3.5" /> Ajouter
+                    </button>
                 </div>
+
+                {showAdd && <AddMemberForm onClose={() => setShowAdd(false)} />}
 
                 <SysDivider label="Chasseurs enregistrés" />
 
                 <div className="space-y-6">
                     {members.map(member => (
-                        <MemberEditor key={member.id} member={member} />
+                        <div key={member.id} className="relative">
+                            <MemberEditor member={member} />
+                            <button
+                                onClick={() => deleteMember(member.id, member.name)}
+                                className="absolute top-4 right-20 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-mono
+                                    border border-transparent text-white/20 hover:border-red-500/30 hover:text-red-400/70
+                                    hover:bg-red-500/[0.05] transition-all duration-200 z-20">
+                                <Trash2 className="w-3 h-3" /> Supprimer
+                            </button>
+                        </div>
                     ))}
                 </div>
             </main>

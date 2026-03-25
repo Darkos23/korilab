@@ -133,18 +133,39 @@ class DashboardController extends Controller
     // ── Team Members (CV) ──────────────────────────────────────
     public function team()
     {
-        $admin = session('admin');
-        $slug  = $admin['slug'] ?? null;
-
-        // Chaque admin ne voit que son propre CV
-        $members = $slug
-            ? TeamMember::where('slug', $slug)->get()
-            : collect();
-
         return Inertia::render('Dashboard/Team', [
-            'admin'   => $admin,
-            'members' => $members,
+            'admin'   => session('admin'),
+            'members' => TeamMember::orderBy('name')->get(),
         ]);
+    }
+
+    public function storeTeamMember(Request $request)
+    {
+        $rankDefaults = [
+            'S' => ['gradient' => 'from-purple-900 to-indigo-900', 'rank_bg' => 'bg-purple-400/10', 'rank_text' => 'text-purple-400', 'rank_border' => 'border-purple-400/30'],
+            'A' => ['gradient' => 'from-blue-900 to-cyan-900',     'rank_bg' => 'bg-[#00a8ff]/10',  'rank_text' => 'text-[#00a8ff]',  'rank_border' => 'border-[#00a8ff]/30'],
+            'B' => ['gradient' => 'from-emerald-900 to-teal-900',  'rank_bg' => 'bg-emerald-400/10','rank_text' => 'text-emerald-400','rank_border' => 'border-emerald-400/30'],
+            'C' => ['gradient' => 'from-gray-800 to-slate-900',    'rank_bg' => 'bg-gray-400/10',   'rank_text' => 'text-gray-400',   'rank_border' => 'border-gray-400/30'],
+        ];
+
+        $rank = $request->rank ?? 'A';
+        $defaults = $rankDefaults[$rank] ?? $rankDefaults['A'];
+
+        TeamMember::create([
+            'slug'         => $request->slug,
+            'name'         => $request->name,
+            'role'         => $request->role,
+            'rank'         => $rank,
+            'initials'     => $request->initials,
+            'theme'        => $request->theme ?? 'shadow',
+            'shadow_title' => $request->shadow_title ?? null,
+            'gradient'     => $defaults['gradient'],
+            'rank_bg'      => $defaults['rank_bg'],
+            'rank_text'    => $defaults['rank_text'],
+            'rank_border'  => $defaults['rank_border'],
+        ]);
+
+        return back()->with('success', 'Membre ajouté.');
     }
 
     public function updateTeamMember(Request $request, $id)
@@ -160,5 +181,11 @@ class DashboardController extends Controller
 
         $member->update($data);
         return back()->with('success', 'CV mis à jour.');
+    }
+
+    public function destroyTeamMember($id)
+    {
+        TeamMember::findOrFail($id)->delete();
+        return back()->with('success', 'Membre supprimé.');
     }
 }

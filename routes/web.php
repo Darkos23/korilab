@@ -42,7 +42,9 @@ Route::middleware('auth.admin')->prefix('dashboard')->group(function () {
 
     // CRUD Team Members (CV)
     Route::get('/team', [DashboardController::class, 'team']);
+    Route::post('/team', [DashboardController::class, 'storeTeamMember']);
     Route::patch('/team/{id}', [DashboardController::class, 'updateTeamMember']);
+    Route::delete('/team/{id}', [DashboardController::class, 'destroyTeamMember']);
 
     // Messages de contact
     Route::get('/messages', [DashboardController::class, 'messages']);
