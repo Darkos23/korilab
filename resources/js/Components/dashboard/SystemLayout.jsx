@@ -52,16 +52,28 @@ export function ParticleNetwork() {
 /* ─── Grid ──────────────────────────────────────────────── */
 export function SystemGrid() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-0" style={{
-      backgroundImage: `linear-gradient(45deg,rgba(0,207,255,0.05) 1px,transparent 1px),linear-gradient(-45deg,rgba(0,207,255,0.05) 1px,transparent 1px)`,
-      backgroundSize: '40px 40px',
-    }}/>
+    <>
+      {/* Diamond grid large */}
+      <div className="fixed inset-0 pointer-events-none z-0" style={{
+        backgroundImage: `linear-gradient(45deg,rgba(0,207,255,0.09) 1px,transparent 1px),linear-gradient(-45deg,rgba(0,207,255,0.09) 1px,transparent 1px)`,
+        backgroundSize: '48px 48px',
+      }}/>
+      {/* Diamond grid small (depth) */}
+      <div className="fixed inset-0 pointer-events-none z-0" style={{
+        backgroundImage: `linear-gradient(45deg,rgba(0,207,255,0.04) 1px,transparent 1px),linear-gradient(-45deg,rgba(0,207,255,0.04) 1px,transparent 1px)`,
+        backgroundSize: '16px 16px',
+      }}/>
+      {/* Vignette */}
+      <div className="fixed inset-0 pointer-events-none z-0" style={{
+        background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,5,20,0.7) 100%)',
+      }}/>
+    </>
   );
 }
 
 /* ─── Orbs ──────────────────────────────────────────────── */
 export function SystemOrbs() {
-  const orbs = [{w:400,h:400,x:'5%',y:'8%',dur:12,d:0,op:0.035},{w:250,h:250,x:'72%',y:'5%',dur:15,d:2,op:0.025},{w:300,h:300,x:'58%',y:'62%',dur:11,d:1,op:0.028}];
+  const orbs = [{w:500,h:500,x:'0%',y:'0%',dur:12,d:0,op:0.05},{w:350,h:350,x:'65%',y:'0%',dur:15,d:2,op:0.04},{w:400,h:400,x:'50%',y:'55%',dur:11,d:1,op:0.04},{w:200,h:200,x:'20%',y:'70%',dur:18,d:3,op:0.03}];
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {orbs.map((o,i)=>(
