@@ -13,174 +13,231 @@ const glass = {
   boxShadow: `0 0 30px rgba(0,207,255,0.08), inset 0 1px 0 rgba(255,255,255,0.06)`,
 };
 
-/* ─── Particle Network ──────────────────────────────────── */
-export function ParticleNetwork() {
-  const canvasRef = useRef(null);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animId;
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-    const rand = (a, b) => Math.random() * (b - a) + a;
-    class Dot {
-      constructor() { this.reset(); }
-      reset() { this.x=rand(0,canvas.width); this.y=rand(0,canvas.height); this.vx=rand(-0.2,0.2); this.vy=rand(-0.2,0.2); this.r=rand(0.6,1.4); this.op=rand(0.1,0.3); }
-      move() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width)this.vx*=-1; if(this.y<0||this.y>canvas.height)this.vy*=-1; }
-      draw() { ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=`rgba(0,207,255,${this.op})`; ctx.fill(); }
-    }
-    resize();
-    window.addEventListener('resize', resize);
-    const dots = Array.from({length:35}, ()=>new Dot());
-    const loop = () => {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      for(let i=0;i<dots.length;i++){
-        dots[i].move(); dots[i].draw();
-        for(let j=i+1;j<dots.length;j++){
-          const dx=dots[i].x-dots[j].x, dy=dots[i].y-dots[j].y, d=Math.sqrt(dx*dx+dy*dy);
-          if(d<130){ctx.beginPath();ctx.moveTo(dots[i].x,dots[i].y);ctx.lineTo(dots[j].x,dots[j].y);ctx.strokeStyle=`rgba(0,207,255,${(1-d/130)*0.06})`;ctx.lineWidth=0.5;ctx.stroke();}
-        }
-      }
-      animId=requestAnimationFrame(loop);
-    };
-    loop();
-    return ()=>{cancelAnimationFrame(animId);window.removeEventListener('resize',resize);};
-  }, []);
-  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-none z-0" style={{opacity:0.5}} />;
-}
-
-/* ─── Grid ──────────────────────────────────────────────── */
-export function SystemGrid() {
-  return (
-    <>
-      {/* Diamond grid large */}
-      <div className="fixed inset-0 pointer-events-none z-0" style={{
-        backgroundImage: `linear-gradient(45deg,rgba(0,207,255,0.09) 1px,transparent 1px),linear-gradient(-45deg,rgba(0,207,255,0.09) 1px,transparent 1px)`,
-        backgroundSize: '48px 48px',
-      }}/>
-      {/* Diamond grid small (depth) */}
-      <div className="fixed inset-0 pointer-events-none z-0" style={{
-        backgroundImage: `linear-gradient(45deg,rgba(0,207,255,0.04) 1px,transparent 1px),linear-gradient(-45deg,rgba(0,207,255,0.04) 1px,transparent 1px)`,
-        backgroundSize: '16px 16px',
-      }}/>
-      {/* Vignette */}
-      <div className="fixed inset-0 pointer-events-none z-0" style={{
-        background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,5,20,0.7) 100%)',
-      }}/>
-    </>
-  );
-}
-
-/* ─── Orbs ──────────────────────────────────────────────── */
-export function SystemOrbs() {
-  const orbs = [{w:500,h:500,x:'0%',y:'0%',dur:12,d:0,op:0.05},{w:350,h:350,x:'65%',y:'0%',dur:15,d:2,op:0.04},{w:400,h:400,x:'50%',y:'55%',dur:11,d:1,op:0.04},{w:200,h:200,x:'20%',y:'70%',dur:18,d:3,op:0.03}];
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {orbs.map((o,i)=>(
-        <motion.div key={i} className="absolute rounded-full"
-          style={{width:o.w,height:o.h,left:o.x,top:o.y,background:`radial-gradient(circle,${C} 0%,transparent 70%)`,opacity:o.op,filter:'blur(70px)'}}
-          animate={{y:[0,-20,0,15,0],x:[0,10,-6,3,0]}}
-          transition={{duration:o.dur,delay:o.d,repeat:Infinity,ease:'easeInOut'}}
-        />
-      ))}
-    </div>
-  );
-}
-
-/* ─── SL Portal Rings + Runes ───────────────────────────── */
+/* ─── SL System Background (full immersive) ─────────────── */
 const RUNES = ["ᚠ","ᚢ","ᚦ","ᚨ","ᚱ","ᚲ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ","ᛇ","ᛈ","ᛉ","ᛊ","ᛏ","ᛒ","ᛖ","ᛗ","ᛚ","ᛜ","ᛞ","ᛟ"];
-const RUNE_POS = RUNES.slice(0,20).map((r,i)=>({
+const RUNE_POS = RUNES.map((r,i)=>({
   char: r,
-  left: `${3+(i*4.7)%88}%`,
-  top:  `${3+(i*8.3)%86}%`,
-  size: 9+(i%5)*3,
-  delay: i*0.3,
-  dur:   3.5+(i%5)*0.9,
-  color: i%3===0 ? 'rgba(129,140,248,0.25)' : 'rgba(0,207,255,0.2)',
+  left: `${2+(i*4.1)%90}%`,
+  top:  `${2+(i*7.7)%88}%`,
+  size: 12+(i%6)*4,
+  delay: i*0.22,
+  dur:   3+(i%6),
+  color: i%3===0 ? 'rgba(129,140,248,0.35)' : i%3===1 ? 'rgba(0,207,255,0.3)' : 'rgba(167,139,250,0.28)',
 }));
 
-export function SLPortal() {
+function SLParticles() {
+  const ref = useRef(null);
+  useEffect(()=>{
+    const canvas = ref.current; if(!canvas) return;
+    const ctx = canvas.getContext('2d'); let raf;
+    const resize=()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;};
+    resize(); window.addEventListener('resize',resize);
+    const pts = Array.from({length:80},()=>({
+      x: Math.random()*window.innerWidth,
+      y: Math.random()*window.innerHeight,
+      r: 0.4+Math.random()*1.8,
+      vx:(Math.random()-.5)*.18,
+      vy:-(0.06+Math.random()*.22),
+      a: 0.07+Math.random()*.38,
+      hue: Math.random()>.55 ? 260 : 190,
+    }));
+    const draw=()=>{
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pts.forEach(p=>{
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.y<-6){p.y=canvas.height+6;p.x=Math.random()*canvas.width;}
+        if(p.x<-6) p.x=canvas.width+6;
+        if(p.x>canvas.width+6) p.x=-6;
+        ctx.save();
+        ctx.globalAlpha=p.a;
+        ctx.shadowBlur=12; ctx.shadowColor=`hsl(${p.hue},100%,70%)`;
+        ctx.fillStyle=`hsl(${p.hue},100%,75%)`;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+        ctx.restore();
+      });
+      raf=requestAnimationFrame(draw);
+    };
+    draw();
+    return()=>{cancelAnimationFrame(raf);window.removeEventListener('resize',resize);};
+  },[]);
+  return <canvas ref={ref} className="fixed inset-0 pointer-events-none z-0" style={{width:'100%',height:'100%'}}/>;
+}
+
+export function SLSystemBG() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Portail — glow central */}
-      <motion.div className="absolute rounded-full"
-        style={{
-          width:'clamp(300px,55vw,700px)', height:'clamp(300px,55vw,700px)',
-          top:'50%', left:'50%', transform:'translate(-50%,-50%)',
-          background:'radial-gradient(circle,rgba(0,207,255,0.06) 0%,rgba(99,102,241,0.04) 35%,transparent 65%)',
-          filter:'blur(70px)',
-        }}
-        animate={{ scale:[1,1.12,1], opacity:[0.4,0.9,0.4] }}
-        transition={{ duration:11, repeat:Infinity, ease:'easeInOut' }}
+
+      {/* ── Base sombre ── */}
+      <div className="absolute inset-0" style={{background:'#010812'}}/>
+
+      {/* ── Grille diamant ── */}
+      <div className="absolute inset-0" style={{
+        backgroundImage:`linear-gradient(45deg,rgba(0,207,255,0.07) 1px,transparent 1px),linear-gradient(-45deg,rgba(0,207,255,0.07) 1px,transparent 1px)`,
+        backgroundSize:'52px 52px',
+      }}/>
+      <div className="absolute inset-0" style={{
+        backgroundImage:`linear-gradient(45deg,rgba(0,207,255,0.03) 1px,transparent 1px),linear-gradient(-45deg,rgba(0,207,255,0.03) 1px,transparent 1px)`,
+        backgroundSize:'16px 16px',
+      }}/>
+
+      {/* ── Portail central — mega glow ── */}
+      <motion.div className="absolute rounded-full" style={{
+        width:'clamp(500px,70vw,1000px)', height:'clamp(500px,70vw,1000px)',
+        top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+        background:'radial-gradient(circle,rgba(0,207,255,0.1) 0%,rgba(99,102,241,0.07) 30%,rgba(129,140,248,0.03) 55%,transparent 70%)',
+        filter:'blur(80px)',
+      }}
+        animate={{scale:[1,1.15,1],opacity:[0.6,1,0.6]}}
+        transition={{duration:10,repeat:Infinity,ease:'easeInOut'}}
       />
-      {/* Anneau externe */}
-      <motion.div className="absolute rounded-full"
-        style={{
-          width:'clamp(280px,48vw,600px)', height:'clamp(280px,48vw,600px)',
+
+      {/* ── Ondes d'énergie ── */}
+      {[0,1,2].map(i=>(
+        <motion.div key={i} className="absolute rounded-full" style={{
+          width:'clamp(200px,35vw,450px)', height:'clamp(200px,35vw,450px)',
           top:'50%', left:'50%', transform:'translate(-50%,-50%)',
-          border:'1px solid rgba(0,207,255,0.08)',
+          border:`1px solid rgba(0,207,255,${0.15-i*0.04})`,
         }}
-        animate={{ rotate:360 }}
-        transition={{ duration:55, repeat:Infinity, ease:'linear' }}
+          animate={{scale:[1,2.5],opacity:[0.6,0]}}
+          transition={{duration:4,repeat:Infinity,ease:'easeOut',delay:i*1.33}}
+        />
+      ))}
+
+      {/* ── Anneau externe CW ── */}
+      <motion.div className="absolute rounded-full" style={{
+        width:'clamp(340px,56vw,680px)', height:'clamp(340px,56vw,680px)',
+        top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+        border:'1.5px solid rgba(0,207,255,0.12)',
+        boxShadow:'0 0 20px rgba(0,207,255,0.05) inset',
+      }}
+        animate={{rotate:360}}
+        transition={{duration:50,repeat:Infinity,ease:'linear'}}
       >
-        {[0,72,144,216,288].map((deg,i)=>(
+        {[0,60,120,180,240,300].map((deg,i)=>(
+          <motion.div key={i} className="absolute rounded-full"
+            style={{
+              width:i%2===0?5:3, height:i%2===0?5:3,
+              top:'50%', left:'50%',
+              transform:`rotate(${deg}deg) translateY(calc(-50% - clamp(170px,28vw,340px))) translate(-50%,-50%)`,
+              background:i%2===0?C:'rgba(129,140,248,0.9)',
+              boxShadow:i%2===0?`0 0 12px 4px ${CG}`:'0 0 10px 3px rgba(129,140,248,0.7)',
+            }}
+            animate={{opacity:[0.3,1,0.3]}}
+            transition={{duration:2.2,repeat:Infinity,delay:i*0.36}}
+          />
+        ))}
+      </motion.div>
+
+      {/* ── Anneau intermédiaire CCW ── */}
+      <motion.div className="absolute rounded-full" style={{
+        width:'clamp(220px,36vw,460px)', height:'clamp(220px,36vw,460px)',
+        top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+        border:'1.5px solid rgba(129,140,248,0.1)',
+      }}
+        animate={{rotate:-360}}
+        transition={{duration:35,repeat:Infinity,ease:'linear'}}
+      >
+        {[40,130,220,310].map((deg,i)=>(
           <motion.div key={i} className="absolute rounded-full"
             style={{
               width:4, height:4, top:'50%', left:'50%',
-              transform:`rotate(${deg}deg) translateY(calc(-50% - clamp(140px,24vw,300px))) translate(-50%,-50%)`,
-              background:C, boxShadow:`0 0 10px 3px ${CG}`,
-            }}
-            animate={{ opacity:[0.2,1,0.2] }}
-            transition={{ duration:2.5, repeat:Infinity, delay:i*0.5 }}
-          />
-        ))}
-      </motion.div>
-      {/* Anneau intermédiaire — contre-rotation */}
-      <motion.div className="absolute rounded-full"
-        style={{
-          width:'clamp(180px,30vw,400px)', height:'clamp(180px,30vw,400px)',
-          top:'50%', left:'50%', transform:'translate(-50%,-50%)',
-          border:'1px solid rgba(99,102,241,0.07)',
-        }}
-        animate={{ rotate:-360 }}
-        transition={{ duration:38, repeat:Infinity, ease:'linear' }}
-      >
-        {[55,235].map((deg,i)=>(
-          <motion.div key={i} className="absolute rounded-full"
-            style={{
-              width:5, height:5, top:'50%', left:'50%',
-              transform:`rotate(${deg}deg) translateY(calc(-50% - clamp(90px,15vw,200px))) translate(-50%,-50%)`,
+              transform:`rotate(${deg}deg) translateY(calc(-50% - clamp(110px,18vw,230px))) translate(-50%,-50%)`,
               background:'radial-gradient(circle,#818cf8,#00cfff)',
-              boxShadow:'0 0 12px 4px rgba(129,140,248,0.8)',
+              boxShadow:'0 0 14px 5px rgba(129,140,248,0.85)',
             }}
-            animate={{ opacity:[0.3,1,0.3] }}
-            transition={{ duration:3, repeat:Infinity, delay:i*0.8 }}
+            animate={{opacity:[0.2,1,0.2]}}
+            transition={{duration:3,repeat:Infinity,delay:i*0.7}}
           />
         ))}
       </motion.div>
-      {/* Anneau interne — pulse */}
-      <motion.div className="absolute rounded-full"
-        style={{
-          width:'clamp(90px,13vw,180px)', height:'clamp(90px,13vw,180px)',
-          top:'50%', left:'50%', transform:'translate(-50%,-50%)',
-          border:'1px solid rgba(0,207,255,0.14)',
-        }}
-        animate={{ scale:[1,1.08,1], opacity:[0.4,1,0.4] }}
-        transition={{ duration:5, repeat:Infinity, ease:'easeInOut' }}
+
+      {/* ── Anneau interne pulse ── */}
+      <motion.div className="absolute rounded-full" style={{
+        width:'clamp(110px,17vw,220px)', height:'clamp(110px,17vw,220px)',
+        top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+        border:'1px solid rgba(0,207,255,0.2)',
+        boxShadow:'0 0 30px rgba(0,207,255,0.08) inset',
+      }}
+        animate={{scale:[1,1.1,1],opacity:[0.5,1,0.5]}}
+        transition={{duration:4.5,repeat:Infinity,ease:'easeInOut'}}
       />
-      {/* Runes flottantes */}
+
+      {/* ── Orbes d'énergie driftantes ── */}
+      {[
+        {w:450,h:450,x:'0%',  y:'0%',  dur:14,dx:40, dy:25, c:C,          op:0.07},
+        {w:350,h:350,x:'65%', y:'0%',  dur:17,dx:-30,dy:20, c:'#818cf8',  op:0.06},
+        {w:400,h:400,x:'45%', y:'55%', dur:13,dx:25, dy:-35,c:C,          op:0.06},
+        {w:250,h:250,x:'10%', y:'60%', dur:20,dx:-20,dy:30, c:'#a78bfa',  op:0.05},
+      ].map((o,i)=>(
+        <motion.div key={i} className="absolute rounded-full"
+          style={{width:o.w,height:o.h,left:o.x,top:o.y,background:`radial-gradient(circle,${o.c} 0%,transparent 70%)`,opacity:o.op,filter:'blur(80px)'}}
+          animate={{x:[0,o.dx,0],y:[0,o.dy,0],scale:[1,1.2,1]}}
+          transition={{duration:o.dur,repeat:Infinity,ease:'easeInOut'}}
+        />
+      ))}
+
+      {/* ── Runes grandes et visibles ── */}
       {RUNE_POS.map(({char,left,top,size,delay,dur,color},i)=>(
         <motion.span key={i} className="absolute font-mono select-none"
-          style={{ left, top, fontSize:size, color }}
-          animate={{ opacity:[0.04,0.3,0.04], y:[0,-16,0] }}
-          transition={{ duration:dur, repeat:Infinity, ease:'easeInOut', delay }}
+          style={{left,top,fontSize:size,color,textShadow:`0 0 12px ${color}`}}
+          animate={{opacity:[0.05,0.45,0.05],y:[0,-22,0]}}
+          transition={{duration:dur,repeat:Infinity,ease:'easeInOut',delay}}
         >
           {char}
         </motion.span>
       ))}
+
+      {/* ── Particules canvas ── */}
+      <SLParticles/>
+
+      {/* ── Scanlines ── */}
+      <div className="absolute inset-0" style={{
+        backgroundImage:'repeating-linear-gradient(0deg,rgba(0,207,255,0.015),rgba(0,207,255,0.015) 1px,transparent 1px,transparent 4px)',
+      }}/>
+
+      {/* ── Vignette forte ── */}
+      <div className="absolute inset-0" style={{
+        background:'radial-gradient(ellipse 80% 80% at 50% 50%,transparent 35%,rgba(1,8,18,0.92) 100%)',
+      }}/>
+
+      {/* ── Coins UI System ── */}
+      {[
+        {top:16,left:16,  bT:true, bL:true },
+        {top:16,right:16, bT:true, bR:true },
+        {bottom:16,left:16,  bB:true, bL:true },
+        {bottom:16,right:16, bB:true, bR:true },
+      ].map((c,i)=>(
+        <motion.div key={i} className="absolute"
+          style={{
+            top:c.top,right:c.right,bottom:c.bottom,left:c.left,
+            width:32,height:32,
+            borderTopWidth:   c.bT?2:0, borderBottomWidth:c.bB?2:0,
+            borderLeftWidth:  c.bL?2:0, borderRightWidth: c.bR?2:0,
+            borderStyle:'solid', borderColor:'rgba(0,207,255,0.4)',
+          }}
+          animate={{opacity:[0.4,1,0.4]}}
+          transition={{duration:3,repeat:Infinity,delay:i*0.6}}
+        />
+      ))}
+
+      {/* ── Label système ── */}
+      <motion.div
+        className="absolute bottom-[30px] left-1/2 -translate-x-1/2 font-mono text-[7px] uppercase tracking-[0.5em] whitespace-nowrap"
+        style={{color:'rgba(0,207,255,0.25)'}}
+        animate={{opacity:[0.15,0.6,0.15]}}
+        transition={{duration:5,repeat:Infinity}}
+      >
+        ◆ Solo Leveling System — Interface Active ◆
+      </motion.div>
     </div>
   );
 }
+
+/* ── Aliases pour compatibilité avec les pages existantes ── */
+export function ParticleNetwork() { return null; }
+export function SystemGrid()      { return null; }
+export function SystemOrbs()      { return null; }
+export function SLPortal()        { return null; }
 
 /* ─── Scanlines ─────────────────────────────────────────── */
 export function Scanlines() {

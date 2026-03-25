@@ -3,7 +3,7 @@ import { router } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
 import WhatsAppFloat from '@/Components/WhatsAppFloat';
-import { SystemGrid, SystemOrbs, ParticleNetwork, SLPortal, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
+import { SLSystemBG, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 const ACCENTS = [
     'from-blue-500 to-violet-500',
@@ -48,11 +48,11 @@ export default function DashboardServices({ admin, services }) {
     const handleCancel = () => { setShowForm(false); setEditingId(null); setForm(defaultForm); };
 
     return (
-        <div className="min-h-screen bg-[#060f28] flex relative overflow-hidden">
-            <SystemGrid />
-            <SystemOrbs />
-            <ParticleNetwork />
-      <SLPortal />
+        <div className="min-h-screen bg-transparent flex relative overflow-hidden">
+            <SLSystemBG />
+            
+            
+      
             <Sidebar admin={admin} />
 
             <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
