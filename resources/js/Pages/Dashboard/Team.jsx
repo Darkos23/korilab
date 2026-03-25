@@ -377,7 +377,7 @@ export default function DashboardTeam({ admin, members }) {
     };
 
     return (
-        <div className="min-h-screen bg-[#030816] flex relative overflow-hidden">
+        <div className="min-h-screen bg-[#060f28] flex relative overflow-hidden">
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />

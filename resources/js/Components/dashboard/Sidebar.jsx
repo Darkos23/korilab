@@ -57,7 +57,7 @@ export default function Sidebar({ admin }) {
 
   const Content = () => (
     <aside className="w-60 min-h-screen flex flex-col relative"
-      style={{ background:'rgba(3,8,24,0.97)', borderRight:'1px solid rgba(0,207,255,0.08)', backdropFilter:'blur(20px)' }}>
+      style={{ background:'rgba(6,14,40,0.98)', borderRight:'1px solid rgba(0,207,255,0.15)', backdropFilter:'blur(20px)' }}>
 
       {/* Top accent line */}
       <div className="absolute top-0 inset-x-0 h-px" style={{background:`linear-gradient(to right,transparent,${C}40,transparent)`}}/>

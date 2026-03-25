@@ -7,10 +7,10 @@ const CG = 'rgba(0,207,255,0.6)';  // glow
 const CS = 'rgba(0,207,255,0.12)'; // soft fill
 
 const glass = {
-  background: 'rgba(8,20,50,0.75)',
+  background: 'rgba(10,30,70,0.85)',
   backdropFilter: 'blur(20px)',
-  border: `1px solid rgba(0,207,255,0.14)`,
-  boxShadow: `0 0 40px rgba(0,207,255,0.04), inset 0 1px 0 rgba(255,255,255,0.05)`,
+  border: `1px solid rgba(0,207,255,0.28)`,
+  boxShadow: `0 0 30px rgba(0,207,255,0.08), inset 0 1px 0 rgba(255,255,255,0.06)`,
 };
 
 /* ─── Particle Network ──────────────────────────────────── */

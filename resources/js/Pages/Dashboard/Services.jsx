@@ -48,7 +48,7 @@ export default function DashboardServices({ admin, services }) {
     const handleCancel = () => { setShowForm(false); setEditingId(null); setForm(defaultForm); };
 
     return (
-        <div className="min-h-screen bg-[#030816] flex relative overflow-hidden">
+        <div className="min-h-screen bg-[#060f28] flex relative overflow-hidden">
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />
