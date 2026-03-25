@@ -3,7 +3,7 @@ import { router } from '@inertiajs/react';
 import { Plus, Trash2, ChevronDown, ChevronUp, Save, CheckCircle } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
 import WhatsAppFloat from '@/Components/WhatsAppFloat';
-import { SystemGrid, SystemOrbs, ParticleNetwork, SysWin, SysInput, SysTextarea, SysSelect, SysBtn, SysDivider, Scanlines, StatusBar } from '@/Components/dashboard/SystemLayout';
+import { SystemGrid, SystemOrbs, ParticleNetwork, SLPortal, SysWin, SysInput, SysTextarea, SysSelect, SysBtn, SysDivider, Scanlines, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 // ─── helpers ───────────────────────────────────────────────
 const THEMES  = [
@@ -381,6 +381,7 @@ export default function DashboardTeam({ admin, members }) {
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />
+      <SLPortal />
             <Sidebar admin={admin} />
 
             <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">

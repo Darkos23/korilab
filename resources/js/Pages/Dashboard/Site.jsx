@@ -3,7 +3,7 @@ import { router } from '@inertiajs/react';
 import { Save, CheckCircle, Plus, Trash2 } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
 import WhatsAppFloat from '@/Components/WhatsAppFloat';
-import { SystemGrid, SystemOrbs, ParticleNetwork, SysWin, SysInput, SysTextarea, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
+import { SystemGrid, SystemOrbs, ParticleNetwork, SLPortal, SysWin, SysInput, SysTextarea, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 function StatsEditor({ stats, onChange }) {
     const update = (i, field, val) => { const n = [...stats]; n[i] = { ...n[i], [field]: val }; onChange(n); };
@@ -163,6 +163,7 @@ export default function DashboardSite({ admin, site }) {
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />
+      <SLPortal />
             <Sidebar admin={admin} />
 
             <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">

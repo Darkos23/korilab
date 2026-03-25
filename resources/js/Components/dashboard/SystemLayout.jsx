@@ -87,6 +87,101 @@ export function SystemOrbs() {
   );
 }
 
+/* ─── SL Portal Rings + Runes ───────────────────────────── */
+const RUNES = ["ᚠ","ᚢ","ᚦ","ᚨ","ᚱ","ᚲ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ","ᛇ","ᛈ","ᛉ","ᛊ","ᛏ","ᛒ","ᛖ","ᛗ","ᛚ","ᛜ","ᛞ","ᛟ"];
+const RUNE_POS = RUNES.slice(0,20).map((r,i)=>({
+  char: r,
+  left: `${3+(i*4.7)%88}%`,
+  top:  `${3+(i*8.3)%86}%`,
+  size: 9+(i%5)*3,
+  delay: i*0.3,
+  dur:   3.5+(i%5)*0.9,
+  color: i%3===0 ? 'rgba(129,140,248,0.25)' : 'rgba(0,207,255,0.2)',
+}));
+
+export function SLPortal() {
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {/* Portail — glow central */}
+      <motion.div className="absolute rounded-full"
+        style={{
+          width:'clamp(300px,55vw,700px)', height:'clamp(300px,55vw,700px)',
+          top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+          background:'radial-gradient(circle,rgba(0,207,255,0.06) 0%,rgba(99,102,241,0.04) 35%,transparent 65%)',
+          filter:'blur(70px)',
+        }}
+        animate={{ scale:[1,1.12,1], opacity:[0.4,0.9,0.4] }}
+        transition={{ duration:11, repeat:Infinity, ease:'easeInOut' }}
+      />
+      {/* Anneau externe */}
+      <motion.div className="absolute rounded-full"
+        style={{
+          width:'clamp(280px,48vw,600px)', height:'clamp(280px,48vw,600px)',
+          top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+          border:'1px solid rgba(0,207,255,0.08)',
+        }}
+        animate={{ rotate:360 }}
+        transition={{ duration:55, repeat:Infinity, ease:'linear' }}
+      >
+        {[0,72,144,216,288].map((deg,i)=>(
+          <motion.div key={i} className="absolute rounded-full"
+            style={{
+              width:4, height:4, top:'50%', left:'50%',
+              transform:`rotate(${deg}deg) translateY(calc(-50% - clamp(140px,24vw,300px))) translate(-50%,-50%)`,
+              background:C, boxShadow:`0 0 10px 3px ${CG}`,
+            }}
+            animate={{ opacity:[0.2,1,0.2] }}
+            transition={{ duration:2.5, repeat:Infinity, delay:i*0.5 }}
+          />
+        ))}
+      </motion.div>
+      {/* Anneau intermédiaire — contre-rotation */}
+      <motion.div className="absolute rounded-full"
+        style={{
+          width:'clamp(180px,30vw,400px)', height:'clamp(180px,30vw,400px)',
+          top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+          border:'1px solid rgba(99,102,241,0.07)',
+        }}
+        animate={{ rotate:-360 }}
+        transition={{ duration:38, repeat:Infinity, ease:'linear' }}
+      >
+        {[55,235].map((deg,i)=>(
+          <motion.div key={i} className="absolute rounded-full"
+            style={{
+              width:5, height:5, top:'50%', left:'50%',
+              transform:`rotate(${deg}deg) translateY(calc(-50% - clamp(90px,15vw,200px))) translate(-50%,-50%)`,
+              background:'radial-gradient(circle,#818cf8,#00cfff)',
+              boxShadow:'0 0 12px 4px rgba(129,140,248,0.8)',
+            }}
+            animate={{ opacity:[0.3,1,0.3] }}
+            transition={{ duration:3, repeat:Infinity, delay:i*0.8 }}
+          />
+        ))}
+      </motion.div>
+      {/* Anneau interne — pulse */}
+      <motion.div className="absolute rounded-full"
+        style={{
+          width:'clamp(90px,13vw,180px)', height:'clamp(90px,13vw,180px)',
+          top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+          border:'1px solid rgba(0,207,255,0.14)',
+        }}
+        animate={{ scale:[1,1.08,1], opacity:[0.4,1,0.4] }}
+        transition={{ duration:5, repeat:Infinity, ease:'easeInOut' }}
+      />
+      {/* Runes flottantes */}
+      {RUNE_POS.map(({char,left,top,size,delay,dur,color},i)=>(
+        <motion.span key={i} className="absolute font-mono select-none"
+          style={{ left, top, fontSize:size, color }}
+          animate={{ opacity:[0.04,0.3,0.04], y:[0,-16,0] }}
+          transition={{ duration:dur, repeat:Infinity, ease:'easeInOut', delay }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </div>
+  );
+}
+
 /* ─── Scanlines ─────────────────────────────────────────── */
 export function Scanlines() {
   return <div className="pointer-events-none absolute inset-0 z-0" style={{backgroundImage:'repeating-linear-gradient(0deg,rgba(0,207,255,0.02),rgba(0,207,255,0.02) 1px,transparent 1px,transparent 4px)',opacity:1}}/>;

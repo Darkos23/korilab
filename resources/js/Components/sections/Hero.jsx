@@ -52,6 +52,7 @@ function CauriHero() {
 }
 
 const STAT_COLORS = ["text-sky-400", "text-indigo-400", "text-violet-400", "text-sky-300"];
+const runes = ["ᚠ","ᚢ","ᚦ","ᚨ","ᚱ","ᚲ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ","ᛇ","ᛈ","ᛉ","ᛊ","ᛏ","ᛒ","ᛖ","ᛗ","ᛚ","ᛜ","ᛞ","ᛟ"];
 const floatingCards = [
   { icon: "⚔️",  label: "Design System",    delay: 0,   top: "12%",    right: "-4%"  },
   { icon: "🔮",  label: "Performance",      delay: 0.5, top: "45%",    left: "-8%"   },
@@ -81,9 +82,19 @@ export default function Hero({ hero, heroStats }) {
   const opacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
+    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden bg-[#040d1a]">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56,189,248,0.04) 0%, transparent 55%)" }} />
+        <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56,189,248,0.06) 0%, transparent 60%)" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-sky-600/[0.04] rounded-full blur-3xl animate-gate" />
+        <div className="absolute top-1/4 -left-64 w-[500px] h-[500px] bg-sky-700/[0.07] rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-64 w-[400px] h-[400px] bg-indigo-700/[0.07] rounded-full blur-3xl" />
+        {runes.slice(0, 12).map((r, i) => (
+          <span key={i} className="absolute text-sky-400/40 font-mono animate-rune select-none"
+            style={{ left: `${5 + (i * 8.5) % 90}%`, top: `${10 + (i * 13) % 80}%`, animationDelay: `${i * 0.4}s`, fontSize: `${12 + (i % 3) * 4}px` }}>
+            {r}
+          </span>
+        ))}
       </div>
 
       <motion.div style={{ y, opacity }} className="section-padding mx-auto max-w-7xl w-full pt-32 pb-20 relative z-10">
