@@ -20,7 +20,10 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:solo-leveling-rouge.vercel.app)",
       "Bash(cd /d D:wwwKoriLab)",
-      "Bash(sed -i 's/bg-\\\\[#0e2f4a\\\\]/bg-\\\\[#040a1c\\\\]/g' resources/js/Pages/Dashboard/Index.jsx resources/js/Pages/Dashboard/Messages.jsx resources/js/Pages/Dashboard/Portfolio.jsx resources/js/Pages/Dashboard/Services.jsx resources/js/Pages/Dashboard/Site.jsx resources/js/Pages/Dashboard/Team.jsx)"
+      "Bash(sed -i 's/bg-\\\\[#0e2f4a\\\\]/bg-\\\\[#040a1c\\\\]/g' resources/js/Pages/Dashboard/Index.jsx resources/js/Pages/Dashboard/Messages.jsx resources/js/Pages/Dashboard/Portfolio.jsx resources/js/Pages/Dashboard/Services.jsx resources/js/Pages/Dashboard/Site.jsx resources/js/Pages/Dashboard/Team.jsx)",
+      "Bash(for f:*)",
+      "Bash(do sed:*)",
+      "Bash(done)"
     ]
   }
 }
