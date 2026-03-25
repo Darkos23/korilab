@@ -99,10 +99,10 @@ export function SystemGrid() {
     <div className="fixed inset-0 pointer-events-none z-0"
       style={{
         backgroundImage: `
-          linear-gradient(rgba(0,168,255,0.13) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0,168,255,0.13) 1px, transparent 1px)
+          linear-gradient(45deg, rgba(0,168,255,0.10) 1px, transparent 1px),
+          linear-gradient(-45deg, rgba(0,168,255,0.10) 1px, transparent 1px)
         `,
-        backgroundSize: "50px 50px",
+        backgroundSize: "36px 36px",
       }}
     />
   );
