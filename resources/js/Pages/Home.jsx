@@ -2,6 +2,7 @@ import { Head } from "@inertiajs/react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import SystemBoot from "../Components/SystemBoot";
+import SLBackground from "../Components/SLBackground";
 import WhatsAppFloat from "../Components/WhatsAppFloat";
 import ScrollToTop from "../Components/ScrollToTop";
 import Hero from "../Components/sections/Hero";
@@ -24,6 +25,7 @@ export default function Home({ site, hero, heroStats, services, portfolio, assoc
   return (
     <>
       <Head title={`${logoName} — ${tagline}`} />
+      <SLBackground />
       <SystemBoot />
       <Navbar header={site?.header} />
       <main>
