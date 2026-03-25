@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
 import WhatsAppFloat from '@/Components/WhatsAppFloat';
-import { SystemGrid, SystemOrbs, ParticleNetwork, SysWin, SysInput, SysBtn, SysDivider, Scanlines, StatusBar } from '@/Components/dashboard/SystemLayout';
+import { SystemGrid, SystemOrbs, ParticleNetwork, SLPortal, SysWin, SysInput, SysBtn, SysDivider, Scanlines, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 /* ─── Corner brackets (L-shaped, like in the anime) ─────── */
 function CornerBrackets({ size = 14, color = '#4fc3f7', glow = true }) {
@@ -241,6 +241,7 @@ export default function DashboardPortfolio({ admin, projects }) {
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />
+      <SLPortal />
             <Sidebar admin={admin} />
 
             <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">

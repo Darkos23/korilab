@@ -3,7 +3,7 @@ import { router } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
 import WhatsAppFloat from '@/Components/WhatsAppFloat';
-import { SystemGrid, SystemOrbs, ParticleNetwork, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
+import { SystemGrid, SystemOrbs, ParticleNetwork, SLPortal, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 const ACCENTS = [
     'from-blue-500 to-violet-500',
@@ -52,6 +52,7 @@ export default function DashboardServices({ admin, services }) {
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />
+      <SLPortal />
             <Sidebar admin={admin} />
 
             <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">

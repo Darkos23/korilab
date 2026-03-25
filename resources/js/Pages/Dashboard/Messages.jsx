@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { MessageSquare, Trash2, Mail, MailOpen, Building2, DollarSign, Calendar } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
 import WhatsAppFloat from "@/Components/WhatsAppFloat";
-import { SystemGrid, SystemOrbs, ParticleNetwork, SysDivider, StatusBar, SysWin } from "@/Components/dashboard/SystemLayout";
+import { SystemGrid, SystemOrbs, ParticleNetwork, SLPortal, SysDivider, StatusBar, SysWin } from "@/Components/dashboard/SystemLayout";
 
 function formatDate(dateStr) {
   const d = new Date(dateStr);
@@ -102,6 +102,7 @@ export default function DashboardMessages({ admin, messages }) {
       <SystemGrid />
       <SystemOrbs />
       <ParticleNetwork />
+      <SLPortal />
       <Sidebar admin={admin} />
 
       <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
