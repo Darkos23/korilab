@@ -98,7 +98,7 @@ export default function DashboardMessages({ admin, messages }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0e2f4a] flex relative overflow-hidden">
+    <div className="min-h-screen bg-[#040a1c] flex relative overflow-hidden">
       <SystemGrid />
       <SystemOrbs />
       <ParticleNetwork />

@@ -207,7 +207,8 @@ function MemberEditor({ member }) {
     ];
 
     return (
-        <div className="relative border rounded-sm overflow-hidden bg-white/[0.03] backdrop-blur-sm"
+        <div className="relative rounded-sm overflow-hidden backdrop-blur-sm"
+            style={{ border:'1px solid rgba(0,207,255,0.35)', boxShadow:'0 0 20px rgba(0,207,255,0.1)', background:'linear-gradient(135deg,#0d2455cc,#081530cc)' }}
             style={{ borderColor: ACCENT + '25', boxShadow:`0 0 30px ${ACCENT}08` }}>
             <Scanlines />
 
@@ -336,7 +337,7 @@ function AddMemberForm({ onClose }) {
     };
 
     return (
-        <div className="relative border border-white/20 rounded-sm bg-white/[0.03] p-6 mb-6">
+        <div className="relative rounded-sm p-6 mb-6" style={{ border:'1px solid rgba(0,207,255,0.35)', background:'linear-gradient(135deg,#0d2455cc,#081530cc)' }}>
             <Scanlines />
             <div className="relative z-10">
                 <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
@@ -376,7 +377,7 @@ export default function DashboardTeam({ admin, members }) {
     };
 
     return (
-        <div className="min-h-screen bg-[#0e2f4a] flex relative overflow-hidden">
+        <div className="min-h-screen bg-[#040a1c] flex relative overflow-hidden">
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />

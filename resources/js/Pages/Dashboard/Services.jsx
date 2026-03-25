@@ -48,7 +48,7 @@ export default function DashboardServices({ admin, services }) {
     const handleCancel = () => { setShowForm(false); setEditingId(null); setForm(defaultForm); };
 
     return (
-        <div className="min-h-screen bg-[#0e2f4a] flex relative overflow-hidden">
+        <div className="min-h-screen bg-[#040a1c] flex relative overflow-hidden">
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />
@@ -138,7 +138,7 @@ export default function DashboardServices({ admin, services }) {
                         return (
                             <div key={s.id}
                                 className="relative flex items-center gap-4 px-5 py-4 border border-[#00a8ff]/10 rounded-xl
-                                    bg-white/[0.03] hover:border-[#00a8ff]/25 transition-all group overflow-hidden">
+                                    hover:border-[#00cfff]/40 transition-all group overflow-hidden">
                                 {/* Accent line */}
                                 <div className={`w-1 h-12 rounded-full bg-gradient-to-b ${s.accent} flex-shrink-0`} />
 
