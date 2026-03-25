@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, Activity, ExternalLink, MessageSquare } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
 import WhatsAppFloat from "@/Components/WhatsAppFloat";
-import { SystemGrid, SystemOrbs, ParticleNetwork, SLPortal, SysWin, StatBadge, SysNotif, SysDivider, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
+import { SLSystemBG, SysWin, StatBadge, SysNotif, SysDivider, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
 
 const QUESTS = [
   { href: "/dashboard/portfolio", icon: FolderOpen, label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",     tag: "PORTFOLIO"  },
@@ -21,11 +21,11 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
   ];
 
   return (
-    <div className="min-h-screen bg-[#060f28] flex relative overflow-hidden">
-      <SystemGrid />
-      <SystemOrbs />
-      <ParticleNetwork />
-      <SLPortal />
+    <div className="min-h-screen bg-transparent flex relative overflow-hidden">
+      <SLSystemBG />
+      
+      
+      
 
       <Sidebar admin={admin} />
 
