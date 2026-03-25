@@ -48,7 +48,7 @@ export default function DashboardServices({ admin, services }) {
     const handleCancel = () => { setShowForm(false); setEditingId(null); setForm(defaultForm); };
 
     return (
-        <div className="min-h-screen bg-[#0d2235] flex relative overflow-hidden">
+        <div className="min-h-screen bg-[#0e2f4a] flex relative overflow-hidden">
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />
@@ -96,7 +96,7 @@ export default function DashboardServices({ admin, services }) {
                             <div className="col-span-2">
                                 <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">Description</label>
                                 <textarea name="desc" value={form.desc} onChange={handleChange} rows={3}
-                                    className="w-full bg-[#0d2235] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono
+                                    className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono
                                         focus:border-[#00a8ff]/40 outline-none resize-none transition-all placeholder-white/10"
                                     placeholder="Description du service" />
                             </div>
@@ -106,7 +106,7 @@ export default function DashboardServices({ admin, services }) {
                             <div>
                                 <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">Icône</label>
                                 <select name="icon" value={form.icon} onChange={handleChange}
-                                    className="w-full bg-[#0d2235] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none">
+                                    className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none">
                                     {ICONS.map(i => <option key={i}>{i}</option>)}
                                 </select>
                             </div>
@@ -138,7 +138,7 @@ export default function DashboardServices({ admin, services }) {
                         return (
                             <div key={s.id}
                                 className="relative flex items-center gap-4 px-5 py-4 border border-[#00a8ff]/10 rounded-xl
-                                    bg-[#020b18]/80 hover:border-[#00a8ff]/25 transition-all group overflow-hidden">
+                                    bg-[#0d2540]/80 hover:border-[#00a8ff]/25 transition-all group overflow-hidden">
                                 {/* Accent line */}
                                 <div className={`w-1 h-12 rounded-full bg-gradient-to-b ${s.accent} flex-shrink-0`} />
 

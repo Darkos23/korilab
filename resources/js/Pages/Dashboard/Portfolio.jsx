@@ -237,7 +237,7 @@ export default function DashboardPortfolio({ admin, projects }) {
     };
 
     return (
-        <div className="min-h-screen bg-[#0d2235] flex relative overflow-hidden">
+        <div className="min-h-screen bg-[#0e2f4a] flex relative overflow-hidden">
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />
@@ -282,7 +282,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                                     name="category"
                                     value={form.category}
                                     onChange={handleChange}
-                                    className="w-full bg-[#0d2235] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none"
+                                    className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none"
                                 >
                                     {CATEGORIES.map(c => <option key={c}>{c}</option>)}
                                 </select>
@@ -306,7 +306,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                                     name="tags"
                                     value={form.tags}
                                     onChange={handleChange}
-                                    className="w-full bg-[#0d2235] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none"
+                                    className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none"
                                     placeholder="React, Laravel, MySQL"
                                 />
                             </div>

@@ -99,8 +99,8 @@ export function SystemGrid() {
     <div className="fixed inset-0 pointer-events-none z-0"
       style={{
         backgroundImage: `
-          linear-gradient(rgba(0,168,255,0.06) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0,168,255,0.06) 1px, transparent 1px)
+          linear-gradient(rgba(0,168,255,0.13) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0,168,255,0.13) 1px, transparent 1px)
         `,
         backgroundSize: "50px 50px",
       }}
@@ -142,7 +142,7 @@ export function SysWin({ title, subtitle, children, className = "", glow = false
       initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
       className={`relative border border-[#00a8ff]/20 rounded-xl overflow-hidden
-        bg-[#0d2235]/70 backdrop-blur-sm
+        bg-[#0d2a42]/70 backdrop-blur-sm
         ${glow ? "shadow-[0_0_30px_rgba(0,168,255,0.08),0_0_0_1px_rgba(0,168,255,0.05),inset_0_0_30px_rgba(0,168,255,0.02)]" : ""}
         ${className}`}
       style={{ outline: "1px solid rgba(0,168,255,0.06)", outlineOffset: "3px" }}
@@ -169,7 +169,7 @@ export function SysWin({ title, subtitle, children, className = "", glow = false
 /* ─── Stat badge ────────────────────────────────────────── */
 export function StatBadge({ label, value, icon: Icon, sub }) {
   return (
-    <div className="relative border border-[#00a8ff]/15 rounded-xl bg-[#0d2235]/70 p-5 overflow-hidden group hover:border-[#00a8ff]/35 transition-all duration-300">
+    <div className="relative border border-[#00a8ff]/15 rounded-xl bg-[#0d2a42]/70 p-5 overflow-hidden group hover:border-[#00a8ff]/35 transition-all duration-300">
       <Scanlines />
       <div className="relative z-10">
         <div className="flex items-start justify-between mb-3">
@@ -207,7 +207,7 @@ export function SysInput({ label, ...props }) {
     <div>
       {label && <label className="block text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">{label}</label>}
       <input
-        className="w-full bg-[#0d2235] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm
+        className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm
           focus:border-[#00a8ff]/50 focus:shadow-[0_0_10px_rgba(0,168,255,0.1)] outline-none transition-all
           placeholder-white/10 font-mono"
         {...props}
@@ -221,7 +221,7 @@ export function SysTextarea({ label, rows = 3, ...props }) {
     <div>
       {label && <label className="block text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">{label}</label>}
       <textarea rows={rows}
-        className="w-full bg-[#0d2235] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm
+        className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm
           focus:border-[#00a8ff]/50 focus:shadow-[0_0_10px_rgba(0,168,255,0.1)] outline-none resize-none transition-all
           placeholder-white/10 font-mono"
         {...props}
@@ -235,7 +235,7 @@ export function SysSelect({ label, options, ...props }) {
     <div>
       {label && <label className="block text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">{label}</label>}
       <select
-        className="w-full bg-[#0d2235] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm
+        className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm
           focus:border-[#00a8ff]/50 outline-none transition-all font-mono"
         {...props}
       >
@@ -281,7 +281,7 @@ export function StatusBar({ admin }) {
   }, []);
   const rankColor = RANK_COLORS[admin?.rank] ?? '#00a8ff';
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#00a8ff]/10 bg-[#020810]/95 backdrop-blur-sm flex items-center px-5 gap-4"
+    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[#00a8ff]/10 bg-[#091e30]/95 backdrop-blur-sm flex items-center px-5 gap-4"
       style={{ height: 26 }}>
       <div className="flex items-center gap-2">
         <motion.div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff]"
