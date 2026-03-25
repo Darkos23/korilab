@@ -14,9 +14,9 @@ function StatsEditor({ stats, onChange }) {
             {stats.map((s, i) => (
                 <div key={i} className="flex gap-2 items-center">
                     <input value={s.value} onChange={e => update(i, 'value', e.target.value)} placeholder="120+"
-                        className="w-28 bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10" />
+                        className="w-28 bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10" />
                     <input value={s.label} onChange={e => update(i, 'label', e.target.value)} placeholder="Projets livrés"
-                        className="flex-1 bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10" />
+                        className="flex-1 bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-[#00a8ff]/40 placeholder-white/10" />
                     <button onClick={() => remove(i)} className="text-red-400/30 hover:text-red-400 transition-colors">
                         <Trash2 className="w-3.5 h-3.5" />
                     </button>

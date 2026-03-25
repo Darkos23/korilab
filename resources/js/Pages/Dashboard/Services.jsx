@@ -96,7 +96,7 @@ export default function DashboardServices({ admin, services }) {
                             <div className="col-span-2">
                                 <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">Description</label>
                                 <textarea name="desc" value={form.desc} onChange={handleChange} rows={3}
-                                    className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono
+                                    className="w-full bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono
                                         focus:border-[#00a8ff]/40 outline-none resize-none transition-all placeholder-white/10"
                                     placeholder="Description du service" />
                             </div>
@@ -106,7 +106,7 @@ export default function DashboardServices({ admin, services }) {
                             <div>
                                 <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">Icône</label>
                                 <select name="icon" value={form.icon} onChange={handleChange}
-                                    className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none">
+                                    className="w-full bg-white/[0.04] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none">
                                     {ICONS.map(i => <option key={i}>{i}</option>)}
                                 </select>
                             </div>

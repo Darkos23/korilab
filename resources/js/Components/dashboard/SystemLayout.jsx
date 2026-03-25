@@ -207,7 +207,7 @@ export function SysInput({ label, ...props }) {
     <div>
       {label && <label className="block text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">{label}</label>}
       <input
-        className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm
+        className="w-full bg-white/[0.04] border border-[#00a8ff]/20 rounded-lg px-3 py-2 text-white text-sm
           focus:border-[#00a8ff]/50 focus:shadow-[0_0_10px_rgba(0,168,255,0.1)] outline-none transition-all
           placeholder-white/10 font-mono"
         {...props}
@@ -221,7 +221,7 @@ export function SysTextarea({ label, rows = 3, ...props }) {
     <div>
       {label && <label className="block text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">{label}</label>}
       <textarea rows={rows}
-        className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm
+        className="w-full bg-white/[0.04] border border-[#00a8ff]/20 rounded-lg px-3 py-2 text-white text-sm
           focus:border-[#00a8ff]/50 focus:shadow-[0_0_10px_rgba(0,168,255,0.1)] outline-none resize-none transition-all
           placeholder-white/10 font-mono"
         {...props}
@@ -235,7 +235,7 @@ export function SysSelect({ label, options, ...props }) {
     <div>
       {label && <label className="block text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">{label}</label>}
       <select
-        className="w-full bg-[#091e30] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm
+        className="w-full bg-white/[0.04] border border-[#00a8ff]/20 rounded-lg px-3 py-2 text-white text-sm
           focus:border-[#00a8ff]/50 outline-none transition-all font-mono"
         {...props}
       >
