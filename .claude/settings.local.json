@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:korilab.dev)",
+      "WebFetch(domain:www.korilab.dev)",
+      "Bash(curl -I https://korilab.dev)",
+      "Bash(git push:*)",
+      "Bash(curl -s -X POST https://korilab.dev/contact -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{\"\"\"\"name\"\"\"\":\"\"\"\"Test KoriLab\"\"\"\",\"\"\"\"email\"\"\"\":\"\"\"\"test@test.com\"\"\"\",\"\"\"\"budget\"\"\"\":\"\"\"\"1000-5000\"\"\"\",\"\"\"\"message\"\"\"\":\"\"\"\"Ceci est un test du formulaire de contact.\"\"\"\"}' -c /tmp/cookies.txt -b /tmp/cookies.txt)",
+      "Bash(php artisan:*)",
+      "Bash(npm run:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(sed -i 's/#061525/#0d2235/g' /d/www/KoriLab/resources/js/Pages/Dashboard/Index.jsx /d/www/KoriLab/resources/js/Pages/Dashboard/Messages.jsx /d/www/KoriLab/resources/js/Pages/Dashboard/Portfolio.jsx /d/www/KoriLab/resources/js/Pages/Dashboard/Services.jsx /d/www/KoriLab/resources/js/Pages/Dashboard/Site.jsx /d/www/KoriLab/resources/js/Pages/Dashboard/Team.jsx /d/www/KoriLab/resources/js/Components/dashboard/SystemLayout.jsx)",
+      "Bash(sed -i 's/#040d1a/#091828/g' /d/www/KoriLab/resources/js/Components/dashboard/Sidebar.jsx)"
+    ]
+  }
+}

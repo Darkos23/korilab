@@ -71,7 +71,7 @@ export default function Sidebar({ admin }) {
   const [open, setOpen] = useState(false);
 
   const SidebarContent = () => (
-    <aside className="w-64 min-h-screen flex flex-col relative border-r border-[#00a8ff]/10 bg-[#040d1a]">
+    <aside className="w-64 min-h-screen flex flex-col relative border-r border-[#00a8ff]/10 bg-[#091828]">
       <Scanlines />
 
       {/* Top glow line */}
@@ -178,7 +178,7 @@ export default function Sidebar({ admin }) {
       <button
         onClick={() => setOpen(true)}
         className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center
-          rounded-lg border border-[#00a8ff]/30 bg-[#040d1a] text-[#00a8ff]
+          rounded-lg border border-[#00a8ff]/30 bg-[#091828] text-[#00a8ff]
           shadow-[0_0_12px_rgba(0,168,255,0.2)]">
         <Menu size={18} />
       </button>
@@ -202,7 +202,7 @@ export default function Sidebar({ admin }) {
                   onClick={() => setOpen(false)}
                   className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center
                     rounded-lg border border-[#00a8ff]/20 text-[#00a8ff]/60 hover:text-[#00a8ff]
-                    bg-[#040d1a] transition-colors z-20">
+                    bg-[#091828] transition-colors z-20">
                   <X size={14} />
                 </button>
               </div>

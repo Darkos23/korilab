@@ -21,7 +21,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
   ];
 
   return (
-    <div className="min-h-screen bg-[#061525] flex relative overflow-hidden">
+    <div className="min-h-screen bg-[#0d2235] flex relative overflow-hidden">
       <SystemGrid />
       <SystemOrbs />
       <ParticleNetwork />

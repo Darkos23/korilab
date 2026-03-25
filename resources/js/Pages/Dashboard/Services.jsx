@@ -48,7 +48,7 @@ export default function DashboardServices({ admin, services }) {
     const handleCancel = () => { setShowForm(false); setEditingId(null); setForm(defaultForm); };
 
     return (
-        <div className="min-h-screen bg-[#061525] flex relative overflow-hidden">
+        <div className="min-h-screen bg-[#0d2235] flex relative overflow-hidden">
             <SystemGrid />
             <SystemOrbs />
             <ParticleNetwork />
@@ -96,7 +96,7 @@ export default function DashboardServices({ admin, services }) {
                             <div className="col-span-2">
                                 <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">Description</label>
                                 <textarea name="desc" value={form.desc} onChange={handleChange} rows={3}
-                                    className="w-full bg-[#061525] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono
+                                    className="w-full bg-[#0d2235] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono
                                         focus:border-[#00a8ff]/40 outline-none resize-none transition-all placeholder-white/10"
                                     placeholder="Description du service" />
                             </div>
@@ -106,7 +106,7 @@ export default function DashboardServices({ admin, services }) {
                             <div>
                                 <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">Icône</label>
                                 <select name="icon" value={form.icon} onChange={handleChange}
-                                    className="w-full bg-[#061525] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none">
+                                    className="w-full bg-[#0d2235] border border-[#00a8ff]/15 rounded-lg px-3 py-2 text-white text-sm font-mono focus:border-[#00a8ff]/40 outline-none">
                                     {ICONS.map(i => <option key={i}>{i}</option>)}
                                 </select>
                             </div>
@@ -116,7 +116,7 @@ export default function DashboardServices({ admin, services }) {
                                 <div className="flex flex-wrap gap-2">
                                     {ACCENTS.map(g => (
                                         <button key={g} type="button" onClick={() => setForm(p => ({ ...p, accent: g }))}
-                                            className={`w-12 h-8 rounded bg-gradient-to-r ${g} transition-all ${form.accent === g ? 'ring-2 ring-[#00a8ff] ring-offset-1 ring-offset-[#061525]' : 'opacity-50 hover:opacity-80'}`} />
+                                            className={`w-12 h-8 rounded bg-gradient-to-r ${g} transition-all ${form.accent === g ? 'ring-2 ring-[#00a8ff] ring-offset-1 ring-offset-[#0d2235]' : 'opacity-50 hover:opacity-80'}`} />
                                     ))}
                                 </div>
                             </div>
