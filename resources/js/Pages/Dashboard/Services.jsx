@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { router } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
+import TopBar from '@/Components/dashboard/TopBar';
 import { SLSystemBG, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
@@ -69,13 +70,16 @@ export default function DashboardServices({ admin, services }) {
     const handleEdit   = s => { setForm({ ...s, tags: Array.isArray(s.tags) ? s.tags.join(', ') : s.tags ?? '' }); setEditingId(s.id); setShowForm(true); window.scrollTo({ top: 0, behavior: 'smooth' }); };
     const handleDelete = id => { if (deleting === id) { router.delete(`/dashboard/services/${id}`, { onSuccess: () => setDeleting(null) }); } else { setDeleting(id); } };
     const handleCancel = () => { setShowForm(false); setEditingId(null); setForm(defaultForm); };
+    const [collapsed, setCollapsed] = useState(false);
 
     return (
         <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
             <SLSystemBG />
-            <Sidebar admin={admin} />
+            <Sidebar admin={admin} collapsed={collapsed} />
 
-            <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
+            <main className="relative z-10 flex-1 overflow-auto flex flex-col">
+                <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
+                <div className="p-4 md:p-8 flex-1">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <div>
@@ -274,6 +278,7 @@ export default function DashboardServices({ admin, services }) {
                         </p>
                     </div>
                 )}
+                </div>
             </main>
             <StatusBar admin={admin} />
         </div>

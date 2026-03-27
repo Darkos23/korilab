@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { router } from '@inertiajs/react';
 import { Save, CheckCircle, Plus, Trash2 } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
+import TopBar from '@/Components/dashboard/TopBar';
 import { SLSystemBG, SysWin, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
@@ -55,6 +56,7 @@ function StatsEditor({ stats, onChange }) {
 }
 
 export default function DashboardSite({ admin, site }) {
+    const [collapsed, setCollapsed] = useState(false);
     const [saved, setSaved] = useState(false);
 
     const [heroStats, setHeroStats] = useState(
@@ -186,9 +188,11 @@ export default function DashboardSite({ admin, site }) {
     return (
         <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
             <SLSystemBG />
-            <Sidebar admin={admin} />
+            <Sidebar admin={admin} collapsed={collapsed} />
 
-            <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
+            <main className="relative z-10 flex-1 overflow-auto flex flex-col">
+                <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
+                <div className="p-4 md:p-8 flex-1">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <div>
@@ -256,6 +260,7 @@ export default function DashboardSite({ admin, site }) {
                         </button>
                     </div>
                 </form>
+                </div>
             </main>
             <StatusBar admin={admin} />
         </div>

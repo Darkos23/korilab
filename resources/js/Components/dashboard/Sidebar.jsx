@@ -21,14 +21,21 @@ const nav = [
   { href: '/dashboard/messages',  icon: MessageSquare,   label: 'Messages',       sub: 'Boîte de réception' },
 ];
 
-export default function Sidebar({ admin }) {
+export default function Sidebar({ admin, collapsed = false }) {
   const { url } = usePage();
   const logout = () => router.post('/logout');
   const [open, setOpen] = useState(false);
 
   const Content = () => (
-    <aside className="w-56 min-h-screen flex flex-col relative z-20"
-      style={{ background: SIDEBAR_BG, borderRight: `1px solid ${BORDER}`, flexShrink: 0 }}>
+    <aside
+      className="min-h-screen flex flex-col relative z-20 transition-all duration-200"
+      style={{
+        width: collapsed ? 0 : 224,
+        overflow: 'hidden',
+        background: SIDEBAR_BG,
+        borderRight: collapsed ? 'none' : `1px solid ${BORDER}`,
+        flexShrink: 0,
+      }}>
 
       {/* Logo */}
       <div className="px-5 pt-6 pb-5 border-b" style={{ borderColor: BORDER }}>

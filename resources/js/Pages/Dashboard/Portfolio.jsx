@@ -3,6 +3,7 @@ import { router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
+import TopBar from '@/Components/dashboard/TopBar';
 import { SLSystemBG, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
@@ -170,6 +171,7 @@ const labelStyle = {
 };
 
 export default function DashboardPortfolio({ admin, projects }) {
+    const [collapsed, setCollapsed] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [editingId, setEditingId] = useState(null);
     const [form, setForm] = useState(defaultForm);
@@ -228,9 +230,11 @@ export default function DashboardPortfolio({ admin, projects }) {
     return (
         <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
             <SLSystemBG />
-            <Sidebar admin={admin} />
+            <Sidebar admin={admin} collapsed={collapsed} />
 
-            <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
+            <main className="relative z-10 flex-1 overflow-auto flex flex-col">
+                <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
+                <div className="p-4 md:p-8 flex-1">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <div>
@@ -383,6 +387,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                         </p>
                     </div>
                 )}
+                </div>
             </main>
             <StatusBar admin={admin} />
         </div>
