@@ -21,13 +21,13 @@ function CauriCard({ project, deleting, onEdit, onDelete }) {
             onHoverEnd={() => setHovered(false)}
             className="relative overflow-hidden flex flex-col"
             style={{
-                background: 'linear-gradient(160deg, #221a0a 0%, #140e04 100%)',
+                background: 'rgba(255,252,244,0.95)',
                 borderRadius: 12,
-                border: `1px solid ${hovered ? GOLD + '55' : 'rgba(232,184,75,0.12)'}`,
-                borderLeft: `3px solid ${hovered ? GOLD : GOLD + '50'}`,
+                border: `1px solid ${hovered ? 'rgba(168,114,10,0.45)' : 'rgba(140,95,25,0.14)'}`,
+                borderLeft: `3px solid ${hovered ? '#a8720a' : 'rgba(168,114,10,0.5)'}`,
                 boxShadow: hovered
-                    ? `0 8px 32px rgba(196,90,42,0.2), 0 2px 8px rgba(0,0,0,0.4)`
-                    : `0 2px 12px rgba(0,0,0,0.3)`,
+                    ? `0 8px 32px rgba(196,90,42,0.12), 0 2px 8px rgba(140,95,25,0.1)`
+                    : `0 2px 12px rgba(140,95,25,0.06)`,
                 transition: 'all 0.3s',
             }}
         >
@@ -62,16 +62,16 @@ function CauriCard({ project, deleting, onEdit, onDelete }) {
 
             {/* Content */}
             <div className="p-4 flex-1">
-                <h3 className="font-black text-sm uppercase tracking-wide mb-2" style={{ color: '#f5ecd0' }}>
+                <h3 className="font-black text-sm uppercase tracking-wide mb-2" style={{ color: '#1e1408' }}>
                     {project.title}
                 </h3>
-                <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(245,236,208,0.45)' }}>
+                <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(30,20,8,0.5)' }}>
                     {project.desc || '—'}
                 </p>
                 <div className="flex flex-wrap gap-1">
                     {(project.tags ?? []).slice(0, 4).map(tag => (
                         <span key={tag} className="text-[9px] font-mono px-2 py-0.5 rounded-full"
-                            style={{ color: GOLD + '90', background: 'rgba(232,184,75,0.08)', border: `1px solid rgba(232,184,75,0.2)` }}>
+                            style={{ color: '#a8720a', background: 'rgba(168,114,10,0.08)', border: `1px solid rgba(168,114,10,0.2)` }}>
                             {tag}
                         </span>
                     ))}
@@ -92,7 +92,7 @@ function CauriCard({ project, deleting, onEdit, onDelete }) {
                 <button onClick={onDelete}
                     className="flex-1 py-2 text-[10px] font-mono uppercase tracking-widest rounded transition-all duration-200"
                     style={{
-                        color: deleting ? '#f87171' : 'rgba(245,236,208,0.3)',
+                        color: deleting ? '#c44030' : 'rgba(30,20,8,0.3)',
                         border: `1px solid ${deleting ? 'rgba(248,113,113,0.4)' : 'rgba(245,236,208,0.1)'}`,
                         background: deleting ? 'rgba(248,113,113,0.08)' : 'transparent',
                     }}>

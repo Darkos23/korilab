@@ -1,92 +1,64 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
-/* ─── Design tokens — Cauri / KoriLab Dakar ─────────────── */
-const BG        = '#1c1508';
-const SURFACE   = 'rgba(212,162,56,0.08)';
-const BORDER    = 'rgba(212,162,56,0.28)';
-const BORDER_H  = 'rgba(212,162,56,0.65)';
-const TEXT      = '#f5ecd0';
-const DIM       = 'rgba(245,236,208,0.70)';
-const MUTED     = 'rgba(245,236,208,0.40)';
+/* ─── Design tokens — Cauri / KoriLab Dakar (mode sable) ── */
+const BG        = '#f7edd8';          /* sable chaud        */
+const SURFACE   = 'rgba(160,110,30,0.06)';
+const BORDER    = 'rgba(140,95,25,0.18)';
+const BORDER_H  = 'rgba(140,95,25,0.45)';
+const TEXT      = '#1e1408';          /* brun nuit          */
+const DIM       = 'rgba(30,20,8,0.65)';
+const MUTED     = 'rgba(30,20,8,0.38)';
 const RED       = '#c44030';
-const GOLD      = '#e8b84b';
+const GOLD      = '#a8720a';          /* or sombre (lisible sur clair) */
 
-/* ─── Scanline ambrée ────────────────────────────────────── */
-function Scanline() {
-  return (
-    <motion.div
-      className="fixed left-0 right-0 pointer-events-none z-0"
-      style={{ height: 1, background: 'rgba(212,162,56,0.07)' }}
-      initial={{ top: '-1%' }}
-      animate={{ top: ['0%', '100%'] }}
-      transition={{ duration: 12, repeat: Infinity, ease: 'linear', repeatDelay: 4 }}
-    />
-  );
-}
-
-/* ─── Background Cauri ───────────────────────────────────── */
+/* ─── Background désert Dakar ────────────────────────────── */
 export function SLSystemBG() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Base — nuit chaude */}
+      {/* Base — sable */}
       <div className="absolute inset-0" style={{ background: BG }} />
 
-      {/* Grain sable */}
+      {/* Grain sable fin */}
       <div className="absolute inset-0" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E")`,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E")`,
         backgroundRepeat: 'repeat',
-        backgroundSize: '256px 256px',
-        mixBlendMode: 'overlay',
+        backgroundSize: '200px 200px',
+        mixBlendMode: 'multiply',
       }} />
 
-      {/* Motif losange bogolan */}
+      {/* Motif losange bogolan — brun chaud */}
       <div className="absolute inset-0" style={{
         backgroundImage:
-          'linear-gradient(45deg, rgba(212,162,56,0.07) 25%, transparent 25%),' +
-          'linear-gradient(-45deg, rgba(212,162,56,0.07) 25%, transparent 25%),' +
-          'linear-gradient(45deg, transparent 75%, rgba(212,162,56,0.07) 75%),' +
-          'linear-gradient(-45deg, transparent 75%, rgba(212,162,56,0.07) 75%)',
+          'linear-gradient(45deg, rgba(140,95,25,0.06) 25%, transparent 25%),' +
+          'linear-gradient(-45deg, rgba(140,95,25,0.06) 25%, transparent 25%),' +
+          'linear-gradient(45deg, transparent 75%, rgba(140,95,25,0.06) 75%),' +
+          'linear-gradient(-45deg, transparent 75%, rgba(140,95,25,0.06) 75%)',
         backgroundSize: '48px 48px',
         backgroundPosition: '0 0, 0 24px, 24px -24px, -24px 0px',
       }} />
 
-      {/* Halo soleil — or ambré en haut */}
+      {/* Halo soleil — haut centre */}
       <div className="absolute inset-x-0 top-0" style={{
-        height: '55vh',
-        background: 'radial-gradient(ellipse 75% 80% at 50% -5%, rgba(212,162,56,0.20) 0%, transparent 68%)',
+        height: '60vh',
+        background: 'radial-gradient(ellipse 80% 70% at 50% -10%, rgba(220,160,40,0.18) 0%, transparent 70%)',
       }} />
 
       {/* Orbe terracotta — bas gauche */}
       <div className="absolute rounded-full" style={{
-        width: 520, height: 420, bottom: '-5%', left: '-3%',
-        background: 'radial-gradient(ellipse, rgba(196,87,58,0.18) 0%, transparent 70%)',
-        filter: 'blur(70px)',
-      }} />
-
-      {/* Orbe indigo — bas droite */}
-      <div className="absolute rounded-full" style={{
-        width: 560, height: 440, bottom: '-5%', right: '-3%',
-        background: 'radial-gradient(ellipse, rgba(74,45,158,0.18) 0%, transparent 70%)',
+        width: 600, height: 500, bottom: '-10%', left: '-5%',
+        background: 'radial-gradient(ellipse, rgba(196,87,58,0.12) 0%, transparent 70%)',
         filter: 'blur(80px)',
       }} />
 
-      {/* Orbe or — milieu droite */}
+      {/* Orbe ocre — haut droite */}
       <div className="absolute rounded-full" style={{
-        width: 300, height: 300, top: '35%', right: '5%',
-        background: 'radial-gradient(ellipse, rgba(212,162,56,0.14) 0%, transparent 70%)',
-        filter: 'blur(55px)',
+        width: 500, height: 400, top: '-5%', right: '-5%',
+        background: 'radial-gradient(ellipse, rgba(200,150,40,0.14) 0%, transparent 70%)',
+        filter: 'blur(80px)',
       }} />
 
-      {/* Scanline ambrée */}
-      <Scanline />
-
-      {/* Vignette */}
-      <div className="absolute inset-0" style={{
-        background: 'radial-gradient(ellipse 90% 90% at 50% 50%, transparent 48%, rgba(4,3,2,0.82) 100%)',
-      }} />
-
-      {/* Coins — or tamisé */}
+      {/* Coins décoratifs */}
       {[
         { top: 16, left: 16,     borderTop: true,    borderLeft: true  },
         { top: 16, right: 16,    borderTop: true,    borderRight: true },
@@ -101,7 +73,7 @@ export function SLSystemBG() {
           borderLeftWidth:   c.borderLeft   ? 1 : 0,
           borderRightWidth:  c.borderRight  ? 1 : 0,
           borderStyle: 'solid',
-          borderColor: 'rgba(212,162,56,0.28)',
+          borderColor: 'rgba(140,95,25,0.22)',
         }} />
       ))}
 
@@ -130,16 +102,13 @@ export function SysWin({ title, subtitle, children, className = '', delay = 0 })
       transition={{ duration: 0.4, delay }}
       className={`relative ${className}`}
       style={{
-        background: 'rgba(10,8,5,0.92)',
+        background: 'rgba(255,252,244,0.92)',
         border: `1px solid ${BORDER}`,
-        borderRadius: 2,
+        borderRadius: 10,
+        boxShadow: '0 2px 16px rgba(140,95,25,0.08)',
       }}
     >
-      {/* Header */}
-      <div className="flex items-center gap-3 px-4 py-2.5 border-b" style={{ borderColor: BORDER }}>
-        <span className="font-mono text-[9px] uppercase tracking-[0.3em]" style={{ color: MUTED }}>
-          [
-        </span>
+      <div className="flex items-center gap-3 px-4 py-3 border-b" style={{ borderColor: BORDER }}>
         <span className="font-mono text-[9px] uppercase tracking-[0.25em]" style={{ color: DIM }}>
           {title}
         </span>
@@ -148,12 +117,9 @@ export function SysWin({ title, subtitle, children, className = '', delay = 0 })
             / {subtitle}
           </span>
         )}
-        <span className="font-mono text-[9px] uppercase tracking-[0.3em]" style={{ color: MUTED }}>
-          ]
-        </span>
-        <div className="ml-auto flex gap-2">
+        <div className="ml-auto flex gap-1.5">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="w-4 h-px" style={{ background: BORDER }} />
+            <div key={i} className="w-2 h-2 rounded-full" style={{ background: BORDER }} />
           ))}
         </div>
       </div>
@@ -168,11 +134,17 @@ export function StatBadge({ label, value, icon: Icon, sub }) {
     <motion.div
       whileHover={{ borderColor: BORDER_H }}
       className="relative p-5 transition-all duration-300"
-      style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 2 }}
+      style={{
+        background: 'rgba(255,252,244,0.85)',
+        border: `1px solid ${BORDER}`,
+        borderRadius: 10,
+        borderLeft: `3px solid ${GOLD}`,
+        boxShadow: '0 2px 12px rgba(140,95,25,0.07)',
+      }}
     >
       <div className="flex items-start justify-between mb-4">
         {Icon && <Icon className="w-3.5 h-3.5" style={{ color: MUTED }} />}
-        <div className="w-1 h-1" style={{ background: GOLD }} />
+        <div className="w-1.5 h-1.5 rounded-full" style={{ background: GOLD }} />
       </div>
       <div className="font-mono text-3xl font-black mb-1" style={{ color: TEXT }}>{value}</div>
       <div className="font-mono text-[9px] uppercase tracking-[0.22em]" style={{ color: DIM }}>{label}</div>
@@ -189,7 +161,11 @@ export function SysNotif({ children }) {
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 1, duration: 0.4 }}
       className="px-4 py-3 flex items-start gap-3"
-      style={{ border: `1px solid ${BORDER}`, borderRadius: 2 }}
+      style={{
+        background: 'rgba(255,252,244,0.7)',
+        border: `1px solid ${BORDER}`,
+        borderRadius: 8,
+      }}
     >
       <span className="font-mono text-[9px] mt-0.5" style={{ color: GOLD }}>◆</span>
       <p className="font-mono text-[11px] leading-relaxed italic" style={{ color: DIM }}>{children}</p>
@@ -210,9 +186,9 @@ export function SysInput({ label, ...props }) {
       <input
         className="w-full px-3 py-2 font-mono text-sm outline-none transition-all duration-200"
         style={{
-          background: SURFACE,
+          background: 'rgba(255,252,244,0.9)',
           border: `1px solid ${f ? BORDER_H : BORDER}`,
-          borderRadius: 2,
+          borderRadius: 6,
           color: TEXT,
         }}
         onFocus={() => setF(true)}
@@ -236,9 +212,9 @@ export function SysTextarea({ label, rows = 3, ...props }) {
         rows={rows}
         className="w-full px-3 py-2 font-mono text-sm outline-none resize-none transition-all duration-200"
         style={{
-          background: SURFACE,
+          background: 'rgba(255,252,244,0.9)',
           border: `1px solid ${f ? BORDER_H : BORDER}`,
-          borderRadius: 2,
+          borderRadius: 6,
           color: TEXT,
         }}
         onFocus={() => setF(true)}
@@ -259,11 +235,11 @@ export function SysSelect({ label, options, ...props }) {
       )}
       <select
         className="w-full px-3 py-2 font-mono text-sm outline-none transition-all duration-200"
-        style={{ background: '#0d0b08', border: `1px solid ${BORDER}`, borderRadius: 2, color: TEXT }}
+        style={{ background: '#fffcf4', border: `1px solid ${BORDER}`, borderRadius: 6, color: TEXT }}
         {...props}
       >
         {options.map(o => (
-          <option key={o.value ?? o} value={o.value ?? o} className="bg-[#0d0b08]">
+          <option key={o.value ?? o} value={o.value ?? o} className="bg-[#fffcf4]">
             {o.label ?? o}
           </option>
         ))}
@@ -276,9 +252,9 @@ export function SysSelect({ label, options, ...props }) {
 export function SysBtn({ children, variant = 'primary', className = '', ...props }) {
   const base = "flex items-center gap-2 px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all duration-200 disabled:opacity-30";
   const styles = {
-    primary: { border: `1px solid ${BORDER_H}`, background: SURFACE,              color: TEXT,        borderRadius: 2 },
-    danger:  { border: `1px solid rgba(196,64,48,0.4)`, background: 'transparent', color: '#e87070',  borderRadius: 2 },
-    ghost:   { border: `1px solid ${BORDER}`,   background: 'transparent',         color: DIM,         borderRadius: 2 },
+    primary: { border: `1px solid ${BORDER_H}`, background: SURFACE, color: TEXT, borderRadius: 6 },
+    danger:  { border: `1px solid rgba(196,64,48,0.4)`, background: 'transparent', color: RED, borderRadius: 6 },
+    ghost:   { border: `1px solid ${BORDER}`, background: 'transparent', color: DIM, borderRadius: 6 },
   };
   return (
     <button className={`${base} ${className}`} style={styles[variant] ?? styles.primary} {...props}>
@@ -288,13 +264,13 @@ export function SysBtn({ children, variant = 'primary', className = '', ...props
 }
 
 /* ─── Rank Badge ─────────────────────────────────────────── */
-const RC = { S: GOLD, A: '#f0e4c4', B: '#c4573a', C: '#8b6fcf', D: '#7ab8a0', E: '#6b7280' };
+const RC = { S: GOLD, A: '#8b6010', B: RED, C: '#5a3a9a', D: '#2a7a6a', E: '#6b7280' };
 export function RankBadge({ rank }) {
   const c = RC[rank] ?? TEXT;
   return (
     <span
       className="inline-flex items-center justify-center w-6 h-6 font-mono text-[10px] font-black uppercase"
-      style={{ color: c, border: `1px solid ${c}40`, background: `${c}08`, letterSpacing: '0.05em' }}
+      style={{ color: c, border: `1px solid ${c}50`, background: `${c}10`, borderRadius: 4 }}
     >
       {rank}
     </span>
@@ -312,13 +288,13 @@ export function StatusBar({ admin }) {
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-50 flex items-center px-5 gap-4"
-      style={{ height: 24, borderTop: `1px solid ${BORDER}`, background: 'rgba(6,4,2,0.98)', backdropFilter: 'blur(8px)' }}
+      style={{ height: 24, borderTop: `1px solid ${BORDER}`, background: 'rgba(247,237,216,0.98)', backdropFilter: 'blur(8px)' }}
     >
       <div className="flex items-center gap-2">
         <motion.div
-          className="w-1 h-1"
+          className="w-1.5 h-1.5 rounded-full"
           style={{ background: GOLD }}
-          animate={{ opacity: [1, 0.2, 1] }}
+          animate={{ opacity: [1, 0.3, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
         <span className="font-mono text-[7px] uppercase tracking-[0.35em]" style={{ color: MUTED }}>En ligne</span>

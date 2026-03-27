@@ -4,12 +4,12 @@ import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, Mess
 import { useState } from "react";
 
 /* ─── Tokens ─────────────────────────────────────────────── */
-const TEXT   = '#f0e4c4';
-const DIM    = 'rgba(240,228,196,0.50)';
-const MUTED  = 'rgba(240,228,196,0.22)';
-const BORDER = 'rgba(212,162,56,0.14)';
-const GOLD   = '#d4a235';
-const RC     = { S: GOLD, A: TEXT, B: '#c4573a', C: '#8b6fcf', D: '#7ab8a0', E: '#6b7280' };
+const TEXT   = '#1e1408';
+const DIM    = 'rgba(30,20,8,0.65)';
+const MUTED  = 'rgba(30,20,8,0.38)';
+const BORDER = 'rgba(140,95,25,0.16)';
+const GOLD   = '#a8720a';
+const RC     = { S: GOLD, A: '#8b6010', B: '#c44030', C: '#5a3a9a', D: '#2a7a6a', E: '#6b7280' };
 
 /* ─── Cauri logo ─────────────────────────────────────────── */
 function CauriLogo() {
@@ -51,7 +51,7 @@ export default function Sidebar({ admin }) {
 
   const Content = () => (
     <aside className="w-56 min-h-screen flex flex-col"
-      style={{ background: 'rgba(7,5,3,0.98)', borderRight: `1px solid ${BORDER}` }}>
+      style={{ background: 'rgba(252,246,232,0.98)', borderRight: `1px solid ${BORDER}` }}>
 
       {/* Logo */}
       <div className="p-5 border-b" style={{ borderColor: BORDER }}>
