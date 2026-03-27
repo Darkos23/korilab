@@ -196,11 +196,11 @@ export default function DashboardPortfolio({ admin, projects }) {
                 <div className="flex items-center justify-between mb-8">
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)]" />
-                            <span className="text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">Projets</span>
+                            <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#e8b84b', boxShadow: '0 0 6px 2px rgba(232,184,75,0.6)' }} />
+                            <span className="text-[9px] font-mono uppercase tracking-[0.3em]" style={{ color: 'rgba(232,184,75,0.5)' }}>Portfolio</span>
                         </div>
-                        <h1 className="text-2xl font-black text-white" style={{ textShadow:'0 0 20px rgba(0,168,255,0.2)' }}>Portfolio</h1>
-                        <p className="text-[#00a8ff]/30 text-xs font-mono mt-1">{projects.length} projet(s) enregistré(s)</p>
+                        <h1 className="text-2xl font-black" style={{ color: '#f5ecd0' }}>Réalisations</h1>
+                        <p className="text-xs font-mono mt-1" style={{ color: 'rgba(245,236,208,0.35)' }}>{projects.length} projet(s) enregistré(s)</p>
                     </div>
                     {!showForm && (
                         <SysBtn variant="primary" onClick={() => setShowForm(true)}>
@@ -305,7 +305,6 @@ export default function DashboardPortfolio({ admin, projects }) {
 
                 <SysDivider label="Réalisations" />
 
-                {/* Solo Leveling Notification Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {projects.map(project => (
                         <CauriCard
@@ -319,7 +318,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                 </div>
 
                 {projects.length === 0 && (
-                    <div className="text-center py-24 font-mono text-[#1b45d7]/40">
+                    <div className="text-center py-24 font-mono" style={{ color: 'rgba(232,184,75,0.3)' }}>
                         <div className="text-4xl mb-4">📁</div>
                         <p className="text-sm uppercase tracking-[0.3em]">Aucun projet enregistré</p>
                     </div>
