@@ -19,6 +19,7 @@ class DashboardController extends Controller
             'portfolioCount'  => Portfolio::count(),
             'servicesCount'   => Service::count(),
             'unreadMessages'  => ContactMessage::whereNull('read_at')->count(),
+            'members'         => TeamMember::select('name', 'role', 'rank', 'initials')->orderBy('rank')->get(),
         ]);
     }
 

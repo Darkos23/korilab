@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { router } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
-import WhatsAppFloat from '@/Components/WhatsAppFloat';
 import { SLSystemBG, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
@@ -16,14 +15,14 @@ const TERRA2 = '#C84030';
 const GOLD   = '#8A5A18';
 
 const inputStyle = {
-    fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 13,
+    fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 13,
     color: INK, background: CARD,
     border: `1px solid ${INK3}`, borderRadius: 8,
     padding: '8px 12px', width: '100%', outline: 'none',
 };
 
 const labelStyle = {
-    fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10,
+    fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 10,
     color: INK2, textTransform: 'uppercase', letterSpacing: '0.12em',
     display: 'block', marginBottom: 6,
 };
@@ -80,13 +79,13 @@ export default function DashboardServices({ admin, services }) {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
+                        <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
                             Offres
                         </div>
-                        <h1 style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
+                        <h1 style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
                             Services
                         </h1>
-                        <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
+                        <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
                             {services.length} service{services.length !== 1 ? 's' : ''} enregistré{services.length !== 1 ? 's' : ''}
                         </p>
                     </div>
@@ -94,7 +93,7 @@ export default function DashboardServices({ admin, services }) {
                         <button onClick={() => setShowForm(true)}
                             className="flex items-center gap-2 transition-all duration-200"
                             style={{
-                                fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 12,
+                                fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 12,
                                 color: '#FFFFFF', background: TERRA,
                                 border: 'none', borderRadius: 10, padding: '10px 18px', cursor: 'pointer',
                             }}
@@ -169,7 +168,7 @@ export default function DashboardServices({ admin, services }) {
                             <div className="col-span-2 flex gap-3 pt-2">
                                 <button type="submit"
                                     style={{
-                                        fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 12,
+                                        fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 12,
                                         color: '#FFFFFF', background: TERRA,
                                         border: 'none', borderRadius: 8, padding: '9px 20px', cursor: 'pointer',
                                     }}>
@@ -177,7 +176,7 @@ export default function DashboardServices({ admin, services }) {
                                 </button>
                                 <button type="button" onClick={handleCancel}
                                     style={{
-                                        fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 12,
+                                        fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 12,
                                         color: INK2, background: 'transparent',
                                         border: `1px solid ${INK3}`, borderRadius: 8, padding: '9px 20px', cursor: 'pointer',
                                     }}>
@@ -209,28 +208,28 @@ export default function DashboardServices({ admin, services }) {
                                 {/* Rank badge */}
                                 <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm flex-shrink-0"
                                     style={{ color: rs.color, border: rs.border, background: rs.bg,
-                                        fontFamily: "'Nunito', sans-serif" }}>
+                                        fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif" }}>
                                     {s.rank}
                                 </div>
 
                                 {/* Info */}
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2 mb-0.5">
-                                        <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 13, color: INK }}>
+                                        <span style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 13, color: INK }}>
                                             {s.title}
                                         </span>
-                                        <span style={{ fontFamily: "'Nunito', sans-serif", fontSize: 9, color: INK2,
+                                        <span style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontSize: 9, color: INK2,
                                             border: `1px solid ${INK3}`, padding: '2px 6px', borderRadius: 4 }}>
                                             {s.icon}
                                         </span>
                                     </div>
-                                    <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 12, color: INK2 }} className="truncate mb-1.5">
+                                    <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 12, color: INK2 }} className="truncate mb-1.5">
                                         {s.desc}
                                     </p>
                                     <div className="flex flex-wrap gap-1">
                                         {(s.tags ?? []).slice(0, 4).map(tag => (
                                             <span key={tag} style={{
-                                                fontFamily: "'Nunito', sans-serif", fontSize: 10,
+                                                fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontSize: 10,
                                                 color: TERRA, background: 'rgba(180,48,40,0.07)',
                                                 border: `1px solid rgba(180,48,40,0.18)`,
                                                 padding: '2px 8px', borderRadius: 20,
@@ -245,7 +244,7 @@ export default function DashboardServices({ admin, services }) {
                                 <div className="flex gap-2 flex-shrink-0">
                                     <button onClick={() => handleEdit(s)}
                                         style={{
-                                            fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 11,
+                                            fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 11,
                                             color: '#FFFFFF', background: TERRA,
                                             border: 'none', borderRadius: 8, padding: '7px 14px', cursor: 'pointer',
                                         }}>
@@ -253,7 +252,7 @@ export default function DashboardServices({ admin, services }) {
                                     </button>
                                     <button onClick={() => handleDelete(s.id)}
                                         style={{
-                                            fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 11,
+                                            fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 11,
                                             color: deleting === s.id ? TERRA : INK2,
                                             background: 'transparent',
                                             border: `1px solid ${deleting === s.id ? TERRA : INK3}`,
@@ -270,13 +269,12 @@ export default function DashboardServices({ admin, services }) {
                 {services.length === 0 && (
                     <div className="text-center py-24">
                         <div className="text-4xl mb-4">⚡</div>
-                        <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 13, color: INK2, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                        <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 13, color: INK2, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
                             Aucun service enregistré
                         </p>
                     </div>
                 )}
             </main>
-            <WhatsAppFloat />
             <StatusBar admin={admin} />
         </div>
     );

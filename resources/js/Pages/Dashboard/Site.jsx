@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { router } from '@inertiajs/react';
 import { Save, CheckCircle, Plus, Trash2 } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
-import WhatsAppFloat from '@/Components/WhatsAppFloat';
 import { SLSystemBG, SysWin, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
@@ -16,14 +15,14 @@ const TERRA2 = '#C84030';
 const GOLD   = '#8A5A18';
 
 const inputStyle = {
-    fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 13,
+    fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 13,
     color: INK, background: CARD,
     border: `1px solid ${INK3}`, borderRadius: 8,
     padding: '8px 12px', width: '100%', outline: 'none',
 };
 
 const labelStyle = {
-    fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10,
+    fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 10,
     color: INK2, textTransform: 'uppercase', letterSpacing: '0.12em',
     display: 'block', marginBottom: 6,
 };
@@ -48,7 +47,7 @@ function StatsEditor({ stats, onChange }) {
             ))}
             <button onClick={add}
                 className="flex items-center gap-1 mt-1"
-                style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 <Plus className="w-3 h-3" /> Ajouter une stat
             </button>
         </div>
@@ -193,13 +192,13 @@ export default function DashboardSite({ admin, site }) {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
+                        <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
                             Configuration
                         </div>
-                        <h1 style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
+                        <h1 style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
                             Paramètres du site
                         </h1>
-                        <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
+                        <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
                             Contenu affiché sur la page publique
                         </p>
                     </div>
@@ -207,8 +206,8 @@ export default function DashboardSite({ admin, site }) {
                     <button onClick={handleSubmit}
                         className="flex items-center gap-2 px-5 py-2.5 rounded-xl transition-all duration-300"
                         style={saved
-                            ? { fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 13, color: '#16a34a', border: '1px solid rgba(22,163,74,0.3)', background: 'rgba(22,163,74,0.06)', cursor: 'pointer' }
-                            : { fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 13, color: '#FFFFFF', background: TERRA, border: 'none', cursor: 'pointer' }
+                            ? { fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 13, color: '#16a34a', border: '1px solid rgba(22,163,74,0.3)', background: 'rgba(22,163,74,0.06)', cursor: 'pointer' }
+                            : { fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 13, color: '#FFFFFF', background: TERRA, border: 'none', cursor: 'pointer' }
                         }
                         onMouseEnter={e => { if (!saved) e.currentTarget.style.background = TERRA2; }}
                         onMouseLeave={e => { if (!saved) e.currentTarget.style.background = TERRA; }}>
@@ -249,7 +248,7 @@ export default function DashboardSite({ admin, site }) {
                     <div className="flex items-center gap-4 pb-8">
                         <button type="submit"
                             className="flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-200"
-                            style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 13, color: '#FFFFFF', background: TERRA, border: 'none', cursor: 'pointer' }}
+                            style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 13, color: '#FFFFFF', background: TERRA, border: 'none', cursor: 'pointer' }}
                             onMouseEnter={e => { e.currentTarget.style.background = TERRA2; }}
                             onMouseLeave={e => { e.currentTarget.style.background = TERRA; }}>
                             <Save className="w-4 h-4" />
@@ -258,7 +257,6 @@ export default function DashboardSite({ admin, site }) {
                     </div>
                 </form>
             </main>
-            <WhatsAppFloat />
             <StatusBar admin={admin} />
         </div>
     );

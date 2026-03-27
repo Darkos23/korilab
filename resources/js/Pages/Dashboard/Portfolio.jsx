@@ -3,7 +3,6 @@ import { router } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
-import WhatsAppFloat from '@/Components/WhatsAppFloat';
 import { SLSystemBG, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
@@ -55,7 +54,7 @@ function ProjectCard({ project, deleting, onEdit, onDelete }) {
                 )}
                 <div className="absolute top-3 right-3">
                     <span style={{
-                        fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 9,
+                        fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 9,
                         background: 'rgba(0,0,0,0.72)', color: GOLD,
                         border: `1px solid rgba(184,120,32,0.4)`,
                         padding: '3px 8px', borderRadius: 4, textTransform: 'uppercase', letterSpacing: '0.1em',
@@ -67,7 +66,7 @@ function ProjectCard({ project, deleting, onEdit, onDelete }) {
                     <div className="absolute inset-0 flex items-center justify-center"
                         style={{ background: 'rgba(0,0,0,0.65)' }}>
                         <span style={{
-                            fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 11,
+                            fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 11,
                             color: GOLD, border: `1px solid rgba(184,120,32,0.5)`,
                             background: 'rgba(184,120,32,0.1)', padding: '6px 16px', borderRadius: 6,
                             textTransform: 'uppercase', letterSpacing: '0.2em',
@@ -80,16 +79,16 @@ function ProjectCard({ project, deleting, onEdit, onDelete }) {
 
             {/* Content */}
             <div className="p-4 flex-1">
-                <h3 style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 13, color: INK, marginBottom: 8 }}>
+                <h3 style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 13, color: INK, marginBottom: 8 }}>
                     {project.title}
                 </h3>
-                <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, lineHeight: 1.6, marginBottom: 12 }}>
+                <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, lineHeight: 1.6, marginBottom: 12 }}>
                     {project.desc || '—'}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                     {(project.tags ?? []).slice(0, 4).map(tag => (
                         <span key={tag} style={{
-                            fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 10,
+                            fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 10,
                             color: TERRA, background: 'rgba(180,48,40,0.07)',
                             border: `1px solid rgba(180,48,40,0.18)`,
                             padding: '2px 8px', borderRadius: 20,
@@ -105,7 +104,7 @@ function ProjectCard({ project, deleting, onEdit, onDelete }) {
                 <button onClick={onEdit}
                     className="flex-1 py-2 transition-all duration-200"
                     style={{
-                        fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 11,
+                        fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 11,
                         color: '#FFFFFF', background: TERRA,
                         border: 'none', borderRadius: 8, cursor: 'pointer',
                         letterSpacing: '0.05em',
@@ -118,7 +117,7 @@ function ProjectCard({ project, deleting, onEdit, onDelete }) {
                 <button onClick={onDelete}
                     className="flex-1 py-2 transition-all duration-200"
                     style={{
-                        fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 11,
+                        fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 11,
                         color: deleting ? TERRA : INK2,
                         background: 'transparent',
                         border: `1px solid ${deleting ? TERRA : INK3}`,
@@ -158,14 +157,14 @@ const defaultForm = {
 
 /* ─── Shared input style ──────────────────────────────────── */
 const inputStyle = {
-    fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 13,
+    fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 13,
     color: INK, background: CARD,
     border: `1px solid ${INK3}`, borderRadius: 8,
     padding: '8px 12px', width: '100%', outline: 'none',
 };
 
 const labelStyle = {
-    fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10,
+    fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 10,
     color: INK2, textTransform: 'uppercase', letterSpacing: '0.12em',
     display: 'block', marginBottom: 6,
 };
@@ -235,13 +234,13 @@ export default function DashboardPortfolio({ admin, projects }) {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
+                        <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
                             Portfolio
                         </div>
-                        <h1 style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
+                        <h1 style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
                             Réalisations
                         </h1>
-                        <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
+                        <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
                             {projects.length} projet{projects.length !== 1 ? 's' : ''} enregistré{projects.length !== 1 ? 's' : ''}
                         </p>
                     </div>
@@ -249,7 +248,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                         <button onClick={() => setShowForm(true)}
                             className="flex items-center gap-2 transition-all duration-200"
                             style={{
-                                fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 12,
+                                fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 12,
                                 color: '#FFFFFF', background: TERRA,
                                 border: 'none', borderRadius: 10, padding: '10px 18px', cursor: 'pointer',
                             }}
@@ -335,7 +334,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                                 <input type="checkbox" name="comingSoon" id="comingSoon"
                                     checked={form.comingSoon} onChange={handleChange}
                                     className="w-4 h-4" style={{ accentColor: TERRA }} />
-                                <label htmlFor="comingSoon" style={{ fontFamily: "'Nunito', sans-serif", fontSize: 12, color: INK2 }}>
+                                <label htmlFor="comingSoon" style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontSize: 12, color: INK2 }}>
                                     Bientôt disponible
                                 </label>
                             </div>
@@ -343,7 +342,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                             <div className="col-span-2 flex gap-3 pt-2">
                                 <button type="submit"
                                     style={{
-                                        fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 12,
+                                        fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 12,
                                         color: '#FFFFFF', background: TERRA,
                                         border: 'none', borderRadius: 8, padding: '9px 20px', cursor: 'pointer',
                                     }}>
@@ -351,7 +350,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                                 </button>
                                 <button type="button" onClick={handleCancel}
                                     style={{
-                                        fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 12,
+                                        fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 12,
                                         color: INK2, background: 'transparent',
                                         border: `1px solid ${INK3}`, borderRadius: 8, padding: '9px 20px', cursor: 'pointer',
                                     }}>
@@ -379,13 +378,12 @@ export default function DashboardPortfolio({ admin, projects }) {
                 {projects.length === 0 && (
                     <div className="text-center py-24">
                         <div className="text-4xl mb-4">📁</div>
-                        <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 13, color: INK2, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                        <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 13, color: INK2, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
                             Aucun projet enregistré
                         </p>
                     </div>
                 )}
             </main>
-            <WhatsAppFloat />
             <StatusBar admin={admin} />
         </div>
     );
