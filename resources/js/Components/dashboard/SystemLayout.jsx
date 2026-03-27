@@ -19,35 +19,7 @@ const SHADOW_INSET   = 'inset 4px 4px 8px rgba(180,130,60,0.22), inset -4px -4px
 const SHADOW_RAISED_SM = '4px 4px 10px rgba(180,130,60,0.22), -4px -4px 10px rgba(255,255,255,0.8)';
 
 /* ─── Background Kente / Dakar ───────────────────────────── */
-export function SLSystemBG() {
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Base sable */}
-      <div className="absolute inset-0" style={{ background: BG }} />
-
-      {/* Orbe terracotta — haut droite */}
-      <div className="absolute rounded-full" style={{
-        width: 700, height: 500, top: '-15%', right: '-10%',
-        background: 'radial-gradient(ellipse, rgba(200,72,24,0.13) 0%, transparent 65%)',
-        filter: 'blur(90px)',
-      }} />
-
-      {/* Orbe or — centre gauche */}
-      <div className="absolute rounded-full" style={{
-        width: 500, height: 500, top: '20%', left: '-10%',
-        background: 'radial-gradient(ellipse, rgba(184,120,32,0.1) 0%, transparent 65%)',
-        filter: 'blur(100px)',
-      }} />
-
-      {/* Orbe terracotta doux — bas droite */}
-      <div className="absolute rounded-full" style={{
-        width: 600, height: 400, bottom: '-10%', right: '10%',
-        background: 'radial-gradient(ellipse, rgba(200,72,24,0.08) 0%, transparent 65%)',
-        filter: 'blur(80px)',
-      }} />
-    </div>
-  );
-}
+export function SLSystemBG() { return null; }
 
 /* ── Aliases (backward compat) ── */
 export function ParticleNetwork() { return null; }

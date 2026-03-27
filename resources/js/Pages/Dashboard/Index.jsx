@@ -2,91 +2,66 @@ import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, ExternalLink, MessageSquare } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
+import { StatusBar } from "@/Components/dashboard/SystemLayout";
 
-import { SLSystemBG, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
-
-/* ── Design tokens ── */
-const INK   = '#1E0E04';
-const INK2  = 'rgba(30,14,4,0.52)';
-const INK3  = 'rgba(30,14,4,0.08)';
-const TERRA = '#C84818';
-const GOLD  = '#B87820';
-const GLASS = 'rgba(255,255,255,0.72)';
-const SHADOW = '0 4px 24px rgba(180,130,60,0.1), 0 1px 4px rgba(180,130,60,0.06)';
+const INK    = '#111827';
+const MUTED  = '#6B7280';
+const BORDER = '#E5E7EB';
+const TERRA  = '#C84818';
+const GOLD   = '#B87820';
 
 const ACTIONS = [
-  { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "PORTFOLIO" },
-  { href: "/dashboard/services",  icon: Wrench,        label: "Modifier les services", desc: "Offres et capacités du studio",        tag: "SERVICES"  },
-  { href: "/dashboard/team",      icon: Users,         label: "Éditer les CV",         desc: "Dossiers et profils de l'équipe",      tag: "ÉQUIPE"    },
-  { href: "/dashboard/site",      icon: Globe,         label: "Paramètres du site",    desc: "Infos de contact et configuration",    tag: "SYSTÈME"   },
-  { href: "/dashboard/messages",  icon: MessageSquare, label: "Messages reçus",        desc: "Demandes clients via le formulaire",   tag: "INBOX"     },
+  { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "Portfolio"  },
+  { href: "/dashboard/services",  icon: Wrench,        label: "Modifier les services", desc: "Offres et capacités du studio",        tag: "Services"   },
+  { href: "/dashboard/team",      icon: Users,         label: "Éditer les CV",         desc: "Dossiers et profils de l'équipe",      tag: "Équipe"     },
+  { href: "/dashboard/site",      icon: Globe,         label: "Paramètres du site",    desc: "Infos de contact et configuration",    tag: "Système"    },
+  { href: "/dashboard/messages",  icon: MessageSquare, label: "Messages reçus",        desc: "Demandes clients via le formulaire",   tag: "Inbox"      },
 ];
 
 function StatCard({ label, value, icon: Icon, sub }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-2xl p-6"
-      style={{
-        background: GLASS,
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255,255,255,0.6)',
-        boxShadow: SHADOW,
-        fontFamily: "'Inter', sans-serif",
-      }}
+      className="bg-white rounded-xl p-6"
+      style={{ border: `1px solid ${BORDER}`, boxShadow: '0 1px 3px rgba(0,0,0,0.05)', fontFamily: "'Inter', sans-serif" }}
     >
       <div className="flex items-center justify-between mb-4">
-        <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-          style={{ background: `rgba(200,72,24,0.08)` }}>
+        <div className="w-9 h-9 rounded-lg flex items-center justify-center"
+          style={{ background: 'rgba(200,72,24,0.08)' }}>
           {Icon && <Icon size={16} style={{ color: TERRA }} />}
         </div>
-        <motion.div className="w-2 h-2 rounded-full"
-          animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 2.5, repeat: Infinity }}
-          style={{ background: TERRA }} />
+        <div className="w-2 h-2 rounded-full" style={{ background: TERRA, opacity: 0.5 }} />
       </div>
-      <div className="text-4xl font-bold mb-1" style={{ color: INK, fontFamily: "'Playfair Display', serif" }}>{value}</div>
-      <div className="text-xs uppercase tracking-widest font-semibold mb-0.5" style={{ color: INK }}>{label}</div>
-      {sub && <div className="text-xs" style={{ color: INK2 }}>{sub}</div>}
+      <div className="text-3xl font-bold mb-1" style={{ color: INK, fontFamily: "'Playfair Display', serif" }}>{value}</div>
+      <div className="text-xs font-semibold uppercase tracking-wider mb-0.5" style={{ color: INK }}>{label}</div>
+      {sub && <div className="text-xs" style={{ color: MUTED }}>{sub}</div>}
     </motion.div>
   );
 }
 
 function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay }}
-    >
-      <Link
-        href={href}
-        className="group flex items-center gap-4 p-5 rounded-2xl transition-all duration-150"
-        style={{
-          background: GLASS,
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.6)',
-          boxShadow: SHADOW,
-          fontFamily: "'Inter', sans-serif",
-        }}
-        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.88)'; }}
-        onMouseLeave={e => { e.currentTarget.style.background = GLASS; }}
+    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay }}>
+      <Link href={href}
+        className="group flex items-center gap-4 p-4 bg-white rounded-xl transition-all duration-150"
+        style={{ border: `1px solid ${BORDER}`, boxShadow: '0 1px 2px rgba(0,0,0,0.04)', fontFamily: "'Inter', sans-serif" }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.boxShadow = '0 4px 12px rgba(200,72,24,0.08)'; }}
+        onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.boxShadow = '0 1px 2px rgba(0,0,0,0.04)'; }}
       >
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-          style={{ background: 'rgba(200,72,24,0.08)' }}>
-          <Icon size={18} style={{ color: TERRA }} />
+        <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+          style={{ background: 'rgba(200,72,24,0.07)' }}>
+          <Icon size={16} style={{ color: TERRA }} />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-0.5">
-            <span className="font-bold text-sm" style={{ color: INK }}>{label}</span>
-            <ArrowUpRight size={14} style={{ color: TERRA }} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="flex items-center gap-1.5">
+            <span className="text-sm font-semibold" style={{ color: INK }}>{label}</span>
+            <ArrowUpRight size={13} style={{ color: TERRA }} className="opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
-          <p className="text-xs" style={{ color: INK2 }}>{desc}</p>
+          <p className="text-xs mt-0.5" style={{ color: MUTED }}>{desc}</p>
         </div>
-        <span className="text-[9px] font-medium uppercase tracking-widest px-2.5 py-1 rounded-lg"
-          style={{ color: GOLD, background: 'rgba(184,120,32,0.1)', fontFamily: "'Inter', sans-serif" }}>
+        <span className="text-[10px] font-medium px-2 py-1 rounded-md flex-shrink-0"
+          style={{ color: MUTED, background: '#F3F4F6' }}>
           {tag}
         </span>
       </Link>
@@ -102,86 +77,51 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
   ];
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden" style={{ background: '#F5EDD6' }}>
-      <SLSystemBG />
+    <div className="min-h-screen flex" style={{ background: '#F4F5F7', fontFamily: "'Inter', sans-serif" }}>
       <Sidebar admin={admin} />
 
-      <main className="relative z-10 flex-1 p-6 md:p-10 pt-16 md:pt-10 overflow-auto pb-10">
+      <main className="flex-1 p-8 pt-16 md:pt-8 overflow-auto">
 
-        {/* ── Header ── */}
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-          className="mb-8 flex items-start justify-between">
+        {/* Header */}
+        <div className="mb-8 flex items-start justify-between">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: TERRA }} />
-              <span className="text-[10px] uppercase tracking-[0.3em] font-mono" style={{ color: INK2 }}>
-                KoriLab — Tableau de bord
-              </span>
-            </div>
-            <h1 className="text-4xl font-bold mb-2" style={{ color: INK, fontFamily: "'Playfair Display', serif" }}>
-              Bienvenue,{" "}
-              <span style={{ color: TERRA }}>{admin?.name}</span>
+            <p className="text-xs font-medium uppercase tracking-widest mb-2" style={{ color: MUTED }}>Tableau de bord</p>
+            <h1 className="text-3xl font-bold mb-1" style={{ color: INK, fontFamily: "'Playfair Display', serif" }}>
+              Bonjour, <span style={{ color: TERRA }}>{admin?.name}</span>
             </h1>
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-semibold px-2 py-0.5 rounded"
-                style={{ background: `rgba(200,72,24,0.1)`, color: TERRA, border: `1px solid rgba(200,72,24,0.2)` }}>
-                {admin?.rank}-Class
-              </span>
-              <span className="text-xs" style={{ color: INK2 }}>Admin KoriLab</span>
-            </div>
+            <p className="text-sm" style={{ color: MUTED }}>Voici un aperçu de votre studio.</p>
           </div>
-
           <a href="/" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200"
-            style={{ background: GLASS, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.6)', boxShadow: SHADOW, color: INK, fontFamily: "'Inter', sans-serif" }}
+            className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg text-sm font-medium transition-all"
+            style={{ border: `1px solid ${BORDER}`, color: INK, boxShadow: '0 1px 2px rgba(0,0,0,0.04)' }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.color = TERRA; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.color = INK; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK; }}
           >
-            <ExternalLink size={13} />
+            <ExternalLink size={14} />
             Voir le site
           </a>
-        </motion.div>
+        </div>
 
-        {/* ── Stats ── */}
+        {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {stats.map((s, i) => (
-            <motion.div key={s.label} transition={{ delay: 0.1 + i * 0.08 }}>
+            <motion.div key={s.label} transition={{ delay: 0.05 * i }}>
               <StatCard {...s} />
             </motion.div>
           ))}
         </div>
 
-        {/* ── Séparateur ── */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex-1 h-px" style={{ background: INK3 }} />
-          <span className="text-[9px] uppercase tracking-[0.35em] font-mono" style={{ color: INK2 }}>
-            ◆ Actions ◆
-          </span>
-          <div className="flex-1 h-px" style={{ background: INK3 }} />
+        {/* Actions */}
+        <div className="mb-4">
+          <h2 className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: MUTED }}>Actions rapides</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {ACTIONS.map((a, i) => (
+              <ActionCard key={a.href} {...a} delay={0.1 + i * 0.05} />
+            ))}
+          </div>
         </div>
-
-        {/* ── Actions ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {ACTIONS.map((a, i) => (
-            <ActionCard key={a.href} {...a} delay={0.2 + i * 0.06} />
-          ))}
-        </div>
-
-        {/* ── Citation ── */}
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-          className="mt-8 px-5 py-4 rounded-xl"
-          style={{ background: GLASS, backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.6)', borderLeft: `3px solid ${GOLD}`, boxShadow: SHADOW, fontFamily: "'Inter', sans-serif" }}
-        >
-          <p className="text-sm italic" style={{ color: INK2 }}>
-            « Chaque création porte l'empreinte de celui qui la forge. Bâtissez avec soin. »
-          </p>
-        </motion.div>
 
       </main>
-
-      
-      <StatusBar admin={admin} />
     </div>
   );
 }
