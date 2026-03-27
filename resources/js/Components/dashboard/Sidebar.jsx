@@ -1,13 +1,8 @@
 import { Link, router, usePage } from "@inertiajs/react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, MessageSquare } from "lucide-react";
 import { useState } from "react";
-
-const TERRA  = '#C84818';
-const INK    = '#111827';
-const MUTED  = '#6B7280';
-const BORDER = '#E5E7EB';
-const BG_ACT = 'rgba(200,72,24,0.08)';
+import { T } from "./SystemLayout";
 
 const nav = [
   { href: '/dashboard',           icon: LayoutDashboard, label: "Vue d'ensemble" },
@@ -23,48 +18,86 @@ export default function Sidebar({ admin }) {
   const logout = () => router.post('/logout');
   const [open, setOpen] = useState(false);
 
+  const initials = (admin?.name ?? 'A')
+    .split(' ')
+    .map(w => w[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+
   const Content = () => (
-    <aside className="w-56 min-h-screen flex flex-col bg-white"
-      style={{ borderRight: `1px solid ${BORDER}`, flexShrink: 0, fontFamily: "'Inter', sans-serif" }}>
+    <aside style={{
+      width: 224,
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      background: T.sb,
+      borderRight: `1px solid ${T.sep}`,
+      flexShrink: 0,
+      fontFamily: "'Nunito', sans-serif",
+    }}>
 
-      {/* Logo */}
-      <div className="px-5 pt-6 pb-5" style={{ borderBottom: `1px solid ${BORDER}` }}>
-        <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 20, color: INK }}>
-          KoriLab
+      {/* Logo + avatar row */}
+      <div style={{ padding: '16px 16px 14px', borderBottom: `1px solid ${T.sep}`, display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{
+          width: 34,
+          height: 34,
+          borderRadius: '50%',
+          background: T.acc2,
+          border: `1.5px solid ${T.acc3}`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 12,
+          fontWeight: 800,
+          color: T.acc,
+          flexShrink: 0,
+        }}>
+          {initials}
         </div>
-        <div style={{ fontSize: 11, color: MUTED, marginTop: 2 }}>Studio créatif · Dakar</div>
-      </div>
-
-      {/* User */}
-      <div className="px-4 py-4" style={{ borderBottom: `1px solid ${BORDER}` }}>
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
-            style={{ background: TERRA }}>
-            {(admin?.name ?? 'A').charAt(0).toUpperCase()}
+        <div>
+          <div style={{ fontSize: 18, fontWeight: 800, color: T.tx, letterSpacing: '-0.4px', lineHeight: 1.2 }}>
+            Kori<span style={{ color: T.acc }}>Lab</span>
           </div>
-          <div>
-            <div className="text-sm font-semibold" style={{ color: INK }}>{admin?.name ?? '—'}</div>
-            <div className="text-xs" style={{ color: MUTED }}>Administrateur</div>
-          </div>
+          <div style={{ fontSize: 11, fontWeight: 400, color: T.tx4, marginTop: 1 }}>korilab.dev · Dakar</div>
         </div>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-3 py-3 space-y-0.5">
+      <nav style={{ flex: 1, padding: '8px 0' }}>
+        <div style={{ fontSize: 10.5, fontWeight: 700, color: T.tx5, letterSpacing: '0.5px', padding: '8px 16px 3px', textTransform: 'uppercase' }}>
+          Workspace
+        </div>
         {nav.map(({ href, icon: Icon, label }) => {
           const active = url === href || (href !== '/dashboard' && url.startsWith(href));
           return (
-            <Link key={href} href={href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150"
+            <Link
+              key={href}
+              href={href}
               style={{
-                background: active ? BG_ACT : 'transparent',
-                color: active ? TERRA : INK,
-                fontWeight: active ? 600 : 400,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 9,
+                padding: '6px 9px',
+                margin: '1px 7px',
+                borderRadius: 10,
+                fontSize: 13,
+                fontWeight: active ? 700 : 500,
+                color: active ? T.acc : T.tx3,
+                background: active ? T.acc2 : 'transparent',
+                textDecoration: 'none',
+                transition: 'all 0.12s',
               }}
-              onMouseEnter={e => { if (!active) e.currentTarget.style.background = '#F9FAFB'; }}
-              onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent'; }}
+              onMouseEnter={e => { if (!active) { e.currentTarget.style.background = T.s2; } }}
+              onMouseLeave={e => { if (!active) { e.currentTarget.style.background = 'transparent'; } }}
             >
-              <Icon size={16} style={{ color: active ? TERRA : MUTED, flexShrink: 0 }} />
+              <div style={{
+                width: 7,
+                height: 7,
+                borderRadius: '50%',
+                flexShrink: 0,
+                background: active ? T.acc : T.s3,
+              }} />
               {label}
             </Link>
           );
@@ -72,14 +105,29 @@ export default function Sidebar({ admin }) {
       </nav>
 
       {/* Logout */}
-      <div className="px-3 pb-5" style={{ borderTop: `1px solid ${BORDER}` }}>
-        <button onClick={logout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 mt-3"
-          style={{ color: MUTED, fontFamily: "'Inter', sans-serif" }}
-          onMouseEnter={e => { e.currentTarget.style.background = '#FEF2F2'; e.currentTarget.style.color = TERRA; }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = MUTED; }}
+      <div style={{ borderTop: `1px solid ${T.sep}`, padding: '8px 7px 14px' }}>
+        <button
+          onClick={logout}
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 9,
+            padding: '6px 9px',
+            borderRadius: 10,
+            fontSize: 13,
+            fontWeight: 500,
+            color: T.tx3,
+            background: 'transparent',
+            border: 'none',
+            cursor: 'pointer',
+            fontFamily: "'Nunito', sans-serif",
+            transition: 'all 0.12s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(180,48,40,0.07)'; e.currentTarget.style.color = T.acc; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = T.tx3; }}
         >
-          <LogOut size={16} style={{ flexShrink: 0 }} />
+          <LogOut size={14} style={{ flexShrink: 0 }} />
           Déconnexion
         </button>
       </div>
@@ -88,9 +136,12 @@ export default function Sidebar({ admin }) {
 
   return (
     <>
-      <button onClick={() => setOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-50 w-10 h-10 rounded-lg bg-white flex items-center justify-center"
-        style={{ border: `1px solid ${BORDER}`, color: INK }}>
+      {/* Mobile toggle */}
+      <button
+        onClick={() => setOpen(true)}
+        className="md:hidden fixed top-4 left-4 z-50 w-10 h-10 rounded-lg flex items-center justify-center"
+        style={{ background: T.sb, border: `1px solid ${T.sep}`, color: T.tx }}
+      >
         <Menu size={18} />
       </button>
 
@@ -99,16 +150,23 @@ export default function Sidebar({ admin }) {
       <AnimatePresence>
         {open && (
           <>
-            <motion.div className="fixed inset-0 z-40 bg-black/20 md:hidden"
+            <motion.div
+              className="fixed inset-0 z-40 md:hidden"
+              style={{ background: 'rgba(0,0,0,0.2)' }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => setOpen(false)} />
-            <motion.div className="fixed left-0 top-0 bottom-0 z-50 md:hidden"
-              initial={{ x: -230 }} animate={{ x: 0 }} exit={{ x: -230 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}>
+              onClick={() => setOpen(false)}
+            />
+            <motion.div
+              className="fixed left-0 top-0 bottom-0 z-50 md:hidden"
+              initial={{ x: -240 }} animate={{ x: 0 }} exit={{ x: -240 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            >
               <div className="relative h-full">
-                <button onClick={() => setOpen(false)}
-                  className="absolute top-4 right-3 z-10 w-7 h-7 rounded-lg bg-white flex items-center justify-center"
-                  style={{ border: `1px solid ${BORDER}`, color: INK }}>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="absolute top-4 right-3 z-10 w-7 h-7 rounded-lg flex items-center justify-center"
+                  style={{ background: T.sb, border: `1px solid ${T.sep}`, color: T.tx }}
+                >
                   <X size={13} />
                 </button>
                 <Content />
