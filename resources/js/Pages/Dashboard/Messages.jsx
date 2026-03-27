@@ -5,15 +5,15 @@ import Sidebar from "@/Components/dashboard/Sidebar";
 
 import { SLSystemBG, SysDivider, StatusBar, SysWin } from "@/Components/dashboard/SystemLayout";
 
-/* ─── Palette MelanoGeek ─────────────────────────────────── */
-const BG     = '#F5EDD6';
-const CARD   = '#FBF5E6';
-const INK    = '#1E0E04';
-const INK2   = 'rgba(30,14,4,0.52)';
-const INK3   = 'rgba(30,14,4,0.14)';
-const TERRA  = '#C84818';
-const TERRA2 = '#E85A1A';
-const GOLD   = '#B87820';
+/* ─── Palette Washi soft ─────────────────────────────────── */
+const BG     = '#F8F5EF';
+const CARD   = '#FFFFFF';
+const INK    = '#1C1A16';
+const INK2   = '#5A5448';
+const INK3   = 'rgba(0,0,0,0.06)';
+const TERRA  = '#B43028';
+const TERRA2 = '#C84030';
+const GOLD   = '#8A5A18';
 
 function formatDate(dateStr) {
   const d = new Date(dateStr);
@@ -49,8 +49,8 @@ export default function DashboardMessages({ admin, messages }) {
         <div className="flex items-start gap-3 mb-3">
           <div className="w-9 h-9 rounded-lg flex items-center justify-center border flex-shrink-0"
             style={{
-              border: isUnread ? `1px solid rgba(200,72,24,0.3)` : `1px solid ${INK3}`,
-              background: isUnread ? 'rgba(200,72,24,0.08)' : 'rgba(30,14,4,0.04)',
+              border: isUnread ? `1px solid rgba(180,48,40,0.25)` : `1px solid ${INK3}`,
+              background: isUnread ? 'rgba(180,48,40,0.07)' : 'rgba(30,14,4,0.04)',
             }}>
             {isUnread
               ? <Mail className="w-4 h-4" style={{ color: TERRA }} />
@@ -58,11 +58,11 @@ export default function DashboardMessages({ admin, messages }) {
             }
           </div>
           <div className="flex-1 min-w-0">
-            <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 13, color: isUnread ? INK : INK2 }}>
+            <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 13, color: isUnread ? INK : INK2 }}>
               {msg.name}
             </div>
             <a href={`mailto:${msg.email}`}
-              style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textDecoration: 'none' }}
+              style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textDecoration: 'none' }}
               onMouseEnter={e => { e.currentTarget.style.color = TERRA2; }}
               onMouseLeave={e => { e.currentTarget.style.color = TERRA; }}>
               {msg.email}
@@ -74,22 +74,22 @@ export default function DashboardMessages({ admin, messages }) {
         <div className="flex flex-wrap gap-3 mb-3">
           {msg.company && (
             <span className="flex items-center gap-1"
-              style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2 }}>
+              style={{ fontFamily: "'Nunito', sans-serif", fontSize: 10, color: INK2 }}>
               <Building2 className="w-3 h-3" /> {msg.company}
             </span>
           )}
           <span className="flex items-center gap-1"
-            style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2 }}>
+            style={{ fontFamily: "'Nunito', sans-serif", fontSize: 10, color: INK2 }}>
             <DollarSign className="w-3 h-3" /> {msg.budget}
           </span>
           <span className="flex items-center gap-1"
-            style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2 }}>
+            style={{ fontFamily: "'Nunito', sans-serif", fontSize: 10, color: INK2 }}>
             <Calendar className="w-3 h-3" /> {formatDate(msg.created_at)}
           </span>
         </div>
 
         {/* Message */}
-        <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: isUnread ? 400 : 300, fontSize: 13, color: isUnread ? INK : INK2, lineHeight: 1.6, marginBottom: 16 }}>
+        <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: isUnread ? 400 : 300, fontSize: 13, color: isUnread ? INK : INK2, lineHeight: 1.6, marginBottom: 16 }}>
           {msg.message}
         </p>
 
@@ -98,7 +98,7 @@ export default function DashboardMessages({ admin, messages }) {
           {isUnread && (
             <button onClick={() => markRead(msg.id)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200"
-              style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: '#FBF5E6', background: TERRA, border: 'none', cursor: 'pointer' }}
+              style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10, color: '#FFFFFF', background: TERRA, border: 'none', cursor: 'pointer' }}
               onMouseEnter={e => { e.currentTarget.style.background = TERRA2; }}
               onMouseLeave={e => { e.currentTarget.style.background = TERRA; }}>
               <MailOpen className="w-3 h-3" /> Marquer comme lu
@@ -106,15 +106,15 @@ export default function DashboardMessages({ admin, messages }) {
           )}
           <a href={`mailto:${msg.email}`}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200"
-            style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 10, color: INK2, background: 'transparent', border: `1px solid ${INK3}`, borderRadius: 8, textDecoration: 'none' }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(200,72,24,0.3)'; e.currentTarget.style.color = TERRA; }}
+            style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 10, color: INK2, background: 'transparent', border: `1px solid ${INK3}`, borderRadius: 8, textDecoration: 'none' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.color = INK2; }}>
             <Mail className="w-3 h-3" /> Répondre
           </a>
           <button onClick={() => destroy(msg.id)}
             className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200"
-            style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 10, color: INK2, background: 'transparent', border: `1px solid transparent`, cursor: 'pointer' }}
-            onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.borderColor = 'rgba(200,72,24,0.3)'; }}
+            style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 10, color: INK2, background: 'transparent', border: `1px solid transparent`, cursor: 'pointer' }}
+            onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; }}
             onMouseLeave={e => { e.currentTarget.style.color = INK2; e.currentTarget.style.borderColor = 'transparent'; }}>
             <Trash2 className="w-3 h-3" /> Supprimer
           </button>
@@ -132,13 +132,13 @@ export default function DashboardMessages({ admin, messages }) {
 
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
+          <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
             Boîte de réception
           </div>
-          <h1 style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 24, color: INK, marginBottom: 6 }}>
+          <h1 style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 24, color: INK, marginBottom: 6 }}>
             Messages
           </h1>
-          <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 12, color: INK2 }}>
+          <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 12, color: INK2 }}>
             {unread.length} non lu{unread.length !== 1 ? "s" : ""} · {messages.length} au total
           </p>
         </motion.div>
@@ -147,10 +147,10 @@ export default function DashboardMessages({ admin, messages }) {
           <SysWin title="Boîte de réception" subtitle="Aucun message reçu">
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <MessageSquare className="w-12 h-12 mb-4" style={{ color: INK3 }} />
-              <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 13, color: INK2 }}>
+              <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 13, color: INK2 }}>
                 Aucun message pour l'instant.
               </p>
-              <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 11, color: INK2, marginTop: 4 }}>
+              <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 11, color: INK2, marginTop: 4 }}>
                 Les demandes via le formulaire apparaîtront ici.
               </p>
             </div>

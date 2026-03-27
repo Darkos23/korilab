@@ -29,7 +29,17 @@
       "Bash(grep -h \"SLSystemBG\\\\|SystemGrid\" resources/js/Pages/Dashboard/*.jsx)",
       "Bash(sed -i 's/bg-\\\\[#060f28\\\\]/bg-transparent/g' resources/js/Pages/Dashboard/Index.jsx resources/js/Pages/Dashboard/Messages.jsx resources/js/Pages/Dashboard/Portfolio.jsx resources/js/Pages/Dashboard/Services.jsx resources/js/Pages/Dashboard/Site.jsx resources/js/Pages/Dashboard/Team.jsx)",
       "Bash(grep -h \"bg-transparent\\\\|bg-\\\\[#060f28\\\\]\" resources/js/Pages/Dashboard/*.jsx)",
-      "Bash(grep -E \"\\\\.\\(js|json|css\\)$\")"
+      "Bash(grep -E \"\\\\.\\(js|json|css\\)$\")",
+      "Read(//c/php/**)",
+      "Read(//c/xampp/php/**)",
+      "Bash(find /c /d -maxdepth 4 -name php.exe)",
+      "Read(//d/laragon/bin/**)",
+      "Bash(ls /d/wamp*/bin/php/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8003/)",
+      "Bash(gh issue:*)",
+      "Bash(gh pr:*)",
+      "Bash(do)",
+      "Bash(sed -i \"s/''Sora'', sans-serif/''Nunito'', sans-serif/g\" /d/www/KoriLab/.claude/worktrees/festive-rosalind/resources/js/Pages/Dashboard/$f.jsx)"
     ]
   }
 }

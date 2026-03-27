@@ -2,96 +2,86 @@ import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, ExternalLink, MessageSquare } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
-import { StatusBar, T } from "@/Components/dashboard/SystemLayout";
+import WhatsAppFloat from "@/Components/WhatsAppFloat";
+import { SLSystemBG, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
+
+/* ── Palette Washi soft ── */
+const INK    = '#1C1A16';
+const INK2   = '#5A5448';
+const INK3   = 'rgba(0,0,0,0.06)';
+const TERRA  = '#B43028';
+const GOLD   = '#8A5A18';
+const CARD   = '#FFFFFF';
 
 const ACTIONS = [
-  { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "Portfolio"  },
-  { href: "/dashboard/services",  icon: Wrench,        label: "Modifier les services", desc: "Offres et capacités du studio",        tag: "Services"   },
-  { href: "/dashboard/team",      icon: Users,         label: "Éditer les CV",         desc: "Dossiers et profils de l'équipe",      tag: "Équipe"     },
-  { href: "/dashboard/site",      icon: Globe,         label: "Paramètres du site",    desc: "Infos de contact et configuration",    tag: "Système"    },
-  { href: "/dashboard/messages",  icon: MessageSquare, label: "Messages reçus",        desc: "Demandes clients via le formulaire",   tag: "Inbox"      },
+  { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "PORTFOLIO" },
+  { href: "/dashboard/services",  icon: Wrench,        label: "Modifier les services", desc: "Offres et capacités du studio",        tag: "SERVICES"  },
+  { href: "/dashboard/team",      icon: Users,         label: "Éditer les CV",         desc: "Dossiers et profils de l'équipe",      tag: "ÉQUIPE"    },
+  { href: "/dashboard/site",      icon: Globe,         label: "Paramètres du site",    desc: "Infos de contact et configuration",    tag: "SYSTÈME"   },
+  { href: "/dashboard/messages",  icon: MessageSquare, label: "Messages reçus",        desc: "Demandes clients via le formulaire",   tag: "INBOX"     },
 ];
 
-function StatCard({ label, value, sub, accent }) {
+function StatCard({ label, value, icon: Icon, sub }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
+      className="rounded-xl p-6"
       style={{
-        background: T.card,
-        borderRadius: 14,
-        padding: '16px 18px',
-        boxShadow: '0 2px 16px rgba(0,0,0,0.07), 0 0.5px 2px rgba(0,0,0,0.05)',
-        fontFamily: "'Nunito', sans-serif",
+        background: CARD,
+        border: `1px solid ${INK3}`,
+        borderLeft: `4px solid ${TERRA}`,
+        boxShadow: '0 2px 10px rgba(36,20,6,0.05)',
       }}
     >
-      <div style={{ fontSize: 11, fontWeight: 700, color: T.tx4, letterSpacing: '0.4px', marginBottom: 8, textTransform: 'uppercase' }}>
-        {label}
+      <div className="flex items-center justify-between mb-4">
+        {Icon && <Icon size={16} style={{ color: INK2 }} />}
+        <div className="w-2 h-2 rounded-full" style={{ background: TERRA }} />
       </div>
-      <div style={{ fontSize: 32, fontWeight: 800, color: accent ? T.acc : T.tx, letterSpacing: '-1.2px', lineHeight: 1 }}>
-        {value}
-      </div>
-      {sub && (
-        <div style={{ fontSize: 12.5, fontWeight: 500, color: T.tx4, marginTop: 6 }}>{sub}</div>
-      )}
+      <div className="text-4xl font-black mb-1" style={{ color: INK, fontFamily: 'serif' }}>{value}</div>
+      <div className="text-xs uppercase tracking-widest font-semibold mb-0.5" style={{ color: INK }}>{label}</div>
+      {sub && <div className="text-xs" style={{ color: INK2 }}>{sub}</div>}
     </motion.div>
   );
 }
 
 function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
   return (
-    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay }}>
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+    >
       <Link
         href={href}
-        className="group flex items-center gap-4 p-4 transition-all duration-150"
+        className="group flex items-center gap-4 p-5 rounded-xl transition-all duration-200"
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 14,
-          padding: '14px 16px',
-          background: T.card,
-          borderRadius: 14,
-          boxShadow: '0 2px 16px rgba(0,0,0,0.07), 0 0.5px 2px rgba(0,0,0,0.05)',
-          textDecoration: 'none',
-          fontFamily: "'Nunito', sans-serif",
-          transition: 'box-shadow 0.15s, border-color 0.15s',
+          background: CARD,
+          border: `1px solid ${INK3}`,
+          boxShadow: '0 1px 5px rgba(36,20,6,0.04)',
         }}
-        onMouseEnter={e => { e.currentTarget.style.boxShadow = `0 4px 20px rgba(180,48,40,0.1), 0 1px 4px rgba(0,0,0,0.06)`; }}
-        onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 2px 16px rgba(0,0,0,0.07), 0 0.5px 2px rgba(0,0,0,0.05)'; }}
+        onMouseEnter={e => {
+          e.currentTarget.style.borderColor = TERRA;
+          e.currentTarget.style.boxShadow = `0 4px 14px rgba(192,96,56,0.09)`;
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.borderColor = INK3;
+          e.currentTarget.style.boxShadow = '0 1px 6px rgba(30,14,4,0.05)';
+        }}
       >
-        {/* Icon dot */}
-        <div style={{
-          width: 36,
-          height: 36,
-          borderRadius: 10,
-          background: T.acc2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-        }}>
-          <Icon size={16} style={{ color: T.acc }} />
+        <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+          style={{ background: `rgba(180,48,40,0.07)`, border: `1px solid rgba(180,48,40,0.18)` }}>
+          <Icon size={18} style={{ color: TERRA }} />
         </div>
-
-        {/* Text */}
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-            <span style={{ fontSize: 13.5, fontWeight: 700, color: T.tx2 }}>{label}</span>
-            <ArrowUpRight size={13} style={{ color: T.acc, opacity: 0 }} className="group-hover:opacity-100 transition-opacity" />
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-0.5">
+            <span className="font-bold text-sm" style={{ color: INK }}>{label}</span>
+            <ArrowUpRight size={14} style={{ color: TERRA }} className="opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
-          <p style={{ fontSize: 12, fontWeight: 400, color: T.tx4, marginTop: 2 }}>{desc}</p>
+          <p className="text-xs" style={{ color: INK2 }}>{desc}</p>
         </div>
-
-        {/* Tag */}
-        <span style={{
-          fontSize: 11,
-          fontWeight: 700,
-          padding: '3px 9px',
-          borderRadius: 8,
-          background: T.s2,
-          color: T.tx4,
-          flexShrink: 0,
-        }}>
+        <span className="text-[9px] font-mono uppercase tracking-widest px-2 py-1 rounded"
+          style={{ color: GOLD, background: `rgba(184,120,32,0.08)`, border: `1px solid rgba(184,120,32,0.2)` }}>
           {tag}
         </span>
       </Link>
@@ -101,81 +91,91 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
 
 export default function DashboardIndex({ admin, portfolioCount, servicesCount, unreadMessages }) {
   const stats = [
-    { label: "Projets actifs",   value: portfolioCount ?? 0, sub: "Réalisations en ligne" },
-    { label: "Services actifs",  value: servicesCount ?? 0,  sub: "Offres du studio" },
-    { label: "Messages non lus", value: unreadMessages ?? 0, sub: "Demandes en attente", accent: (unreadMessages ?? 0) > 0 },
+    { label: "Projets actifs",   value: portfolioCount, icon: FolderOpen,    sub: "Réalisations en ligne" },
+    { label: "Services actifs",  value: servicesCount,  icon: Wrench,        sub: "Offres du studio"      },
+    { label: "Messages non lus", value: unreadMessages, icon: MessageSquare, sub: "Demandes en attente"   },
   ];
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', background: T.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div className="min-h-screen flex relative overflow-hidden" style={{ background: '#F8F5EF' }}>
+      <SLSystemBG />
       <Sidebar admin={admin} />
 
-      <main style={{ flex: 1, padding: '32px 32px 48px', overflowY: 'auto' }} className="pt-16 md:pt-8">
+      <main className="relative z-10 flex-1 p-6 md:p-10 pt-16 md:pt-10 overflow-auto pb-10">
 
-        {/* Header */}
-        <div style={{ marginBottom: 28, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+        {/* ── Header ── */}
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+          className="mb-8 flex items-start justify-between">
           <div>
-            <p style={{ fontSize: 11, fontWeight: 700, color: T.tx4, letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 6 }}>
-              Tableau de bord
-            </p>
-            <h1 style={{ fontSize: 28, fontWeight: 800, color: T.tx, letterSpacing: '-0.6px', lineHeight: 1.2, marginBottom: 4 }}>
-              Bonjour, <span style={{ color: T.acc }}>{admin?.name}</span>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: TERRA }} />
+              <span className="text-[10px] uppercase tracking-[0.3em] font-mono" style={{ color: INK2 }}>
+                KoriLab — Tableau de bord
+              </span>
+            </div>
+            <h1 className="text-4xl font-black mb-2" style={{ color: INK, fontFamily: 'serif' }}>
+              Bienvenue,{" "}
+              <span style={{ color: TERRA }}>{admin?.name}</span>
             </h1>
-            <p style={{ fontSize: 13.5, fontWeight: 400, color: T.tx3 }}>Voici un aperçu de votre studio.</p>
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-semibold px-2 py-0.5 rounded"
+                style={{ background: `rgba(180,48,40,0.08)`, color: TERRA, border: `1px solid rgba(180,48,40,0.18)` }}>
+                {admin?.rank}-Class
+              </span>
+              <span className="text-xs" style={{ color: INK2 }}>Admin KoriLab</span>
+            </div>
           </div>
 
-          <a
-            href="/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '7px 16px',
-              background: T.card,
-              borderRadius: 10,
-              fontSize: 13,
-              fontWeight: 600,
-              color: T.tx2,
-              textDecoration: 'none',
-              boxShadow: '0 1px 6px rgba(0,0,0,0.06)',
-              border: `1px solid ${T.sep}`,
-              transition: 'color 0.12s',
-              flexShrink: 0,
-              marginTop: 4,
-            }}
-            onMouseEnter={e => { e.currentTarget.style.color = T.acc; }}
-            onMouseLeave={e => { e.currentTarget.style.color = T.tx2; }}
+          <a href="/" target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200"
+            style={{ background: CARD, border: `1px solid ${INK3}`, color: INK }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.color = TERRA; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.color = INK; }}
           >
-            <ExternalLink size={14} />
+            <ExternalLink size={13} />
             Voir le site
           </a>
-        </div>
+        </motion.div>
 
-        {/* Stat row */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0,1fr))', gap: 10, marginBottom: 20 }}>
+        {/* ── Stats ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {stats.map((s, i) => (
-            <motion.div key={s.label} transition={{ delay: 0.05 * i }}>
+            <motion.div key={s.label} transition={{ delay: 0.1 + i * 0.08 }}>
               <StatCard {...s} />
             </motion.div>
           ))}
         </div>
 
-        {/* Actions */}
-        <div>
-          <p style={{ fontSize: 10.5, fontWeight: 700, color: T.tx5, letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 10 }}>
-            Actions rapides
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 10 }}>
-            {ACTIONS.map((a, i) => (
-              <ActionCard key={a.href} {...a} delay={0.1 + i * 0.05} />
-            ))}
-          </div>
+        {/* ── Séparateur ── */}
+        <div className="flex items-center gap-3 mb-6">
+          <div className="flex-1 h-px" style={{ background: INK3 }} />
+          <span className="text-[9px] uppercase tracking-[0.35em] font-mono" style={{ color: INK2 }}>
+            ◆ Actions ◆
+          </span>
+          <div className="flex-1 h-px" style={{ background: INK3 }} />
         </div>
+
+        {/* ── Actions ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {ACTIONS.map((a, i) => (
+            <ActionCard key={a.href} {...a} delay={0.2 + i * 0.06} />
+          ))}
+        </div>
+
+        {/* ── Citation ── */}
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
+          className="mt-8 px-5 py-4 rounded-xl"
+          style={{ background: CARD, border: `1px solid ${INK3}`, borderLeft: `3px solid ${GOLD}` }}
+        >
+          <p className="text-sm italic" style={{ color: INK2 }}>
+            « Chaque création porte l'empreinte de celui qui la forge. Bâtissez avec soin. »
+          </p>
+        </motion.div>
 
       </main>
 
+      <WhatsAppFloat />
       <StatusBar admin={admin} />
     </div>
   );
