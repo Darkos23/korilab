@@ -6,18 +6,18 @@ import WhatsAppFloat from "@/Components/WhatsAppFloat";
 import { SLSystemBG, SysWin, StatBadge, SysNotif, SysDivider, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
 
 const QUESTS = [
-  { href: "/dashboard/portfolio", icon: FolderOpen,    label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",     tag: "PORTFOLIO"  },
-  { href: "/dashboard/services",  icon: Wrench,         label: "Modifier les services", desc: "Offres et capacités du studio",           tag: "SERVICES"   },
-  { href: "/dashboard/team",      icon: Users,          label: "Éditer les CV",         desc: "Dossiers et profils de l'équipe",         tag: "ÉQUIPE"     },
-  { href: "/dashboard/site",      icon: Globe,          label: "Paramètres du site",    desc: "Infos de contact et configuration",       tag: "SYSTÈME"    },
-  { href: "/dashboard/messages",  icon: MessageSquare,  label: "Messages reçus",        desc: "Demandes clients via le formulaire",      tag: "INBOX"      },
+  { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "PORTFOLIO" },
+  { href: "/dashboard/services",  icon: Wrench,        label: "Modifier les services", desc: "Offres et capacités du studio",        tag: "SERVICES"  },
+  { href: "/dashboard/team",      icon: Users,         label: "Éditer les CV",         desc: "Dossiers et profils de l'équipe",      tag: "ÉQUIPE"    },
+  { href: "/dashboard/site",      icon: Globe,         label: "Paramètres du site",    desc: "Infos de contact et configuration",    tag: "SYSTÈME"   },
+  { href: "/dashboard/messages",  icon: MessageSquare, label: "Messages reçus",        desc: "Demandes clients via le formulaire",   tag: "INBOX"     },
 ];
 
 export default function DashboardIndex({ admin, portfolioCount, servicesCount, unreadMessages }) {
   const stats = [
-    { label: "Projets actifs",   value: portfolioCount, icon: FolderOpen,    sub: "Réalisations en ligne"    },
-    { label: "Services actifs",  value: servicesCount,  icon: Wrench,        sub: "Offres du studio"         },
-    { label: "Messages non lus", value: unreadMessages, icon: MessageSquare, sub: "Demandes en attente"      },
+    { label: "Projets actifs",   value: portfolioCount, icon: FolderOpen,    sub: "Réalisations en ligne" },
+    { label: "Services actifs",  value: servicesCount,  icon: Wrench,        sub: "Offres du studio"      },
+    { label: "Messages non lus", value: unreadMessages, icon: MessageSquare, sub: "Demandes en attente"   },
   ];
 
   return (
@@ -42,18 +42,9 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
             </div>
             <a href="/" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-3 py-1.5 rounded font-mono text-xs transition-all duration-200"
-              style={{
-                border: '1px solid rgba(212,162,56,0.28)',
-                color: '#d4a235',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = 'rgba(212,162,56,0.08)';
-                e.currentTarget.style.borderColor = 'rgba(212,162,56,0.55)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.borderColor = 'rgba(212,162,56,0.28)';
-              }}
+              style={{ border: '1px solid rgba(212,162,56,0.28)', color: '#d4a235' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(212,162,56,0.08)'; e.currentTarget.style.borderColor = 'rgba(212,162,56,0.55)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(212,162,56,0.28)'; }}
             >
               <ExternalLink size={12} />
               Voir le site
@@ -93,7 +84,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
 
         <SysDivider label="Actions disponibles" />
 
-        {/* ── Quests ── */}
+        {/* ── Actions ── */}
         <SysWin title="MENU PRINCIPAL" subtitle="Sélectionnez une action" delay={0.3}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {QUESTS.map((q, i) => (
@@ -102,28 +93,17 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
                 transition={{ delay: 0.4 + i * 0.07 }}>
                 <Link href={q.href}
                   className="group relative flex items-start gap-4 p-4 rounded transition-all duration-300 overflow-hidden"
-                  style={{
-                    border: '1px solid rgba(212,162,56,0.12)',
-                    background: 'rgba(212,162,56,0.02)',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'rgba(212,162,56,0.32)';
-                    e.currentTarget.style.background  = 'rgba(212,162,56,0.06)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'rgba(212,162,56,0.12)';
-                    e.currentTarget.style.background  = 'rgba(212,162,56,0.02)';
-                  }}
+                  style={{ border: '1px solid rgba(212,162,56,0.12)', background: 'rgba(212,162,56,0.02)' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(212,162,56,0.32)'; e.currentTarget.style.background = 'rgba(212,162,56,0.06)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(212,162,56,0.12)'; e.currentTarget.style.background = 'rgba(212,162,56,0.02)'; }}
                 >
-                  <div className="flex-shrink-0 w-9 h-9 rounded flex items-center justify-center transition-colors"
+                  <div className="flex-shrink-0 w-9 h-9 rounded flex items-center justify-center"
                     style={{ border: '1px solid rgba(212,162,56,0.15)', background: 'rgba(212,162,56,0.06)' }}>
                     <q.icon className="w-4 h-4" style={{ color: 'rgba(212,162,56,0.55)' }} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-sm font-bold font-mono" style={{ color: 'rgba(240,228,196,0.8)' }}>
-                        {q.label}
-                      </span>
+                      <span className="text-sm font-bold font-mono" style={{ color: 'rgba(240,228,196,0.8)' }}>{q.label}</span>
                       <ArrowUpRight className="w-3 h-3" style={{ color: 'rgba(212,162,56,0.4)' }} />
                     </div>
                     <p className="text-xs font-mono" style={{ color: 'rgba(240,228,196,0.28)' }}>{q.desc}</p>
@@ -138,7 +118,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
           </div>
         </SysWin>
 
-        {/* ── Message système ── */}
+        {/* ── Message ── */}
         <div className="mt-4">
           <SysNotif>
             « Chaque création porte l'empreinte de celui qui la forge. Bâtissez avec soin. »
