@@ -258,7 +258,7 @@ export default function DashboardSite({ admin, site }) {
                     </div>
                 </form>
             </main>
-            <WhatsAppFloat />
+            
             <StatusBar admin={admin} />
         </div>
     );

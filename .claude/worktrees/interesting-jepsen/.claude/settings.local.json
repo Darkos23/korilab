@@ -8,7 +8,11 @@
       "Read(//d/www/KoriLab/**)",
       "Bash(npm run:*)",
       "Bash(del \"D:\\\\www\\\\KoriLab\\\\public_redirect.htaccess\")",
-      "Bash(dir \"D:\\\\www\\\\KoriLab\\\\resources\\\\js\\\\Pages\\\\Dashboard\")"
+      "Bash(dir \"D:\\\\www\\\\KoriLab\\\\resources\\\\js\\\\Pages\\\\Dashboard\")",
+      "Bash(for f:*)",
+      "Bash(do sed:*)",
+      "Bash(sed -i 's/<WhatsAppFloat \\\\/>//g' \"$f\")",
+      "Bash(done)"
     ]
   }
 }

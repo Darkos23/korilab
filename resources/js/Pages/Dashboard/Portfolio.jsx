@@ -385,7 +385,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                     </div>
                 )}
             </main>
-            <WhatsAppFloat />
+            
             <StatusBar admin={admin} />
         </div>
     );

@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, ExternalLink, MessageSquare } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
-import WhatsAppFloat from "@/Components/WhatsAppFloat";
+
 import { SLSystemBG, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
 
 /* ── Palette MelanoGeek ── */
@@ -170,7 +170,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
 
       </main>
 
-      <WhatsAppFloat />
+      
       <StatusBar admin={admin} />
     </div>
   );

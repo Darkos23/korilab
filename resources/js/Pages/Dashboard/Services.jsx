@@ -276,7 +276,7 @@ export default function DashboardServices({ admin, services }) {
                     </div>
                 )}
             </main>
-            <WhatsAppFloat />
+            
             <StatusBar admin={admin} />
         </div>
     );

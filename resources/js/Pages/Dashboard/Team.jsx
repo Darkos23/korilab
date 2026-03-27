@@ -469,7 +469,7 @@ export default function DashboardTeam({ admin, members }) {
                     ))}
                 </div>
             </main>
-            <WhatsAppFloat />
+            
             <StatusBar admin={admin} />
         </div>
     );

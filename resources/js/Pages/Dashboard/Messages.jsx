@@ -2,7 +2,7 @@ import { router } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { MessageSquare, Trash2, Mail, MailOpen, Building2, DollarSign, Calendar } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
-import WhatsAppFloat from "@/Components/WhatsAppFloat";
+
 import { SLSystemBG, SysDivider, StatusBar, SysWin } from "@/Components/dashboard/SystemLayout";
 
 /* ─── Palette MelanoGeek ─────────────────────────────────── */
@@ -186,7 +186,7 @@ export default function DashboardMessages({ admin, messages }) {
         )}
 
       </main>
-      <WhatsAppFloat />
+      
       <StatusBar admin={admin} />
     </div>
   );
