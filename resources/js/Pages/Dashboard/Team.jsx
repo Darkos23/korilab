@@ -5,25 +5,25 @@ import Sidebar from '@/Components/dashboard/Sidebar';
 import WhatsAppFloat from '@/Components/WhatsAppFloat';
 import { SLSystemBG, SysWin, SysInput, SysTextarea, SysSelect, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
-/* ─── Palette MelanoGeek ─────────────────────────────────── */
-const BG     = '#F5EDD6';
-const CARD   = '#FBF5E6';
-const INK    = '#1E0E04';
-const INK2   = 'rgba(30,14,4,0.52)';
-const INK3   = 'rgba(30,14,4,0.14)';
-const TERRA  = '#C84818';
-const TERRA2 = '#E85A1A';
-const GOLD   = '#B87820';
+/* ─── Palette Washi soft ─────────────────────────────────── */
+const BG     = '#F8F5EF';
+const CARD   = '#FFFFFF';
+const INK    = '#1C1A16';
+const INK2   = '#5A5448';
+const INK3   = 'rgba(0,0,0,0.06)';
+const TERRA  = '#B43028';
+const TERRA2 = '#C84030';
+const GOLD   = '#8A5A18';
 
 const inputStyle = {
-    fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 13,
+    fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 13,
     color: INK, background: CARD,
     border: `1px solid ${INK3}`, borderRadius: 8,
     padding: '8px 12px', width: '100%', outline: 'none',
 };
 
 const labelStyle = {
-    fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10,
+    fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10,
     color: INK2, textTransform: 'uppercase', letterSpacing: '0.12em',
     display: 'block', marginBottom: 6,
 };
@@ -43,7 +43,7 @@ const RANKS = ['S','A','B','C'];
 const SectionTitle = ({ children }) => (
     <div className="flex items-center gap-3 my-5">
         <div className="flex-1 h-px" style={{ background: INK3 }} />
-        <span style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 9, color: INK2, textTransform: 'uppercase', letterSpacing: '0.25em' }}>
+        <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 9, color: INK2, textTransform: 'uppercase', letterSpacing: '0.25em' }}>
             {children}
         </span>
         <div className="flex-1 h-px" style={{ background: INK3 }} />
@@ -65,14 +65,14 @@ function SkillsEditor({ skills, onChange }) {
                         style={{ ...inputStyle, width: 110 }} />
                     <input type="number" min={0} max={100} value={sk.level} onChange={e=>update(i,'level',e.target.value)}
                         style={{ ...inputStyle, width: 64, textAlign: 'center' }} />
-                    <span style={{ fontFamily: "'Sora', sans-serif", fontSize: 9, color: INK2, width: 28 }}>{sk.level}%</span>
+                    <span style={{ fontFamily: "'Nunito', sans-serif", fontSize: 9, color: INK2, width: 28 }}>{sk.level}%</span>
                     <button onClick={()=>remove(i)} style={{ color: TERRA, background: 'none', border: 'none', cursor: 'pointer' }}>
                         <Trash2 className="w-3.5 h-3.5"/>
                     </button>
                 </div>
             ))}
             <button onClick={add} className="flex items-center gap-1 mt-1 transition-colors"
-                style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 <Plus className="w-3 h-3"/> Ajouter
             </button>
         </div>
@@ -94,12 +94,12 @@ function ExperienceEditor({ experience, onChange }) {
             {experience.map((exp,i) => (
                 <div key={i} style={{ border: `1px solid ${INK3}`, borderRadius: 8, overflow: 'hidden' }}>
                     <div className="flex items-center gap-2 px-3 py-2.5 cursor-pointer"
-                        style={{ background: 'rgba(30,14,4,0.03)' }}
+                        style={{ background: 'rgba(0,0,0,0.02)' }}
                         onClick={()=>toggle(i)}>
-                        <span className="flex-1 truncate" style={{ fontFamily: "'Sora', sans-serif", fontSize: 13, color: INK }}>
+                        <span className="flex-1 truncate" style={{ fontFamily: "'Nunito', sans-serif", fontSize: 13, color: INK }}>
                             {exp.title || `Expérience ${i+1}`}
                         </span>
-                        <span style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2 }}>{exp.period}</span>
+                        <span style={{ fontFamily: "'Nunito', sans-serif", fontSize: 10, color: INK2 }}>{exp.period}</span>
                         <button onClick={e=>{e.stopPropagation();remove(i);}}
                             style={{ color: TERRA, background: 'none', border: 'none', cursor: 'pointer' }}>
                             <Trash2 className="w-3.5 h-3.5"/>
@@ -116,7 +116,7 @@ function ExperienceEditor({ experience, onChange }) {
                                 <input placeholder="Entreprise" value={exp.company} onChange={e=>update(i,'company',e.target.value)} style={inputStyle} />
                             </div>
                             <input placeholder="Poste / Titre" value={exp.title} onChange={e=>update(i,'title',e.target.value)} style={inputStyle} />
-                            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 9, color: INK2, textTransform: 'uppercase', letterSpacing: '0.12em', marginTop: 8 }}>Missions :</p>
+                            <p style={{ fontFamily: "'Nunito', sans-serif", fontSize: 9, color: INK2, textTransform: 'uppercase', letterSpacing: '0.12em', marginTop: 8 }}>Missions :</p>
                             <div className="space-y-1.5">
                                 {(exp.missions??[]).map((m,j) => (
                                     <div key={j} className="flex gap-2">
@@ -127,7 +127,7 @@ function ExperienceEditor({ experience, onChange }) {
                                     </div>
                                 ))}
                                 <button onClick={()=>addM(i)}
-                                    style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                                    style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
                                     className="flex items-center gap-1">
                                     <Plus className="w-3 h-3"/> Mission
                                 </button>
@@ -137,7 +137,7 @@ function ExperienceEditor({ experience, onChange }) {
                 </div>
             ))}
             <button onClick={add}
-                style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
                 className="flex items-center gap-1 mt-1">
                 <Plus className="w-3 h-3"/> Ajouter une expérience
             </button>
@@ -163,7 +163,7 @@ function EducationEditor({ education, onChange }) {
                 </div>
             ))}
             <button onClick={add}
-                style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
                 className="flex items-center gap-1 mt-1">
                 <Plus className="w-3 h-3"/> Ajouter
             </button>
@@ -190,7 +190,7 @@ function LanguagesEditor({ languages, onChange }) {
                 </div>
             ))}
             <button onClick={add}
-                style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
                 className="flex items-center gap-1 mt-1">
                 <Plus className="w-3 h-3"/> Ajouter
             </button>
@@ -246,14 +246,14 @@ function MemberEditor({ member }) {
             {/* Header */}
             <div className="flex items-center gap-4 px-6 py-4 border-b" style={{ borderColor: INK3 }}>
                 <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ background: TERRA, color: '#FBF5E6', fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 14 }}>
+                    style={{ background: TERRA, color: '#FBF5E6', fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 14 }}>
                     {member.initials}
                 </div>
                 <div className="flex-1">
-                    <h2 style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 14, color: INK }}>
+                    <h2 style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 14, color: INK }}>
                         {member.name}
                     </h2>
-                    <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 11, color: INK2, marginTop: 2 }}>
+                    <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 11, color: INK2, marginTop: 2 }}>
                         {member.role} — Rang {member.rank}
                     </p>
                 </div>
@@ -261,8 +261,8 @@ function MemberEditor({ member }) {
                 <button onClick={save} disabled={saving}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all duration-300 disabled:opacity-50"
                     style={saved
-                        ? { fontFamily: "'Sora', sans-serif", fontWeight: 600, color: '#16a34a', border: '1px solid rgba(22,163,74,0.3)', background: 'rgba(22,163,74,0.06)' }
-                        : { fontFamily: "'Sora', sans-serif", fontWeight: 600, color: '#FBF5E6', border: 'none', background: TERRA, cursor: 'pointer' }
+                        ? { fontFamily: "'Nunito', sans-serif", fontWeight: 600, color: '#16a34a', border: '1px solid rgba(22,163,74,0.3)', background: 'rgba(22,163,74,0.06)' }
+                        : { fontFamily: "'Nunito', sans-serif", fontWeight: 600, color: '#FFFFFF', border: 'none', background: TERRA, cursor: 'pointer' }
                     }>
                     {saved ? <><CheckCircle className="w-4 h-4"/> Sauvegardé</> : <><Save className="w-4 h-4"/> Enregistrer</>}
                 </button>
@@ -274,8 +274,8 @@ function MemberEditor({ member }) {
                     <button key={t.id} onClick={() => setTab(t.id)}
                         className="px-4 py-2.5 whitespace-nowrap transition-colors"
                         style={tab === t.id
-                            ? { fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 11, color: TERRA, borderBottom: `2px solid ${TERRA}`, textTransform: 'uppercase', letterSpacing: '0.1em' }
-                            : { fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 11, color: INK2, textTransform: 'uppercase', letterSpacing: '0.1em' }
+                            ? { fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 11, color: TERRA, borderBottom: `2px solid ${TERRA}`, textTransform: 'uppercase', letterSpacing: '0.1em' }
+                            : { fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 11, color: INK2, textTransform: 'uppercase', letterSpacing: '0.1em' }
                         }>{t.label}</button>
                 ))}
             </div>
@@ -369,7 +369,7 @@ function AddMemberForm({ onClose }) {
     return (
         <div style={{ background: CARD, borderRadius: 12, border: `1px solid ${INK3}`, borderLeft: `4px solid ${TERRA}`, padding: 24, marginBottom: 24 }}>
             <h3 className="flex items-center gap-2 mb-4"
-                style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 14, color: INK }}>
+                style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 14, color: INK }}>
                 <Plus className="w-4 h-4" style={{ color: TERRA }} /> Nouveau membre
             </h3>
             <form onSubmit={submit} className="grid grid-cols-2 gap-3">
@@ -395,11 +395,11 @@ function AddMemberForm({ onClose }) {
                 </div>
                 <div className="col-span-2 flex gap-3 justify-end mt-2">
                     <button type="button" onClick={onClose}
-                        style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 12, color: INK2, background: 'transparent', border: `1px solid ${INK3}`, borderRadius: 8, padding: '8px 18px', cursor: 'pointer' }}>
+                        style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 12, color: INK2, background: 'transparent', border: `1px solid ${INK3}`, borderRadius: 8, padding: '8px 18px', cursor: 'pointer' }}>
                         Annuler
                     </button>
                     <button type="submit"
-                        style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 12, color: '#FBF5E6', background: TERRA, border: 'none', borderRadius: 8, padding: '8px 18px', cursor: 'pointer' }}>
+                        style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 12, color: '#FFFFFF', background: TERRA, border: 'none', borderRadius: 8, padding: '8px 18px', cursor: 'pointer' }}>
                         Créer
                     </button>
                 </div>
@@ -426,21 +426,21 @@ export default function DashboardTeam({ admin, members }) {
             <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
                 <div className="flex items-start justify-between mb-8">
                     <div>
-                        <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
+                        <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
                             Équipe
                         </div>
-                        <h1 style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
+                        <h1 style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
                             Équipe / CV
                         </h1>
-                        <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
+                        <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
                             {members.length} membre{members.length !== 1 ? 's' : ''} enregistré{members.length !== 1 ? 's' : ''}
                         </p>
                     </div>
                     <button onClick={() => setShowAdd(p => !p)}
                         className="flex items-center gap-2 transition-all duration-200"
                         style={{
-                            fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 12,
-                            color: '#FBF5E6', background: TERRA,
+                            fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 12,
+                            color: '#FFFFFF', background: TERRA,
                             border: 'none', borderRadius: 10, padding: '10px 18px', cursor: 'pointer',
                         }}
                         onMouseEnter={e => { e.currentTarget.style.background = TERRA2; }}
@@ -460,8 +460,8 @@ export default function DashboardTeam({ admin, members }) {
                             <button
                                 onClick={() => deleteMember(member.id, member.name)}
                                 className="absolute top-4 right-36 flex items-center gap-1.5 px-3 py-1.5 rounded-lg z-20 transition-all duration-200"
-                                style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2, background: 'transparent', border: `1px solid transparent`, cursor: 'pointer' }}
-                                onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.borderColor = 'rgba(200,72,24,0.3)'; }}
+                                style={{ fontFamily: "'Nunito', sans-serif", fontSize: 10, color: INK2, background: 'transparent', border: `1px solid transparent`, cursor: 'pointer' }}
+                                onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; }}
                                 onMouseLeave={e => { e.currentTarget.style.color = INK2; e.currentTarget.style.borderColor = 'transparent'; }}>
                                 <Trash2 className="w-3 h-3" /> Supprimer
                             </button>

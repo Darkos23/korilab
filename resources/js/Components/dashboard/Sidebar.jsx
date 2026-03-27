@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, MessageSquare } from "lucide-react";
 import { useState } from "react";
 
-/* ─── Tokens sidebar (fond doux) ─────────────────────────── */
-const SIDEBAR_BG = '#2C1C0E';
-const TEXT       = '#F5EFE3';
-const DIM        = 'rgba(245,239,227,0.6)';
-const MUTED      = 'rgba(245,239,227,0.38)';
-const BORDER     = 'rgba(245,239,227,0.1)';
-const TERRA      = '#C06038';
-const GOLD       = '#C09A42';
+/* ─── Tokens sidebar (washi soft) ────────────────────────── */
+const SIDEBAR_BG = '#FDFBF7';
+const TEXT       = '#1C1A16';
+const DIM        = '#5A5448';
+const MUTED      = '#8A8478';
+const BORDER     = 'rgba(0,0,0,0.06)';
+const TERRA      = '#B43028';
+const GOLD       = '#8A5A18';
 
 const nav = [
   { href: '/dashboard',           icon: LayoutDashboard, label: "Vue d'ensemble", sub: 'Tableau central'    },
@@ -28,31 +28,31 @@ export default function Sidebar({ admin }) {
 
   const Content = () => (
     <aside className="w-56 min-h-screen flex flex-col relative z-20"
-      style={{ background: SIDEBAR_BG, borderRight: `1px solid rgba(251,245,230,0.08)`, flexShrink: 0 }}>
+      style={{ background: SIDEBAR_BG, borderRight: `1px solid ${BORDER}`, flexShrink: 0 }}>
 
       {/* Logo */}
       <div className="px-5 pt-6 pb-5 border-b" style={{ borderColor: BORDER }}>
         <div className="mb-4">
-          <div style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 16, color: TEXT, letterSpacing: '0.02em' }}>
+          <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 16, color: TEXT, letterSpacing: '0.02em' }}>
             KoriLab
           </div>
-          <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 10, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 2 }}>
+          <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 10, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 2 }}>
             Dakar · Studio
           </div>
         </div>
 
         {/* User card */}
         <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg"
-          style={{ background: 'rgba(251,245,230,0.06)', border: `1px solid ${BORDER}` }}>
+          style={{ background: 'rgba(0,0,0,0.03)', border: `1px solid ${BORDER}` }}>
           <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ background: TERRA, color: TEXT, fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 11 }}>
+            style={{ background: 'rgba(180,48,40,0.09)', color: TERRA, fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 11, border: `1px solid rgba(180,48,40,0.2)` }}>
             {(admin?.name ?? 'A').charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
-            <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 12, color: TEXT }} className="truncate">
+            <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 12, color: TEXT }} className="truncate">
               {admin?.name ?? '—'}
             </div>
-            <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
               Admin
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function Sidebar({ admin }) {
 
       {/* Nav */}
       <nav className="flex-1 px-3 py-4 space-y-0.5">
-        <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.3em' }}
+        <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.3em' }}
           className="px-3 pb-2">
           Navigation
         </p>
@@ -77,17 +77,17 @@ export default function Sidebar({ admin }) {
               <Link href={item.href}
                 className="group flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150"
                 style={active
-                  ? { background: 'rgba(200,72,24,0.12)', borderLeft: `3px solid ${TERRA}`, paddingLeft: 9, color: TEXT }
+                  ? { background: 'rgba(180,48,40,0.07)', borderLeft: `2.5px solid ${TERRA}`, paddingLeft: 9, color: TEXT }
                   : { borderLeft: '3px solid transparent', paddingLeft: 9, color: DIM }
                 }
               >
                 <item.icon className="w-4 h-4 flex-shrink-0"
                   style={{ color: active ? TERRA : MUTED }} />
                 <div className="flex-1 min-w-0">
-                  <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: active ? 600 : 400, fontSize: 12, color: active ? TEXT : DIM }}>
+                  <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: active ? 600 : 400, fontSize: 12, color: active ? TEXT : DIM }}>
                     {item.label}
                   </div>
-                  <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }} className="truncate">
+                  <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }} className="truncate">
                     {item.sub}
                   </div>
                 </div>
@@ -102,11 +102,11 @@ export default function Sidebar({ admin }) {
         <button onClick={logout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150"
           style={{ color: MUTED, borderLeft: '3px solid transparent', paddingLeft: 9 }}
-          onMouseEnter={e => { e.currentTarget.style.color = '#e87070'; e.currentTarget.style.background = 'rgba(200,72,24,0.08)'; }}
+          onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.background = 'rgba(180,48,40,0.06)'; }}
           onMouseLeave={e => { e.currentTarget.style.color = MUTED; e.currentTarget.style.background = 'transparent'; }}
         >
           <LogOut className="w-4 h-4" />
-          <span style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 12 }}>Déconnexion</span>
+          <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 12 }}>Déconnexion</span>
         </button>
       </div>
     </aside>

@@ -1,21 +1,21 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
-/* ─── Design tokens — Palette KoriLab Dakar (soft) ───────── */
-const BG        = '#FAF6EF';
-const SURFACE   = 'rgba(192,96,56,0.04)';
-const BORDER    = 'rgba(30,14,4,0.1)';
-const BORDER_H  = 'rgba(192,96,56,0.35)';
-const TEXT      = '#241406';
-const DIM       = 'rgba(36,20,6,0.5)';
-const MUTED     = 'rgba(36,20,6,0.32)';
-const RED       = '#C06038';
-const TERRA     = '#C06038';
-const GOLD      = '#C09A42';
+/* ─── Design tokens — Washi/Nunito (soft) ────────────────── */
+const BG        = '#F8F5EF';
+const SURFACE   = 'rgba(180,48,40,0.05)';
+const BORDER    = 'rgba(0,0,0,0.07)';
+const BORDER_H  = 'rgba(180,48,40,0.3)';
+const TEXT      = '#1C1A16';
+const DIM       = '#5A5448';
+const MUTED     = '#8A8478';
+const RED       = '#B43028';
+const TERRA     = '#B43028';
+const GOLD      = '#8A5A18';
 
 /* ─── Background Kente / Dakar ───────────────────────────── */
 export function SLSystemBG() {
-  const kente = `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C84818' stroke-width='0.6' opacity='0.07'%3E%3Crect x='10' y='10' width='20' height='20'/%3E%3Crect x='50' y='10' width='20' height='20'/%3E%3Crect x='10' y='50' width='20' height='20'/%3E%3Crect x='50' y='50' width='20' height='20'/%3E%3Cline x1='0' y1='40' x2='80' y2='40'/%3E%3Cline x1='40' y1='0' x2='40' y2='80'/%3E%3Cpath d='M10 10 L30 30 M50 10 L70 30 M10 50 L30 70 M50 50 L70 70'/%3E%3C/g%3E%3C/svg%3E")`;
+  const kente = `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23B43028' stroke-width='0.5' opacity='0.05'%3E%3Crect x='10' y='10' width='20' height='20'/%3E%3Crect x='50' y='10' width='20' height='20'/%3E%3Crect x='10' y='50' width='20' height='20'/%3E%3Crect x='50' y='50' width='20' height='20'/%3E%3Cline x1='0' y1='40' x2='80' y2='40'/%3E%3Cline x1='40' y1='0' x2='40' y2='80'/%3E%3Cpath d='M10 10 L30 30 M50 10 L70 30 M10 50 L30 70 M50 50 L70 70'/%3E%3C/g%3E%3C/svg%3E")`;
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -259,7 +259,7 @@ export function StatusBar({ admin }) {
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-50 flex items-center px-5 gap-4"
-      style={{ height: 24, borderTop: `1px solid ${BORDER}`, background: 'rgba(250,246,242,0.98)', backdropFilter: 'blur(8px)' }}
+      style={{ height: 24, borderTop: `1px solid ${BORDER}`, background: 'rgba(253,251,247,0.98)', backdropFilter: 'blur(8px)' }}
     >
       <div className="flex items-center gap-2">
         <motion.div

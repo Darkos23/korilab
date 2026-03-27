@@ -12,7 +12,7 @@
       "runtimeExecutable": "php",
       "runtimeArgs": ["artisan", "serve", "--port=8003"],
       "port": 8003,
-      "cwd": "/d/www/korilab"
+      "cwd": "."
     }
   ]
 }

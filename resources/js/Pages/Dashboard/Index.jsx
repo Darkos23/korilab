@@ -5,13 +5,13 @@ import Sidebar from "@/Components/dashboard/Sidebar";
 import WhatsAppFloat from "@/Components/WhatsAppFloat";
 import { SLSystemBG, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
 
-/* ── Palette KoriLab soft ── */
-const INK    = '#241406';
-const INK2   = 'rgba(36,20,6,0.5)';
-const INK3   = 'rgba(36,20,6,0.1)';
-const TERRA  = '#C06038';
-const GOLD   = '#C09A42';
-const CARD   = '#FDFAF5';
+/* ── Palette Washi soft ── */
+const INK    = '#1C1A16';
+const INK2   = '#5A5448';
+const INK3   = 'rgba(0,0,0,0.06)';
+const TERRA  = '#B43028';
+const GOLD   = '#8A5A18';
+const CARD   = '#FFFFFF';
 
 const ACTIONS = [
   { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "PORTFOLIO" },
@@ -70,7 +70,7 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
         }}
       >
         <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-          style={{ background: `rgba(200,72,24,0.08)`, border: `1px solid rgba(200,72,24,0.2)` }}>
+          style={{ background: `rgba(180,48,40,0.07)`, border: `1px solid rgba(180,48,40,0.18)` }}>
           <Icon size={18} style={{ color: TERRA }} />
         </div>
         <div className="flex-1 min-w-0">
@@ -97,7 +97,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
   ];
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden" style={{ background: '#FAF6EF' }}>
+    <div className="min-h-screen flex relative overflow-hidden" style={{ background: '#F8F5EF' }}>
       <SLSystemBG />
       <Sidebar admin={admin} />
 
@@ -119,7 +119,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
             </h1>
             <div className="flex items-center gap-3">
               <span className="text-xs font-semibold px-2 py-0.5 rounded"
-                style={{ background: `rgba(200,72,24,0.1)`, color: TERRA, border: `1px solid rgba(200,72,24,0.2)` }}>
+                style={{ background: `rgba(180,48,40,0.08)`, color: TERRA, border: `1px solid rgba(180,48,40,0.18)` }}>
                 {admin?.rank}-Class
               </span>
               <span className="text-xs" style={{ color: INK2 }}>Admin KoriLab</span>
