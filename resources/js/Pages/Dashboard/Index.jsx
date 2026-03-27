@@ -8,6 +8,7 @@ import { SLSystemBG, StatusBar, RankBadge } from "@/Components/dashboard/SystemL
 /* ── Palette MelanoGeek ── */
 const INK    = '#1E0E04';
 const INK2   = 'rgba(30,14,4,0.52)';
+const INK3   = 'rgba(30,14,4,0.12)';
 const TERRA  = '#C84818';
 const GOLD   = '#B87820';
 const BG     = '#F5EDD6';
