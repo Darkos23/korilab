@@ -3,14 +3,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, MessageSquare } from "lucide-react";
 import { useState } from "react";
 
-/* ─── Tokens sidebar (fond très foncé) ───────────────────── */
-const SIDEBAR_BG = '#1E0E04';
-const TEXT       = '#FBF5E6';
-const DIM        = 'rgba(251,245,230,0.6)';
-const MUTED      = 'rgba(251,245,230,0.35)';
-const BORDER     = 'rgba(251,245,230,0.1)';
-const TERRA      = '#C84818';
-const GOLD       = '#B87820';
+/* ─── Soft UI Tokens ─────────────────────────────────────── */
+const BG      = '#F0DEB8';
+const TEXT    = '#1E0E04';
+const DIM     = 'rgba(30,14,4,0.55)';
+const MUTED   = 'rgba(30,14,4,0.35)';
+const TERRA   = '#C84818';
+const GOLD    = '#B87820';
+
+const SHADOW_SIDEBAR  = '6px 0 20px rgba(180,130,60,0.22), -2px 0 8px rgba(255,255,255,0.6)';
+const SHADOW_RAISED   = '4px 4px 10px rgba(180,130,60,0.2), -4px -4px 10px rgba(255,255,255,0.7)';
+const SHADOW_INSET    = 'inset 3px 3px 8px rgba(180,130,60,0.22), inset -3px -3px 8px rgba(255,255,255,0.65)';
 
 const nav = [
   { href: '/dashboard',           icon: LayoutDashboard, label: "Vue d'ensemble", sub: 'Tableau central'    },
@@ -27,86 +30,93 @@ export default function Sidebar({ admin }) {
   const [open, setOpen] = useState(false);
 
   const Content = () => (
-    <aside className="w-56 min-h-screen flex flex-col relative z-20"
-      style={{ background: SIDEBAR_BG, borderRight: `1px solid rgba(251,245,230,0.08)`, flexShrink: 0 }}>
+    <aside className="w-60 min-h-screen flex flex-col relative z-20"
+      style={{ background: BG, boxShadow: SHADOW_SIDEBAR, flexShrink: 0 }}>
 
       {/* Logo */}
-      <div className="px-5 pt-6 pb-5 border-b" style={{ borderColor: BORDER }}>
-        <div className="mb-4">
-          <div style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 16, color: TEXT, letterSpacing: '0.02em' }}>
+      <div className="px-5 pt-7 pb-5" style={{ borderBottom: '1px solid rgba(180,130,60,0.15)' }}>
+        <div className="mb-5">
+          <div style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 17, color: TEXT, letterSpacing: '0.01em' }}>
             KoriLab
           </div>
-          <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 10, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 2 }}>
-            Dakar · Studio
+          <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, letterSpacing: '0.25em', textTransform: 'uppercase', marginTop: 3 }}>
+            Dakar · Studio Créatif
           </div>
         </div>
 
-        {/* User card */}
-        <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg"
-          style={{ background: 'rgba(251,245,230,0.06)', border: `1px solid ${BORDER}` }}>
+        {/* User card — inset */}
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl"
+          style={{ background: BG, boxShadow: SHADOW_INSET }}>
           <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ background: TERRA, color: TEXT, fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 11 }}>
+            style={{ background: TERRA, color: '#FBF5E6', fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 12, boxShadow: SHADOW_RAISED }}>
             {(admin?.name ?? 'A').charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
             <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 12, color: TEXT }} className="truncate">
               {admin?.name ?? '—'}
             </div>
-            <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.12em' }}>
               Admin
             </div>
           </div>
-          <motion.div className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-            style={{ background: GOLD }}
-            animate={{ opacity: [1, 0.2, 1] }}
-            transition={{ duration: 2.5, repeat: Infinity }}
-          />
+          <motion.div className="w-2 h-2 rounded-full flex-shrink-0"
+            animate={{ opacity: [1, 0.4, 1] }} transition={{ duration: 2, repeat: Infinity }}
+            style={{ background: '#22c55e' }} />
         </div>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-3 py-4 space-y-0.5">
-        <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.3em' }}
-          className="px-3 pb-2">
-          Navigation
-        </p>
-        {nav.map((item, i) => {
-          const active = url.startsWith(item.href) && (item.href !== '/dashboard' || url === '/dashboard');
+      <nav className="flex-1 px-4 py-5 space-y-1.5 overflow-y-auto">
+        {nav.map(({ href, icon: Icon, label, sub }) => {
+          const active = url === href || (href !== '/dashboard' && url.startsWith(href));
           return (
-            <motion.div key={item.href} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.06 + i * 0.04 }}>
-              <Link href={item.href}
-                className="group flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150"
-                style={active
-                  ? { background: 'rgba(200,72,24,0.12)', borderLeft: `3px solid ${TERRA}`, paddingLeft: 9, color: TEXT }
-                  : { borderLeft: '3px solid transparent', paddingLeft: 9, color: DIM }
-                }
-              >
-                <item.icon className="w-4 h-4 flex-shrink-0"
-                  style={{ color: active ? TERRA : MUTED }} />
-                <div className="flex-1 min-w-0">
-                  <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: active ? 600 : 400, fontSize: 12, color: active ? TEXT : DIM }}>
-                    {item.label}
-                  </div>
-                  <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }} className="truncate">
-                    {item.sub}
-                  </div>
+            <Link key={href} href={href}
+              className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200"
+              style={{
+                background: BG,
+                boxShadow: active ? SHADOW_INSET : 'none',
+                color: active ? TERRA : TEXT,
+              }}
+              onMouseEnter={e => { if (!active) e.currentTarget.style.boxShadow = SHADOW_RAISED; }}
+              onMouseLeave={e => { if (!active) e.currentTarget.style.boxShadow = 'none'; }}
+            >
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{
+                  background: BG,
+                  boxShadow: active ? SHADOW_INSET : SHADOW_RAISED,
+                  color: active ? TERRA : DIM,
+                }}>
+                <Icon size={15} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: active ? 700 : 500, fontSize: 12, color: active ? TERRA : TEXT }}>
+                  {label}
                 </div>
-              </Link>
-            </motion.div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  {sub}
+                </div>
+              </div>
+              {active && (
+                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: TERRA }} />
+              )}
+            </Link>
           );
         })}
       </nav>
 
-      {/* Footer */}
-      <div className="px-3 py-4 border-t" style={{ borderColor: BORDER }}>
+      {/* Logout */}
+      <div className="px-4 pb-6 pt-2" style={{ borderTop: '1px solid rgba(180,130,60,0.15)' }}>
         <button onClick={logout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150"
-          style={{ color: MUTED, borderLeft: '3px solid transparent', paddingLeft: 9 }}
-          onMouseEnter={e => { e.currentTarget.style.color = '#e87070'; e.currentTarget.style.background = 'rgba(200,72,24,0.08)'; }}
-          onMouseLeave={e => { e.currentTarget.style.color = MUTED; e.currentTarget.style.background = 'transparent'; }}
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200"
+          style={{ background: BG, color: DIM, fontFamily: "'Sora', sans-serif", fontSize: 12 }}
+          onMouseEnter={e => { e.currentTarget.style.boxShadow = SHADOW_RAISED; e.currentTarget.style.color = TERRA; }}
+          onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.color = DIM; }}
         >
-          <LogOut className="w-4 h-4" />
-          <span style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 12 }}>Déconnexion</span>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+            style={{ background: BG, boxShadow: SHADOW_RAISED }}>
+            <LogOut size={14} />
+          </div>
+          <span style={{ fontWeight: 500 }}>Déconnexion</span>
         </button>
       </div>
     </aside>
@@ -114,29 +124,35 @@ export default function Sidebar({ admin }) {
 
   return (
     <>
-      <div className="hidden md:flex"><Content /></div>
-
+      {/* Mobile toggle */}
       <button onClick={() => setOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center rounded-lg"
-        style={{ background: SIDEBAR_BG, color: TEXT, border: `1px solid ${BORDER}` }}>
-        <Menu size={16} />
+        className="md:hidden fixed top-4 left-4 z-50 w-10 h-10 rounded-xl flex items-center justify-center"
+        style={{ background: BG, boxShadow: SHADOW_RAISED, color: TEXT }}>
+        <Menu size={18} />
       </button>
 
+      {/* Desktop */}
+      <div className="hidden md:block">
+        <Content />
+      </div>
+
+      {/* Mobile drawer */}
       <AnimatePresence>
         {open && (
           <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => setOpen(false)} className="md:hidden fixed inset-0 z-40 bg-black/60" />
-            <motion.div initial={{ x: -230 }} animate={{ x: 0 }} exit={{ x: -230 }}
-              transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-              className="md:hidden fixed top-0 left-0 z-50 h-full">
-              <div className="relative">
-                <Content />
+            <motion.div className="fixed inset-0 z-40 bg-black/30 md:hidden"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)} />
+            <motion.div className="fixed left-0 top-0 bottom-0 z-50 md:hidden"
+              initial={{ x: -260 }} animate={{ x: 0 }} exit={{ x: -260 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}>
+              <div className="relative h-full">
                 <button onClick={() => setOpen(false)}
-                  className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center z-20 rounded"
-                  style={{ border: `1px solid ${BORDER}`, color: DIM, background: 'rgba(251,245,230,0.05)' }}>
-                  <X size={12} />
+                  className="absolute top-4 right-4 z-10 w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ background: BG, boxShadow: SHADOW_RAISED, color: TEXT }}>
+                  <X size={14} />
                 </button>
+                <Content />
               </div>
             </motion.div>
           </>

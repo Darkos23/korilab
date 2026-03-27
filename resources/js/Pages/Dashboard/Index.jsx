@@ -8,10 +8,14 @@ import { SLSystemBG, StatusBar, RankBadge } from "@/Components/dashboard/SystemL
 /* ── Palette MelanoGeek ── */
 const INK    = '#1E0E04';
 const INK2   = 'rgba(30,14,4,0.52)';
-const INK3   = 'rgba(30,14,4,0.14)';
 const TERRA  = '#C84818';
 const GOLD   = '#B87820';
-const CARD   = '#FBF5E6';
+const BG     = '#F5EDD6';
+
+/* Soft UI shadows */
+const RAISED    = '6px 6px 14px rgba(180,130,60,0.22), -6px -6px 14px rgba(255,255,255,0.82)';
+const RAISED_SM = '4px 4px 10px rgba(180,130,60,0.18), -4px -4px 10px rgba(255,255,255,0.78)';
+const INSET     = 'inset 4px 4px 8px rgba(180,130,60,0.2), inset -4px -4px 8px rgba(255,255,255,0.72)';
 
 const ACTIONS = [
   { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "PORTFOLIO" },
@@ -26,17 +30,17 @@ function StatCard({ label, value, icon: Icon, sub }) {
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-xl p-6"
-      style={{
-        background: CARD,
-        border: `1px solid ${INK3}`,
-        borderLeft: `4px solid ${TERRA}`,
-        boxShadow: '0 2px 12px rgba(30,14,4,0.07)',
-      }}
+      className="rounded-2xl p-6"
+      style={{ background: BG, boxShadow: RAISED }}
     >
       <div className="flex items-center justify-between mb-4">
-        {Icon && <Icon size={16} style={{ color: INK2 }} />}
-        <div className="w-2 h-2 rounded-full" style={{ background: TERRA }} />
+        <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+          style={{ background: BG, boxShadow: INSET }}>
+          {Icon && <Icon size={16} style={{ color: TERRA }} />}
+        </div>
+        <motion.div className="w-2 h-2 rounded-full"
+          animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 2.5, repeat: Infinity }}
+          style={{ background: TERRA }} />
       </div>
       <div className="text-4xl font-black mb-1" style={{ color: INK, fontFamily: 'serif' }}>{value}</div>
       <div className="text-xs uppercase tracking-widest font-semibold mb-0.5" style={{ color: INK }}>{label}</div>
@@ -54,23 +58,13 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
     >
       <Link
         href={href}
-        className="group flex items-center gap-4 p-5 rounded-xl transition-all duration-200"
-        style={{
-          background: CARD,
-          border: `1px solid ${INK3}`,
-          boxShadow: '0 1px 6px rgba(30,14,4,0.05)',
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.borderColor = TERRA;
-          e.currentTarget.style.boxShadow = `0 4px 16px rgba(200,72,24,0.12)`;
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.borderColor = INK3;
-          e.currentTarget.style.boxShadow = '0 1px 6px rgba(30,14,4,0.05)';
-        }}
+        className="group flex items-center gap-4 p-5 rounded-2xl transition-all duration-200"
+        style={{ background: BG, boxShadow: RAISED_SM }}
+        onMouseEnter={e => { e.currentTarget.style.boxShadow = RAISED; }}
+        onMouseLeave={e => { e.currentTarget.style.boxShadow = RAISED_SM; }}
       >
-        <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-          style={{ background: `rgba(200,72,24,0.08)`, border: `1px solid rgba(200,72,24,0.2)` }}>
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+          style={{ background: BG, boxShadow: INSET }}>
           <Icon size={18} style={{ color: TERRA }} />
         </div>
         <div className="flex-1 min-w-0">
@@ -80,8 +74,8 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
           </div>
           <p className="text-xs" style={{ color: INK2 }}>{desc}</p>
         </div>
-        <span className="text-[9px] font-mono uppercase tracking-widest px-2 py-1 rounded"
-          style={{ color: GOLD, background: `rgba(184,120,32,0.08)`, border: `1px solid rgba(184,120,32,0.2)` }}>
+        <span className="text-[9px] font-mono uppercase tracking-widest px-2.5 py-1.5 rounded-lg"
+          style={{ color: GOLD, background: BG, boxShadow: INSET }}>
           {tag}
         </span>
       </Link>
@@ -128,7 +122,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
 
           <a href="/" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200"
-            style={{ background: CARD, border: `1px solid ${INK3}`, color: INK }}
+            style={{ background: BG, boxShadow: RAISED_SM, color: INK }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.color = TERRA; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.color = INK; }}
           >
@@ -166,7 +160,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
           className="mt-8 px-5 py-4 rounded-xl"
-          style={{ background: CARD, border: `1px solid ${INK3}`, borderLeft: `3px solid ${GOLD}` }}
+          style={{ background: BG, boxShadow: RAISED_SM, borderLeft: `3px solid ${GOLD}` }}
         >
           <p className="text-sm italic" style={{ color: INK2 }}>
             « Chaque création porte l'empreinte de celui qui la forge. Bâtissez avec soin. »

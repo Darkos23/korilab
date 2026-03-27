@@ -13,6 +13,11 @@ const RED       = '#C84818';
 const TERRA     = '#C84818';
 const GOLD      = '#B87820';
 
+/* ─── Soft UI shadows ────────────────────────────────────── */
+const SHADOW_RAISED  = '8px 8px 16px rgba(180,130,60,0.28), -8px -8px 16px rgba(255,255,255,0.85)';
+const SHADOW_INSET   = 'inset 4px 4px 8px rgba(180,130,60,0.22), inset -4px -4px 8px rgba(255,255,255,0.75)';
+const SHADOW_RAISED_SM = '4px 4px 10px rgba(180,130,60,0.22), -4px -4px 10px rgba(255,255,255,0.8)';
+
 /* ─── Background Kente / Dakar ───────────────────────────── */
 export function SLSystemBG() {
   const kente = `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C84818' stroke-width='0.6' opacity='0.07'%3E%3Crect x='10' y='10' width='20' height='20'/%3E%3Crect x='50' y='10' width='20' height='20'/%3E%3Crect x='10' y='50' width='20' height='20'/%3E%3Crect x='50' y='50' width='20' height='20'/%3E%3Cline x1='0' y1='40' x2='80' y2='40'/%3E%3Cline x1='40' y1='0' x2='40' y2='80'/%3E%3Cpath d='M10 10 L30 30 M50 10 L70 30 M10 50 L30 70 M50 50 L70 70'/%3E%3C/g%3E%3C/svg%3E")`;
@@ -73,13 +78,13 @@ export function SysWin({ title, subtitle, children, className = '', delay = 0 })
       transition={{ duration: 0.4, delay }}
       className={`relative ${className}`}
       style={{
-        background: 'rgba(255,252,244,0.92)',
-        border: `1px solid ${BORDER}`,
-        borderRadius: 10,
-        boxShadow: '0 2px 16px rgba(140,95,25,0.08)',
+        background: BG,
+        borderRadius: 16,
+        boxShadow: SHADOW_RAISED,
+        transition: 'all 0.2s ease',
       }}
     >
-      <div className="flex items-center gap-3 px-4 py-3 border-b" style={{ borderColor: BORDER }}>
+      <div className="flex items-center gap-3 px-4 py-3" style={{ borderBottom: '1px solid rgba(180,130,60,0.12)' }}>
         <span className="font-mono text-[9px] uppercase tracking-[0.25em]" style={{ color: DIM }}>
           {title}
         </span>
@@ -90,7 +95,7 @@ export function SysWin({ title, subtitle, children, className = '', delay = 0 })
         )}
         <div className="ml-auto flex gap-1.5">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="w-2 h-2 rounded-full" style={{ background: BORDER }} />
+            <div key={i} className="w-2 h-2 rounded-full" style={{ background: 'rgba(30,14,4,0.15)' }} />
           ))}
         </div>
       </div>
@@ -103,19 +108,18 @@ export function SysWin({ title, subtitle, children, className = '', delay = 0 })
 export function StatBadge({ label, value, icon: Icon, sub }) {
   return (
     <motion.div
-      whileHover={{ borderColor: BORDER_H }}
-      className="relative p-5 transition-all duration-300"
+      whileHover={{ boxShadow: '10px 10px 20px rgba(180,130,60,0.32), -10px -10px 20px rgba(255,255,255,0.9)' }}
+      className="relative p-5 transition-all duration-200"
       style={{
-        background: 'rgba(255,252,244,0.85)',
-        border: `1px solid ${BORDER}`,
-        borderRadius: 10,
-        borderLeft: `3px solid ${GOLD}`,
-        boxShadow: '0 2px 12px rgba(140,95,25,0.07)',
+        background: BG,
+        borderRadius: 16,
+        boxShadow: SHADOW_RAISED,
       }}
     >
+      {/* Point terracotta en badge haut-droite */}
+      <div className="absolute top-3 right-3 w-2 h-2 rounded-full" style={{ background: TERRA }} />
       <div className="flex items-start justify-between mb-4">
         {Icon && <Icon className="w-3.5 h-3.5" style={{ color: MUTED }} />}
-        <div className="w-1.5 h-1.5 rounded-full" style={{ background: GOLD }} />
       </div>
       <div className="font-mono text-3xl font-black mb-1" style={{ color: TEXT }}>{value}</div>
       <div className="font-mono text-[9px] uppercase tracking-[0.22em]" style={{ color: DIM }}>{label}</div>
@@ -133,9 +137,9 @@ export function SysNotif({ children }) {
       transition={{ delay: 1, duration: 0.4 }}
       className="px-4 py-3 flex items-start gap-3"
       style={{
-        background: 'rgba(255,252,244,0.7)',
-        border: `1px solid ${BORDER}`,
-        borderRadius: 8,
+        background: BG,
+        borderRadius: 12,
+        boxShadow: SHADOW_RAISED_SM,
       }}
     >
       <span className="font-mono text-[9px] mt-0.5" style={{ color: GOLD }}>◆</span>
@@ -157,9 +161,10 @@ export function SysInput({ label, ...props }) {
       <input
         className="w-full px-3 py-2 font-mono text-sm outline-none transition-all duration-200"
         style={{
-          background: 'rgba(255,252,244,0.9)',
-          border: `1px solid ${f ? BORDER_H : BORDER}`,
-          borderRadius: 6,
+          background: BG,
+          boxShadow: f ? 'inset 5px 5px 10px rgba(180,130,60,0.25), inset -5px -5px 10px rgba(255,255,255,0.8)' : SHADOW_INSET,
+          borderRadius: 12,
+          border: 'none',
           color: TEXT,
         }}
         onFocus={() => setF(true)}
@@ -183,9 +188,10 @@ export function SysTextarea({ label, rows = 3, ...props }) {
         rows={rows}
         className="w-full px-3 py-2 font-mono text-sm outline-none resize-none transition-all duration-200"
         style={{
-          background: 'rgba(255,252,244,0.9)',
-          border: `1px solid ${f ? BORDER_H : BORDER}`,
-          borderRadius: 6,
+          background: BG,
+          boxShadow: f ? 'inset 5px 5px 10px rgba(180,130,60,0.25), inset -5px -5px 10px rgba(255,255,255,0.8)' : SHADOW_INSET,
+          borderRadius: 12,
+          border: 'none',
           color: TEXT,
         }}
         onFocus={() => setF(true)}
@@ -206,11 +212,11 @@ export function SysSelect({ label, options, ...props }) {
       )}
       <select
         className="w-full px-3 py-2 font-mono text-sm outline-none transition-all duration-200"
-        style={{ background: '#fffcf4', border: `1px solid ${BORDER}`, borderRadius: 6, color: TEXT }}
+        style={{ background: BG, border: 'none', boxShadow: SHADOW_INSET, borderRadius: 12, color: TEXT }}
         {...props}
       >
         {options.map(o => (
-          <option key={o.value ?? o} value={o.value ?? o} className="bg-[#fffcf4]">
+          <option key={o.value ?? o} value={o.value ?? o} style={{ background: BG }}>
             {o.label ?? o}
           </option>
         ))}
@@ -222,13 +228,47 @@ export function SysSelect({ label, options, ...props }) {
 /* ─── Button ─────────────────────────────────────────────── */
 export function SysBtn({ children, variant = 'primary', className = '', ...props }) {
   const base = "flex items-center gap-2 px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all duration-200 disabled:opacity-30";
-  const styles = {
-    primary: { border: `1px solid ${BORDER_H}`, background: SURFACE, color: TEXT, borderRadius: 6 },
-    danger:  { border: `1px solid rgba(196,64,48,0.4)`, background: 'transparent', color: RED, borderRadius: 6 },
-    ghost:   { border: `1px solid ${BORDER}`, background: 'transparent', color: DIM, borderRadius: 6 },
+
+  const getStyle = (v) => {
+    if (v === 'danger') return {
+      background: BG,
+      boxShadow: SHADOW_RAISED,
+      borderRadius: 12,
+      border: 'none',
+      color: RED,
+    };
+    if (v === 'ghost') return {
+      background: BG,
+      boxShadow: SHADOW_RAISED_SM,
+      borderRadius: 12,
+      border: 'none',
+      color: DIM,
+    };
+    // primary
+    return {
+      background: BG,
+      boxShadow: SHADOW_RAISED,
+      borderRadius: 12,
+      border: 'none',
+      color: TEXT,
+    };
   };
+
+  const handleMouseEnter = (e) => {
+    e.currentTarget.style.boxShadow = SHADOW_INSET;
+  };
+  const handleMouseLeave = (e) => {
+    e.currentTarget.style.boxShadow = SHADOW_RAISED;
+  };
+
   return (
-    <button className={`${base} ${className}`} style={styles[variant] ?? styles.primary} {...props}>
+    <button
+      className={`${base} ${className}`}
+      style={getStyle(variant)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      {...props}
+    >
       {children}
     </button>
   );
@@ -241,7 +281,7 @@ export function RankBadge({ rank }) {
   return (
     <span
       className="inline-flex items-center justify-center w-6 h-6 font-mono text-[10px] font-black uppercase"
-      style={{ color: c, border: `1px solid ${c}50`, background: `${c}10`, borderRadius: 4 }}
+      style={{ color: c, background: `${c}10`, borderRadius: 4, boxShadow: SHADOW_RAISED_SM }}
     >
       {rank}
     </span>
@@ -259,7 +299,12 @@ export function StatusBar({ admin }) {
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-50 flex items-center px-5 gap-4"
-      style={{ height: 24, borderTop: `1px solid ${BORDER}`, background: 'rgba(247,237,216,0.98)', backdropFilter: 'blur(8px)' }}
+      style={{
+        height: 24,
+        background: 'rgba(245,237,214,0.98)',
+        backdropFilter: 'blur(8px)',
+        boxShadow: '0 -2px 12px rgba(180,130,60,0.12)',
+      }}
     >
       <div className="flex items-center gap-2">
         <motion.div
@@ -285,11 +330,11 @@ export function StatusBar({ admin }) {
 export function SysDivider({ label }) {
   return (
     <div className="flex items-center gap-3 my-6">
-      <div className="flex-1 h-px" style={{ background: BORDER }} />
+      <div className="flex-1 h-px" style={{ background: 'rgba(180,130,60,0.18)' }} />
       <span className="font-mono text-[8px] uppercase tracking-[0.35em]" style={{ color: MUTED }}>
         ◆ {label} ◆
       </span>
-      <div className="flex-1 h-px" style={{ background: BORDER }} />
+      <div className="flex-1 h-px" style={{ background: 'rgba(180,130,60,0.18)' }} />
     </div>
   );
 }
