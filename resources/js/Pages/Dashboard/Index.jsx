@@ -10,7 +10,7 @@ const INK2   = '#5A5448';
 const INK3   = 'rgba(0,0,0,0.06)';
 const TERRA  = '#B43028';
 const GOLD   = '#8A5A18';
-const CARD   = '#FFFFFF';
+const CARD   = '#FDFBF7';
 const FONT   = "'Century Gothic', 'Trebuchet MS', sans-serif";
 
 const ACTIONS = [

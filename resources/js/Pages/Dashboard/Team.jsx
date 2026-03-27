@@ -6,7 +6,7 @@ import { SLSystemBG, SysWin, SysInput, SysTextarea, SysSelect, SysBtn, SysDivide
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
 const BG     = '#F8F5EF';
-const CARD   = '#FFFFFF';
+const CARD   = '#FDFBF7';
 const INK    = '#1C1A16';
 const INK2   = '#5A5448';
 const INK3   = 'rgba(0,0,0,0.06)';

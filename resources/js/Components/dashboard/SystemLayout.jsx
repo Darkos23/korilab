@@ -73,7 +73,7 @@ export function SysWin({ title, subtitle, children, className = '', delay = 0 })
       transition={{ duration: 0.4, delay }}
       className={`relative ${className}`}
       style={{
-        background: 'rgba(255,253,248,0.94)',
+        background: 'rgba(253,251,247,0.96)',
         border: `1px solid ${BORDER}`,
         borderRadius: 10,
         boxShadow: '0 2px 12px rgba(36,20,6,0.05)',
@@ -106,7 +106,7 @@ export function StatBadge({ label, value, icon: Icon, sub }) {
       whileHover={{ borderColor: BORDER_H }}
       className="relative p-5 transition-all duration-300"
       style={{
-        background: 'rgba(255,253,248,0.9)',
+        background: 'rgba(253,251,247,0.92)',
         border: `1px solid ${BORDER}`,
         borderRadius: 10,
         borderLeft: `3px solid ${GOLD}`,
@@ -133,7 +133,7 @@ export function SysNotif({ children }) {
       transition={{ delay: 1, duration: 0.4 }}
       className="px-4 py-3 flex items-start gap-3"
       style={{
-        background: 'rgba(255,252,244,0.7)',
+        background: 'rgba(253,251,247,0.75)',
         border: `1px solid ${BORDER}`,
         borderRadius: 8,
       }}
@@ -157,7 +157,7 @@ export function SysInput({ label, ...props }) {
       <input
         className="w-full px-3 py-2 font-mono text-sm outline-none transition-all duration-200"
         style={{
-          background: 'rgba(255,252,244,0.9)',
+          background: 'rgba(253,251,247,0.92)',
           border: `1px solid ${f ? BORDER_H : BORDER}`,
           borderRadius: 6,
           color: TEXT,
@@ -183,7 +183,7 @@ export function SysTextarea({ label, rows = 3, ...props }) {
         rows={rows}
         className="w-full px-3 py-2 font-mono text-sm outline-none resize-none transition-all duration-200"
         style={{
-          background: 'rgba(255,252,244,0.9)',
+          background: 'rgba(253,251,247,0.92)',
           border: `1px solid ${f ? BORDER_H : BORDER}`,
           borderRadius: 6,
           color: TEXT,
@@ -206,7 +206,7 @@ export function SysSelect({ label, options, ...props }) {
       )}
       <select
         className="w-full px-3 py-2 font-mono text-sm outline-none transition-all duration-200"
-        style={{ background: '#fffcf4', border: `1px solid ${BORDER}`, borderRadius: 6, color: TEXT }}
+        style={{ background: '#FDFBF7', border: `1px solid ${BORDER}`, borderRadius: 6, color: TEXT }}
         {...props}
       >
         {options.map(o => (
