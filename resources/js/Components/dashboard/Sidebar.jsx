@@ -4,11 +4,11 @@ import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, Mess
 import { useState } from "react";
 
 /* ─── Tokens ─────────────────────────────────────────────── */
-const TEXT   = '#f5ecd0';
-const DIM    = 'rgba(245,236,208,0.65)';
-const MUTED  = 'rgba(245,236,208,0.38)';
-const BORDER = 'rgba(245,236,208,0.12)';
-const GOLD   = '#e8b84b';
+const TEXT   = '#FBF5E6';
+const DIM    = 'rgba(251,245,230,0.65)';
+const MUTED  = 'rgba(251,245,230,0.38)';
+const BORDER = 'rgba(251,245,230,0.12)';
+const GOLD   = '#B87820';
 const RC     = { S: GOLD, A: '#8b6010', B: '#c44030', C: '#5a3a9a', D: '#2a7a6a', E: '#6b7280' };
 
 /* ─── Cauri logo ─────────────────────────────────────────── */

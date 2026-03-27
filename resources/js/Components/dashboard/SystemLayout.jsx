@@ -1,120 +1,52 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
-/* ─── Design tokens — Cauri / KoriLab Dakar (mode sable) ── */
-const BG        = '#f7edd8';          /* sable chaud        */
-const SURFACE   = 'rgba(160,110,30,0.06)';
-const BORDER    = 'rgba(140,95,25,0.18)';
-const BORDER_H  = 'rgba(140,95,25,0.45)';
-const TEXT      = '#1e1408';          /* brun nuit          */
-const DIM       = 'rgba(30,20,8,0.65)';
-const MUTED     = 'rgba(30,20,8,0.38)';
-const RED       = '#c44030';
-const GOLD      = '#a8720a';          /* or sombre (lisible sur clair) */
+/* ─── Design tokens — Palette MelanoGeek / KoriLab Dakar ── */
+const BG        = '#F5EDD6';
+const SURFACE   = 'rgba(200,72,24,0.05)';
+const BORDER    = 'rgba(30,14,4,0.14)';
+const BORDER_H  = 'rgba(200,72,24,0.45)';
+const TEXT      = '#1E0E04';
+const DIM       = 'rgba(30,14,4,0.52)';
+const MUTED     = 'rgba(30,14,4,0.35)';
+const RED       = '#C84818';
+const TERRA     = '#C84818';
+const GOLD      = '#B87820';
 
-/* ─── Runes Tifinagh flottantes ──────────────────────────── */
-const TIFINAGH = ['ⵀ','ⵃ','ⵅ','ⵇ','ⵉ','ⵌ','ⵎ','ⵏ','ⵓ','ⵔ','ⵖ','ⵙ','ⵛ','ⵜ','ⵟ','ⵢ','ⵣ','ⵥ','ⵯ'];
-
-function FloatingRunes() {
-  const runes = Array.from({ length: 18 }, (_, i) => ({
-    id: i,
-    char: TIFINAGH[i % TIFINAGH.length],
-    x: (i * 37 + 5) % 95,
-    y: (i * 53 + 8) % 90,
-    size: 14 + (i % 3) * 6,
-    duration: 18 + (i % 7) * 4,
-    delay: -(i * 2.3),
-    drift: (i % 2 === 0 ? 1 : -1) * (8 + (i % 4) * 5),
-  }));
-
-  return (
-    <>
-      {runes.map(r => (
-        <motion.div
-          key={r.id}
-          className="absolute select-none"
-          style={{
-            left: `${r.x}%`,
-            top: `${r.y}%`,
-            fontSize: r.size,
-            color: 'rgba(140,95,25,0.12)',
-            fontFamily: 'serif',
-          }}
-          animate={{
-            y: [0, r.drift, 0],
-            opacity: [0.08, 0.16, 0.08],
-            rotate: [-3, 3, -3],
-          }}
-          transition={{
-            duration: r.duration,
-            delay: r.delay,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        >
-          {r.char}
-        </motion.div>
-      ))}
-    </>
-  );
-}
-
-/* ─── Background désert Dakar ────────────────────────────── */
+/* ─── Background Kente / Dakar ───────────────────────────── */
 export function SLSystemBG() {
+  const kente = `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C84818' stroke-width='0.6' opacity='0.07'%3E%3Crect x='10' y='10' width='20' height='20'/%3E%3Crect x='50' y='10' width='20' height='20'/%3E%3Crect x='10' y='50' width='20' height='20'/%3E%3Crect x='50' y='50' width='20' height='20'/%3E%3Cline x1='0' y1='40' x2='80' y2='40'/%3E%3Cline x1='40' y1='0' x2='40' y2='80'/%3E%3Cpath d='M10 10 L30 30 M50 10 L70 30 M10 50 L30 70 M50 50 L70 70'/%3E%3C/g%3E%3C/svg%3E")`;
+
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Base — sable */}
+      {/* Base sable */}
       <div className="absolute inset-0" style={{ background: BG }} />
 
-      {/* Grain sable fin */}
+      {/* Motif kente */}
       <div className="absolute inset-0" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.045'/%3E%3C/svg%3E")`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: '300px 300px',
-        mixBlendMode: 'multiply',
+        backgroundImage: kente,
+        backgroundSize: '80px 80px',
       }} />
 
-      {/* Runes Tifinagh flottantes */}
-      <FloatingRunes />
-
-      {/* Halo soleil — haut centre */}
+      {/* Halo soleil terracotta — haut */}
       <div className="absolute inset-x-0 top-0" style={{
-        height: '60vh',
-        background: 'radial-gradient(ellipse 80% 70% at 50% -10%, rgba(220,160,40,0.18) 0%, transparent 70%)',
+        height: '50vh',
+        background: 'radial-gradient(ellipse 70% 60% at 50% -10%, rgba(200,72,24,0.1) 0%, transparent 70%)',
+      }} />
+
+      {/* Orbe or — haut droite */}
+      <div className="absolute rounded-full" style={{
+        width: 500, height: 400, top: '-5%', right: '-5%',
+        background: 'radial-gradient(ellipse, rgba(184,120,32,0.12) 0%, transparent 70%)',
+        filter: 'blur(80px)',
       }} />
 
       {/* Orbe terracotta — bas gauche */}
       <div className="absolute rounded-full" style={{
-        width: 600, height: 500, bottom: '-10%', left: '-5%',
-        background: 'radial-gradient(ellipse, rgba(196,87,58,0.12) 0%, transparent 70%)',
+        width: 600, height: 400, bottom: '-10%', left: '-5%',
+        background: 'radial-gradient(ellipse, rgba(200,72,24,0.1) 0%, transparent 70%)',
         filter: 'blur(80px)',
       }} />
-
-      {/* Orbe ocre — haut droite */}
-      <div className="absolute rounded-full" style={{
-        width: 500, height: 400, top: '-5%', right: '-5%',
-        background: 'radial-gradient(ellipse, rgba(200,150,40,0.14) 0%, transparent 70%)',
-        filter: 'blur(80px)',
-      }} />
-
-      {/* Coins décoratifs */}
-      {[
-        { top: 16, left: 16,     borderTop: true,    borderLeft: true  },
-        { top: 16, right: 16,    borderTop: true,    borderRight: true },
-        { bottom: 16, left: 16,  borderBottom: true, borderLeft: true  },
-        { bottom: 16, right: 16, borderBottom: true, borderRight: true },
-      ].map((c, i) => (
-        <div key={i} className="absolute" style={{
-          top: c.top, right: c.right, bottom: c.bottom, left: c.left,
-          width: 20, height: 20,
-          borderTopWidth:    c.borderTop    ? 1 : 0,
-          borderBottomWidth: c.borderBottom ? 1 : 0,
-          borderLeftWidth:   c.borderLeft   ? 1 : 0,
-          borderRightWidth:  c.borderRight  ? 1 : 0,
-          borderStyle: 'solid',
-          borderColor: 'rgba(140,95,25,0.22)',
-        }} />
-      ))}
 
       {/* Label */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[7px] uppercase tracking-[0.5em] whitespace-nowrap"
