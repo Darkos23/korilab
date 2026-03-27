@@ -20,44 +20,31 @@ const SHADOW_RAISED_SM = '4px 4px 10px rgba(180,130,60,0.22), -4px -4px 10px rgb
 
 /* ─── Background Kente / Dakar ───────────────────────────── */
 export function SLSystemBG() {
-  const kente = `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C84818' stroke-width='0.6' opacity='0.07'%3E%3Crect x='10' y='10' width='20' height='20'/%3E%3Crect x='50' y='10' width='20' height='20'/%3E%3Crect x='10' y='50' width='20' height='20'/%3E%3Crect x='50' y='50' width='20' height='20'/%3E%3Cline x1='0' y1='40' x2='80' y2='40'/%3E%3Cline x1='40' y1='0' x2='40' y2='80'/%3E%3Cpath d='M10 10 L30 30 M50 10 L70 30 M10 50 L30 70 M50 50 L70 70'/%3E%3C/g%3E%3C/svg%3E")`;
-
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Base sable */}
       <div className="absolute inset-0" style={{ background: BG }} />
 
-      {/* Motif kente */}
-      <div className="absolute inset-0" style={{
-        backgroundImage: kente,
-        backgroundSize: '80px 80px',
-      }} />
-
-      {/* Halo soleil terracotta — haut */}
-      <div className="absolute inset-x-0 top-0" style={{
-        height: '50vh',
-        background: 'radial-gradient(ellipse 70% 60% at 50% -10%, rgba(200,72,24,0.1) 0%, transparent 70%)',
-      }} />
-
-      {/* Orbe or — haut droite */}
+      {/* Orbe terracotta — haut droite */}
       <div className="absolute rounded-full" style={{
-        width: 500, height: 400, top: '-5%', right: '-5%',
-        background: 'radial-gradient(ellipse, rgba(184,120,32,0.12) 0%, transparent 70%)',
+        width: 700, height: 500, top: '-15%', right: '-10%',
+        background: 'radial-gradient(ellipse, rgba(200,72,24,0.13) 0%, transparent 65%)',
+        filter: 'blur(90px)',
+      }} />
+
+      {/* Orbe or — centre gauche */}
+      <div className="absolute rounded-full" style={{
+        width: 500, height: 500, top: '20%', left: '-10%',
+        background: 'radial-gradient(ellipse, rgba(184,120,32,0.1) 0%, transparent 65%)',
+        filter: 'blur(100px)',
+      }} />
+
+      {/* Orbe terracotta doux — bas droite */}
+      <div className="absolute rounded-full" style={{
+        width: 600, height: 400, bottom: '-10%', right: '10%',
+        background: 'radial-gradient(ellipse, rgba(200,72,24,0.08) 0%, transparent 65%)',
         filter: 'blur(80px)',
       }} />
-
-      {/* Orbe terracotta — bas gauche */}
-      <div className="absolute rounded-full" style={{
-        width: 600, height: 400, bottom: '-10%', left: '-5%',
-        background: 'radial-gradient(ellipse, rgba(200,72,24,0.1) 0%, transparent 70%)',
-        filter: 'blur(80px)',
-      }} />
-
-      {/* Label */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[7px] uppercase tracking-[0.5em] whitespace-nowrap"
-        style={{ color: MUTED }}>
-        — KoriLab · Dakar —
-      </div>
     </div>
   );
 }
