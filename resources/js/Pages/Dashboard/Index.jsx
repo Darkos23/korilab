@@ -1,7 +1,9 @@
 import { Link } from "@inertiajs/react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, ExternalLink, MessageSquare } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
+import TopBar from "@/Components/dashboard/TopBar";
 import { SLSystemBG, StatusBar } from "@/Components/dashboard/SystemLayout";
 
 /* ── Palette Washi soft ── */
@@ -126,6 +128,7 @@ function RightSidebar({ admin, members }) {
 
 /* ── Page ── */
 export default function DashboardIndex({ admin, portfolioCount, servicesCount, unreadMessages, members = [] }) {
+  const [collapsed, setCollapsed] = useState(false);
   const stats = [
     { label: "Projets actifs",   value: portfolioCount, icon: FolderOpen,    sub: "Réalisations en ligne", delay: 0.1  },
     { label: "Services actifs",  value: servicesCount,  icon: Wrench,        sub: "Offres du studio",      delay: 0.15 },
@@ -137,7 +140,9 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
       <SLSystemBG />
       <Sidebar admin={admin} />
 
-      <main className="relative z-10 flex-1 p-6 md:p-8 pt-16 md:pt-8 overflow-auto pb-10">
+      <main className="relative z-10 flex-1 overflow-auto flex flex-col">
+        <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
+        <div className="p-6 md:p-8 pb-10 flex-1">
 
         {/* ── Header ── */}
         <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
@@ -189,6 +194,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
 
         </div>
 
+        </div>
       </main>
 
       <StatusBar admin={admin} />

@@ -2,6 +2,7 @@ import { router } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { MessageSquare, Trash2, Mail, MailOpen, Building2, DollarSign, Calendar } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
+import TopBar from '@/Components/dashboard/TopBar';
 import { SLSystemBG, SysDivider, StatusBar, SysWin } from "@/Components/dashboard/SystemLayout";
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
@@ -20,6 +21,7 @@ function formatDate(dateStr) {
 }
 
 export default function DashboardMessages({ admin, messages }) {
+  const [collapsed, setCollapsed] = useState(false);
   const unread = messages.filter(m => !m.read_at);
   const read   = messages.filter(m => m.read_at);
 
@@ -125,9 +127,11 @@ export default function DashboardMessages({ admin, messages }) {
   return (
     <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
       <SLSystemBG />
-      <Sidebar admin={admin} />
+      <Sidebar admin={admin} collapsed={collapsed} />
 
-      <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
+      <main className="relative z-10 flex-1 overflow-auto flex flex-col">
+                <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
+                <div className="p-4 md:p-8 flex-1">
 
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -183,7 +187,7 @@ export default function DashboardMessages({ admin, messages }) {
             )}
           </>
         )}
-
+                </div>
       </main>
       <StatusBar admin={admin} />
     </div>

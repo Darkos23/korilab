@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { router } from '@inertiajs/react';
 import { Plus, Trash2, ChevronDown, ChevronUp, Save, CheckCircle } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
+import TopBar from '@/Components/dashboard/TopBar';
 import { SLSystemBG, SysWin, SysInput, SysTextarea, SysSelect, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
@@ -409,6 +410,7 @@ function AddMemberForm({ onClose }) {
 
 /* ─── Page ──────────────────────────────────────────────────── */
 export default function DashboardTeam({ admin, members }) {
+    const [collapsed, setCollapsed] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
 
     const deleteMember = (id, name) => {
@@ -420,9 +422,11 @@ export default function DashboardTeam({ admin, members }) {
     return (
         <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
             <SLSystemBG />
-            <Sidebar admin={admin} />
+            <Sidebar admin={admin} collapsed={collapsed} />
 
-            <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
+            <main className="relative z-10 flex-1 overflow-auto flex flex-col">
+                <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
+                <div className="p-4 md:p-8 flex-1">
                 <div className="flex items-start justify-between mb-8">
                     <div>
                         <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
@@ -466,6 +470,7 @@ export default function DashboardTeam({ admin, members }) {
                             </button>
                         </div>
                     ))}
+                </div>
                 </div>
             </main>
             <StatusBar admin={admin} />
