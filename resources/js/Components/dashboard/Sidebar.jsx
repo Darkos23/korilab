@@ -11,9 +11,9 @@ const MUTED   = 'rgba(30,14,4,0.35)';
 const TERRA   = '#C84818';
 const GOLD    = '#B87820';
 
-const SHADOW_SIDEBAR  = '6px 0 20px rgba(180,130,60,0.22), -2px 0 8px rgba(255,255,255,0.6)';
-const SHADOW_RAISED   = '4px 4px 10px rgba(180,130,60,0.2), -4px -4px 10px rgba(255,255,255,0.7)';
-const SHADOW_INSET    = 'inset 3px 3px 8px rgba(180,130,60,0.22), inset -3px -3px 8px rgba(255,255,255,0.65)';
+const SHADOW_SIDEBAR  = '4px 0 16px rgba(180,130,60,0.16), -1px 0 6px rgba(255,255,255,0.4)';
+const SHADOW_RAISED   = '3px 3px 8px rgba(180,130,60,0.15), -3px -3px 8px rgba(255,255,255,0.48)';
+const SHADOW_INSET    = 'inset 2px 2px 6px rgba(180,130,60,0.15), inset -2px -2px 6px rgba(255,255,255,0.48)';
 
 const nav = [
   { href: '/dashboard',           icon: LayoutDashboard, label: "Vue d'ensemble", sub: 'Tableau central'    },

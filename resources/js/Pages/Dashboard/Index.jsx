@@ -14,9 +14,9 @@ const GOLD   = '#B87820';
 const BG     = '#F5EDD6';
 
 /* Soft UI shadows */
-const RAISED    = '6px 6px 14px rgba(180,130,60,0.22), -6px -6px 14px rgba(255,255,255,0.82)';
-const RAISED_SM = '4px 4px 10px rgba(180,130,60,0.18), -4px -4px 10px rgba(255,255,255,0.78)';
-const INSET     = 'inset 4px 4px 8px rgba(180,130,60,0.2), inset -4px -4px 8px rgba(255,255,255,0.72)';
+const RAISED    = '5px 5px 12px rgba(180,130,60,0.18), -5px -5px 12px rgba(255,255,255,0.52)';
+const RAISED_SM = '3px 3px 8px rgba(180,130,60,0.14), -3px -3px 8px rgba(255,255,255,0.48)';
+const INSET     = 'inset 3px 3px 7px rgba(180,130,60,0.16), inset -3px -3px 7px rgba(255,255,255,0.5)';
 
 const ACTIONS = [
   { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "PORTFOLIO" },
