@@ -17,7 +17,7 @@
     pointer-events: none;
   }
   html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body { background: #040d1a; color: #e2e8f0; overflow-x: hidden; }
+  body { background: #010a14; color: #b8d8f8; overflow-x: hidden; }
 }
 
 @layer utilities {
@@ -58,6 +58,14 @@
 .animate-spin-20s { animation: spin-ccw 20s linear infinite; }
 .animate-spin-12s { animation: spin-cw  12s linear infinite; }
 .animate-spin-6s  { animation: spin-cw   6s linear infinite; }
+
+/* ── Jarvis / HUD extras ── */
+@keyframes jarvis-pulse { 0%,100% { opacity:0.5; transform:scale(1); } 50% { opacity:1; transform:scale(1.04); } }
+@keyframes jarvis-glow  { 0%,100% { box-shadow:0 0 8px rgba(0,168,255,0.3); } 50% { box-shadow:0 0 20px rgba(0,168,255,0.7); } }
+@keyframes hud-flicker  { 0%,100%{opacity:1}30%{opacity:0.92}60%{opacity:0.97}80%{opacity:0.88} }
+.jarvis-pulse  { animation: jarvis-pulse  4s ease-in-out infinite; }
+.jarvis-glow   { animation: jarvis-glow   3s ease-in-out infinite; }
+.hud-flicker   { animation: hud-flicker   8s ease-in-out infinite; }
 
 /* ── Solo Leveling System bg extras ── */
 @keyframes sl-energy { 0%,100% { opacity:0.4; transform:scale(1);   } 50% { opacity:0.9; transform:scale(1.08); } }
