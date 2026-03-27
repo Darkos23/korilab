@@ -51,7 +51,7 @@ export default function Sidebar({ admin }) {
 
   const Content = () => (
     <aside className="w-56 min-h-screen flex flex-col"
-      style={{ background: 'rgba(252,246,232,0.98)', borderRight: `1px solid ${BORDER}` }}>
+      style={{ background: '#ede0c0', borderRight: `2px solid rgba(140,95,25,0.25)` }}>
 
       {/* Logo */}
       <div className="p-5 border-b" style={{ borderColor: BORDER }}>
