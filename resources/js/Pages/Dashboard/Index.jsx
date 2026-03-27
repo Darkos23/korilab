@@ -2,8 +2,7 @@ import { Link } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { FolderOpen, Wrench, Globe, Users, ArrowUpRight, ExternalLink, MessageSquare } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
-import WhatsAppFloat from "@/Components/WhatsAppFloat";
-import { SLSystemBG, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
+import { SLSystemBG, StatusBar } from "@/Components/dashboard/SystemLayout";
 
 /* ── Palette Washi soft ── */
 const INK    = '#1C1A16';
@@ -12,6 +11,7 @@ const INK3   = 'rgba(0,0,0,0.06)';
 const TERRA  = '#B43028';
 const GOLD   = '#8A5A18';
 const CARD   = '#FFFFFF';
+const FONT   = "'Century Gothic', 'Trebuchet MS', sans-serif";
 
 const ACTIONS = [
   { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "PORTFOLIO" },
@@ -20,6 +20,9 @@ const ACTIONS = [
   { href: "/dashboard/site",      icon: Globe,         label: "Paramètres du site",    desc: "Infos de contact et configuration",    tag: "SYSTÈME"   },
   { href: "/dashboard/messages",  icon: MessageSquare, label: "Messages reçus",        desc: "Demandes clients via le formulaire",   tag: "INBOX"     },
 ];
+
+/* ── Rank → online dot color ── */
+const RANK_DOT = { S: '#3A6840', A: '#3A6840', B: '#8A5A18', C: '#8A8478' };
 
 function StatCard({ label, value, icon: Icon, sub }) {
   return (
@@ -31,43 +34,29 @@ function StatCard({ label, value, icon: Icon, sub }) {
         background: CARD,
         border: `1px solid ${INK3}`,
         borderLeft: `4px solid ${TERRA}`,
-        boxShadow: '0 2px 10px rgba(36,20,6,0.05)',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
       }}
     >
       <div className="flex items-center justify-between mb-4">
         {Icon && <Icon size={16} style={{ color: INK2 }} />}
         <div className="w-2 h-2 rounded-full" style={{ background: TERRA }} />
       </div>
-      <div className="text-4xl font-black mb-1" style={{ color: INK, fontFamily: 'serif' }}>{value}</div>
-      <div className="text-xs uppercase tracking-widest font-semibold mb-0.5" style={{ color: INK }}>{label}</div>
-      {sub && <div className="text-xs" style={{ color: INK2 }}>{sub}</div>}
+      <div className="text-4xl font-black mb-1" style={{ color: INK, fontFamily: FONT }}>{value}</div>
+      <div className="text-xs uppercase tracking-widest font-semibold mb-0.5" style={{ color: INK, fontFamily: FONT }}>{label}</div>
+      {sub && <div className="text-xs" style={{ color: INK2, fontFamily: FONT }}>{sub}</div>}
     </motion.div>
   );
 }
 
 function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay }}
-    >
+    <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay }}>
       <Link
         href={href}
         className="group flex items-center gap-4 p-5 rounded-xl transition-all duration-200"
-        style={{
-          background: CARD,
-          border: `1px solid ${INK3}`,
-          boxShadow: '0 1px 5px rgba(36,20,6,0.04)',
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.borderColor = TERRA;
-          e.currentTarget.style.boxShadow = `0 4px 14px rgba(192,96,56,0.09)`;
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.borderColor = INK3;
-          e.currentTarget.style.boxShadow = '0 1px 6px rgba(30,14,4,0.05)';
-        }}
+        style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 5px rgba(0,0,0,0.04)' }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.boxShadow = `0 4px 14px rgba(180,48,40,0.08)`; }}
+        onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.boxShadow = '0 1px 5px rgba(0,0,0,0.04)'; }}
       >
         <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
           style={{ background: `rgba(180,48,40,0.07)`, border: `1px solid rgba(180,48,40,0.18)` }}>
@@ -75,13 +64,13 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5">
-            <span className="font-bold text-sm" style={{ color: INK }}>{label}</span>
+            <span className="font-bold text-sm" style={{ color: INK, fontFamily: FONT }}>{label}</span>
             <ArrowUpRight size={14} style={{ color: TERRA }} className="opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
-          <p className="text-xs" style={{ color: INK2 }}>{desc}</p>
+          <p className="text-xs" style={{ color: INK2, fontFamily: FONT }}>{desc}</p>
         </div>
-        <span className="text-[9px] font-mono uppercase tracking-widest px-2 py-1 rounded"
-          style={{ color: GOLD, background: `rgba(184,120,32,0.08)`, border: `1px solid rgba(184,120,32,0.2)` }}>
+        <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-1 rounded"
+          style={{ color: GOLD, background: `rgba(138,90,24,0.08)`, border: `1px solid rgba(138,90,24,0.2)` }}>
           {tag}
         </span>
       </Link>
@@ -89,7 +78,54 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
   );
 }
 
-export default function DashboardIndex({ admin, portfolioCount, servicesCount, unreadMessages }) {
+function TeamCard({ members }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3 }}
+      className="rounded-xl overflow-hidden"
+      style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: INK3 }}>
+        <span style={{ fontFamily: FONT, fontSize: 13.5, fontWeight: 700, color: INK2 }}>Équipe</span>
+        <span style={{ fontFamily: FONT, fontSize: 11.5, fontWeight: 600, color: '#B4AEA4' }}>{members.length}</span>
+      </div>
+      {/* Members */}
+      <div className="px-4 py-1">
+        {members.map((m, i) => {
+          const isLead = m.rank === 'S';
+          return (
+            <div key={i} className="flex items-center gap-3 py-2.5 border-b last:border-0" style={{ borderColor: INK3 }}>
+              {/* Avatar */}
+              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-[11px] font-bold"
+                style={isLead
+                  ? { background: 'rgba(180,48,40,0.09)', color: TERRA }
+                  : { background: '#F2EDE5', color: '#8A8478' }
+                }>
+                {m.initials || (m.name ?? '?').charAt(0)}
+              </div>
+              {/* Info */}
+              <div className="flex-1 min-w-0">
+                <div style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: INK }}>{m.name}</div>
+                <div style={{ fontFamily: FONT, fontSize: 11, fontWeight: 400, color: '#B4AEA4', marginTop: 1 }}>{m.role}</div>
+              </div>
+              {/* Online dot */}
+              <div className="w-2 h-2 rounded-full flex-shrink-0"
+                style={{ background: RANK_DOT[m.rank] ?? '#B4AEA4' }} />
+            </div>
+          );
+        })}
+        {members.length === 0 && (
+          <p className="text-xs py-4 text-center" style={{ color: '#B4AEA4', fontFamily: FONT }}>Aucun membre</p>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+export default function DashboardIndex({ admin, portfolioCount, servicesCount, unreadMessages, members = [] }) {
   const stats = [
     { label: "Projets actifs",   value: portfolioCount, icon: FolderOpen,    sub: "Réalisations en ligne" },
     { label: "Services actifs",  value: servicesCount,  icon: Wrench,        sub: "Offres du studio"      },
@@ -113,22 +149,22 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
                 KoriLab — Tableau de bord
               </span>
             </div>
-            <h1 className="text-4xl font-black mb-2" style={{ color: INK, fontFamily: 'serif' }}>
+            <h1 className="text-4xl font-black mb-2" style={{ color: INK, fontFamily: FONT }}>
               Bienvenue,{" "}
               <span style={{ color: TERRA }}>{admin?.name}</span>
             </h1>
             <div className="flex items-center gap-3">
               <span className="text-xs font-semibold px-2 py-0.5 rounded"
-                style={{ background: `rgba(180,48,40,0.08)`, color: TERRA, border: `1px solid rgba(180,48,40,0.18)` }}>
+                style={{ background: `rgba(180,48,40,0.08)`, color: TERRA, border: `1px solid rgba(180,48,40,0.18)`, fontFamily: FONT }}>
                 {admin?.rank}-Class
               </span>
-              <span className="text-xs" style={{ color: INK2 }}>Admin KoriLab</span>
+              <span className="text-xs" style={{ color: INK2, fontFamily: FONT }}>Admin KoriLab</span>
             </div>
           </div>
 
           <a href="/" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200"
-            style={{ background: CARD, border: `1px solid ${INK3}`, color: INK }}
+            style={{ background: CARD, border: `1px solid ${INK3}`, color: INK, fontFamily: FONT }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.color = TERRA; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.color = INK; }}
           >
@@ -155,27 +191,34 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
           <div className="flex-1 h-px" style={{ background: INK3 }} />
         </div>
 
-        {/* ── Actions ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {ACTIONS.map((a, i) => (
-            <ActionCard key={a.href} {...a} delay={0.2 + i * 0.06} />
-          ))}
-        </div>
+        {/* ── Content grid: actions (gauche) + team (droite) ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-6">
+          {/* Actions */}
+          <div className="flex flex-col gap-3">
+            {ACTIONS.map((a, i) => (
+              <ActionCard key={a.href} {...a} delay={0.2 + i * 0.06} />
+            ))}
+          </div>
 
-        {/* ── Citation ── */}
-        <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-          className="mt-8 px-5 py-4 rounded-xl"
-          style={{ background: CARD, border: `1px solid ${INK3}`, borderLeft: `3px solid ${GOLD}` }}
-        >
-          <p className="text-sm italic" style={{ color: INK2 }}>
-            « Chaque création porte l'empreinte de celui qui la forge. Bâtissez avec soin. »
-          </p>
-        </motion.div>
+          {/* Team card */}
+          <div className="flex flex-col gap-4">
+            <TeamCard members={members} />
+
+            {/* Citation */}
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
+              className="px-4 py-4 rounded-xl"
+              style={{ background: CARD, border: `1px solid ${INK3}`, borderLeft: `3px solid ${GOLD}` }}
+            >
+              <p className="text-xs italic leading-relaxed" style={{ color: INK2, fontFamily: FONT }}>
+                « Bâtissez avec soin. »
+              </p>
+            </motion.div>
+          </div>
+        </div>
 
       </main>
 
-      <WhatsAppFloat />
       <StatusBar admin={admin} />
     </div>
   );

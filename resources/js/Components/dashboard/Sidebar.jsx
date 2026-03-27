@@ -33,10 +33,10 @@ export default function Sidebar({ admin }) {
       {/* Logo */}
       <div className="px-5 pt-6 pb-5 border-b" style={{ borderColor: BORDER }}>
         <div className="mb-4">
-          <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 16, color: TEXT, letterSpacing: '0.02em' }}>
+          <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 16, color: TEXT, letterSpacing: '0.02em' }}>
             KoriLab
           </div>
-          <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 10, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 2 }}>
+          <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 10, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 2 }}>
             Dakar · Studio
           </div>
         </div>
@@ -45,14 +45,14 @@ export default function Sidebar({ admin }) {
         <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg"
           style={{ background: 'rgba(0,0,0,0.03)', border: `1px solid ${BORDER}` }}>
           <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ background: 'rgba(180,48,40,0.09)', color: TERRA, fontFamily: "'Nunito', sans-serif", fontWeight: 700, fontSize: 11, border: `1px solid rgba(180,48,40,0.2)` }}>
+            style={{ background: 'rgba(180,48,40,0.09)', color: TERRA, fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 11, border: `1px solid rgba(180,48,40,0.2)` }}>
             {(admin?.name ?? 'A').charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
-            <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 600, fontSize: 12, color: TEXT }} className="truncate">
+            <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 12, color: TEXT }} className="truncate">
               {admin?.name ?? '—'}
             </div>
-            <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
               Admin
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function Sidebar({ admin }) {
 
       {/* Nav */}
       <nav className="flex-1 px-3 py-4 space-y-0.5">
-        <p style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.3em' }}
+        <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.3em' }}
           className="px-3 pb-2">
           Navigation
         </p>
@@ -84,10 +84,10 @@ export default function Sidebar({ admin }) {
                 <item.icon className="w-4 h-4 flex-shrink-0"
                   style={{ color: active ? TERRA : MUTED }} />
                 <div className="flex-1 min-w-0">
-                  <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: active ? 600 : 400, fontSize: 12, color: active ? TEXT : DIM }}>
+                  <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: active ? 600 : 400, fontSize: 12, color: active ? TEXT : DIM }}>
                     {item.label}
                   </div>
-                  <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }} className="truncate">
+                  <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }} className="truncate">
                     {item.sub}
                   </div>
                 </div>
@@ -106,7 +106,7 @@ export default function Sidebar({ admin }) {
           onMouseLeave={e => { e.currentTarget.style.color = MUTED; e.currentTarget.style.background = 'transparent'; }}
         >
           <LogOut className="w-4 h-4" />
-          <span style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 400, fontSize: 12 }}>Déconnexion</span>
+          <span style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 12 }}>Déconnexion</span>
         </button>
       </div>
     </aside>
