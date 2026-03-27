@@ -62,11 +62,11 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
             <RankBadge rank={admin?.rank} />
             <span className="text-xs font-black font-mono"
               style={{ color: admin?.rank === 'S' ? '#d4a235' : '#f0e4c4' }}>
-              {admin?.rank}-CLASS
+              Admin KoriLab
             </span>
             <span className="font-mono text-xs" style={{ color: 'rgba(240,228,196,0.2)' }}>|</span>
             <span className="text-xs font-mono" style={{ color: 'rgba(240,228,196,0.3)' }}>
-              Accès administrateur confirmé
+              Bienvenue sur votre espace
             </span>
           </div>
         </motion.div>
@@ -85,7 +85,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
         <SysDivider label="Actions disponibles" />
 
         {/* ── Actions ── */}
-        <SysWin title="MENU PRINCIPAL" subtitle="Sélectionnez une action" delay={0.3}>
+        <SysWin title="ESPACE DE TRAVAIL" subtitle="Navigation" delay={0.3}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {QUESTS.map((q, i) => (
               <motion.div key={q.href}

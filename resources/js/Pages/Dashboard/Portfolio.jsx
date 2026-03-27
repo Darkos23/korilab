@@ -4,152 +4,99 @@ import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
 import WhatsAppFloat from '@/Components/WhatsAppFloat';
-import { SLSystemBG, SysWin, SysInput, SysBtn, SysDivider, Scanlines, StatusBar } from '@/Components/dashboard/SystemLayout';
+import { SLSystemBG, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
-/* ─── Corner brackets (L-shaped, like in the anime) ─────── */
-function CornerBrackets({ size = 14, color = '#4fc3f7', glow = true }) {
-    const style = (pos) => ({
-        position: 'absolute',
-        width: size,
-        height: size,
-        ...pos,
-        boxShadow: glow ? `0 0 8px 2px ${color}` : 'none',
-    });
-    const borderW = '2px';
-    return (
-        <>
-            {/* Top-left */}
-            <div style={{ ...style({ top: 0, left: 0 }), borderTop: `${borderW} solid ${color}`, borderLeft: `${borderW} solid ${color}` }} />
-            {/* Top-right */}
-            <div style={{ ...style({ top: 0, right: 0 }), borderTop: `${borderW} solid ${color}`, borderRight: `${borderW} solid ${color}` }} />
-            {/* Bottom-left */}
-            <div style={{ ...style({ bottom: 0, left: 0 }), borderBottom: `${borderW} solid ${color}`, borderLeft: `${borderW} solid ${color}` }} />
-            {/* Bottom-right */}
-            <div style={{ ...style({ bottom: 0, right: 0 }), borderBottom: `${borderW} solid ${color}`, borderRight: `${borderW} solid ${color}` }} />
-        </>
-    );
-}
-
-/* ─── Solo Leveling Notification Card ───────────────────── */
-function SLNotifCard({ project, deleting, onEdit, onDelete }) {
+/* ─── Cauri Project Card ─────────────────────────────────── */
+function CauriCard({ project, deleting, onEdit, onDelete }) {
     const [hovered, setHovered] = useState(false);
-
-    const BLUE   = '#4fc3f7';
-    const BLUE2  = '#1b45d7';
+    const GOLD  = '#e8b84b';
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            whileHover={{ y: -4, scale: 1.01 }}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.3 }}
             onHoverStart={() => setHovered(true)}
             onHoverEnd={() => setHovered(false)}
-            className="relative"
+            className="relative overflow-hidden flex flex-col"
             style={{
-                /* Angled corners — top-right + bottom-left coupés */
-                clipPath: 'polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px))',
-                background: 'linear-gradient(160deg, #0d2235 0%, #020810 100%)',
-                border: `1px solid ${hovered ? BLUE + 'aa' : BLUE2 + '60'}`,
+                background: 'linear-gradient(160deg, #221a0a 0%, #140e04 100%)',
+                borderRadius: 12,
+                border: `1px solid ${hovered ? GOLD + '55' : 'rgba(232,184,75,0.12)'}`,
+                borderLeft: `3px solid ${hovered ? GOLD : GOLD + '50'}`,
                 boxShadow: hovered
-                    ? `0 0 20px 4px ${BLUE2}50, 0 0 40px 8px ${BLUE2}20, inset 0 0 20px ${BLUE2}08`
-                    : `0 0 10px 2px ${BLUE2}30, inset 0 0 10px ${BLUE2}05`,
-                transition: 'box-shadow 0.3s, border-color 0.3s',
+                    ? `0 8px 32px rgba(196,90,42,0.2), 0 2px 8px rgba(0,0,0,0.4)`
+                    : `0 2px 12px rgba(0,0,0,0.3)`,
+                transition: 'all 0.3s',
             }}
         >
-            <Scanlines />
-            <CornerBrackets color={hovered ? BLUE : BLUE2 + 'cc'} glow={hovered} />
-
-            {/* ── Header "NOTIFICATION" ── */}
-            <div className="relative z-10 flex items-center gap-3 px-4 py-3 border-b"
-                style={{ borderColor: BLUE2 + '40', background: 'rgba(27,69,215,0.06)' }}>
-                {/* Exclamation icon */}
-                <div className="flex-shrink-0 w-7 h-7 flex items-center justify-center border rounded"
-                    style={{ borderColor: BLUE + '80', background: 'rgba(79,195,247,0.08)' }}>
-                    <span className="text-xs font-black" style={{ color: BLUE, textShadow: `0 0 8px ${BLUE}` }}>!</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                    <div className="text-[8px] font-mono uppercase tracking-[0.35em] mb-0.5" style={{ color: BLUE + '60' }}>
-                        NOTIFICATION
-                    </div>
-                    <div className="text-xs font-black text-white truncate uppercase tracking-wider">
-                        {project.title}
-                    </div>
-                </div>
-                {/* Category badge */}
-                <span className="text-[8px] font-mono px-2 py-0.5 flex-shrink-0"
-                    style={{ color: BLUE + '90', border: `1px solid ${BLUE2}60`, background: 'rgba(27,69,215,0.1)' }}>
-                    {project.category.toUpperCase()}
-                </span>
-            </div>
-
-            {/* ── Image / gradient band ── */}
-            <div className={`relative z-10 h-36 overflow-hidden ${!project.image ? `bg-gradient-to-br ${project.gradient}` : 'bg-[#020810]'} flex items-center justify-center`}>
+            {/* Image */}
+            <div className={`relative h-40 overflow-hidden flex-shrink-0 ${!project.image ? `bg-gradient-to-br ${project.gradient}` : 'bg-[#120d04]'}`}>
                 {project.image ? (
                     <img src={project.image} alt={project.title}
-                        className="w-full h-full object-cover opacity-90"
-                        onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }}
+                        className="w-full h-full object-cover"
+                        onError={e => { e.target.style.display = 'none'; }}
                     />
-                ) : null}
-                {/* Fallback emoji si pas d'image */}
-                <div className={`${project.image ? 'hidden' : 'flex'} absolute inset-0 items-center justify-center bg-gradient-to-br ${project.gradient}`}>
-                    <div className="absolute inset-0 opacity-[0.15]"
-                        style={{ backgroundImage: 'repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 3px)' }} />
-                    <span className="relative text-5xl drop-shadow-2xl">{project.emoji}</span>
+                ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-5xl drop-shadow-lg">{project.emoji}</span>
+                    </div>
+                )}
+                <div className="absolute top-3 right-3">
+                    <span className="text-[9px] font-mono px-2 py-1 rounded"
+                        style={{ background: 'rgba(20,14,4,0.88)', color: GOLD, border: `1px solid ${GOLD}40` }}>
+                        {project.category.toUpperCase()}
+                    </span>
                 </div>
-                {/* Scanlines overlay sur l'image */}
-                {project.image && (
-                    <div className="absolute inset-0 opacity-[0.08]"
-                        style={{ backgroundImage: 'repeating-linear-gradient(0deg,#000,#000 1px,transparent 1px,transparent 3px)' }} />
-                )}
-                {/* Blue tint overlay */}
-                {project.image && (
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(2,8,16,0.1), rgba(2,8,16,0.5))' }} />
-                )}
                 {project.comingSoon && (
-                    <div className="absolute inset-0 flex items-center justify-center z-10"
-                        style={{ background: 'rgba(4,13,26,0.80)' }}>
-                        <span className="text-[10px] font-mono uppercase tracking-[0.3em] px-3 py-1 border"
-                            style={{ color: '#fbbf24', borderColor: '#fbbf2460' }}>
-                            EN COURS...
+                    <div className="absolute inset-0 flex items-center justify-center"
+                        style={{ background: 'rgba(14,10,3,0.82)' }}>
+                        <span className="text-[11px] font-mono uppercase tracking-[0.25em] px-4 py-2 rounded"
+                            style={{ color: GOLD, border: `1px solid ${GOLD}50`, background: 'rgba(232,184,75,0.08)' }}>
+                            En cours...
                         </span>
                     </div>
                 )}
             </div>
 
-            {/* ── Body ── */}
-            <div className="relative z-10 px-4 py-3">
-                <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>
+            {/* Content */}
+            <div className="p-4 flex-1">
+                <h3 className="font-black text-sm uppercase tracking-wide mb-2" style={{ color: '#f5ecd0' }}>
+                    {project.title}
+                </h3>
+                <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(245,236,208,0.45)' }}>
                     {project.desc || '—'}
                 </p>
                 <div className="flex flex-wrap gap-1">
                     {(project.tags ?? []).slice(0, 4).map(tag => (
-                        <span key={tag} className="text-[8px] font-mono px-2 py-0.5"
-                            style={{ color: BLUE + '70', border: `1px solid ${BLUE2}40`, background: 'rgba(27,69,215,0.07)' }}>
+                        <span key={tag} className="text-[9px] font-mono px-2 py-0.5 rounded-full"
+                            style={{ color: GOLD + '90', background: 'rgba(232,184,75,0.08)', border: `1px solid rgba(232,184,75,0.2)` }}>
                             {tag}
                         </span>
                     ))}
                 </div>
             </div>
 
-            {/* ── YES / NO buttons ── */}
-            <div className="relative z-10 grid grid-cols-2 border-t" style={{ borderColor: BLUE2 + '30' }}>
+            {/* Actions */}
+            <div className="px-4 pb-4 flex gap-2 border-t pt-3" style={{ borderColor: 'rgba(232,184,75,0.12)' }}>
                 <button onClick={onEdit}
-                    className="py-3 text-[10px] font-mono uppercase tracking-widest transition-all duration-200 border-r"
+                    className="flex-1 py-2 text-[10px] font-mono uppercase tracking-widest rounded transition-all duration-200"
                     style={{
-                        color: hovered ? BLUE : BLUE + '70',
-                        borderColor: BLUE2 + '30',
-                        background: hovered ? 'rgba(79,195,247,0.06)' : 'transparent',
+                        color: GOLD,
+                        border: `1px solid ${GOLD}40`,
+                        background: hovered ? `rgba(232,184,75,0.08)` : 'transparent',
                     }}>
-                    [ MODIFIER ]
+                    Modifier
                 </button>
                 <button onClick={onDelete}
-                    className="py-3 text-[10px] font-mono uppercase tracking-widest transition-all duration-200"
+                    className="flex-1 py-2 text-[10px] font-mono uppercase tracking-widest rounded transition-all duration-200"
                     style={{
-                        color: deleting ? '#f87171' : 'rgba(255,255,255,0.2)',
+                        color: deleting ? '#f87171' : 'rgba(245,236,208,0.3)',
+                        border: `1px solid ${deleting ? 'rgba(248,113,113,0.4)' : 'rgba(245,236,208,0.1)'}`,
                         background: deleting ? 'rgba(248,113,113,0.08)' : 'transparent',
                     }}>
-                    {deleting ? '⚠ CONFIRMER' : '[ SUPPRIMER ]'}
+                    {deleting ? '⚠ Confirmer' : 'Supprimer'}
                 </button>
             </div>
         </motion.div>
@@ -250,7 +197,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)]" />
-                            <span className="text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">Quêtes accomplies</span>
+                            <span className="text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">Projets</span>
                         </div>
                         <h1 className="text-2xl font-black text-white" style={{ textShadow:'0 0 20px rgba(0,168,255,0.2)' }}>Portfolio</h1>
                         <p className="text-[#00a8ff]/30 text-xs font-mono mt-1">{projects.length} projet(s) enregistré(s)</p>
@@ -264,7 +211,7 @@ export default function DashboardPortfolio({ admin, projects }) {
 
                 {/* Form */}
                 {showForm && (
-                    <SysWin title={editingId ? 'MODIFIER LA QUÊTE' : 'NOUVELLE QUÊTE'} glow className="mb-6">
+                    <SysWin title={editingId ? 'MODIFIER LE PROJET' : 'NOUVEAU PROJET'} glow className="mb-6">
                         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
                             <div className="col-span-2 md:col-span-1">
                                 <SysInput
@@ -356,12 +303,12 @@ export default function DashboardPortfolio({ admin, projects }) {
                     </SysWin>
                 )}
 
-                <SysDivider label="Quêtes enregistrées" />
+                <SysDivider label="Réalisations" />
 
                 {/* Solo Leveling Notification Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {projects.map(project => (
-                        <SLNotifCard
+                        <CauriCard
                             key={project.id}
                             project={project}
                             deleting={deleting === project.id}
@@ -374,7 +321,7 @@ export default function DashboardPortfolio({ admin, projects }) {
                 {projects.length === 0 && (
                     <div className="text-center py-24 font-mono text-[#1b45d7]/40">
                         <div className="text-4xl mb-4">📁</div>
-                        <p className="text-sm uppercase tracking-[0.3em]">Aucune quête enregistrée</p>
+                        <p className="text-sm uppercase tracking-[0.3em]">Aucun projet enregistré</p>
                     </div>
                 )}
             </main>
