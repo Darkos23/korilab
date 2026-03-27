@@ -12,6 +12,53 @@ const MUTED     = 'rgba(30,20,8,0.38)';
 const RED       = '#c44030';
 const GOLD      = '#a8720a';          /* or sombre (lisible sur clair) */
 
+/* ─── Runes Tifinagh flottantes ──────────────────────────── */
+const TIFINAGH = ['ⵀ','ⵃ','ⵅ','ⵇ','ⵉ','ⵌ','ⵎ','ⵏ','ⵓ','ⵔ','ⵖ','ⵙ','ⵛ','ⵜ','ⵟ','ⵢ','ⵣ','ⵥ','ⵯ'];
+
+function FloatingRunes() {
+  const runes = Array.from({ length: 18 }, (_, i) => ({
+    id: i,
+    char: TIFINAGH[i % TIFINAGH.length],
+    x: (i * 37 + 5) % 95,
+    y: (i * 53 + 8) % 90,
+    size: 14 + (i % 3) * 6,
+    duration: 18 + (i % 7) * 4,
+    delay: -(i * 2.3),
+    drift: (i % 2 === 0 ? 1 : -1) * (8 + (i % 4) * 5),
+  }));
+
+  return (
+    <>
+      {runes.map(r => (
+        <motion.div
+          key={r.id}
+          className="absolute select-none"
+          style={{
+            left: `${r.x}%`,
+            top: `${r.y}%`,
+            fontSize: r.size,
+            color: 'rgba(140,95,25,0.12)',
+            fontFamily: 'serif',
+          }}
+          animate={{
+            y: [0, r.drift, 0],
+            opacity: [0.08, 0.16, 0.08],
+            rotate: [-3, 3, -3],
+          }}
+          transition={{
+            duration: r.duration,
+            delay: r.delay,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        >
+          {r.char}
+        </motion.div>
+      ))}
+    </>
+  );
+}
+
 /* ─── Background désert Dakar ────────────────────────────── */
 export function SLSystemBG() {
   return (
@@ -21,22 +68,14 @@ export function SLSystemBG() {
 
       {/* Grain sable fin */}
       <div className="absolute inset-0" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E")`,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.045'/%3E%3C/svg%3E")`,
         backgroundRepeat: 'repeat',
-        backgroundSize: '200px 200px',
+        backgroundSize: '300px 300px',
         mixBlendMode: 'multiply',
       }} />
 
-      {/* Motif losange bogolan — brun chaud */}
-      <div className="absolute inset-0" style={{
-        backgroundImage:
-          'linear-gradient(45deg, rgba(140,95,25,0.025) 25%, transparent 25%),' +
-          'linear-gradient(-45deg, rgba(140,95,25,0.025) 25%, transparent 25%),' +
-          'linear-gradient(45deg, transparent 75%, rgba(140,95,25,0.025) 75%),' +
-          'linear-gradient(-45deg, transparent 75%, rgba(140,95,25,0.025) 75%)',
-        backgroundSize: '48px 48px',
-        backgroundPosition: '0 0, 0 24px, 24px -24px, -24px 0px',
-      }} />
+      {/* Runes Tifinagh flottantes */}
+      <FloatingRunes />
 
       {/* Halo soleil — haut centre */}
       <div className="absolute inset-x-0 top-0" style={{
