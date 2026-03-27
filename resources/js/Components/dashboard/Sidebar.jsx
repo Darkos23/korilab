@@ -4,12 +4,12 @@ import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, Mess
 import { useState } from "react";
 
 /* ─── Tokens ─────────────────────────────────────────────── */
-const TEXT   = '#e8e0d0';
-const DIM    = 'rgba(232,224,208,0.35)';
-const MUTED  = 'rgba(232,224,208,0.15)';
-const BORDER = 'rgba(255,255,255,0.07)';
-const GOLD   = '#c8a951';
-const RC     = { S: GOLD, A: TEXT, B: '#a78bfa', C: '#6ee7b7', D: '#fbbf24', E: '#6b7280' };
+const TEXT   = '#f0e4c4';
+const DIM    = 'rgba(240,228,196,0.50)';
+const MUTED  = 'rgba(240,228,196,0.22)';
+const BORDER = 'rgba(212,162,56,0.14)';
+const GOLD   = '#d4a235';
+const RC     = { S: GOLD, A: TEXT, B: '#c4573a', C: '#8b6fcf', D: '#7ab8a0', E: '#6b7280' };
 
 /* ─── Cauri logo ─────────────────────────────────────────── */
 function CauriLogo() {
@@ -51,7 +51,7 @@ export default function Sidebar({ admin }) {
 
   const Content = () => (
     <aside className="w-56 min-h-screen flex flex-col"
-      style={{ background: 'rgba(5,5,5,0.98)', borderRight: `1px solid ${BORDER}` }}>
+      style={{ background: 'rgba(7,5,3,0.98)', borderRight: `1px solid ${BORDER}` }}>
 
       {/* Logo */}
       <div className="p-5 border-b" style={{ borderColor: BORDER }}>
@@ -67,7 +67,7 @@ export default function Sidebar({ admin }) {
               >_</motion.span>
             </div>
             <div className="font-mono text-[8px] uppercase tracking-[0.3em]" style={{ color: MUTED }}>
-              System Panel
+              Dakar · Studio
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function Sidebar({ admin }) {
 
       <button onClick={() => setOpen(true)}
         className="md:hidden fixed top-4 left-4 z-50 w-8 h-8 flex items-center justify-center font-mono text-xs"
-        style={{ border: `1px solid ${BORDER}`, background: 'rgba(5,5,5,0.95)', color: TEXT }}>
+        style={{ border: `1px solid ${BORDER}`, background: 'rgba(7,5,3,0.95)', color: TEXT }}>
         <Menu size={16} />
       </button>
 

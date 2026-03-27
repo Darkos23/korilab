@@ -1,7 +1,8 @@
 import { useEffect, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
 
-const RUNES = ["ᚠ","ᚢ","ᚦ","ᚨ","ᚱ","ᚲ","ᚷ","ᚹ","ᚺ","ᚾ","ᛁ","ᛃ","ᛇ","ᛈ","ᛉ","ᛊ","ᛏ","ᛒ","ᛖ","ᛗ","ᛚ","ᛜ","ᛞ","ᛟ"];
+/* Alphabet Tifinagh (script berbère d'Afrique du Nord/Ouest) */
+const TIFINAGH = ["ⵀ","ⵁ","ⵂ","ⵃ","ⵄ","ⵅ","ⵆ","ⵇ","ⵈ","ⵉ","ⵊ","ⵋ","ⵌ","ⵍ","ⵎ","ⵏ","ⵐ","ⵑ","ⵒ","ⵓ","ⵔ","ⵕ","ⵖ","ⵗ"];
 
 /* ── Canvas particle system ──────────────────────────────── */
 function Particles() {
@@ -20,14 +21,15 @@ function Particles() {
     resize();
     window.addEventListener("resize", resize);
 
-    const pts = Array.from({ length: 65 }, () => ({
+    const pts = Array.from({ length: 60 }, () => ({
       x:   Math.random() * window.innerWidth,
       y:   Math.random() * window.innerHeight,
-      r:   0.3 + Math.random() * 1.5,
-      vx:  (Math.random() - 0.5) * 0.18,
-      vy:  -(0.04 + Math.random() * 0.2),
-      a:   0.06 + Math.random() * 0.32,
-      hue: Math.random() > 0.58 ? 262 : 200,
+      r:   0.3 + Math.random() * 1.4,
+      vx:  (Math.random() - 0.5) * 0.16,
+      vy:  -(0.04 + Math.random() * 0.18),
+      a:   0.06 + Math.random() * 0.28,
+      /* or ambré (40°) ou terracotta (18°) */
+      hue: Math.random() > 0.55 ? 40 : 18,
     }));
 
     const draw = () => {
@@ -35,15 +37,15 @@ function Particles() {
       pts.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
-        if (p.y < -6)                  { p.y = canvas.height + 6; p.x = Math.random() * canvas.width; }
+        if (p.y < -6)                 { p.y = canvas.height + 6; p.x = Math.random() * canvas.width; }
         if (p.x < -6)                  p.x = canvas.width + 6;
         if (p.x > canvas.width  + 6)   p.x = -6;
 
         ctx.save();
         ctx.globalAlpha = p.a;
         ctx.shadowBlur  = 10;
-        ctx.shadowColor = `hsl(${p.hue},100%,70%)`;
-        ctx.fillStyle   = `hsl(${p.hue},100%,75%)`;
+        ctx.shadowColor = `hsl(${p.hue},85%,60%)`;
+        ctx.fillStyle   = `hsl(${p.hue},80%,65%)`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
@@ -65,17 +67,17 @@ function Particles() {
   );
 }
 
-/* ── Main background ─────────────────────────────────────── */
+/* ── Background principal — thème Cauri ─────────────────── */
 export default function SLBackground() {
-  const runes = useMemo(() =>
-    RUNES.slice(0, 22).map((char, i) => ({
+  const glyphs = useMemo(() =>
+    TIFINAGH.slice(0, 22).map((char, i) => ({
       char,
       left:  `${3  + (i * 4.3)  % 88}%`,
       top:   `${3  + (i * 8.1)  % 87}%`,
-      size:  9 + (i % 5) * 3,
+      size:  10 + (i % 5) * 3,
       delay: i * 0.26,
       dur:   3.8 + (i % 5) * 0.9,
-      color: i % 3 === 0 ? "rgba(129,140,248,0.22)" : "rgba(56,189,248,0.18)",
+      color: i % 3 === 0 ? "rgba(212,162,56,0.20)" : "rgba(196,87,58,0.16)",
     })),
   []);
 
@@ -85,56 +87,47 @@ export default function SLBackground() {
       style={{ zIndex: -1 }}
       aria-hidden="true"
     >
-      {/* ── Base ── */}
-      <div className="absolute inset-0" style={{ background: "#020b18" }} />
+      {/* Base — nuit chaude */}
+      <div className="absolute inset-0" style={{ background: "#080604" }} />
 
-      {/* ── Halo supérieur ── */}
+      {/* Halo soleil — or en haut */}
       <div className="absolute inset-x-0 top-0" style={{
         height: "65vh",
-        background: "radial-gradient(ellipse 90% 110% at 50% -8%, rgba(56,189,248,0.09) 0%, transparent 65%)",
+        background: "radial-gradient(ellipse 90% 110% at 50% -8%, rgba(212,162,56,0.10) 0%, transparent 65%)",
       }} />
 
-      {/* ── Grille fine ── */}
+      {/* Motif losange bogolan */}
       <div className="absolute inset-0" style={{
         backgroundImage:
-          "linear-gradient(rgba(56,189,248,0.02) 1px, transparent 1px)," +
-          "linear-gradient(90deg, rgba(56,189,248,0.02) 1px, transparent 1px)",
-        backgroundSize: "72px 72px",
+          "linear-gradient(45deg, rgba(212,162,56,0.022) 25%, transparent 25%)," +
+          "linear-gradient(-45deg, rgba(212,162,56,0.022) 25%, transparent 25%)," +
+          "linear-gradient(45deg, transparent 75%, rgba(212,162,56,0.022) 75%)," +
+          "linear-gradient(-45deg, transparent 75%, rgba(212,162,56,0.022) 75%)",
+        backgroundSize: "56px 56px",
+        backgroundPosition: "0 0, 0 28px, 28px -28px, -28px 0px",
       }} />
 
-      {/* ── Portail central — glow ── */}
-      <motion.div
-        className="absolute rounded-full"
-        style={{
-          width: "clamp(400px,65vw,880px)", height: "clamp(400px,65vw,880px)",
-          top: "50%", left: "50%", transform: "translate(-50%,-50%)",
-          background: "radial-gradient(circle, rgba(56,189,248,0.07) 0%, rgba(99,102,241,0.05) 35%, transparent 65%)",
-          filter: "blur(72px)",
-        }}
-        animate={{ scale: [1, 1.12, 1], opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* ── Anneau externe — rotation lente ── */}
+      {/* Anneau externe — rotation lente, ton or */}
       <motion.div
         className="absolute rounded-full"
         style={{
           width: "clamp(320px,55vw,680px)", height: "clamp(320px,55vw,680px)",
           top: "50%", left: "50%", transform: "translate(-50%,-50%)",
-          border: "1px solid rgba(56,189,248,0.07)",
+          border: "1px solid rgba(212,162,56,0.08)",
         }}
         animate={{ rotate: 360 }}
-        transition={{ duration: 58, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 65, repeat: Infinity, ease: "linear" }}
       >
         {[0, 72, 144, 216, 288].map((deg, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-sky-400"
+            className="absolute rounded-full"
             style={{
               width: 4, height: 4,
               top: "50%", left: "50%",
               transform: `rotate(${deg}deg) translateY(calc(-50% - clamp(160px,27.5vw,340px))) translate(-50%,-50%)`,
-              boxShadow: "0 0 10px 3px rgba(56,189,248,0.9)",
+              background: "#d4a235",
+              boxShadow: "0 0 10px 3px rgba(212,162,56,0.8)",
             }}
             animate={{ opacity: [0.25, 1, 0.25] }}
             transition={{ duration: 2.8, repeat: Infinity, delay: i * 0.55 }}
@@ -142,16 +135,16 @@ export default function SLBackground() {
         ))}
       </motion.div>
 
-      {/* ── Anneau intermédiaire — contre-rotation ── */}
+      {/* Anneau intermédiaire — contre-rotation, terracotta/or */}
       <motion.div
         className="absolute rounded-full"
         style={{
           width: "clamp(210px,35vw,460px)", height: "clamp(210px,35vw,460px)",
           top: "50%", left: "50%", transform: "translate(-50%,-50%)",
-          border: "1px solid rgba(99,102,241,0.07)",
+          border: "1px solid rgba(196,87,58,0.08)",
         }}
         animate={{ rotate: -360 }}
-        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 44, repeat: Infinity, ease: "linear" }}
       >
         {[55, 235].map((deg, i) => (
           <motion.div
@@ -161,8 +154,8 @@ export default function SLBackground() {
               width: 5, height: 5,
               top: "50%", left: "50%",
               transform: `rotate(${deg}deg) translateY(calc(-50% - clamp(105px,17.5vw,230px))) translate(-50%,-50%)`,
-              background: "radial-gradient(circle, #818cf8, #38bdf8)",
-              boxShadow: "0 0 12px 4px rgba(129,140,248,0.85)",
+              background: "radial-gradient(circle, #d4a235, #c4573a)",
+              boxShadow: "0 0 12px 4px rgba(212,162,56,0.75)",
             }}
             animate={{ opacity: [0.35, 1, 0.35] }}
             transition={{ duration: 3.2, repeat: Infinity, delay: i * 0.9 }}
@@ -170,83 +163,75 @@ export default function SLBackground() {
         ))}
       </motion.div>
 
-      {/* ── Anneau interne — pulse ── */}
+      {/* Anneau interne — pulse, or */}
       <motion.div
         className="absolute rounded-full"
         style={{
           width: "clamp(110px,16vw,240px)", height: "clamp(110px,16vw,240px)",
           top: "50%", left: "50%", transform: "translate(-50%,-50%)",
-          border: "1px solid rgba(56,189,248,0.13)",
-          boxShadow: "0 0 40px rgba(56,189,248,0.04) inset",
+          border: "1px solid rgba(212,162,56,0.14)",
+          boxShadow: "0 0 40px rgba(212,162,56,0.04) inset",
         }}
         animate={{ scale: [1, 1.07, 1], opacity: [0.45, 1, 0.45] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* ── Orbes d'énergie driftants ── */}
+      {/* Orbes driftants */}
       <motion.div className="absolute rounded-full" style={{
         width: 360, height: 360, top: "6%", left: "2%",
-        background: "radial-gradient(circle, rgba(56,189,248,0.055) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(212,162,56,0.06) 0%, transparent 70%)",
         filter: "blur(90px)",
       }}
         animate={{ x: [0, 45, 0], y: [0, 28, 0], scale: [1, 1.2, 1] }}
-        transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div className="absolute rounded-full" style={{
         width: 480, height: 480, bottom: "4%", right: "2%",
-        background: "radial-gradient(circle, rgba(99,102,241,0.065) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(196,87,58,0.07) 0%, transparent 70%)",
         filter: "blur(100px)",
       }}
         animate={{ x: [0, -55, 0], y: [0, -38, 0], scale: [1, 1.18, 1] }}
-        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div className="absolute rounded-full" style={{
         width: 300, height: 300, top: "38%", right: "6%",
-        background: "radial-gradient(circle, rgba(167,139,250,0.05) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(74,45,158,0.06) 0%, transparent 70%)",
         filter: "blur(75px)",
       }}
         animate={{ x: [0, 22, 0], y: [0, -45, 0] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div className="absolute rounded-full" style={{
-        width: 250, height: 250, top: "55%", left: "10%",
-        background: "radial-gradient(circle, rgba(56,189,248,0.04) 0%, transparent 70%)",
-        filter: "blur(65px)",
-      }}
-        animate={{ x: [0, -25, 0], y: [0, 30, 0] }}
-        transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
-      />
 
-      {/* ── Runes flottantes ── */}
-      {runes.map(({ char, left, top, size, delay, dur, color }, i) => (
+      {/* Glyphes Tifinagh flottants */}
+      {glyphs.map(({ char, left, top, size, delay, dur, color }, i) => (
         <motion.span
           key={i}
           className="absolute font-mono select-none"
           style={{ left, top, fontSize: size, color }}
-          animate={{ opacity: [0.04, 0.28, 0.04], y: [0, -20, 0] }}
+          animate={{ opacity: [0.04, 0.26, 0.04], y: [0, -18, 0] }}
           transition={{ duration: dur, repeat: Infinity, ease: "easeInOut", delay }}
         >
           {char}
         </motion.span>
       ))}
 
-      {/* ── Particules canvas ── */}
+      {/* Particules canvas */}
       <Particles />
 
-      {/* ── Scanlines ── */}
+      {/* Scanlines */}
       <div className="absolute inset-0" style={{
         backgroundImage: "repeating-linear-gradient(0deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 4px)",
       }} />
 
-      {/* ── Vignette ── */}
+      {/* Vignette */}
       <div className="absolute inset-0" style={{
-        background: "radial-gradient(ellipse 88% 88% at 50% 50%, transparent 40%, rgba(2,11,24,0.88) 100%)",
+        background: "radial-gradient(ellipse 88% 88% at 50% 50%, transparent 40%, rgba(4,3,2,0.88) 100%)",
       }} />
 
-      {/* ── Coins UI système ── */}
+      {/* Coins UI — or tamisé */}
       {[
-        { top: 18, left: 18,  borderTop: true,    borderLeft:  true  },
-        { top: 18, right: 18, borderTop: true,    borderRight: true  },
+        { top: 18, left: 18,     borderTop: true,    borderLeft:  true  },
+        { top: 18, right: 18,    borderTop: true,    borderRight: true  },
         { bottom: 18, left: 18,  borderBottom: true, borderLeft:  true  },
         { bottom: 18, right: 18, borderBottom: true, borderRight: true  },
       ].map((c, i) => (
@@ -261,20 +246,21 @@ export default function SLBackground() {
             borderLeftWidth:   c.borderLeft   ? 1 : 0,
             borderRightWidth:  c.borderRight  ? 1 : 0,
             borderStyle: "solid",
-            borderColor: "rgba(56,189,248,0.28)",
+            borderColor: "rgba(212,162,56,0.28)",
           }}
           animate={{ opacity: [0.35, 1, 0.35] }}
           transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.55 }}
         />
       ))}
 
-      {/* ── Étiquette système ── */}
+      {/* Étiquette */}
       <motion.div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[7px] text-sky-500/20 uppercase tracking-[0.45em] whitespace-nowrap"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[7px] uppercase tracking-[0.45em] whitespace-nowrap"
+        style={{ color: "rgba(240,228,196,0.18)" }}
         animate={{ opacity: [0.15, 0.55, 0.15] }}
         transition={{ duration: 6, repeat: Infinity }}
       >
-        ◆ Solo Leveling System — v2.0 ◆
+        ◆ KoriLab · Dakar ◆
       </motion.div>
     </div>
   );
