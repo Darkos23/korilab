@@ -27,8 +27,8 @@ export default function Sidebar({ admin }) {
   const [open, setOpen] = useState(false);
 
   const Content = () => (
-    <aside className="w-56 min-h-screen flex flex-col"
-      style={{ background: SIDEBAR_BG, borderRight: `1px solid rgba(251,245,230,0.08)` }}>
+    <aside className="w-56 min-h-screen flex flex-col relative z-20"
+      style={{ background: SIDEBAR_BG, borderRight: `1px solid rgba(251,245,230,0.08)`, flexShrink: 0 }}>
 
       {/* Logo */}
       <div className="px-5 pt-6 pb-5 border-b" style={{ borderColor: BORDER }}>

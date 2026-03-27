@@ -7,7 +7,8 @@
       "Bash(cp \"D:\\\\www\\\\KoriLab\\\\.claude\\\\worktrees\\\\interesting-jepsen\\\\resources\\\\js\\\\Components\\\\SLBackground.jsx\" \"D:\\\\www\\\\KoriLab\\\\resources\\\\js\\\\Components\\\\SLBackground.jsx\")",
       "Read(//d/www/KoriLab/**)",
       "Bash(npm run:*)",
-      "Bash(del \"D:\\\\www\\\\KoriLab\\\\public_redirect.htaccess\")"
+      "Bash(del \"D:\\\\www\\\\KoriLab\\\\public_redirect.htaccess\")",
+      "Bash(dir \"D:\\\\www\\\\KoriLab\\\\resources\\\\js\\\\Pages\\\\Dashboard\")"
     ]
   }
 }
