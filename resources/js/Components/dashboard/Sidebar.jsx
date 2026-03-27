@@ -4,11 +4,11 @@ import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, Mess
 import { useState } from "react";
 
 /* ─── Tokens ─────────────────────────────────────────────── */
-const TEXT   = '#1e1408';
-const DIM    = 'rgba(30,20,8,0.65)';
-const MUTED  = 'rgba(30,20,8,0.38)';
-const BORDER = 'rgba(140,95,25,0.16)';
-const GOLD   = '#a8720a';
+const TEXT   = '#f5ecd0';
+const DIM    = 'rgba(245,236,208,0.65)';
+const MUTED  = 'rgba(245,236,208,0.38)';
+const BORDER = 'rgba(245,236,208,0.12)';
+const GOLD   = '#e8b84b';
 const RC     = { S: GOLD, A: '#8b6010', B: '#c44030', C: '#5a3a9a', D: '#2a7a6a', E: '#6b7280' };
 
 /* ─── Cauri logo ─────────────────────────────────────────── */
@@ -51,7 +51,7 @@ export default function Sidebar({ admin }) {
 
   const Content = () => (
     <aside className="w-56 min-h-screen flex flex-col"
-      style={{ background: '#ede0c0', borderRight: `2px solid rgba(140,95,25,0.25)` }}>
+      style={{ background: '#2a1f0e', borderRight: `2px solid rgba(140,95,25,0.3)` }}>
 
       {/* Logo */}
       <div className="p-5 border-b" style={{ borderColor: BORDER }}>
