@@ -2,15 +2,15 @@ import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 /* ─── Design tokens — Cauri / KoriLab Dakar ─────────────── */
-const BG        = '#080604';
-const SURFACE   = 'rgba(212,162,56,0.04)';
-const BORDER    = 'rgba(212,162,56,0.15)';
-const BORDER_H  = 'rgba(212,162,56,0.42)';
-const TEXT      = '#f0e4c4';
-const DIM       = 'rgba(240,228,196,0.50)';
-const MUTED     = 'rgba(240,228,196,0.22)';
+const BG        = '#1c1508';
+const SURFACE   = 'rgba(212,162,56,0.08)';
+const BORDER    = 'rgba(212,162,56,0.28)';
+const BORDER_H  = 'rgba(212,162,56,0.65)';
+const TEXT      = '#f5ecd0';
+const DIM       = 'rgba(245,236,208,0.70)';
+const MUTED     = 'rgba(245,236,208,0.40)';
 const RED       = '#c44030';
-const GOLD      = '#d4a235';
+const GOLD      = '#e8b84b';
 
 /* ─── Scanline ambrée ────────────────────────────────────── */
 function Scanline() {
@@ -43,10 +43,10 @@ export function SLSystemBG() {
       {/* Motif losange bogolan */}
       <div className="absolute inset-0" style={{
         backgroundImage:
-          'linear-gradient(45deg, rgba(212,162,56,0.028) 25%, transparent 25%),' +
-          'linear-gradient(-45deg, rgba(212,162,56,0.028) 25%, transparent 25%),' +
-          'linear-gradient(45deg, transparent 75%, rgba(212,162,56,0.028) 75%),' +
-          'linear-gradient(-45deg, transparent 75%, rgba(212,162,56,0.028) 75%)',
+          'linear-gradient(45deg, rgba(212,162,56,0.07) 25%, transparent 25%),' +
+          'linear-gradient(-45deg, rgba(212,162,56,0.07) 25%, transparent 25%),' +
+          'linear-gradient(45deg, transparent 75%, rgba(212,162,56,0.07) 75%),' +
+          'linear-gradient(-45deg, transparent 75%, rgba(212,162,56,0.07) 75%)',
         backgroundSize: '48px 48px',
         backgroundPosition: '0 0, 0 24px, 24px -24px, -24px 0px',
       }} />
@@ -54,27 +54,27 @@ export function SLSystemBG() {
       {/* Halo soleil — or ambré en haut */}
       <div className="absolute inset-x-0 top-0" style={{
         height: '55vh',
-        background: 'radial-gradient(ellipse 75% 80% at 50% -5%, rgba(212,162,56,0.09) 0%, transparent 68%)',
+        background: 'radial-gradient(ellipse 75% 80% at 50% -5%, rgba(212,162,56,0.20) 0%, transparent 68%)',
       }} />
 
       {/* Orbe terracotta — bas gauche */}
       <div className="absolute rounded-full" style={{
         width: 520, height: 420, bottom: '-5%', left: '-3%',
-        background: 'radial-gradient(ellipse, rgba(196,87,58,0.07) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(196,87,58,0.18) 0%, transparent 70%)',
         filter: 'blur(70px)',
       }} />
 
       {/* Orbe indigo — bas droite */}
       <div className="absolute rounded-full" style={{
         width: 560, height: 440, bottom: '-5%', right: '-3%',
-        background: 'radial-gradient(ellipse, rgba(74,45,158,0.08) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(74,45,158,0.18) 0%, transparent 70%)',
         filter: 'blur(80px)',
       }} />
 
       {/* Orbe or — milieu droite */}
       <div className="absolute rounded-full" style={{
         width: 300, height: 300, top: '35%', right: '5%',
-        background: 'radial-gradient(ellipse, rgba(212,162,56,0.05) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(212,162,56,0.14) 0%, transparent 70%)',
         filter: 'blur(55px)',
       }} />
 

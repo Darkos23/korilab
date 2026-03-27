@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"D:\\\\www\\\\KoriLab\\\\.claude\\\\worktrees\\\\interesting-jepsen\\\\resources\\\\js\\\\Components\\\\dashboard\\\\SystemLayout.jsx\" \"D:\\\\www\\\\KoriLab\\\\resources\\\\js\\\\Components\\\\dashboard\\\\SystemLayout.jsx\")",
+      "Bash(cp \"D:\\\\www\\\\KoriLab\\\\.claude\\\\worktrees\\\\interesting-jepsen\\\\resources\\\\js\\\\Components\\\\dashboard\\\\Sidebar.jsx\" \"D:\\\\www\\\\KoriLab\\\\resources\\\\js\\\\Components\\\\dashboard\\\\Sidebar.jsx\")",
+      "Bash(cp \"D:\\\\www\\\\KoriLab\\\\.claude\\\\worktrees\\\\interesting-jepsen\\\\resources\\\\js\\\\Pages\\\\Dashboard\\\\Index.jsx\" \"D:\\\\www\\\\KoriLab\\\\resources\\\\js\\\\Pages\\\\Dashboard\\\\Index.jsx\")",
+      "Bash(cp \"D:\\\\www\\\\KoriLab\\\\.claude\\\\worktrees\\\\interesting-jepsen\\\\resources\\\\js\\\\Components\\\\SLBackground.jsx\" \"D:\\\\www\\\\KoriLab\\\\resources\\\\js\\\\Components\\\\SLBackground.jsx\")",
+      "Read(//d/www/KoriLab/**)",
+      "Bash(npm run:*)",
+      "Bash(del \"D:\\\\www\\\\KoriLab\\\\public_redirect.htaccess\")"
+    ]
+  }
+}
