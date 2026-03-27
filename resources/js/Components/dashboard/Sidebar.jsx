@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, MessageSquare } from "lucide-react";
 import { useState } from "react";
 
-/* ─── Tokens sidebar (fond très foncé) ───────────────────── */
-const SIDEBAR_BG = '#1E0E04';
-const TEXT       = '#FBF5E6';
-const DIM        = 'rgba(251,245,230,0.6)';
-const MUTED      = 'rgba(251,245,230,0.35)';
-const BORDER     = 'rgba(251,245,230,0.1)';
-const TERRA      = '#C84818';
-const GOLD       = '#B87820';
+/* ─── Tokens sidebar (fond doux) ─────────────────────────── */
+const SIDEBAR_BG = '#2C1C0E';
+const TEXT       = '#F5EFE3';
+const DIM        = 'rgba(245,239,227,0.6)';
+const MUTED      = 'rgba(245,239,227,0.38)';
+const BORDER     = 'rgba(245,239,227,0.1)';
+const TERRA      = '#C06038';
+const GOLD       = '#C09A42';
 
 const nav = [
   { href: '/dashboard',           icon: LayoutDashboard, label: "Vue d'ensemble", sub: 'Tableau central'    },

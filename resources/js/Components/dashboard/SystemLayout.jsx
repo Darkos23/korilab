@@ -1,17 +1,17 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
-/* ─── Design tokens — Palette MelanoGeek / KoriLab Dakar ── */
-const BG        = '#F5EDD6';
-const SURFACE   = 'rgba(200,72,24,0.05)';
-const BORDER    = 'rgba(30,14,4,0.14)';
-const BORDER_H  = 'rgba(200,72,24,0.45)';
-const TEXT      = '#1E0E04';
-const DIM       = 'rgba(30,14,4,0.52)';
-const MUTED     = 'rgba(30,14,4,0.35)';
-const RED       = '#C84818';
-const TERRA     = '#C84818';
-const GOLD      = '#B87820';
+/* ─── Design tokens — Palette KoriLab Dakar (soft) ───────── */
+const BG        = '#FAF6EF';
+const SURFACE   = 'rgba(192,96,56,0.04)';
+const BORDER    = 'rgba(30,14,4,0.1)';
+const BORDER_H  = 'rgba(192,96,56,0.35)';
+const TEXT      = '#241406';
+const DIM       = 'rgba(36,20,6,0.5)';
+const MUTED     = 'rgba(36,20,6,0.32)';
+const RED       = '#C06038';
+const TERRA     = '#C06038';
+const GOLD      = '#C09A42';
 
 /* ─── Background Kente / Dakar ───────────────────────────── */
 export function SLSystemBG() {
@@ -31,20 +31,20 @@ export function SLSystemBG() {
       {/* Halo soleil terracotta — haut */}
       <div className="absolute inset-x-0 top-0" style={{
         height: '50vh',
-        background: 'radial-gradient(ellipse 70% 60% at 50% -10%, rgba(200,72,24,0.1) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse 70% 60% at 50% -10%, rgba(192,96,56,0.06) 0%, transparent 70%)',
       }} />
 
       {/* Orbe or — haut droite */}
       <div className="absolute rounded-full" style={{
         width: 500, height: 400, top: '-5%', right: '-5%',
-        background: 'radial-gradient(ellipse, rgba(184,120,32,0.12) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(192,154,66,0.08) 0%, transparent 70%)',
         filter: 'blur(80px)',
       }} />
 
       {/* Orbe terracotta — bas gauche */}
       <div className="absolute rounded-full" style={{
         width: 600, height: 400, bottom: '-10%', left: '-5%',
-        background: 'radial-gradient(ellipse, rgba(200,72,24,0.1) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(192,96,56,0.06) 0%, transparent 70%)',
         filter: 'blur(80px)',
       }} />
 
@@ -73,10 +73,10 @@ export function SysWin({ title, subtitle, children, className = '', delay = 0 })
       transition={{ duration: 0.4, delay }}
       className={`relative ${className}`}
       style={{
-        background: 'rgba(255,252,244,0.92)',
+        background: 'rgba(255,253,248,0.94)',
         border: `1px solid ${BORDER}`,
         borderRadius: 10,
-        boxShadow: '0 2px 16px rgba(140,95,25,0.08)',
+        boxShadow: '0 2px 12px rgba(36,20,6,0.05)',
       }}
     >
       <div className="flex items-center gap-3 px-4 py-3 border-b" style={{ borderColor: BORDER }}>
@@ -106,11 +106,11 @@ export function StatBadge({ label, value, icon: Icon, sub }) {
       whileHover={{ borderColor: BORDER_H }}
       className="relative p-5 transition-all duration-300"
       style={{
-        background: 'rgba(255,252,244,0.85)',
+        background: 'rgba(255,253,248,0.9)',
         border: `1px solid ${BORDER}`,
         borderRadius: 10,
         borderLeft: `3px solid ${GOLD}`,
-        boxShadow: '0 2px 12px rgba(140,95,25,0.07)',
+        boxShadow: '0 2px 10px rgba(36,20,6,0.05)',
       }}
     >
       <div className="flex items-start justify-between mb-4">
@@ -259,7 +259,7 @@ export function StatusBar({ admin }) {
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-50 flex items-center px-5 gap-4"
-      style={{ height: 24, borderTop: `1px solid ${BORDER}`, background: 'rgba(247,237,216,0.98)', backdropFilter: 'blur(8px)' }}
+      style={{ height: 24, borderTop: `1px solid ${BORDER}`, background: 'rgba(250,246,242,0.98)', backdropFilter: 'blur(8px)' }}
     >
       <div className="flex items-center gap-2">
         <motion.div

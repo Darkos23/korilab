@@ -5,13 +5,13 @@ import Sidebar from "@/Components/dashboard/Sidebar";
 import WhatsAppFloat from "@/Components/WhatsAppFloat";
 import { SLSystemBG, StatusBar, RankBadge } from "@/Components/dashboard/SystemLayout";
 
-/* ── Palette MelanoGeek ── */
-const INK    = '#1E0E04';
-const INK2   = 'rgba(30,14,4,0.52)';
-const INK3   = 'rgba(30,14,4,0.14)';
-const TERRA  = '#C84818';
-const GOLD   = '#B87820';
-const CARD   = '#FBF5E6';
+/* ── Palette KoriLab soft ── */
+const INK    = '#241406';
+const INK2   = 'rgba(36,20,6,0.5)';
+const INK3   = 'rgba(36,20,6,0.1)';
+const TERRA  = '#C06038';
+const GOLD   = '#C09A42';
+const CARD   = '#FDFAF5';
 
 const ACTIONS = [
   { href: "/dashboard/portfolio", icon: FolderOpen,   label: "Gérer les projets",    desc: "Ajouter / modifier des réalisations",  tag: "PORTFOLIO" },
@@ -31,7 +31,7 @@ function StatCard({ label, value, icon: Icon, sub }) {
         background: CARD,
         border: `1px solid ${INK3}`,
         borderLeft: `4px solid ${TERRA}`,
-        boxShadow: '0 2px 12px rgba(30,14,4,0.07)',
+        boxShadow: '0 2px 10px rgba(36,20,6,0.05)',
       }}
     >
       <div className="flex items-center justify-between mb-4">
@@ -58,11 +58,11 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
         style={{
           background: CARD,
           border: `1px solid ${INK3}`,
-          boxShadow: '0 1px 6px rgba(30,14,4,0.05)',
+          boxShadow: '0 1px 5px rgba(36,20,6,0.04)',
         }}
         onMouseEnter={e => {
           e.currentTarget.style.borderColor = TERRA;
-          e.currentTarget.style.boxShadow = `0 4px 16px rgba(200,72,24,0.12)`;
+          e.currentTarget.style.boxShadow = `0 4px 14px rgba(192,96,56,0.09)`;
         }}
         onMouseLeave={e => {
           e.currentTarget.style.borderColor = INK3;
@@ -97,7 +97,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
   ];
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden" style={{ background: '#F5EDD6' }}>
+    <div className="min-h-screen flex relative overflow-hidden" style={{ background: '#FAF6EF' }}>
       <SLSystemBG />
       <Sidebar admin={admin} />
 
