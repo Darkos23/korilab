@@ -30,10 +30,10 @@ export function SLSystemBG() {
       {/* Motif losange bogolan — brun chaud */}
       <div className="absolute inset-0" style={{
         backgroundImage:
-          'linear-gradient(45deg, rgba(140,95,25,0.06) 25%, transparent 25%),' +
-          'linear-gradient(-45deg, rgba(140,95,25,0.06) 25%, transparent 25%),' +
-          'linear-gradient(45deg, transparent 75%, rgba(140,95,25,0.06) 75%),' +
-          'linear-gradient(-45deg, transparent 75%, rgba(140,95,25,0.06) 75%)',
+          'linear-gradient(45deg, rgba(140,95,25,0.025) 25%, transparent 25%),' +
+          'linear-gradient(-45deg, rgba(140,95,25,0.025) 25%, transparent 25%),' +
+          'linear-gradient(45deg, transparent 75%, rgba(140,95,25,0.025) 75%),' +
+          'linear-gradient(-45deg, transparent 75%, rgba(140,95,25,0.025) 75%)',
         backgroundSize: '48px 48px',
         backgroundPosition: '0 0, 0 24px, 24px -24px, -24px 0px',
       }} />
