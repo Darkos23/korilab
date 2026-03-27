@@ -6,33 +6,43 @@ import Sidebar from '@/Components/dashboard/Sidebar';
 import WhatsAppFloat from '@/Components/WhatsAppFloat';
 import { SLSystemBG, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
-/* ─── Cauri Project Card ─────────────────────────────────── */
-function CauriCard({ project, deleting, onEdit, onDelete }) {
+/* ─── Palette MelanoGeek ─────────────────────────────────── */
+const BG     = '#F5EDD6';
+const CARD   = '#FBF5E6';
+const INK    = '#1E0E04';
+const INK2   = 'rgba(30,14,4,0.52)';
+const INK3   = 'rgba(30,14,4,0.14)';
+const TERRA  = '#C84818';
+const TERRA2 = '#E85A1A';
+const GOLD   = '#B87820';
+
+/* ─── Project Card ───────────────────────────────────────── */
+function ProjectCard({ project, deleting, onEdit, onDelete }) {
     const [hovered, setHovered] = useState(false);
-    const GOLD  = '#e8b84b';
 
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -4 }}
+            whileHover={{ y: -3 }}
             transition={{ duration: 0.3 }}
             onHoverStart={() => setHovered(true)}
             onHoverEnd={() => setHovered(false)}
-            className="relative overflow-hidden flex flex-col"
+            className="relative flex flex-col"
             style={{
-                background: 'rgba(255,252,244,0.95)',
+                background: CARD,
                 borderRadius: 12,
-                border: `1px solid ${hovered ? 'rgba(168,114,10,0.45)' : 'rgba(140,95,25,0.14)'}`,
-                borderLeft: `3px solid ${hovered ? '#a8720a' : 'rgba(168,114,10,0.5)'}`,
+                border: `1px solid ${hovered ? 'rgba(200,72,24,0.3)' : INK3}`,
+                borderLeft: `4px solid ${hovered ? TERRA2 : TERRA}`,
                 boxShadow: hovered
-                    ? `0 8px 32px rgba(196,90,42,0.12), 0 2px 8px rgba(140,95,25,0.1)`
-                    : `0 2px 12px rgba(140,95,25,0.06)`,
-                transition: 'all 0.3s',
+                    ? '0 8px 32px rgba(30,14,4,0.12)'
+                    : '0 2px 12px rgba(30,14,4,0.08)',
+                transition: 'all 0.25s',
             }}
         >
             {/* Image */}
-            <div className={`relative h-40 overflow-hidden flex-shrink-0 ${!project.image ? `bg-gradient-to-br ${project.gradient}` : 'bg-[#120d04]'}`}>
+            <div className={`relative h-40 overflow-hidden rounded-tl-none rounded-tr-lg flex-shrink-0 ${!project.image ? `bg-gradient-to-br ${project.gradient}` : ''}`}
+                style={{ borderRadius: '0 8px 0 0', background: !project.image ? undefined : '#1E0E04' }}>
                 {project.image ? (
                     <img src={project.image} alt={project.title}
                         className="w-full h-full object-cover"
@@ -40,20 +50,28 @@ function CauriCard({ project, deleting, onEdit, onDelete }) {
                     />
                 ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-5xl drop-shadow-lg">{project.emoji}</span>
+                        <span className="text-5xl">{project.emoji}</span>
                     </div>
                 )}
                 <div className="absolute top-3 right-3">
-                    <span className="text-[9px] font-mono px-2 py-1 rounded"
-                        style={{ background: 'rgba(20,14,4,0.88)', color: GOLD, border: `1px solid ${GOLD}40` }}>
-                        {project.category.toUpperCase()}
+                    <span style={{
+                        fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 9,
+                        background: 'rgba(30,14,4,0.82)', color: GOLD,
+                        border: `1px solid rgba(184,120,32,0.4)`,
+                        padding: '3px 8px', borderRadius: 4, textTransform: 'uppercase', letterSpacing: '0.1em',
+                    }}>
+                        {project.category}
                     </span>
                 </div>
                 {project.comingSoon && (
                     <div className="absolute inset-0 flex items-center justify-center"
-                        style={{ background: 'rgba(14,10,3,0.82)' }}>
-                        <span className="text-[11px] font-mono uppercase tracking-[0.25em] px-4 py-2 rounded"
-                            style={{ color: GOLD, border: `1px solid ${GOLD}50`, background: 'rgba(232,184,75,0.08)' }}>
+                        style={{ background: 'rgba(30,14,4,0.75)' }}>
+                        <span style={{
+                            fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 11,
+                            color: GOLD, border: `1px solid rgba(184,120,32,0.5)`,
+                            background: 'rgba(184,120,32,0.1)', padding: '6px 16px', borderRadius: 6,
+                            textTransform: 'uppercase', letterSpacing: '0.2em',
+                        }}>
                             En cours...
                         </span>
                     </div>
@@ -62,16 +80,20 @@ function CauriCard({ project, deleting, onEdit, onDelete }) {
 
             {/* Content */}
             <div className="p-4 flex-1">
-                <h3 className="font-black text-sm uppercase tracking-wide mb-2" style={{ color: '#1e1408' }}>
+                <h3 style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 13, color: INK, marginBottom: 8 }}>
                     {project.title}
                 </h3>
-                <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(30,20,8,0.5)' }}>
+                <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, lineHeight: 1.6, marginBottom: 12 }}>
                     {project.desc || '—'}
                 </p>
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1.5">
                     {(project.tags ?? []).slice(0, 4).map(tag => (
-                        <span key={tag} className="text-[9px] font-mono px-2 py-0.5 rounded-full"
-                            style={{ color: '#a8720a', background: 'rgba(168,114,10,0.08)', border: `1px solid rgba(168,114,10,0.2)` }}>
+                        <span key={tag} style={{
+                            fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 10,
+                            color: TERRA, background: 'rgba(200,72,24,0.08)',
+                            border: `1px solid rgba(200,72,24,0.2)`,
+                            padding: '2px 8px', borderRadius: 20,
+                        }}>
                             {tag}
                         </span>
                     ))}
@@ -79,24 +101,31 @@ function CauriCard({ project, deleting, onEdit, onDelete }) {
             </div>
 
             {/* Actions */}
-            <div className="px-4 pb-4 flex gap-2 border-t pt-3" style={{ borderColor: 'rgba(140,95,25,0.12)' }}>
+            <div className="px-4 pb-4 pt-3 flex gap-2 border-t" style={{ borderColor: INK3 }}>
                 <button onClick={onEdit}
-                    className="flex-1 py-2 text-[10px] font-mono uppercase tracking-widest rounded transition-all duration-200"
+                    className="flex-1 py-2 transition-all duration-200"
                     style={{
-                        color: '#a8720a',
-                        border: `1px solid rgba(168,114,10,0.4)`,
-                        background: hovered ? `rgba(168,114,10,0.08)` : 'rgba(168,114,10,0.04)',
-                    }}>
+                        fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 11,
+                        color: '#FBF5E6', background: TERRA,
+                        border: 'none', borderRadius: 8, cursor: 'pointer',
+                        letterSpacing: '0.05em',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = TERRA2; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = TERRA; }}
+                >
                     Modifier
                 </button>
                 <button onClick={onDelete}
-                    className="flex-1 py-2 text-[10px] font-mono uppercase tracking-widest rounded transition-all duration-200"
+                    className="flex-1 py-2 transition-all duration-200"
                     style={{
-                        color: deleting ? '#c44030' : 'rgba(30,20,8,0.45)',
-                        border: `1px solid ${deleting ? 'rgba(196,64,48,0.4)' : 'rgba(30,20,8,0.15)'}`,
-                        background: deleting ? 'rgba(196,64,48,0.06)' : 'rgba(30,20,8,0.03)',
-                    }}>
-                    {deleting ? '⚠ Confirmer' : 'Supprimer'}
+                        fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 11,
+                        color: deleting ? TERRA : INK2,
+                        background: 'transparent',
+                        border: `1px solid ${deleting ? TERRA : INK3}`,
+                        borderRadius: 8, cursor: 'pointer',
+                    }}
+                >
+                    {deleting ? 'Confirmer ?' : 'Supprimer'}
                 </button>
             </div>
         </motion.div>
@@ -125,6 +154,20 @@ const defaultForm = {
     image: '',
     link: '',
     comingSoon: false,
+};
+
+/* ─── Shared input style ──────────────────────────────────── */
+const inputStyle = {
+    fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 13,
+    color: INK, background: CARD,
+    border: `1px solid ${INK3}`, borderRadius: 8,
+    padding: '8px 12px', width: '100%', outline: 'none',
+};
+
+const labelStyle = {
+    fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10,
+    color: INK2, textTransform: 'uppercase', letterSpacing: '0.12em',
+    display: 'block', marginBottom: 6,
 };
 
 export default function DashboardPortfolio({ admin, projects }) {
@@ -184,95 +227,93 @@ export default function DashboardPortfolio({ admin, projects }) {
     };
 
     return (
-        <div className="min-h-screen bg-transparent flex relative overflow-hidden">
+        <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
             <SLSystemBG />
-            
-            
-      
             <Sidebar admin={admin} />
 
             <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <div className="flex items-center gap-2 mb-1">
-                            <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#e8b84b', boxShadow: '0 0 6px 2px rgba(232,184,75,0.6)' }} />
-                            <span className="text-[9px] font-mono uppercase tracking-[0.3em]" style={{ color: 'rgba(232,184,75,0.5)' }}>Portfolio</span>
+                        <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
+                            Portfolio
                         </div>
-                        <h1 className="text-2xl font-black" style={{ color: '#f5ecd0' }}>Réalisations</h1>
-                        <p className="text-xs font-mono mt-1" style={{ color: 'rgba(245,236,208,0.35)' }}>{projects.length} projet(s) enregistré(s)</p>
+                        <h1 style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
+                            Réalisations
+                        </h1>
+                        <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
+                            {projects.length} projet{projects.length !== 1 ? 's' : ''} enregistré{projects.length !== 1 ? 's' : ''}
+                        </p>
                     </div>
                     {!showForm && (
-                        <SysBtn variant="primary" onClick={() => setShowForm(true)}>
+                        <button onClick={() => setShowForm(true)}
+                            className="flex items-center gap-2 transition-all duration-200"
+                            style={{
+                                fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 12,
+                                color: '#FBF5E6', background: TERRA,
+                                border: 'none', borderRadius: 10, padding: '10px 18px', cursor: 'pointer',
+                            }}
+                            onMouseEnter={e => { e.currentTarget.style.background = TERRA2; }}
+                            onMouseLeave={e => { e.currentTarget.style.background = TERRA; }}
+                        >
                             <Plus className="w-4 h-4" /> Nouveau projet
-                        </SysBtn>
+                        </button>
                     )}
                 </div>
 
                 {/* Form */}
                 {showForm && (
-                    <SysWin title={editingId ? 'MODIFIER LE PROJET' : 'NOUVEAU PROJET'} glow className="mb-6">
+                    <SysWin title={editingId ? 'Modifier le projet' : 'Nouveau projet'} className="mb-6">
                         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
                             <div className="col-span-2 md:col-span-1">
-                                <SysInput
-                                    label="Titre *"
-                                    name="title"
-                                    value={form.title}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="Nom du projet"
-                                />
+                                <label style={labelStyle}>Titre *</label>
+                                <input name="title" value={form.title} onChange={handleChange} required
+                                    placeholder="Nom du projet" style={inputStyle} />
                             </div>
 
                             <div>
-                                <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">Catégorie</label>
-                                <select
-                                    name="category"
-                                    value={form.category}
-                                    onChange={handleChange}
-                                    className="w-full bg-white/[0.04] border border-white/15 rounded-sm px-3 py-2 text-white text-sm font-mono focus:border-white/40 outline-none"
-                                >
+                                <label style={labelStyle}>Catégorie</label>
+                                <select name="category" value={form.category} onChange={handleChange}
+                                    style={{ ...inputStyle }}>
                                     {CATEGORIES.map(c => <option key={c}>{c}</option>)}
                                 </select>
                             </div>
 
                             <div className="col-span-2">
-                                <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-1.5">Description</label>
-                                <textarea
-                                    name="desc"
-                                    value={form.desc}
-                                    onChange={handleChange}
-                                    rows={3}
-                                    className="w-full bg-[#0a0a0f] border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:border-violet-500 outline-none resize-none"
+                                <label style={labelStyle}>Description</label>
+                                <textarea name="desc" value={form.desc} onChange={handleChange} rows={3}
                                     placeholder="Description du projet"
-                                />
+                                    style={{ ...inputStyle, resize: 'none' }} />
                             </div>
 
                             <div className="col-span-2 md:col-span-1">
-                                <label className="block text-sm text-gray-400 mb-1">Tags (virgules)</label>
-                                <input
-                                    name="tags"
-                                    value={form.tags}
-                                    onChange={handleChange}
-                                    className="w-full bg-white/[0.04] border border-white/15 rounded-sm px-3 py-2 text-white text-sm font-mono focus:border-white/40 outline-none"
-                                    placeholder="React, Laravel, MySQL"
-                                />
+                                <label style={labelStyle}>Tags (virgules)</label>
+                                <input name="tags" value={form.tags} onChange={handleChange}
+                                    placeholder="React, Laravel, MySQL" style={inputStyle} />
                             </div>
 
                             <div>
-                                <SysInput label="Lien" name="link" value={form.link} onChange={handleChange} placeholder="https://..." />
+                                <label style={labelStyle}>Lien</label>
+                                <input name="link" value={form.link} onChange={handleChange}
+                                    placeholder="https://..." style={inputStyle} />
                             </div>
 
                             <div className="col-span-2 md:col-span-1">
-                                <SysInput label="Image (chemin /portfolio/...)" name="image" value={form.image} onChange={handleChange} placeholder="/portfolio/project.png" />
+                                <label style={labelStyle}>Image (chemin /portfolio/...)</label>
+                                <input name="image" value={form.image} onChange={handleChange}
+                                    placeholder="/portfolio/project.png" style={inputStyle} />
                             </div>
 
                             <div>
-                                <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-2">Emoji</label>
+                                <label style={labelStyle}>Emoji</label>
                                 <div className="flex flex-wrap gap-2">
                                     {EMOJIS.map(e => (
                                         <button key={e} type="button" onClick={() => setForm(prev => ({ ...prev, emoji: e }))}
-                                            className={`text-xl p-1.5 rounded-lg border transition-all ${form.emoji === e ? 'border-[#00a8ff]/50 bg-[#00a8ff]/10' : 'border-white/5 bg-white/[0.02] hover:border-[#00a8ff]/20'}`}>
+                                            className="text-xl p-1.5 rounded-lg transition-all"
+                                            style={{
+                                                border: `1px solid ${form.emoji === e ? TERRA : INK3}`,
+                                                background: form.emoji === e ? 'rgba(200,72,24,0.08)' : 'transparent',
+                                            }}>
                                             {e}
                                         </button>
                                     ))}
@@ -280,24 +321,42 @@ export default function DashboardPortfolio({ admin, projects }) {
                             </div>
 
                             <div className="col-span-2">
-                                <label className="block text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-widest mb-2">Gradient</label>
+                                <label style={labelStyle}>Gradient de fond</label>
                                 <div className="flex flex-wrap gap-2">
                                     {GRADIENTS.map(g => (
                                         <button key={g} type="button" onClick={() => setForm(prev => ({ ...prev, gradient: g }))}
-                                            className={`w-12 h-8 rounded bg-gradient-to-r ${g} transition-all ${form.gradient === g ? 'ring-2 ring-[#00a8ff] ring-offset-1 ring-offset-[#0d2235]' : 'opacity-50 hover:opacity-80'}`} />
+                                            className={`w-12 h-8 rounded bg-gradient-to-r ${g} transition-all`}
+                                            style={{ opacity: form.gradient === g ? 1 : 0.45, outline: form.gradient === g ? `2px solid ${TERRA}` : 'none', outlineOffset: 2 }} />
                                     ))}
                                 </div>
                             </div>
 
                             <div className="col-span-2 flex items-center gap-3">
-                                <input type="checkbox" name="comingSoon" id="comingSoon" checked={form.comingSoon} onChange={handleChange}
-                                    className="w-4 h-4 accent-[#00a8ff]" />
-                                <label htmlFor="comingSoon" className="text-xs font-mono text-white/40">Bientôt disponible</label>
+                                <input type="checkbox" name="comingSoon" id="comingSoon"
+                                    checked={form.comingSoon} onChange={handleChange}
+                                    className="w-4 h-4" style={{ accentColor: TERRA }} />
+                                <label htmlFor="comingSoon" style={{ fontFamily: "'Sora', sans-serif", fontSize: 12, color: INK2 }}>
+                                    Bientôt disponible
+                                </label>
                             </div>
 
                             <div className="col-span-2 flex gap-3 pt-2">
-                                <SysBtn type="submit" variant="primary">{editingId ? '[ ENREGISTRER ]' : '[ CRÉER ]'}</SysBtn>
-                                <SysBtn type="button" variant="ghost" onClick={handleCancel}>[ ANNULER ]</SysBtn>
+                                <button type="submit"
+                                    style={{
+                                        fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 12,
+                                        color: '#FBF5E6', background: TERRA,
+                                        border: 'none', borderRadius: 8, padding: '9px 20px', cursor: 'pointer',
+                                    }}>
+                                    {editingId ? 'Enregistrer' : 'Créer le projet'}
+                                </button>
+                                <button type="button" onClick={handleCancel}
+                                    style={{
+                                        fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 12,
+                                        color: INK2, background: 'transparent',
+                                        border: `1px solid ${INK3}`, borderRadius: 8, padding: '9px 20px', cursor: 'pointer',
+                                    }}>
+                                    Annuler
+                                </button>
                             </div>
                         </form>
                     </SysWin>
@@ -307,7 +366,7 @@ export default function DashboardPortfolio({ admin, projects }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {projects.map(project => (
-                        <CauriCard
+                        <ProjectCard
                             key={project.id}
                             project={project}
                             deleting={deleting === project.id}
@@ -318,14 +377,16 @@ export default function DashboardPortfolio({ admin, projects }) {
                 </div>
 
                 {projects.length === 0 && (
-                    <div className="text-center py-24 font-mono" style={{ color: 'rgba(232,184,75,0.3)' }}>
+                    <div className="text-center py-24">
                         <div className="text-4xl mb-4">📁</div>
-                        <p className="text-sm uppercase tracking-[0.3em]">Aucun projet enregistré</p>
+                        <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 13, color: INK2, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                            Aucun projet enregistré
+                        </p>
                     </div>
                 )}
             </main>
-        <WhatsAppFloat />
-        <StatusBar admin={admin} />
+            <WhatsAppFloat />
+            <StatusBar admin={admin} />
         </div>
     );
 }

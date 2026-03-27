@@ -3,30 +3,54 @@ import { router } from '@inertiajs/react';
 import { Plus, Trash2, ChevronDown, ChevronUp, Save, CheckCircle } from 'lucide-react';
 import Sidebar from '@/Components/dashboard/Sidebar';
 import WhatsAppFloat from '@/Components/WhatsAppFloat';
-import { SLSystemBG, SysWin, SysInput, SysTextarea, SysSelect, SysBtn, SysDivider, Scanlines, StatusBar } from '@/Components/dashboard/SystemLayout';
+import { SLSystemBG, SysWin, SysInput, SysTextarea, SysSelect, SysBtn, SysDivider, StatusBar } from '@/Components/dashboard/SystemLayout';
 
-// ─── helpers ───────────────────────────────────────────────
-const THEMES  = [
-    { value:'shadow',        label:'Shadow Monarch (violet)'         },
-    { value:'constellation', label:'Constellation du Monarque (indigo)' },
-    { value:'real-madrid', label:'Real Madrid (or/marine)'   },
-    { value:'gojo',        label:'Gojo Satoru (bleu infini)' },
-    { value:'dune',        label:'Dune — Arrakis (sable)'    },
-    { value:'itachi',      label:'Itachi Uchiha (cramoisi)'  },
-    { value:'beast',       label:'Beast Monarch (ambre)'     },
-    { value:'antares',     label:'Antares (rouge stellaire)' },
+/* ─── Palette MelanoGeek ─────────────────────────────────── */
+const BG     = '#F5EDD6';
+const CARD   = '#FBF5E6';
+const INK    = '#1E0E04';
+const INK2   = 'rgba(30,14,4,0.52)';
+const INK3   = 'rgba(30,14,4,0.14)';
+const TERRA  = '#C84818';
+const TERRA2 = '#E85A1A';
+const GOLD   = '#B87820';
+
+const inputStyle = {
+    fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 13,
+    color: INK, background: CARD,
+    border: `1px solid ${INK3}`, borderRadius: 8,
+    padding: '8px 12px', width: '100%', outline: 'none',
+};
+
+const labelStyle = {
+    fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10,
+    color: INK2, textTransform: 'uppercase', letterSpacing: '0.12em',
+    display: 'block', marginBottom: 6,
+};
+
+const THEMES = [
+    { value: 'shadow',        label: 'Violet sombre'      },
+    { value: 'constellation', label: 'Indigo constellation'},
+    { value: 'real-madrid',   label: 'Or & Marine'        },
+    { value: 'gojo',          label: 'Bleu infini'        },
+    { value: 'dune',          label: 'Sable — Dakar'      },
+    { value: 'itachi',        label: 'Cramoisi'           },
+    { value: 'beast',         label: 'Ambre'              },
+    { value: 'antares',       label: 'Rouge stellaire'    },
 ];
-const RANKS   = ['S','A','B','C'];
+const RANKS = ['S','A','B','C'];
 
 const SectionTitle = ({ children }) => (
     <div className="flex items-center gap-3 my-5">
-        <div className="flex-1 h-px bg-[#00a8ff]/10" />
-        <span className="text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">◈ {children} ◈</span>
-        <div className="flex-1 h-px bg-[#00a8ff]/10" />
+        <div className="flex-1 h-px" style={{ background: INK3 }} />
+        <span style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 9, color: INK2, textTransform: 'uppercase', letterSpacing: '0.25em' }}>
+            {children}
+        </span>
+        <div className="flex-1 h-px" style={{ background: INK3 }} />
     </div>
 );
 
-// ─── Skills editor ─────────────────────────────────────────
+/* ─── Skills editor ────────────────────────────────────────── */
 function SkillsEditor({ skills, onChange }) {
     const update = (i, field, val) => { const n=[...skills]; n[i]={...n[i],[field]:field==='level'?Number(val):val}; onChange(n); };
     const add    = () => onChange([...skills,{name:'',level:80,category:''}]);
@@ -36,23 +60,26 @@ function SkillsEditor({ skills, onChange }) {
             {skills.map((sk,i) => (
                 <div key={i} className="flex gap-2 items-center">
                     <input value={sk.name} onChange={e=>update(i,'name',e.target.value)} placeholder="Compétence"
-                        className="flex-1 bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10" />
-                    <input value={sk.category} onChange={e=>update(i,'category',e.target.value)} placeholder="Catégorie" style={{width:100}}
-                        className="bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10" />
-                    <input type="number" min={0} max={100} value={sk.level} onChange={e=>update(i,'level',e.target.value)} style={{width:60}}
-                        className="bg-white/[0.04] border border-white/15 rounded-sm px-2 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 text-center" />
-                    <span className="text-[9px] font-mono text-[#00a8ff]/30 w-6">{sk.level}%</span>
-                    <button onClick={()=>remove(i)} className="text-red-400/30 hover:text-red-400 transition-colors"><Trash2 className="w-3.5 h-3.5"/></button>
+                        style={{ ...inputStyle, flex: 1 }} />
+                    <input value={sk.category} onChange={e=>update(i,'category',e.target.value)} placeholder="Catégorie"
+                        style={{ ...inputStyle, width: 110 }} />
+                    <input type="number" min={0} max={100} value={sk.level} onChange={e=>update(i,'level',e.target.value)}
+                        style={{ ...inputStyle, width: 64, textAlign: 'center' }} />
+                    <span style={{ fontFamily: "'Sora', sans-serif", fontSize: 9, color: INK2, width: 28 }}>{sk.level}%</span>
+                    <button onClick={()=>remove(i)} style={{ color: TERRA, background: 'none', border: 'none', cursor: 'pointer' }}>
+                        <Trash2 className="w-3.5 h-3.5"/>
+                    </button>
                 </div>
             ))}
-            <button onClick={add} className="flex items-center gap-1 text-[9px] font-mono text-[#00a8ff]/40 hover:text-[#00a8ff] transition-colors mt-1 uppercase tracking-widest">
+            <button onClick={add} className="flex items-center gap-1 mt-1 transition-colors"
+                style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                 <Plus className="w-3 h-3"/> Ajouter
             </button>
         </div>
     );
 }
 
-// ─── Experience editor ─────────────────────────────────────
+/* ─── Experience editor ───────────────────────────────────── */
 function ExperienceEditor({ experience, onChange }) {
     const [open, setOpen] = useState([]);
     const toggle = i => setOpen(p=>p.includes(i)?p.filter(x=>x!==i):[...p,i]);
@@ -65,30 +92,43 @@ function ExperienceEditor({ experience, onChange }) {
     return (
         <div className="space-y-2">
             {experience.map((exp,i) => (
-                <div key={i} className="border border-[#00a8ff]/10 rounded-lg overflow-hidden">
-                    <div className="flex items-center gap-2 px-3 py-2 bg-[#00a8ff]/[0.03] cursor-pointer" onClick={()=>toggle(i)}>
-                        <span className="flex-1 text-sm font-mono text-white/70 truncate">{exp.title||`Expérience ${i+1}`}</span>
-                        <span className="text-[9px] font-mono text-[#00a8ff]/30">{exp.period}</span>
-                        <button onClick={e=>{e.stopPropagation();remove(i);}} className="text-red-400/30 hover:text-red-400"><Trash2 className="w-3.5 h-3.5"/></button>
-                        {open.includes(i)?<ChevronUp className="w-3.5 h-3.5 text-[#00a8ff]/30"/>:<ChevronDown className="w-3.5 h-3.5 text-[#00a8ff]/30"/>}
+                <div key={i} style={{ border: `1px solid ${INK3}`, borderRadius: 8, overflow: 'hidden' }}>
+                    <div className="flex items-center gap-2 px-3 py-2.5 cursor-pointer"
+                        style={{ background: 'rgba(30,14,4,0.03)' }}
+                        onClick={()=>toggle(i)}>
+                        <span className="flex-1 truncate" style={{ fontFamily: "'Sora', sans-serif", fontSize: 13, color: INK }}>
+                            {exp.title || `Expérience ${i+1}`}
+                        </span>
+                        <span style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2 }}>{exp.period}</span>
+                        <button onClick={e=>{e.stopPropagation();remove(i);}}
+                            style={{ color: TERRA, background: 'none', border: 'none', cursor: 'pointer' }}>
+                            <Trash2 className="w-3.5 h-3.5"/>
+                        </button>
+                        {open.includes(i)
+                            ? <ChevronUp className="w-3.5 h-3.5" style={{ color: INK2 }}/>
+                            : <ChevronDown className="w-3.5 h-3.5" style={{ color: INK2 }}/>
+                        }
                     </div>
                     {open.includes(i) && (
-                        <div className="p-3 space-y-2 border-t border-[#00a8ff]/10">
+                        <div className="p-3 space-y-2" style={{ borderTop: `1px solid ${INK3}` }}>
                             <div className="grid grid-cols-2 gap-2">
-                                <SysInput placeholder="Période" value={exp.period}  onChange={e=>update(i,'period',e.target.value)} />
-                                <SysInput placeholder="Entreprise" value={exp.company} onChange={e=>update(i,'company',e.target.value)} />
+                                <input placeholder="Période" value={exp.period} onChange={e=>update(i,'period',e.target.value)} style={inputStyle} />
+                                <input placeholder="Entreprise" value={exp.company} onChange={e=>update(i,'company',e.target.value)} style={inputStyle} />
                             </div>
-                            <SysInput placeholder="Poste / Titre" value={exp.title} onChange={e=>update(i,'title',e.target.value)} />
-                            <p className="text-[9px] font-mono text-[#00a8ff]/30 uppercase tracking-widest mt-2">Missions :</p>
+                            <input placeholder="Poste / Titre" value={exp.title} onChange={e=>update(i,'title',e.target.value)} style={inputStyle} />
+                            <p style={{ fontFamily: "'Sora', sans-serif", fontSize: 9, color: INK2, textTransform: 'uppercase', letterSpacing: '0.12em', marginTop: 8 }}>Missions :</p>
                             <div className="space-y-1.5">
                                 {(exp.missions??[]).map((m,j) => (
                                     <div key={j} className="flex gap-2">
-                                        <input value={m} onChange={e=>updM(i,j,e.target.value)}
-                                            className="flex-1 bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10" />
-                                        <button onClick={()=>removeM(i,j)} className="text-red-400/30 hover:text-red-400"><Trash2 className="w-3.5 h-3.5"/></button>
+                                        <input value={m} onChange={e=>updM(i,j,e.target.value)} style={{ ...inputStyle, flex: 1 }} />
+                                        <button onClick={()=>removeM(i,j)} style={{ color: TERRA, background: 'none', border: 'none', cursor: 'pointer' }}>
+                                            <Trash2 className="w-3.5 h-3.5"/>
+                                        </button>
                                     </div>
                                 ))}
-                                <button onClick={()=>addM(i)} className="flex items-center gap-1 text-[9px] font-mono text-[#00a8ff]/40 hover:text-[#00a8ff] uppercase tracking-widest">
+                                <button onClick={()=>addM(i)}
+                                    style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                                    className="flex items-center gap-1">
                                     <Plus className="w-3 h-3"/> Mission
                                 </button>
                             </div>
@@ -96,14 +136,16 @@ function ExperienceEditor({ experience, onChange }) {
                     )}
                 </div>
             ))}
-            <button onClick={add} className="flex items-center gap-1 text-[9px] font-mono text-[#00a8ff]/40 hover:text-[#00a8ff] uppercase tracking-widest mt-1">
+            <button onClick={add}
+                style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                className="flex items-center gap-1 mt-1">
                 <Plus className="w-3 h-3"/> Ajouter une expérience
             </button>
         </div>
     );
 }
 
-// ─── Education editor ──────────────────────────────────────
+/* ─── Education editor ────────────────────────────────────── */
 function EducationEditor({ education, onChange }) {
     const update = (i,f,v) => { const n=[...education]; n[i]={...n[i],[f]:v}; onChange(n); };
     const add    = () => onChange([...education,{year:'',school:'',degree:''}]);
@@ -112,23 +154,24 @@ function EducationEditor({ education, onChange }) {
         <div className="space-y-2">
             {education.map((edu,i) => (
                 <div key={i} className="grid grid-cols-[80px_1fr_1fr_auto] gap-2 items-center">
-                    <input value={edu.year}   onChange={e=>update(i,'year',e.target.value)}   placeholder="Année"
-                        className="bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
-                    <input value={edu.school} onChange={e=>update(i,'school',e.target.value)} placeholder="École"
-                        className="bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
-                    <input value={edu.degree} onChange={e=>update(i,'degree',e.target.value)} placeholder="Diplôme"
-                        className="bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
-                    <button onClick={()=>remove(i)} className="text-red-400/30 hover:text-red-400"><Trash2 className="w-3.5 h-3.5"/></button>
+                    <input value={edu.year}   onChange={e=>update(i,'year',e.target.value)}   placeholder="Année"   style={inputStyle} />
+                    <input value={edu.school} onChange={e=>update(i,'school',e.target.value)} placeholder="École"   style={inputStyle} />
+                    <input value={edu.degree} onChange={e=>update(i,'degree',e.target.value)} placeholder="Diplôme" style={inputStyle} />
+                    <button onClick={()=>remove(i)} style={{ color: TERRA, background: 'none', border: 'none', cursor: 'pointer' }}>
+                        <Trash2 className="w-3.5 h-3.5"/>
+                    </button>
                 </div>
             ))}
-            <button onClick={add} className="flex items-center gap-1 text-[9px] font-mono text-[#00a8ff]/40 hover:text-[#00a8ff] uppercase tracking-widest mt-1">
+            <button onClick={add}
+                style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                className="flex items-center gap-1 mt-1">
                 <Plus className="w-3 h-3"/> Ajouter
             </button>
         </div>
     );
 }
 
-// ─── Languages editor ──────────────────────────────────────
+/* ─── Languages editor ────────────────────────────────────── */
 function LanguagesEditor({ languages, onChange }) {
     const update = (i,f,v) => { const n=[...languages]; n[i]={...n[i],[f]:f==='percent'?Number(v):v}; onChange(n); };
     const add    = () => onChange([...languages,{name:'',level:'',percent:80}]);
@@ -137,23 +180,25 @@ function LanguagesEditor({ languages, onChange }) {
         <div className="space-y-2">
             {languages.map((lang,i) => (
                 <div key={i} className="flex gap-2 items-center">
-                    <input value={lang.name}  onChange={e=>update(i,'name',e.target.value)}  placeholder="Langue"
-                        className="flex-1 bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
-                    <input value={lang.level} onChange={e=>update(i,'level',e.target.value)} placeholder="Natif / Courant..."
-                        className="flex-1 bg-white/[0.04] border border-white/15 rounded-sm px-3 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 placeholder-white/10"/>
-                    <input type="number" min={0} max={100} value={lang.percent} onChange={e=>update(i,'percent',e.target.value)} style={{width:60}}
-                        className="bg-white/[0.04] border border-white/15 rounded-sm px-2 py-1.5 text-white text-sm font-mono outline-none focus:border-white/40 text-center"/>
-                    <button onClick={()=>remove(i)} className="text-red-400/30 hover:text-red-400"><Trash2 className="w-3.5 h-3.5"/></button>
+                    <input value={lang.name}  onChange={e=>update(i,'name',e.target.value)}  placeholder="Langue"         style={{ ...inputStyle, flex: 1 }} />
+                    <input value={lang.level} onChange={e=>update(i,'level',e.target.value)} placeholder="Natif / Courant" style={{ ...inputStyle, flex: 1 }} />
+                    <input type="number" min={0} max={100} value={lang.percent} onChange={e=>update(i,'percent',e.target.value)}
+                        style={{ ...inputStyle, width: 64, textAlign: 'center' }} />
+                    <button onClick={()=>remove(i)} style={{ color: TERRA, background: 'none', border: 'none', cursor: 'pointer' }}>
+                        <Trash2 className="w-3.5 h-3.5"/>
+                    </button>
                 </div>
             ))}
-            <button onClick={add} className="flex items-center gap-1 text-[9px] font-mono text-[#00a8ff]/40 hover:text-[#00a8ff] uppercase tracking-widest mt-1">
+            <button onClick={add}
+                style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                className="flex items-center gap-1 mt-1">
                 <Plus className="w-3 h-3"/> Ajouter
             </button>
         </div>
     );
 }
 
-// ─── Member editor ─────────────────────────────────────────
+/* ─── Member editor ─────────────────────────────────────────── */
 function MemberEditor({ member }) {
     const [form, setForm] = useState({
         ...member,
@@ -188,112 +233,98 @@ function MemberEditor({ member }) {
         });
     };
 
-    const ACCENT = {
-        'real-madrid': '#D4AF37',
-        'gojo':        '#38bdf8',
-        'dune':        '#c9834a',
-        'itachi':      '#be123c',
-        'beast':       '#f59e0b',
-        'antares':     '#ef4444',
-        'shadow':      '#a855f7',
-    }[member.theme] ?? '#00a8ff';
-
     const tabs = [
-        { id:'info',       label:'📋 Infos'        },
-        { id:'skills',     label:'⚡ Compétences'   },
-        { id:'experience', label:'🏆 Expériences'   },
-        { id:'education',  label:'🎓 Formations'    },
-        { id:'languages',  label:'🌐 Langues'       },
+        { id:'info',       label:'Infos'        },
+        { id:'skills',     label:'Compétences'  },
+        { id:'experience', label:'Expériences'  },
+        { id:'education',  label:'Formations'   },
+        { id:'languages',  label:'Langues'      },
     ];
 
     return (
-        <div className="relative rounded-sm overflow-hidden backdrop-blur-sm"
-            style={{ border:'1px solid rgba(0,207,255,0.35)', boxShadow:'0 0 20px rgba(0,207,255,0.1)', background:'linear-gradient(135deg,#0d2455cc,#081530cc)' }}
-            style={{ borderColor: ACCENT + '25', boxShadow:`0 0 30px ${ACCENT}08` }}>
-            <Scanlines />
-
-            {/* ── Member header ── */}
-            <div className="relative z-10 flex items-center gap-4 px-6 py-4 border-b"
-                style={{ borderColor: ACCENT + '15', background: ACCENT + '05' }}>
-                {/* Avatar */}
-                <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center font-black text-lg border-2"
-                    style={{
-                        borderColor: ACCENT + '60',
-                        background: 'rgba(0,0,0,0.6)',
-                        boxShadow: `0 0 16px ${ACCENT}30`,
-                        color: ACCENT,
-                        textShadow: `0 0 10px ${ACCENT}`,
-                    }}>
+        <div style={{ background: CARD, borderRadius: 12, border: `1px solid ${INK3}`, borderLeft: `4px solid ${TERRA}`, boxShadow: '0 2px 12px rgba(30,14,4,0.08)', overflow: 'hidden' }}>
+            {/* Header */}
+            <div className="flex items-center gap-4 px-6 py-4 border-b" style={{ borderColor: INK3 }}>
+                <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: TERRA, color: '#FBF5E6', fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 14 }}>
                     {member.initials}
                 </div>
-
                 <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-0.5">
-                        <div className="w-1 h-1 rounded-full animate-pulse" style={{ background: ACCENT, boxShadow:`0 0 6px 2px ${ACCENT}` }} />
-                        <span className="text-[9px] font-mono uppercase tracking-[0.3em]" style={{ color: ACCENT + '50' }}>
-                            {member.shadow_title ?? 'Fiche du chasseur'}
-                        </span>
-                    </div>
-                    <h2 className="font-black text-white tracking-wide">{member.name}</h2>
-                    <p className="text-[10px] font-mono" style={{ color: ACCENT + '60' }}>
-                        {member.shadow_title} — Rang {member.rank}
+                    <h2 style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 14, color: INK }}>
+                        {member.name}
+                    </h2>
+                    <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 11, color: INK2, marginTop: 2 }}>
+                        {member.role} — Rang {member.rank}
                     </p>
                 </div>
 
-                {/* Save button */}
                 <button onClick={save} disabled={saving}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono border transition-all duration-300 disabled:opacity-50"
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs transition-all duration-300 disabled:opacity-50"
                     style={saved
-                        ? { color:'#4ade80', borderColor:'#4ade8040', background:'rgba(74,222,128,0.08)', boxShadow:'0 0 15px rgba(74,222,128,0.1)' }
-                        : { color: ACCENT, borderColor: ACCENT+'40', background: ACCENT+'10', boxShadow:`0 0 0px ${ACCENT}00` }
+                        ? { fontFamily: "'Sora', sans-serif", fontWeight: 600, color: '#16a34a', border: '1px solid rgba(22,163,74,0.3)', background: 'rgba(22,163,74,0.06)' }
+                        : { fontFamily: "'Sora', sans-serif", fontWeight: 600, color: '#FBF5E6', border: 'none', background: TERRA, cursor: 'pointer' }
                     }>
-                    {saved ? <><CheckCircle className="w-4 h-4"/> [ SAUVEGARDÉ ]</> : <><Save className="w-4 h-4"/> [ ENREGISTRER ]</>}
+                    {saved ? <><CheckCircle className="w-4 h-4"/> Sauvegardé</> : <><Save className="w-4 h-4"/> Enregistrer</>}
                 </button>
             </div>
 
-            {/* ── Tabs ── */}
-            <div className="relative z-10 flex border-b overflow-x-auto" style={{ borderColor: ACCENT + '10' }}>
+            {/* Tabs */}
+            <div className="flex border-b overflow-x-auto" style={{ borderColor: INK3 }}>
                 {tabs.map(t => (
                     <button key={t.id} onClick={() => setTab(t.id)}
-                        className="px-4 py-2.5 text-[9px] font-mono whitespace-nowrap uppercase tracking-widest transition-colors"
+                        className="px-4 py-2.5 whitespace-nowrap transition-colors"
                         style={tab === t.id
-                            ? { color: ACCENT, borderBottom: `2px solid ${ACCENT}` }
-                            : { color: 'rgba(255,255,255,0.2)' }
+                            ? { fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 11, color: TERRA, borderBottom: `2px solid ${TERRA}`, textTransform: 'uppercase', letterSpacing: '0.1em' }
+                            : { fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 11, color: INK2, textTransform: 'uppercase', letterSpacing: '0.1em' }
                         }>{t.label}</button>
                 ))}
             </div>
 
-            {/* ── Content ── */}
-            <div className="relative z-10 p-6">
-
+            {/* Content */}
+            <div className="p-6">
                 {tab === 'info' && (
                     <div className="grid grid-cols-2 gap-4">
-                        <SysInput label="Nom complet"   name="name"         value={form.name}            onChange={handleChange} />
-                        <SysInput label="Poste / Rôle"  name="role"         value={form.role}            onChange={handleChange} />
-                        <SysInput label="Initiales"     name="initials"     value={form.initials}        onChange={handleChange} />
-                        <SysSelect label="Rang" options={RANKS} name="rank" value={form.rank}            onChange={handleChange} />
-                        <SysInput label="Localisation"  name="location"     value={form.location ?? ''}  onChange={handleChange} />
-                        <SysInput label="Téléphone"     name="phone"        value={form.phone ?? ''}     onChange={handleChange} />
-                        <SysInput label="Email"         name="email"        value={form.email ?? ''}     onChange={handleChange} />
-                        <SysSelect label="Thème" options={THEMES} name="theme" value={form.theme}        onChange={handleChange} />
-                        <div className="col-span-2">
-                            <SysInput label="Titre spécial" name="shadow_title" value={form.shadow_title ?? ''} onChange={handleChange} />
+                        <div><label style={labelStyle}>Nom complet</label><input name="name" value={form.name} onChange={handleChange} style={inputStyle} /></div>
+                        <div><label style={labelStyle}>Poste / Rôle</label><input name="role" value={form.role} onChange={handleChange} style={inputStyle} /></div>
+                        <div><label style={labelStyle}>Initiales</label><input name="initials" value={form.initials} onChange={handleChange} style={inputStyle} /></div>
+                        <div>
+                            <label style={labelStyle}>Rang</label>
+                            <select name="rank" value={form.rank} onChange={handleChange} style={inputStyle}>
+                                {RANKS.map(r => <option key={r}>{r}</option>)}
+                            </select>
+                        </div>
+                        <div><label style={labelStyle}>Localisation</label><input name="location" value={form.location ?? ''} onChange={handleChange} style={inputStyle} /></div>
+                        <div><label style={labelStyle}>Téléphone</label><input name="phone" value={form.phone ?? ''} onChange={handleChange} style={inputStyle} /></div>
+                        <div><label style={labelStyle}>Email</label><input name="email" value={form.email ?? ''} onChange={handleChange} style={inputStyle} /></div>
+                        <div>
+                            <label style={labelStyle}>Thème</label>
+                            <select name="theme" value={form.theme} onChange={handleChange} style={inputStyle}>
+                                {THEMES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
+                            </select>
                         </div>
                         <div className="col-span-2">
-                            <SysTextarea label="Résumé / À propos" name="summary" rows={4} value={form.summary ?? ''} onChange={handleChange} />
+                            <label style={labelStyle}>Titre spécial</label>
+                            <input name="shadow_title" value={form.shadow_title ?? ''} onChange={handleChange} style={inputStyle} />
                         </div>
                         <div className="col-span-2">
-                            <SysInput label="Soft skills (virgules)" name="soft_skills" value={form.soft_skills} onChange={handleChange} />
+                            <label style={labelStyle}>Résumé / À propos</label>
+                            <textarea name="summary" rows={4} value={form.summary ?? ''} onChange={handleChange}
+                                style={{ ...inputStyle, resize: 'vertical' }} />
                         </div>
                         <div className="col-span-2">
-                            <SysInput label="Centres d'intérêt (virgules)" name="interests" value={form.interests} onChange={handleChange} />
+                            <label style={labelStyle}>Soft skills (virgules)</label>
+                            <input name="soft_skills" value={form.soft_skills} onChange={handleChange} style={inputStyle} />
+                        </div>
+                        <div className="col-span-2">
+                            <label style={labelStyle}>Centres d'intérêt (virgules)</label>
+                            <input name="interests" value={form.interests} onChange={handleChange} style={inputStyle} />
                         </div>
                     </div>
                 )}
 
                 {tab === 'skills' && (
                     <>
-                        <SectionTitle>Compétences techniques — Nom · Catégorie · Niveau %</SectionTitle>
+                        <SectionTitle>Compétences — Nom · Catégorie · Niveau %</SectionTitle>
                         <SkillsEditor skills={form.skills} onChange={val=>set('skills',val)} />
                     </>
                 )}
@@ -323,10 +354,9 @@ function MemberEditor({ member }) {
     );
 }
 
-const THEMES_VALUES = THEMES.map(t => t.value);
-const defaultNewMember = { slug:'', name:'', role:'', rank:'A', initials:'', theme:'shadow', shadow_title:'' };
+const defaultNewMember = { slug:'', name:'', role:'', rank:'A', initials:'', theme:'dune', shadow_title:'' };
 
-// ─── Add member form ────────────────────────────────────────
+/* ─── Add member form ─────────────────────────────────────── */
 function AddMemberForm({ onClose }) {
     const [form, setForm] = useState(defaultNewMember);
     const set = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
@@ -337,36 +367,48 @@ function AddMemberForm({ onClose }) {
     };
 
     return (
-        <div className="relative rounded-sm p-6 mb-6" style={{ border:'1px solid rgba(0,207,255,0.35)', background:'linear-gradient(135deg,#0d2455cc,#081530cc)' }}>
-            <Scanlines />
-            <div className="relative z-10">
-                <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
-                    <Plus className="w-4 h-4 text-[#00a8ff]" /> Nouveau membre
-                </h3>
-                <form onSubmit={submit} className="grid grid-cols-2 gap-3">
-                    <SysInput label="Slug (identifiant unique)" name="slug" value={form.slug} onChange={set} required />
-                    <SysInput label="Nom complet" name="name" value={form.name} onChange={set} required />
-                    <SysInput label="Poste / Rôle" name="role" value={form.role} onChange={set} required />
-                    <SysInput label="Initiales" name="initials" value={form.initials} onChange={set} />
-                    <SysSelect label="Rang" options={RANKS} name="rank" value={form.rank} onChange={set} />
-                    <SysSelect label="Thème" options={THEMES} name="theme" value={form.theme} onChange={set} />
-                    <div className="col-span-2">
-                        <SysInput label="Titre spécial" name="shadow_title" value={form.shadow_title} onChange={set} />
-                    </div>
-                    <div className="col-span-2 flex gap-3 justify-end mt-2">
-                        <button type="button" onClick={onClose}
-                            className="px-4 py-2 text-xs font-mono border border-white/10 text-white/30 rounded-lg hover:text-white/60 transition-colors">
-                            Annuler
-                        </button>
-                        <SysBtn type="submit">[ CRÉER ]</SysBtn>
-                    </div>
-                </form>
-            </div>
+        <div style={{ background: CARD, borderRadius: 12, border: `1px solid ${INK3}`, borderLeft: `4px solid ${TERRA}`, padding: 24, marginBottom: 24 }}>
+            <h3 className="flex items-center gap-2 mb-4"
+                style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 14, color: INK }}>
+                <Plus className="w-4 h-4" style={{ color: TERRA }} /> Nouveau membre
+            </h3>
+            <form onSubmit={submit} className="grid grid-cols-2 gap-3">
+                <div><label style={labelStyle}>Slug (identifiant unique)</label><input name="slug" value={form.slug} onChange={set} required style={inputStyle} /></div>
+                <div><label style={labelStyle}>Nom complet</label><input name="name" value={form.name} onChange={set} required style={inputStyle} /></div>
+                <div><label style={labelStyle}>Poste / Rôle</label><input name="role" value={form.role} onChange={set} required style={inputStyle} /></div>
+                <div><label style={labelStyle}>Initiales</label><input name="initials" value={form.initials} onChange={set} style={inputStyle} /></div>
+                <div>
+                    <label style={labelStyle}>Rang</label>
+                    <select name="rank" value={form.rank} onChange={set} style={inputStyle}>
+                        {['S','A','B','C'].map(r => <option key={r}>{r}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <label style={labelStyle}>Thème</label>
+                    <select name="theme" value={form.theme} onChange={set} style={inputStyle}>
+                        {THEMES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
+                    </select>
+                </div>
+                <div className="col-span-2">
+                    <label style={labelStyle}>Titre / Spécialité</label>
+                    <input name="shadow_title" value={form.shadow_title} onChange={set} style={inputStyle} />
+                </div>
+                <div className="col-span-2 flex gap-3 justify-end mt-2">
+                    <button type="button" onClick={onClose}
+                        style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 12, color: INK2, background: 'transparent', border: `1px solid ${INK3}`, borderRadius: 8, padding: '8px 18px', cursor: 'pointer' }}>
+                        Annuler
+                    </button>
+                    <button type="submit"
+                        style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 12, color: '#FBF5E6', background: TERRA, border: 'none', borderRadius: 8, padding: '8px 18px', cursor: 'pointer' }}>
+                        Créer
+                    </button>
+                </div>
+            </form>
         </div>
     );
 }
 
-// ─── Page ──────────────────────────────────────────────────
+/* ─── Page ──────────────────────────────────────────────────── */
 export default function DashboardTeam({ admin, members }) {
     const [showAdd, setShowAdd] = useState(false);
 
@@ -377,32 +419,39 @@ export default function DashboardTeam({ admin, members }) {
     };
 
     return (
-        <div className="min-h-screen bg-transparent flex relative overflow-hidden">
+        <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
             <SLSystemBG />
-            
-            
-      
             <Sidebar admin={admin} />
 
             <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
                 <div className="flex items-start justify-between mb-8">
                     <div>
-                        <div className="flex items-center gap-2 mb-1">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff] shadow-[0_0_6px_2px_rgba(0,168,255,0.8)]" />
-                            <span className="text-[9px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">Dossiers chasseurs</span>
+                        <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
+                            Équipe
                         </div>
-                        <h1 className="text-2xl font-black text-white" style={{ textShadow:'0 0 20px rgba(0,168,255,0.2)' }}>Équipe / CV</h1>
-                        <p className="text-[#00a8ff]/30 text-xs font-mono mt-1">{members.length} membre{members.length !== 1 ? 's' : ''} enregistré{members.length !== 1 ? 's' : ''}</p>
+                        <h1 style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
+                            Équipe / CV
+                        </h1>
+                        <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
+                            {members.length} membre{members.length !== 1 ? 's' : ''} enregistré{members.length !== 1 ? 's' : ''}
+                        </p>
                     </div>
                     <button onClick={() => setShowAdd(p => !p)}
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono border border-[#00a8ff]/30 text-[#00a8ff] bg-[#00a8ff]/[0.06] hover:bg-[#00a8ff]/[0.12] transition-all">
-                        <Plus className="w-3.5 h-3.5" /> Ajouter
+                        className="flex items-center gap-2 transition-all duration-200"
+                        style={{
+                            fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 12,
+                            color: '#FBF5E6', background: TERRA,
+                            border: 'none', borderRadius: 10, padding: '10px 18px', cursor: 'pointer',
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.background = TERRA2; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = TERRA; }}>
+                        <Plus className="w-3.5 h-3.5" /> Ajouter un membre
                     </button>
                 </div>
 
                 {showAdd && <AddMemberForm onClose={() => setShowAdd(false)} />}
 
-                <SysDivider label="Chasseurs enregistrés" />
+                <SysDivider label="Membres" />
 
                 <div className="space-y-6">
                     {members.map(member => (
@@ -410,9 +459,10 @@ export default function DashboardTeam({ admin, members }) {
                             <MemberEditor member={member} />
                             <button
                                 onClick={() => deleteMember(member.id, member.name)}
-                                className="absolute top-4 right-20 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-mono
-                                    border border-transparent text-white/20 hover:border-red-500/30 hover:text-red-400/70
-                                    hover:bg-red-500/[0.05] transition-all duration-200 z-20">
+                                className="absolute top-4 right-36 flex items-center gap-1.5 px-3 py-1.5 rounded-lg z-20 transition-all duration-200"
+                                style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2, background: 'transparent', border: `1px solid transparent`, cursor: 'pointer' }}
+                                onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.borderColor = 'rgba(200,72,24,0.3)'; }}
+                                onMouseLeave={e => { e.currentTarget.style.color = INK2; e.currentTarget.style.borderColor = 'transparent'; }}>
                                 <Trash2 className="w-3 h-3" /> Supprimer
                             </button>
                         </div>

@@ -5,6 +5,16 @@ import Sidebar from "@/Components/dashboard/Sidebar";
 import WhatsAppFloat from "@/Components/WhatsAppFloat";
 import { SLSystemBG, SysDivider, StatusBar, SysWin } from "@/Components/dashboard/SystemLayout";
 
+/* ─── Palette MelanoGeek ─────────────────────────────────── */
+const BG     = '#F5EDD6';
+const CARD   = '#FBF5E6';
+const INK    = '#1E0E04';
+const INK2   = 'rgba(30,14,4,0.52)';
+const INK3   = 'rgba(30,14,4,0.14)';
+const TERRA  = '#C84818';
+const TERRA2 = '#E85A1A';
+const GOLD   = '#B87820';
+
 function formatDate(dateStr) {
   const d = new Date(dateStr);
   return d.toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
@@ -22,29 +32,39 @@ export default function DashboardMessages({ admin, messages }) {
     return (
       <motion.div
         initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-        className={`relative rounded-xl border p-5 transition-all duration-200 ${
-          isUnread
-            ? "border-[#00a8ff]/30 bg-[#00a8ff]/[0.04]"
-            : "border-white/5 bg-white/[0.01]"
-        }`}
+        className="relative p-5 transition-all duration-200"
+        style={{
+          background: CARD, borderRadius: 12,
+          border: `1px solid ${isUnread ? 'rgba(200,72,24,0.25)' : INK3}`,
+          borderLeft: `4px solid ${isUnread ? TERRA : INK3}`,
+          boxShadow: '0 2px 12px rgba(30,14,4,0.07)',
+        }}
       >
         {isUnread && (
-          <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-[#00a8ff] shadow-[0_0_8px_2px_rgba(0,168,255,0.8)] animate-pulse" />
+          <div className="absolute top-4 right-4 w-2 h-2 rounded-full animate-pulse"
+            style={{ background: TERRA, boxShadow: `0 0 8px 2px rgba(200,72,24,0.5)` }} />
         )}
 
         {/* Header */}
         <div className="flex items-start gap-3 mb-3">
-          <div className={`w-9 h-9 rounded-lg flex items-center justify-center border flex-shrink-0 ${
-            isUnread ? "border-[#00a8ff]/30 bg-[#00a8ff]/10" : "border-white/10 bg-white/5"
-          }`}>
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center border flex-shrink-0"
+            style={{
+              border: isUnread ? `1px solid rgba(200,72,24,0.3)` : `1px solid ${INK3}`,
+              background: isUnread ? 'rgba(200,72,24,0.08)' : 'rgba(30,14,4,0.04)',
+            }}>
             {isUnread
-              ? <Mail className="w-4 h-4 text-[#00a8ff]" />
-              : <MailOpen className="w-4 h-4 text-white/30" />
+              ? <Mail className="w-4 h-4" style={{ color: TERRA }} />
+              : <MailOpen className="w-4 h-4" style={{ color: INK2 }} />
             }
           </div>
           <div className="flex-1 min-w-0">
-            <div className={`font-bold text-sm ${isUnread ? "text-white" : "text-white/50"}`}>{msg.name}</div>
-            <a href={`mailto:${msg.email}`} className="text-xs text-[#00a8ff]/60 hover:text-[#00a8ff] transition-colors font-mono">
+            <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 13, color: isUnread ? INK : INK2 }}>
+              {msg.name}
+            </div>
+            <a href={`mailto:${msg.email}`}
+              style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textDecoration: 'none' }}
+              onMouseEnter={e => { e.currentTarget.style.color = TERRA2; }}
+              onMouseLeave={e => { e.currentTarget.style.color = TERRA; }}>
               {msg.email}
             </a>
           </div>
@@ -53,20 +73,23 @@ export default function DashboardMessages({ admin, messages }) {
         {/* Meta */}
         <div className="flex flex-wrap gap-3 mb-3">
           {msg.company && (
-            <span className="flex items-center gap-1 text-[10px] font-mono text-white/30">
+            <span className="flex items-center gap-1"
+              style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2 }}>
               <Building2 className="w-3 h-3" /> {msg.company}
             </span>
           )}
-          <span className="flex items-center gap-1 text-[10px] font-mono text-white/30">
+          <span className="flex items-center gap-1"
+            style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2 }}>
             <DollarSign className="w-3 h-3" /> {msg.budget}
           </span>
-          <span className="flex items-center gap-1 text-[10px] font-mono text-white/20">
+          <span className="flex items-center gap-1"
+            style={{ fontFamily: "'Sora', sans-serif", fontSize: 10, color: INK2 }}>
             <Calendar className="w-3 h-3" /> {formatDate(msg.created_at)}
           </span>
         </div>
 
         {/* Message */}
-        <p className={`text-sm leading-relaxed mb-4 ${isUnread ? "text-white/70" : "text-white/30"}`}>
+        <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: isUnread ? 400 : 300, fontSize: 13, color: isUnread ? INK : INK2, lineHeight: 1.6, marginBottom: 16 }}>
           {msg.message}
         </p>
 
@@ -74,22 +97,25 @@ export default function DashboardMessages({ admin, messages }) {
         <div className="flex items-center gap-2">
           {isUnread && (
             <button onClick={() => markRead(msg.id)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-mono
-                border border-[#00a8ff]/20 text-[#00a8ff]/60 hover:border-[#00a8ff]/50 hover:text-[#00a8ff]
-                hover:bg-[#00a8ff]/[0.06] transition-all duration-200">
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200"
+              style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: 10, color: '#FBF5E6', background: TERRA, border: 'none', cursor: 'pointer' }}
+              onMouseEnter={e => { e.currentTarget.style.background = TERRA2; }}
+              onMouseLeave={e => { e.currentTarget.style.background = TERRA; }}>
               <MailOpen className="w-3 h-3" /> Marquer comme lu
             </button>
           )}
           <a href={`mailto:${msg.email}`}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-mono
-              border border-white/10 text-white/30 hover:border-[#00a8ff]/20 hover:text-[#00a8ff]/60
-              hover:bg-[#00a8ff]/[0.03] transition-all duration-200">
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200"
+            style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 10, color: INK2, background: 'transparent', border: `1px solid ${INK3}`, borderRadius: 8, textDecoration: 'none' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(200,72,24,0.3)'; e.currentTarget.style.color = TERRA; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.color = INK2; }}>
             <Mail className="w-3 h-3" /> Répondre
           </a>
           <button onClick={() => destroy(msg.id)}
-            className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-mono
-              border border-transparent text-white/20 hover:border-red-500/20 hover:text-red-400/60
-              hover:bg-red-500/[0.04] transition-all duration-200">
+            className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200"
+            style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 10, color: INK2, background: 'transparent', border: `1px solid transparent`, cursor: 'pointer' }}
+            onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.borderColor = 'rgba(200,72,24,0.3)'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = INK2; e.currentTarget.style.borderColor = 'transparent'; }}>
             <Trash2 className="w-3 h-3" /> Supprimer
           </button>
         </div>
@@ -98,35 +124,35 @@ export default function DashboardMessages({ admin, messages }) {
   };
 
   return (
-    <div className="min-h-screen bg-transparent flex relative overflow-hidden">
+    <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
       <SLSystemBG />
-      
-      
-      
       <Sidebar admin={admin} />
 
       <main className="relative z-10 flex-1 p-4 md:p-8 pt-16 md:pt-8 overflow-auto">
 
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-[#00a8ff]/40" />
-            <span className="text-[10px] font-mono text-[#00a8ff]/40 uppercase tracking-[0.3em]">Inbox — Messages clients</span>
+          <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
+            Boîte de réception
           </div>
-          <h1 className="text-3xl font-black text-white mb-1">
-            Messages <span className="text-[#00a8ff]">reçus</span>
+          <h1 style={{ fontFamily: "'Unbounded', sans-serif", fontWeight: 700, fontSize: 24, color: INK, marginBottom: 6 }}>
+            Messages
           </h1>
-          <p className="text-xs font-mono text-white/20">
+          <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 12, color: INK2 }}>
             {unread.length} non lu{unread.length !== 1 ? "s" : ""} · {messages.length} au total
           </p>
         </motion.div>
 
         {messages.length === 0 ? (
-          <SysWin title="INBOX" subtitle="Aucun message reçu" delay={0.1}>
+          <SysWin title="Boîte de réception" subtitle="Aucun message reçu">
             <div className="flex flex-col items-center justify-center py-16 text-center">
-              <MessageSquare className="w-12 h-12 text-[#00a8ff]/10 mb-4" />
-              <p className="text-white/20 text-sm font-mono">Aucun message pour l'instant.</p>
-              <p className="text-white/10 text-xs font-mono mt-1">Les demandes via le formulaire apparaîtront ici.</p>
+              <MessageSquare className="w-12 h-12 mb-4" style={{ color: INK3 }} />
+              <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 400, fontSize: 13, color: INK2 }}>
+                Aucun message pour l'instant.
+              </p>
+              <p style={{ fontFamily: "'Sora', sans-serif", fontWeight: 300, fontSize: 11, color: INK2, marginTop: 4 }}>
+                Les demandes via le formulaire apparaîtront ici.
+              </p>
             </div>
           </SysWin>
         ) : (
