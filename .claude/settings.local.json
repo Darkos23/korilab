@@ -28,7 +28,8 @@
       "Bash(grep -n \"SystemGrid, SystemOrbs, ParticleNetwork\" resources/js/Pages/Dashboard/*.jsx)",
       "Bash(grep -h \"SLSystemBG\\\\|SystemGrid\" resources/js/Pages/Dashboard/*.jsx)",
       "Bash(sed -i 's/bg-\\\\[#060f28\\\\]/bg-transparent/g' resources/js/Pages/Dashboard/Index.jsx resources/js/Pages/Dashboard/Messages.jsx resources/js/Pages/Dashboard/Portfolio.jsx resources/js/Pages/Dashboard/Services.jsx resources/js/Pages/Dashboard/Site.jsx resources/js/Pages/Dashboard/Team.jsx)",
-      "Bash(grep -h \"bg-transparent\\\\|bg-\\\\[#060f28\\\\]\" resources/js/Pages/Dashboard/*.jsx)"
+      "Bash(grep -h \"bg-transparent\\\\|bg-\\\\[#060f28\\\\]\" resources/js/Pages/Dashboard/*.jsx)",
+      "Bash(grep -E \"\\\\.\\(js|json|css\\)$\")"
     ]
   }
 }

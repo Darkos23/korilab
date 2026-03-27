@@ -4,8 +4,15 @@
     {
       "name": "korilab-worktree",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "5174"],
-      "port": 5174
+      "runtimeArgs": ["run", "dev", "--", "--port", "5176"],
+      "port": 5176
+    },
+    {
+      "name": "korilab (Laravel)",
+      "runtimeExecutable": "php",
+      "runtimeArgs": ["artisan", "serve", "--port=8003"],
+      "port": 8003,
+      "cwd": "/d/www/korilab"
     }
   ]
 }
