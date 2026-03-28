@@ -78,7 +78,7 @@ export default function Footer({ footer, contactInfo }) {
   ];
 
   return (
-    <footer className="border-t" style={{ background: '#F9F5EF', color: '#5A5448', borderColor: 'rgba(28,26,22,0.08)' }}>
+    <footer className="border-t" style={{ background: '#FDFBF7', color: '#5A5448', borderColor: 'rgba(28,26,22,0.08)' }}>
       <div className="section-padding mx-auto max-w-7xl py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-12 border-b" style={{ borderColor: 'rgba(28,26,22,0.08)' }}>
           <div className="lg:col-span-2">
