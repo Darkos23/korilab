@@ -4,7 +4,7 @@ import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, Mess
 import { useState } from "react";
 
 /* ─── Tokens sidebar (washi soft) ────────────────────────── */
-const SIDEBAR_BG = '#F5EAD5';
+const SIDEBAR_BG = '#F9F5EF';
 const TEXT       = '#1C1A16';
 const DIM        = '#5A5448';
 const MUTED      = '#8A8478';
