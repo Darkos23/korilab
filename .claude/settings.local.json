@@ -41,7 +41,8 @@
       "Bash(do)",
       "Bash(sed -i \"s/''Sora'', sans-serif/''Nunito'', sans-serif/g\" /d/www/KoriLab/.claude/worktrees/festive-rosalind/resources/js/Pages/Dashboard/$f.jsx)",
       "Bash(grep -rn \"CARD   = ''#FFFFFF''\" /d/www/KoriLab/.claude/worktrees/festive-rosalind/resources/js/Pages/Dashboard/ /d/www/KoriLab/.claude/worktrees/festive-rosalind/resources/js/Components/dashboard/)",
-      "Read(//d/www/KoriLab/**)"
+      "Read(//d/www/KoriLab/**)",
+      "Bash(node -e \":*)"
     ]
   }
 }
