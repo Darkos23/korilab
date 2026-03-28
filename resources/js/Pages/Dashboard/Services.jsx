@@ -199,7 +199,7 @@ export default function DashboardServices({ admin, services }) {
                         const rs = RANK_STYLES[s.rank] ?? RANK_STYLES.C;
                         return (
                             <div key={s.id}
-                                className="flex items-center gap-4 px-5 py-4 transition-all"
+                                className="flex items-center gap-4 px-5 py-4 transition-all paper-card"
                                 style={{
                                     background: CARD, borderRadius: 12,
                                     border: `1px solid ${INK3}`,

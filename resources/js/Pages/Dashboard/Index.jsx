@@ -29,7 +29,7 @@ const RANK_DOT = { S: '#3A6840', A: '#3A6840', B: '#8A5A18', C: '#B4AEA4' };
 function StatCard({ label, value, icon: Icon, sub, delay }) {
   return (
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay }}
-      className="rounded-xl p-5"
+      className="rounded-xl p-5 paper-card"
       style={{ background: CARD, border: `1px solid ${INK3}`, borderLeft: `3px solid ${TERRA}`, boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
       <div className="flex items-center justify-between mb-3">
         {Icon && <Icon size={14} style={{ color: INK3 }} />}
@@ -47,7 +47,7 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay }}>
       <Link href={href}
-        className="group flex items-center gap-4 p-4 rounded-xl transition-all duration-200"
+        className="group flex items-center gap-4 p-4 rounded-xl transition-all duration-200 paper-card"
         style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}
         onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.boxShadow = '0 4px 14px rgba(180,48,40,0.08)'; }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.boxShadow = '0 1px 4px rgba(0,0,0,0.04)'; }}
@@ -79,7 +79,7 @@ function RightSidebar({ admin, members }) {
 
       {/* Site card */}
       <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }}
-        className="rounded-xl p-4"
+        className="rounded-xl p-4 paper-card"
         style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
         <div className="font-mono text-[9px] uppercase tracking-widest mb-2" style={{ color: '#B4AEA4' }}>korilab.dev</div>
         <p style={{ fontFamily: FONT, fontSize: 15, fontWeight: 700, color: INK, lineHeight: 1.35, fontStyle: 'italic' }}>
@@ -90,7 +90,7 @@ function RightSidebar({ admin, members }) {
 
       {/* Équipe */}
       <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.25 }}
-        className="rounded-xl overflow-hidden"
+        className="rounded-xl overflow-hidden paper-card"
         style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
         <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: INK3 }}>
           <span style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: INK2, textTransform: 'uppercase', letterSpacing: '0.3em' }}>Équipe</span>

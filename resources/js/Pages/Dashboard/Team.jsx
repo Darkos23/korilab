@@ -242,7 +242,7 @@ function MemberEditor({ member }) {
     ];
 
     return (
-        <div style={{ background: CARD, borderRadius: 12, border: `1px solid ${INK3}`, borderLeft: `4px solid ${TERRA}`, boxShadow: '0 2px 12px rgba(30,14,4,0.08)', overflow: 'hidden' }}>
+        <div className="paper-card" style={{ background: CARD, borderRadius: 12, border: `1px solid ${INK3}`, borderLeft: `4px solid ${TERRA}`, boxShadow: '0 2px 12px rgba(30,14,4,0.08)', overflow: 'hidden' }}>
             {/* Header */}
             <div className="flex items-center gap-4 px-6 py-4 border-b" style={{ borderColor: INK3 }}>
                 <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
@@ -367,7 +367,7 @@ function AddMemberForm({ onClose }) {
     };
 
     return (
-        <div style={{ background: CARD, borderRadius: 12, border: `1px solid ${INK3}`, borderLeft: `4px solid ${TERRA}`, padding: 24, marginBottom: 24 }}>
+        <div className="paper-card" style={{ background: CARD, borderRadius: 12, border: `1px solid ${INK3}`, borderLeft: `4px solid ${TERRA}`, padding: 24, marginBottom: 24 }}>
             <h3 className="flex items-center gap-2 mb-4"
                 style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 14, color: INK }}>
                 <Plus className="w-4 h-4" style={{ color: TERRA }} /> Nouveau membre

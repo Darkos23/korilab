@@ -33,7 +33,7 @@ export default function DashboardMessages({ admin, messages }) {
     return (
       <motion.div
         initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-        className="relative p-5 transition-all duration-200"
+        className="relative p-5 transition-all duration-200 paper-card"
         style={{
           background: CARD, borderRadius: 12,
           border: `1px solid ${isUnread ? 'rgba(200,72,24,0.25)' : INK3}`,
