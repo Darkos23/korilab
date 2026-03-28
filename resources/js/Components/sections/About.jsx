@@ -83,16 +83,6 @@ export default function About({ about }) {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent" />
             </div>
-            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-5 -right-5 glass rounded-xl p-4 shadow-xl glow-blue-sm">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-amber-500/20 flex items-center justify-center text-lg">🏆</div>
-                <div>
-                  <div className="font-bold text-white text-sm">Studio Signature</div>
-                  <div className="text-xs text-slate-500">Studio Dakar · Sénégal</div>
-                </div>
-              </div>
-            </motion.div>
             <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 shadow-lg">
               <div className="text-2xl font-bold text-blue-400">{questCount}</div>
