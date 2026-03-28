@@ -7,7 +7,7 @@ import { SLSystemBG, SysWin, SysInput, SysBtn, SysDivider, StatusBar } from '@/C
 
 /* ─── Palette Washi soft ─────────────────────────────────── */
 const BG     = '#F8F5EF';
-const CARD   = '#F9F5EF';
+const CARD   = '#FDFBF7';
 const INK    = '#1C1A16';
 const INK2   = '#5A5448';
 const INK3   = 'rgba(0,0,0,0.06)';
