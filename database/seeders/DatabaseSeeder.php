@@ -175,10 +175,10 @@ class DatabaseSeeder extends Seeder
 
         // Site config
         Site::create([
-            'header'              => ['logoName' => 'Dualcore', 'tagline' => 'Creative Studio', 'ctaText' => 'Démarrer un projet'],
+            'header'              => ['logoName' => 'KoriLab', 'tagline' => 'Creative Studio', 'ctaText' => 'Démarrer un projet'],
             'hero'                => ['badge' => 'Système Activé — Studio Créatif', 'titleStart' => 'Nous forjons des', 'titleHighlight' => 'expériences', 'titleEnd' => 'légendaires', 'subtitle' => 'Design, développement et stratégie — nous franchissons les portes de la médiocrité pour construire des produits digitaux de rang S.', 'cta1' => 'Voir nos quêtes', 'cta2' => "Rejoindre l'aventure"],
-            'heroStats'           => [['value' => '120+', 'label' => 'Projets livrés'], ['value' => '98%', 'label' => 'Clients satisfaits'], ['value' => 'S-Rank', 'label' => 'Qualité'], ['value' => '8 ans', 'label' => 'Expertise']],
-            'contactInfo'         => [['icon' => 'Mail', 'label' => 'Email', 'value' => 'hello@dualcore.studio'], ['icon' => 'Phone', 'label' => 'Téléphone', 'value' => '+221 77 534 19 54'], ['icon' => 'MapPin', 'label' => 'Adresse', 'value' => 'Dakar, Sénégal'], ['icon' => 'Clock', 'label' => 'Disponibilité', 'value' => 'Lun — Ven, 9h — 18h']],
+            'heroStats'           => [['value' => '10+', 'label' => 'Projets livrés'], ['value' => '98%', 'label' => 'Clients satisfaits'], ['value' => 'S-Rank', 'label' => 'Qualité'], ['value' => '5 ans', 'label' => 'Expertise']],
+            'contactInfo'         => [['icon' => 'Mail', 'label' => 'Email', 'value' => 'contact@korilab.dev'], ['icon' => 'Phone', 'label' => 'Téléphone', 'value' => '+221 77 534 19 54'], ['icon' => 'MapPin', 'label' => 'Adresse', 'value' => 'Dakar, Sénégal'], ['icon' => 'Clock', 'label' => 'Disponibilité', 'value' => 'Lun — Ven, 9h — 18h']],
             'availabilityMessage' => 'Disponible pour de nouveaux projets',
             'availabilitySlots'   => '2 créneaux disponibles ce mois-ci',
         ]);
