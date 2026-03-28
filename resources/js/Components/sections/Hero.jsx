@@ -70,10 +70,10 @@ export default function Hero({ hero, heroStats }) {
   const stats          = heroStats?.length
     ? heroStats.map((s, i) => ({ ...s, color: STAT_COLORS[i % STAT_COLORS.length] }))
     : [
-        { value: "20+",    label: "Projets livrés",    color: "text-blue-400" },
-        { value: "98%",    label: "Clients satisfaits", color: "text-violet-400" },
-        { value: "Elite",  label: "Qualité",             color: "text-amber-400" },
-        { value: "5 ans",  label: "Expertise",          color: "text-blue-300" },
+        { value: "100%",   label: "Clients satisfaits", color: "text-blue-400" },
+        { value: "24h",    label: "Temps de réponse",   color: "text-violet-400" },
+        { value: "Premium",label: "Qualité",             color: "text-amber-400" },
+        { value: "Dakar",  label: "Basés à",            color: "text-blue-300" },
       ];
 
   const ref = useRef(null);

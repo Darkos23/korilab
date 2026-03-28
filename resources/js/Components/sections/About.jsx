@@ -63,10 +63,10 @@ const item = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transiti
 export default function About({ about }) {
   const titleStart     = about?.titleStart     ?? "Forgés par la passion du";
   const titleHighlight = about?.titleHighlight ?? "digital";
-  const para1          = about?.para1          ?? "Fondée en 2016, KoriLab est née d'une conviction simple : le design et la technologie, maîtrisés à la perfection, transforment une startup en marque légendaire.";
-  const para2          = about?.para2          ?? "Notre studio de 15 experts allie créativité audacieuse et rigueur technique pour livrer des produits qui repoussent toutes les limites.";
+  const para1          = about?.para1          ?? "KoriLab est née d'une conviction simple : le design et la technologie, maîtrisés à la perfection, transforment une startup en marque légendaire.";
+  const para2          = about?.para2          ?? "Notre équipe allie créativité audacieuse et rigueur technique pour livrer des produits qui repoussent toutes les limites.";
   const aboutSkills    = Array.isArray(about?.skills) ? about.skills : skills;
-  const questCount     = about?.questCount     ?? "+20";
+  const questCount     = about?.questCount     ?? "100%";
 
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -88,15 +88,15 @@ export default function About({ about }) {
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-amber-500/20 flex items-center justify-center text-lg">🏆</div>
                 <div>
-                  <div className="font-bold text-white text-sm">Studio Signature</div>
-                  <div className="text-xs text-slate-500">Top Agency 2024</div>
+                  <div className="font-bold text-white text-sm">Studio Créatif</div>
+                  <div className="text-xs text-slate-500">Dakar, Sénégal</div>
                 </div>
               </div>
             </motion.div>
             <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 shadow-lg">
               <div className="text-2xl font-bold text-blue-400">{questCount}</div>
-              <div className="text-xs text-slate-500">Projets livrés</div>
+              <div className="text-xs text-slate-500">Satisfaction</div>
             </motion.div>
           </motion.div>
 

@@ -36,7 +36,7 @@ function StatsEditor({ stats, onChange }) {
         <div className="space-y-2">
             {stats.map((s, i) => (
                 <div key={i} className="flex gap-2 items-center">
-                    <input value={s.value} onChange={e => update(i, 'value', e.target.value)} placeholder="120+"
+                    <input value={s.value} onChange={e => update(i, 'value', e.target.value)} placeholder="100%"
                         style={{ ...inputStyle, width: 110 }} />
                     <input value={s.label} onChange={e => update(i, 'label', e.target.value)} placeholder="Projets livrés"
                         style={{ ...inputStyle, flex: 1 }} />
@@ -61,10 +61,10 @@ export default function DashboardSite({ admin, site }) {
 
     const [heroStats, setHeroStats] = useState(
         site?.heroStats?.length ? site.heroStats : [
-            { value: '20+',   label: 'Projets livrés'     },
-            { value: '98%',   label: 'Clients satisfaits' },
-            { value: 'Top',   label: 'Qualité'            },
-            { value: '5 ans', label: 'Expertise'          },
+            { value: '100%',    label: 'Clients satisfaits' },
+            { value: '24h',    label: 'Temps de réponse'  },
+            { value: 'Premium',label: 'Qualité'           },
+            { value: 'Dakar',  label: 'Basés à'           },
         ]
     );
 
@@ -80,10 +80,10 @@ export default function DashboardSite({ admin, site }) {
         heroCta2:            site?.hero?.cta2                   ?? 'Nous contacter',
         aboutTitleStart:     site?.about?.titleStart     ?? 'Forgés par la passion du',
         aboutTitleHighlight: site?.about?.titleHighlight ?? 'digital',
-        aboutPara1:          site?.about?.para1          ?? "Fondée en 2016, KoriLab est née d'une conviction simple : le design et la technologie, bien maîtrisés, transforment une startup en marque de référence.",
-        aboutPara2:          site?.about?.para2          ?? "Notre équipe d'experts allie créativité et rigueur technique pour livrer des produits qui font la différence.",
+        aboutPara1:          site?.about?.para1          ?? "KoriLab est née d'une conviction simple : le design et la technologie, maîtrisés à la perfection, transforment une startup en marque légendaire.",
+        aboutPara2:          site?.about?.para2          ?? "Notre équipe allie créativité audacieuse et rigueur technique pour livrer des produits qui repoussent toutes les limites.",
         aboutSkills:         Array.isArray(site?.about?.skills) ? site.about.skills.join(', ') : 'Design UI/UX, React / Next.js, Branding, Motion Design, SEO, Mobile First',
-        aboutQuestCount:     site?.about?.questCount     ?? '+20',
+        aboutQuestCount:     site?.about?.questCount     ?? '100%',
         contactEmail:        site?.contactInfo?.email           ?? '',
         contactPhone:        site?.contactInfo?.phone           ?? '',
         contactLocation:     site?.contactInfo?.location        ?? '',
