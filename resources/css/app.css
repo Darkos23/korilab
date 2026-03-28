@@ -30,7 +30,7 @@
   .card-sl { background: linear-gradient(135deg, rgba(4,13,26,0.8) 0%, rgba(8,20,40,0.6) 100%); border: 1px solid rgba(56,189,248,0.08); border-radius: 1rem; box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04); }
   .sys-label { font-family: monospace; font-size: 0.75rem; color: #38bdf8; letter-spacing: 0.25em; text-transform: uppercase; }
   /* Papyrus paper texture on dashboard cards */
-  .paper-card { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.06 0.02' numOctaves='5' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.40'/%3E%3C/svg%3E") !important; background-size: 300px 300px !important; background-repeat: repeat !important; }
+  .paper-card { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.70' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E") !important; background-size: 400px 400px !important; background-repeat: repeat !important; }
   .premium-border { border: 1px solid transparent; background: linear-gradient(rgba(4,13,26,0.9), rgba(4,13,26,0.9)) padding-box, linear-gradient(135deg, rgba(56,189,248,0.4), rgba(129,140,248,0.2), rgba(56,189,248,0.1)) border-box; }
 }
 
