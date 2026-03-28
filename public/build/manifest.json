@@ -22,7 +22,7 @@
     "name": "vendor-react"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CPJYPUYt.css",
+    "file": "assets/app-ZIxhZYSH.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -31,7 +31,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-YT0HIgJr.js",
+    "file": "assets/app-DUAwW1QL.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -41,7 +41,7 @@
       "_vendor-lucide-kiEHQq__.js"
     ],
     "css": [
-      "assets/app-CPJYPUYt.css"
+      "assets/app-ZIxhZYSH.css"
     ]
   }
 }
