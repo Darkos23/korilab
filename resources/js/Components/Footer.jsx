@@ -4,7 +4,7 @@ import { Twitter, Linkedin, Github, Instagram } from "lucide-react";
 
 const SOCIAL_ICONS = { Twitter, Linkedin, Github, Instagram };
 
-function CauriLogo({ color = "#60a5fa" }) {
+function CauriLogo({ color = "#B43028" }) {
   const C = color;
   return (
     <motion.div className="relative flex items-center justify-center" style={{ width: 28, height: 40 }}>
@@ -78,19 +78,19 @@ export default function Footer({ footer, contactInfo }) {
   ];
 
   return (
-    <footer className="bg-[#030308] text-slate-500 border-t border-sky-500/[0.08]">
+    <footer className="border-t" style={{ background: '#F9F5EF', color: '#5A5448', borderColor: 'rgba(28,26,22,0.08)' }}>
       <div className="section-padding mx-auto max-w-7xl py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-12 border-b border-sky-500/[0.08]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-12 border-b" style={{ borderColor: 'rgba(28,26,22,0.08)' }}>
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-5">
               {!isAuth ? (
-                <Link href="/login"><CauriLogo color="#38bdf8" /></Link>
+                <Link href="/login"><CauriLogo color="#B43028" /></Link>
               ) : (
-                <CauriLogo color="#38bdf8" />
+                <CauriLogo color="#B43028" />
               )}
               <div>
-                <span className="font-bold text-xl text-white">{header?.logoName ?? "KoriLab"}<span className="text-sky-400">.</span></span>
-                <div className="font-mono text-[9px] text-sky-400/50 tracking-[0.2em] uppercase">{header?.logoSub ?? "Creative Studio"}</div>
+                <span className="font-bold text-xl" style={{ color: '#1C1A16' }}>{header?.logoName ?? "KoriLab"}<span style={{ color: '#B43028' }}>.</span></span>
+                <div className="font-mono text-[9px] tracking-[0.2em] uppercase" style={{ color: '#B43028', opacity: 0.5 }}>{header?.logoSub ?? "Creative Studio"}</div>
               </div>
             </div>
             <p className="text-sm leading-relaxed max-w-sm mb-6">{tagline}</p>
@@ -98,14 +98,14 @@ export default function Footer({ footer, contactInfo }) {
 
           {footerCols.map(({ title, items }) => (
             <div key={title}>
-              <h3 className="font-mono text-xs text-sky-400 font-semibold mb-4 uppercase tracking-wider">[ {title} ]</h3>
+              <h3 className="font-mono text-xs font-semibold mb-4 uppercase tracking-wider" style={{ color: '#B43028' }}>[ {title} ]</h3>
               <ul className="space-y-3">
                 {items.map((item) => (
                   <li key={item}>
                     {item.includes("@") || item.startsWith("+") ? (
-                      <span className="text-sm hover:text-sky-400 transition-colors cursor-default">{item}</span>
+                      <span className="text-sm hover:text-[#B43028] transition-colors cursor-default">{item}</span>
                     ) : (
-                      <a href="#" className="text-sm hover:text-sky-400 transition-colors">{item}</a>
+                      <a href="#" className="text-sm hover:text-[#B43028] transition-colors">{item}</a>
                     )}
                   </li>
                 ))}
@@ -115,10 +115,10 @@ export default function Footer({ footer, contactInfo }) {
         </div>
 
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-          <p className="font-mono text-xs text-slate-700">© {new Date().getFullYear()} {copyright}</p>
+          <p className="font-mono text-xs" style={{ color: '#8A8478' }}>© {new Date().getFullYear()} {copyright}</p>
           <div className="flex gap-6 items-center">
-            <Link href="/mentions-legales" className="text-xs hover:text-sky-400 transition-colors">Mentions légales</Link>
-            <Link href="/confidentialite" className="text-xs hover:text-sky-400 transition-colors">Confidentialité</Link>
+            <Link href="/mentions-legales" className="text-xs hover:text-[#B43028] transition-colors">Mentions légales</Link>
+            <Link href="/confidentialite" className="text-xs hover:text-[#B43028] transition-colors">Confidentialité</Link>
           </div>
         </div>
       </div>
