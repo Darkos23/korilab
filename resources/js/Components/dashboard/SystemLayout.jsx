@@ -157,7 +157,7 @@ export function SysInput({ label, ...props }) {
       <input
         className="w-full px-3 py-2 font-mono text-sm outline-none transition-all duration-200"
         style={{
-          backgroundColor: 'rgba(245,234,213,0.92)', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.70' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px',
+          backgroundColor: 'rgba(245,234,213,0.92)', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.70' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px',
           border: `1px solid ${f ? BORDER_H : BORDER}`,
           borderRadius: 6,
           color: TEXT,
@@ -183,7 +183,7 @@ export function SysTextarea({ label, rows = 3, ...props }) {
         rows={rows}
         className="w-full px-3 py-2 font-mono text-sm outline-none resize-none transition-all duration-200"
         style={{
-          backgroundColor: 'rgba(245,234,213,0.92)', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.70' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px',
+          backgroundColor: 'rgba(245,234,213,0.92)', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.70' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px',
           border: `1px solid ${f ? BORDER_H : BORDER}`,
           borderRadius: 6,
           color: TEXT,
@@ -206,7 +206,7 @@ export function SysSelect({ label, options, ...props }) {
       )}
       <select
         className="w-full px-3 py-2 font-mono text-sm outline-none transition-all duration-200"
-        style={{ backgroundColor: '#F5EAD5', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.70' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', border: `1px solid ${BORDER}`, borderRadius: 6, color: TEXT }}
+        style={{ backgroundColor: '#F5EAD5', backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015 0.70' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E")`, backgroundSize: '200px 200px', border: `1px solid ${BORDER}`, borderRadius: 6, color: TEXT }}
         {...props}
       >
         {options.map(o => (
