@@ -71,7 +71,7 @@ export function SysWin({ title, subtitle, children, className = '', delay = 0 })
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
-      className={`relative ${className}`}
+      className={`relative paper-card ${className}`}
       style={{
         background: 'rgba(253,251,247,0.96)',
         border: `1px solid ${BORDER}`,
@@ -104,7 +104,7 @@ export function StatBadge({ label, value, icon: Icon, sub }) {
   return (
     <motion.div
       whileHover={{ borderColor: BORDER_H }}
-      className="relative p-5 transition-all duration-300"
+      className="relative p-5 transition-all duration-300 paper-card"
       style={{
         background: 'rgba(253,251,247,0.92)',
         border: `1px solid ${BORDER}`,

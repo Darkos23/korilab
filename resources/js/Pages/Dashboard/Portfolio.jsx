@@ -28,7 +28,7 @@ function ProjectCard({ project, deleting, onEdit, onDelete }) {
             transition={{ duration: 0.3 }}
             onHoverStart={() => setHovered(true)}
             onHoverEnd={() => setHovered(false)}
-            className="relative flex flex-col"
+            className="relative flex flex-col paper-card"
             style={{
                 background: CARD,
                 borderRadius: 12,
