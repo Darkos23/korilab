@@ -9,7 +9,7 @@ const GOLD   = '#8A5A18';
 const INK    = '#1C1A16';
 const INK2   = '#5A5448';
 const BORDER = 'rgba(0,0,0,0.07)';
-const BG     = '#F9F5EF';
+const BG     = '#FDFBF7';
 
 export default function TopBar({ admin, collapsed, onToggle }) {
   const [open, setOpen] = useState(false);
