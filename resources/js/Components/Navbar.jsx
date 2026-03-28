@@ -4,7 +4,7 @@ import { Menu, X, LayoutDashboard, Settings, LogOut, ChevronDown } from "lucide-
 import { Link, usePage, router } from "@inertiajs/react";
 
 /* ── Cauri plein avec motif en découpe ──────────────────── */
-function CauriLogo({ color = "#B43028" }) {
+function CauriLogo({ color = "#38bdf8" }) {
   const C = color;
   return (
     <motion.div className="relative flex items-center justify-center" style={{ width: 28, height: 40 }}>
@@ -79,13 +79,13 @@ function ProfileDropdown({ user }) {
     <div className="relative" ref={ref}>
       <button onClick={() => setOpen(v => !v)}
         className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg transition-all duration-150"
-        style={{ border: `1px solid ${open ? 'rgba(180,48,40,0.3)' : 'rgba(180,48,40,0.15)'}`, background: 'transparent', cursor: 'pointer' }}>
+        style={{ border: `1px solid ${open ? 'rgba(56,189,248,0.3)' : 'rgba(56,189,248,0.12)'}`, background: 'transparent', cursor: 'pointer' }}>
         <div className="w-6 h-6 rounded-full flex items-center justify-center font-mono text-[10px] font-bold flex-shrink-0"
-          style={{ background: 'rgba(180,48,40,0.09)', color: '#B43028', border: '1px solid rgba(180,48,40,0.2)' }}>
+          style={{ background: 'rgba(56,189,248,0.12)', color: '#38bdf8', border: '1px solid rgba(56,189,248,0.22)' }}>
           {(user?.name ?? 'A').charAt(0).toUpperCase()}
         </div>
-        <span className="font-semibold text-xs" style={{ color: '#1C1A16' }}>{user?.name ?? '—'}</span>
-        <ChevronDown size={11} style={{ color: '#B43028', opacity: 0.6, transition: 'transform 0.15s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+        <span className="font-semibold text-xs text-white">{user?.name ?? '—'}</span>
+        <ChevronDown size={11} className="text-sky-400/60" style={{ transition: 'transform 0.15s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
       </button>
 
       <AnimatePresence>
@@ -96,10 +96,10 @@ function ProfileDropdown({ user }) {
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.12 }}
             className="absolute right-0 top-full mt-2 w-52 rounded-xl overflow-hidden z-50"
-            style={{ background: '#FDFBF7', border: '1px solid rgba(28,26,22,0.1)', boxShadow: '0 8px 24px rgba(0,0,0,0.1)' }}>
-            <div className="px-4 py-3 border-b" style={{ borderColor: 'rgba(28,26,22,0.06)' }}>
-              <div className="text-sm font-bold" style={{ color: '#1C1A16' }}>{user?.name}</div>
-              <div className="text-[10px] mt-1" style={{ color: '#B43028', opacity: 0.6 }}>Admin KoriLab</div>
+            style={{ background: '#040d1a', border: '1px solid rgba(56,189,248,0.12)', boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
+            <div className="px-4 py-3 border-b" style={{ borderColor: 'rgba(56,189,248,0.08)' }}>
+              <div className="text-sm font-bold text-white">{user?.name}</div>
+              <div className="text-[10px] text-sky-400/50 mt-1">Admin KoriLab</div>
               <div className="flex items-center gap-1.5 mt-2">
                 <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#3A6840' }} />
                 <span className="font-mono text-[9px]" style={{ color: '#3A6840' }}>En ligne</span>
@@ -107,18 +107,18 @@ function ProfileDropdown({ user }) {
             </div>
             <div className="p-1.5 flex flex-col gap-0.5">
               <Link href="/dashboard"
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100 text-xs hover:bg-black/[0.04]"
-                style={{ textDecoration: 'none', color: '#5A5448' }}>
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100 text-xs text-sky-400/70 hover:text-white hover:bg-sky-500/[0.08]"
+                style={{ textDecoration: 'none' }}>
                 <LayoutDashboard size={13} /> Dashboard
               </Link>
               <a href="/dashboard/site"
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100 text-xs hover:bg-black/[0.04]"
-                style={{ textDecoration: 'none', color: '#5A5448' }}>
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100 text-xs text-slate-400 hover:text-white hover:bg-sky-500/[0.08]"
+                style={{ textDecoration: 'none' }}>
                 <Settings size={13} /> Paramètres du site
               </a>
               <button onClick={logout}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100 text-xs hover:bg-black/[0.04]"
-                style={{ background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left', color: '#B43028' }}>
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100 text-xs text-sky-400 hover:bg-sky-500/[0.08]"
+                style={{ background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
                 <LogOut size={13} /> Déconnexion
               </button>
             </div>
@@ -150,28 +150,29 @@ export default function Navbar({ header }) {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-      scrolled ? "py-3 shadow-sm" : "py-5 bg-transparent"
-    )}
-    style={scrolled ? { background: 'rgba(253,251,247,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(28,26,22,0.07)' } : {}}>
+      scrolled ? "py-3 bg-[#040d1a]/90 backdrop-blur-2xl border-b border-sky-500/[0.1] shadow-lg shadow-black/40" : "py-5 bg-transparent"
+    )}>
       <nav className="section-padding mx-auto max-w-7xl flex items-center justify-between">
         <Link href="/" className="group flex items-center gap-2.5">
           <CauriLogo />
           <div className="flex flex-col leading-none">
-            <span className="font-extrabold text-lg tracking-tight" style={{ color: '#1C1A16' }}>
-              {logoName}<span style={{ color: '#B43028' }}>.</span>
-            </span>
-            <span className="font-mono text-[9px] tracking-[0.25em] uppercase" style={{ color: '#B43028', opacity: 0.5 }}>{tagline}</span>
+            <motion.span
+              className="font-extrabold text-lg tracking-tight text-white"
+              animate={{ textShadow: ["0 0 8px rgba(56,189,248,0.2)", "0 0 20px rgba(56,189,248,0.5)", "0 0 8px rgba(56,189,248,0.2)"] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              {logoName}<span className="text-sky-400">.</span>
+            </motion.span>
+            <span className="font-mono text-[9px] text-sky-400/50 tracking-[0.25em] uppercase">{tagline}</span>
           </div>
         </Link>
 
         <ul className="hidden md:flex items-center gap-1">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 group"
-                style={{ color: '#5A5448' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#1C1A16'; e.currentTarget.style.background = 'rgba(180,48,40,0.05)'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#5A5448'; e.currentTarget.style.background = 'transparent'; }}>
-                {link.label}
+              <a href={link.href} className="relative px-4 py-2 text-sm font-medium text-slate-400 hover:text-white rounded-lg transition-all duration-200 group">
+                <span className="relative z-10">{link.label}</span>
+                <span className="absolute inset-0 rounded-lg bg-sky-500/0 group-hover:bg-sky-500/[0.06] transition-all duration-300 border border-transparent group-hover:border-sky-500/15" />
               </a>
             </li>
           ))}
@@ -181,22 +182,15 @@ export default function Navbar({ header }) {
           {isAuth
             ? <ProfileDropdown user={props.auth.user} />
             : (
-              <a href="/#contact"
-                className="px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:scale-[1.03]"
-                style={{ color: '#B43028', border: '1px solid rgba(180,48,40,0.3)', background: 'rgba(180,48,40,0.04)' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(180,48,40,0.09)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(180,48,40,0.04)'; }}>
-                {ctaText}
+              <a href="/#contact" className="relative px-5 py-2.5 text-sm font-semibold rounded-xl text-white overflow-hidden group transition-all duration-300 hover:scale-[1.03] premium-border glow-blue-sm hover:glow-blue">
+                <span className="relative z-10 bg-gradient-to-r from-sky-300 to-indigo-300 bg-clip-text text-transparent group-hover:from-white group-hover:to-white transition-all">{ctaText}</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-sky-600/20 to-indigo-600/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
               </a>
             )
           }
         </div>
 
-        <button onClick={() => setOpen(!open)}
-          className="md:hidden p-2 rounded-lg transition-colors"
-          style={{ color: '#5A5448' }}
-          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(180,48,40,0.06)'; e.currentTarget.style.color = '#1C1A16'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#5A5448'; }}>
+        <button onClick={() => setOpen(!open)} className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-sky-500/[0.08] transition-colors">
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </nav>
@@ -204,16 +198,11 @@ export default function Navbar({ header }) {
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden border-t"
-            style={{ background: 'rgba(253,251,247,0.97)', backdropFilter: 'blur(20px)', borderColor: 'rgba(28,26,22,0.06)' }}>
+            className="md:hidden overflow-hidden bg-[#040d1a]/95 backdrop-blur-2xl border-t border-sky-500/[0.08]">
             <ul className="section-padding py-4 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} onClick={() => setOpen(false)}
-                    className="block px-4 py-3 text-sm font-medium rounded-xl transition-all"
-                    style={{ color: '#5A5448' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#1C1A16'; e.currentTarget.style.background = 'rgba(180,48,40,0.05)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#5A5448'; e.currentTarget.style.background = 'transparent'; }}>
+                  <a href={link.href} onClick={() => setOpen(false)} className="block px-4 py-3 text-sm font-medium text-slate-400 hover:text-white hover:bg-sky-500/[0.06] rounded-xl transition-all">
                     {link.label}
                   </a>
                 </li>
@@ -221,17 +210,15 @@ export default function Navbar({ header }) {
               {isAuth && (
                 <>
                   <li>
-                    <Link href="/dashboard" onClick={() => setOpen(false)}
-                      className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-xl transition-all"
-                      style={{ color: '#B43028' }}>
+                    <Link href="/dashboard" onClick={() => setOpen(false)} className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-sky-400/70 hover:text-sky-400 hover:bg-sky-500/[0.06] rounded-xl transition-all">
                       <LayoutDashboard className="w-4 h-4" />
                       Dashboard
                     </Link>
                   </li>
                   <li>
                     <button onClick={() => { setOpen(false); router.post('/logout'); }}
-                      className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-xl transition-all w-full text-left"
-                      style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#B43028' }}>
+                      className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-sky-400/70 hover:text-sky-400 hover:bg-sky-500/[0.06] rounded-xl transition-all w-full text-left"
+                      style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
                       <LogOut className="w-4 h-4" />
                       Déconnexion
                     </button>
@@ -239,9 +226,7 @@ export default function Navbar({ header }) {
                 </>
               )}
               <li className="pt-2">
-                <a href="/#contact" onClick={() => setOpen(false)}
-                  className="block px-4 py-3 text-sm font-semibold text-center rounded-xl"
-                  style={{ color: '#B43028', border: '1px solid rgba(180,48,40,0.25)', background: 'rgba(180,48,40,0.04)' }}>
+                <a href="/#contact" onClick={() => setOpen(false)} className="block px-4 py-3 text-sm font-semibold text-center rounded-xl premium-border text-sky-300">
                   {ctaText}
                 </a>
               </li>
