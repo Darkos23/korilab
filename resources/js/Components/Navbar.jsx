@@ -152,7 +152,7 @@ export default function Navbar({ header }) {
       "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
       scrolled ? "py-3 shadow-sm" : "py-5 bg-transparent"
     )}
-    style={scrolled ? { background: 'rgba(249,245,239,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(28,26,22,0.07)' } : {}}>
+    style={scrolled ? { background: 'rgba(253,251,247,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(28,26,22,0.07)' } : {}}>
       <nav className="section-padding mx-auto max-w-7xl flex items-center justify-between">
         <Link href="/" className="group flex items-center gap-2.5">
           <CauriLogo />
@@ -205,7 +205,7 @@ export default function Navbar({ header }) {
         {open && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
             className="md:hidden overflow-hidden border-t"
-            style={{ background: 'rgba(249,245,239,0.97)', backdropFilter: 'blur(20px)', borderColor: 'rgba(28,26,22,0.06)' }}>
+            style={{ background: 'rgba(253,251,247,0.97)', backdropFilter: 'blur(20px)', borderColor: 'rgba(28,26,22,0.06)' }}>
             <ul className="section-padding py-4 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
