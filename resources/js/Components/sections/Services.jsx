@@ -38,7 +38,7 @@ export default function Services({ services }) {
           </p>
         </motion.div>
 
-        <motion.div variants={container} initial="hidden" animate={inView ? "show" : "hidden"} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <motion.div variants={container} initial="hidden" animate={inView ? "show" : "hidden"} className="grid sm:grid-cols-2 gap-5">
           {services.map((s) => {
             const Icon = iconMap[s.icon] ?? Globe;
             const border = rankBorders[s.rank] ?? "hover:border-blue-400/30";
