@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight, Zap, Crown } from "lucide-react";
 import { useRef } from "react";
+import { Link } from "@inertiajs/react";
 
 /* ── Cauri traditionnel — logo hero ─────────────────────── */
 function CauriHero() {
@@ -127,6 +128,11 @@ export default function Hero({ hero, heroStats }) {
               <a href="#contact" className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl premium-border text-slate-300 font-semibold hover:text-white transition-all duration-300 hover:glow-blue-sm">
                 {cta2}
               </a>
+              <Link href="/prestige" className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 text-white font-semibold hover:from-amber-500 hover:to-amber-400 hover:scale-[1.03] transition-all duration-300 shadow-lg shadow-amber-500/20">
+                <Crown className="w-4 h-4" />
+                Prestige
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}
