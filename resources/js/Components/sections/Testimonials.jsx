@@ -24,7 +24,7 @@ const FALLBACK = [
     name:     "Cheikh Tidiane Gueye",
     role:     "Influenceur & Créateur",
     company:  "CTGHT Store",
-    quote:    "J'avais besoin d'une boutique à mon image — lifestyle, moderne, qui claque. Khalil a tout compris dès le brief. Le site est propre, les paiements roulent, et ma communauté a adoré. C'est exactement ce que je voulais pour lancer mes produits.",
+    quote:    "J'avais besoin d'une boutique à mon image — lifestyle, moderne, qui claque. Ibrahima a tout compris dès le brief. Le site est propre, les paiements roulent, et ma communauté a adoré. C'est exactement ce que je voulais pour lancer mes produits.",
     stars:    5,
     initials: "CTG",
     avatar:   "/testimonials/ctght.jpg",

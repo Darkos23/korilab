@@ -7,7 +7,7 @@ import { ArrowLeft } from "lucide-react";
 export default function Mentions({ site, contactInfo }) {
   const logoName = site?.header?.logoName ?? "KoriLab";
   const year     = new Date().getFullYear();
-  const email    = contactInfo?.find(c => c.label === "Email")?.value ?? "hello@zyra.studio";
+  const email    = contactInfo?.find(c => c.label === "Email")?.value ?? "contact@korilab.dev";
 
   return (
     <>

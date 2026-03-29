@@ -69,7 +69,7 @@ export default function Footer({ footer, contactInfo }) {
 
   const contactLines = contactInfo
     ? contactInfo.filter(c => ["Email","Téléphone","Adresse"].includes(c.label)).map(c => c.value)
-    : ["hello@zyra.studio", "+221 77 534 19 54", "Dakar, Sénégal"];
+    : ["contact@korilab.dev", "+221 77 534 19 54", "Dakar, Sénégal"];
 
   const footerCols = [
     { title: "Services", items: serviceLinks },
