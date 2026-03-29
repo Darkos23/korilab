@@ -10,6 +10,7 @@ import Services from "../Components/sections/Services";
 import Portfolio from "../Components/sections/Portfolio";
 import Team from "../Components/sections/Team";
 import Contact from "../Components/sections/Contact";
+import PrestigeBanner from "../Components/sections/PrestigeBanner";
 import Testimonials from "../Components/sections/Testimonials";
 import { team } from "../data/team";
 
@@ -30,6 +31,7 @@ export default function Home({ site, hero, heroStats, services, portfolio, assoc
         <Hero hero={hero} heroStats={heroStats} />
         <About about={site?.about} />
         <Services services={services ?? []} />
+        <PrestigeBanner />
         <Portfolio projects={portfolio ?? []} />
         <Team teamMembers={team} associates={associates ?? []} />
         <Testimonials testimonials={site?.testimonials ?? []} />
