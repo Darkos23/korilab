@@ -17,7 +17,14 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="description" content="KoriLab — Studio de design et développement web. Nous créons des expériences digitales de haut niveau pour les startups et entreprises.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://korilab.dev">
+    <meta property="og:title" content="KoriLab — Studio de développement web & mobile">
+    <meta property="og:description" content="Applications web, mobile et desktop ultra-performantes pour startups et entreprises. React, Laravel, Next.js.">
+    <meta property="og:image" content="https://korilab.dev/images/korilab.jpg">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KoriLab — Studio de développement web & mobile">
+    <meta name="twitter:description" content="Applications web, mobile et desktop ultra-performantes pour startups et entreprises.">
+    <meta name="twitter:image" content="https://korilab.dev/images/korilab.jpg">
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
     @inertiaHead
