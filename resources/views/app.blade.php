@@ -20,11 +20,11 @@
     <meta property="og:url" content="https://korilab.dev">
     <meta property="og:title" content="KoriLab — Studio de développement web, mobile & desktop">
     <meta property="og:description" content="KoriLab conçoit des applications web, mobile et desktop ultra-performantes pour les startups et entreprises. React, Laravel, Next.js, Flutter.">
-    <meta property="og:image" content="https://korilab.dev/images/korilab.jpg">
+    <meta property="og:image" content="https://korilab.dev/images/og-preview.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="KoriLab — Studio de développement web, mobile & desktop">
     <meta name="twitter:description" content="KoriLab conçoit des applications web, mobile et desktop ultra-performantes pour les startups et entreprises. React, Laravel, Next.js, Flutter.">
-    <meta name="twitter:image" content="https://korilab.dev/images/korilab.jpg">
+    <meta name="twitter:image" content="https://korilab.dev/images/og-preview.png">
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
     @inertiaHead
