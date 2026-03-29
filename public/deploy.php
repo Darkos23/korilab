@@ -26,6 +26,8 @@ $commands = [
     "cd {$projectRoot} && git fetch origin main 2>&1",
     "cd {$projectRoot} && git reset --hard origin/main 2>&1",
     "cd {$projectRoot} && composer install --no-dev --optimize-autoloader 2>&1",
+    "cd {$projectRoot} && npm install --production 2>&1",
+    "cd {$projectRoot} && npm run build 2>&1",
     "cd {$projectRoot} && php artisan migrate --force 2>&1",
     "cd {$projectRoot} && php artisan config:cache 2>&1",
     "cd {$projectRoot} && php artisan route:cache 2>&1",
