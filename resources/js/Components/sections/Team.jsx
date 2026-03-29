@@ -131,12 +131,8 @@ export default function Team({ teamMembers = [], associates = [] }) {
                 <p className="text-sm text-slate-500 mb-4 leading-relaxed line-clamp-2 flex-1">{member.summary}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex gap-2">
-                    <a href="#" className="w-8 h-8 rounded-lg bg-blue-500/[0.08] border border-blue-500/[0.1] hover:bg-blue-500/[0.2] flex items-center justify-center text-slate-500 hover:text-blue-400 transition-all">
-                      <Linkedin className="w-3.5 h-3.5" />
-                    </a>
-                    <a href="#" className="w-8 h-8 rounded-lg bg-blue-500/[0.08] border border-blue-500/[0.1] hover:bg-blue-500/[0.2] flex items-center justify-center text-slate-500 hover:text-blue-400 transition-all">
-                      <Github className="w-3.5 h-3.5" />
-                    </a>
+                    {member.linkedin && <a href={member.linkedin} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg bg-blue-500/[0.08] border border-blue-500/[0.1] hover:bg-blue-500/[0.2] flex items-center justify-center text-slate-500 hover:text-blue-400 transition-all"><Linkedin className="w-3.5 h-3.5" /></a>}
+                    {member.github   && <a href={member.github}   target="_blank" rel="noreferrer" className="w-8 h-8 rounded-lg bg-blue-500/[0.08] border border-blue-500/[0.1] hover:bg-blue-500/[0.2] flex items-center justify-center text-slate-500 hover:text-blue-400 transition-all"><Github   className="w-3.5 h-3.5" /></a>}
                   </div>
                   <Link href={`/team/${member.slug}`} className="flex items-center gap-1 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors group-hover:gap-1.5">
                     Voir la fiche <ArrowUpRight className="w-3.5 h-3.5" />
