@@ -142,7 +142,7 @@ const GRADIENTS = [
 ];
 
 const EMOJIS = ['🚀','💻','📱','🎨','⚡','🌐','🔥','💎','🎯','🛸'];
-const CATEGORIES = ['Web', 'Mobile', 'Design', 'Backend', 'Fullstack'];
+const CATEGORIES = ['Web', 'Mobile', 'Desktop', 'Design', 'Backend', 'Fullstack'];
 
 const defaultForm = {
     title: '',
