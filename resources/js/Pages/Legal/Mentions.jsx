@@ -53,15 +53,15 @@ export default function Mentions({ site, contactInfo }) {
 
             <section>
               <h2 className="text-white font-semibold text-base mb-3 font-mono">[ Directeur de la publication ]</h2>
-              <p>Le directeur de la publication est le gérant du studio {logoName}.</p>
+              <p>Le directeur de la publication est <span className="text-slate-300">Ibrahima Sarr</span>, gérant du studio {logoName}.</p>
             </section>
 
             <section>
               <h2 className="text-white font-semibold text-base mb-3 font-mono">[ Hébergement ]</h2>
               <div className="p-5 rounded-xl bg-blue-500/[0.04] border border-blue-500/[0.1] space-y-1.5">
-                <p><span className="text-slate-600">Hébergeur :</span> <span className="text-slate-300">Hostingeur</span></p>
+                <p><span className="text-slate-600">Hébergeur :</span> <span className="text-slate-300">Hostinger</span></p>
                 <p><span className="text-slate-600">Site :</span>{" "}
-                  <a href="https://www.hostingeur.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">www.hostingeur.com</a>
+                  <a href="https://www.hostinger.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">www.hostinger.com</a>
                 </p>
               </div>
             </section>

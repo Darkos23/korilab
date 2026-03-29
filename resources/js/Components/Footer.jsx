@@ -118,6 +118,7 @@ export default function Footer({ footer, contactInfo }) {
           <p className="font-mono text-xs text-slate-700">© {new Date().getFullYear()} {copyright}</p>
           <div className="flex gap-6 items-center">
             <Link href="/mentions-legales" className="text-xs hover:text-sky-400 transition-colors">Mentions légales</Link>
+            <Link href="/cgv" className="text-xs hover:text-sky-400 transition-colors">CGV</Link>
             <Link href="/confidentialite" className="text-xs hover:text-sky-400 transition-colors">Confidentialité</Link>
           </div>
         </div>

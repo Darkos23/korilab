@@ -69,4 +69,34 @@ class HomeController extends Controller
             'contactInfo' => $contactInfo,
         ]);
     }
+
+    public function prestige()
+    {
+        $site = Site::first();
+        $ci   = $site?->contactInfo ?? [];
+        $contactInfo = [];
+        if (!empty($ci['email']))    $contactInfo[] = ['icon' => 'Mail',   'label' => 'Email',        'value' => $ci['email']];
+        if (!empty($ci['phone']))    $contactInfo[] = ['icon' => 'Phone',  'label' => 'Téléphone',    'value' => $ci['phone']];
+        if (!empty($ci['location'])) $contactInfo[] = ['icon' => 'MapPin', 'label' => 'Localisation', 'value' => $ci['location']];
+
+        return Inertia::render('Prestige', [
+            'site'        => $site,
+            'contactInfo' => $contactInfo,
+        ]);
+    }
+
+    public function cgv()
+    {
+        $site = Site::first();
+        $ci   = $site?->contactInfo ?? [];
+        $contactInfo = [];
+        if (!empty($ci['email']))    $contactInfo[] = ['icon' => 'Mail',   'label' => 'Email',        'value' => $ci['email']];
+        if (!empty($ci['phone']))    $contactInfo[] = ['icon' => 'Phone',  'label' => 'Téléphone',    'value' => $ci['phone']];
+        if (!empty($ci['location'])) $contactInfo[] = ['icon' => 'MapPin', 'label' => 'Localisation', 'value' => $ci['location']];
+
+        return Inertia::render('Legal/Cgv', [
+            'site'        => $site,
+            'contactInfo' => $contactInfo,
+        ]);
+    }
 }

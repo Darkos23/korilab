@@ -14,6 +14,8 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 Route::get('/team/{slug}', [TeamController::class, 'show']);
 Route::get('/mentions-legales', [HomeController::class, 'mentions'])->name('mentions');
 Route::get('/confidentialite', [HomeController::class, 'privacy'])->name('privacy');
+Route::get('/cgv', [HomeController::class, 'cgv'])->name('cgv');
+Route::get('/prestige', [HomeController::class, 'prestige'])->name('prestige');
 
 // Auth
 Route::get('/login', [AuthController::class, 'show'])->name('login');
