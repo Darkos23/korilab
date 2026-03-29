@@ -403,10 +403,10 @@ export default function Portfolio({ projects }) {
                     )}
                   </div>
                 ) : (
-                  <div className={`relative h-48 overflow-hidden bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                    <div className="w-full h-full flex items-center justify-center">
+                  <div className={`relative h-48 overflow-hidden ${project.image ? "bg-slate-900" : `bg-gradient-to-br ${project.gradient}`} flex items-center justify-center`}>
+                    <div className={project.comingSoon ? "blur-md w-full h-full flex items-center justify-center" : "w-full h-full flex items-center justify-center"}>
                       {project.image ? (
-                        <img src={project.image} alt={project.title} className={cn("w-full h-full object-cover object-top", project.comingSoon && "blur-[2px] scale-105")} />
+                        <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top" />
                       ) : (
                         <>
                           <span className="text-6xl filter drop-shadow-lg z-10">{project.emoji}</span>
@@ -414,14 +414,7 @@ export default function Portfolio({ projects }) {
                         </>
                       )}
                     </div>
-                    {project.comingSoon ? (
-                      <div className="absolute inset-0 bg-[#050814]/60 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="font-mono text-xs text-violet-400 tracking-[0.3em] uppercase mb-1">En cours...</div>
-                          <div className="font-bold text-sm text-white/80 tracking-widest uppercase">Bientôt disponible</div>
-                        </div>
-                      </div>
-                    ) : (
+                    {project.comingSoon ? <ComingSoonOverlay /> : (
                       <div className="absolute inset-0 bg-[#050814]/0 group-hover:bg-[#050814]/50 transition-colors duration-300 flex items-center justify-center">
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-11 h-11 rounded-xl glass flex items-center justify-center">
                           <ArrowUpRight className="w-5 h-5 text-white" />
