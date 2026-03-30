@@ -1,6 +1,6 @@
 import { Link, router, usePage } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Briefcase, Wrench, LogOut, Users, Menu, X, MessageSquare, FileText, FolderKanban } from "lucide-react";
+import { LayoutDashboard, Briefcase, Wrench, LogOut, Users, Menu, X, FileText, FolderKanban } from "lucide-react";
 import { useState } from "react";
 
 /* ─── Tokens sidebar (washi soft) ────────────────────────── */
@@ -18,7 +18,6 @@ const nav = [
   { href: '/dashboard/portfolio', icon: Briefcase,       label: 'Portfolio',      sub: 'Réalisations'       },
   { href: '/dashboard/services',  icon: Wrench,          label: 'Services',       sub: 'Offres & capacités' },
   { href: '/dashboard/team',      icon: Users,           label: 'Équipe / CV',    sub: 'Profils'            },
-  { href: '/dashboard/messages',  icon: MessageSquare,   label: 'Messages',       sub: 'Boîte de réception' },
   { href: '/dashboard/contrats', icon: FileText,        label: 'Contrats',       sub: 'Prestige'            },
 ];
 

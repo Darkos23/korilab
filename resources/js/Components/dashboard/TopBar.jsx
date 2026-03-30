@@ -1,6 +1,6 @@
-import { router } from "@inertiajs/react";
+import { router, usePage, Link } from "@inertiajs/react";
 import { useState, useRef, useEffect } from "react";
-import { Settings, LogOut, ChevronDown, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Settings, LogOut, ChevronDown, PanelLeftClose, PanelLeftOpen, MessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FONT   = "'Century Gothic', 'Trebuchet MS', sans-serif";
@@ -15,6 +15,7 @@ export default function TopBar({ admin, collapsed, onToggle }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const logout = () => router.post('/logout');
+  const { unreadMessages = 0 } = usePage().props;
 
   useEffect(() => {
     const handler = e => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
@@ -36,6 +37,20 @@ export default function TopBar({ admin, collapsed, onToggle }) {
           ? <PanelLeftOpen size={14} />
           : <PanelLeftClose size={14} />}
       </button>
+
+      {/* Messages icon */}
+      <Link href="/dashboard/messages" className="relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 mr-1"
+        style={{ color: INK2, border: `1px solid ${BORDER}` }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
+        onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; }}>
+        <MessageSquare size={14} />
+        {unreadMessages > 0 && (
+          <span className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 rounded-full font-mono text-[9px] font-bold"
+            style={{ background: TERRA, color: 'white' }}>
+            {unreadMessages > 9 ? '9+' : unreadMessages}
+          </span>
+        )}
+      </Link>
 
       {/* Profile dropdown */}
       <div className="relative" ref={ref}>
