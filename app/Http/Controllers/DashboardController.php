@@ -9,17 +9,35 @@ use App\Models\Service;
 use App\Models\Site;
 use App\Models\TeamMember;
 use App\Models\ContactMessage;
+use App\Models\Project;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        $now = now();
+
         return Inertia::render('Dashboard/Index', [
             'admin'           => session('admin'),
             'portfolioCount'  => Portfolio::count(),
             'servicesCount'   => Service::count(),
             'unreadMessages'  => ContactMessage::whereNull('read_at')->count(),
-            'members'         => TeamMember::select('name', 'role', 'rank', 'initials')->orderBy('rank')->get(),
+            'members'         => TeamMember::select('name', 'role', 'initials')->get(),
+            'projetsEnCours'  => Project::whereNotIn('status', ['terminé', 'annulé'])->count(),
+            'projetsEnRetard' => Project::whereNotIn('status', ['terminé', 'annulé'])
+                                    ->whereNotNull('deadline')
+                                    ->where('deadline', '<', $now)
+                                    ->count(),
+            'urgentProjects'  => Project::whereNotIn('status', ['terminé', 'annulé'])
+                                    ->whereNotNull('deadline')
+                                    ->where('deadline', '<', $now->copy()->addDays(7))
+                                    ->orderBy('deadline')
+                                    ->limit(4)
+                                    ->get(['id', 'client_name', 'project_type', 'deadline', 'status']),
+            'recentMessages'  => ContactMessage::whereNull('read_at')
+                                    ->latest()
+                                    ->limit(3)
+                                    ->get(['id', 'name', 'company', 'message', 'created_at']),
         ]);
     }
 
