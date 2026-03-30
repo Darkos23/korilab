@@ -71,12 +71,6 @@ export default function TopBar({ admin, collapsed, onToggle }) {
             {admin?.name ?? '—'}
           </span>
 
-          {/* Rank badge */}
-          <span className="font-mono text-[9px] px-1.5 py-0.5 rounded"
-            style={{ background: 'rgba(138,90,24,0.08)', color: GOLD, border: '1px solid rgba(138,90,24,0.2)' }}>
-            {admin?.rank}
-          </span>
-
           <ChevronDown size={12} style={{ color: INK2, transition: 'transform 0.15s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
         </button>
 
