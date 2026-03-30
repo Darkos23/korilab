@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DemoController;
 
 // Public
 Route::get('/', [HomeController::class, 'index']);
@@ -16,6 +17,15 @@ Route::get('/mentions-legales', [HomeController::class, 'mentions'])->name('ment
 Route::get('/confidentialite', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/cgv', [HomeController::class, 'cgv'])->name('cgv');
 Route::get('/prestige', [HomeController::class, 'prestige'])->name('prestige');
+
+// Demo Starter Template
+Route::prefix('demo')->group(function () {
+    Route::get('/', [DemoController::class, 'home']);
+    Route::get('/a-propos', [DemoController::class, 'about']);
+    Route::get('/services', [DemoController::class, 'services']);
+    Route::get('/contact', [DemoController::class, 'contact']);
+    Route::get('/mentions-legales', [DemoController::class, 'mentions']);
+});
 
 // Auth
 Route::get('/login', [AuthController::class, 'show'])->name('login');
