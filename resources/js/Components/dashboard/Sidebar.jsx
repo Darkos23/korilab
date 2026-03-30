@@ -1,6 +1,6 @@
 import { Link, router, usePage } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, MessageSquare, FileText, FolderKanban } from "lucide-react";
+import { LayoutDashboard, Briefcase, Wrench, LogOut, Users, Menu, X, MessageSquare, FileText, FolderKanban } from "lucide-react";
 import { useState } from "react";
 
 /* ─── Tokens sidebar (washi soft) ────────────────────────── */
@@ -18,7 +18,6 @@ const nav = [
   { href: '/dashboard/portfolio', icon: Briefcase,       label: 'Portfolio',      sub: 'Réalisations'       },
   { href: '/dashboard/services',  icon: Wrench,          label: 'Services',       sub: 'Offres & capacités' },
   { href: '/dashboard/team',      icon: Users,           label: 'Équipe / CV',    sub: 'Profils'            },
-  { href: '/dashboard/site',      icon: Globe,           label: 'Paramètres',     sub: 'Config. site'       },
   { href: '/dashboard/messages',  icon: MessageSquare,   label: 'Messages',       sub: 'Boîte de réception' },
   { href: '/dashboard/contrats', icon: FileText,        label: 'Contrats',       sub: 'Prestige'            },
 ];
@@ -28,7 +27,7 @@ export default function Sidebar({ admin, collapsed = false }) {
   const logout = () => router.post('/logout');
   const [open, setOpen] = useState(false);
 
-  const Content = () => (
+  const aside = (
     <aside
       className="min-h-screen flex flex-col relative z-20 transition-all duration-200"
       style={{
@@ -145,7 +144,7 @@ export default function Sidebar({ admin, collapsed = false }) {
 
   return (
     <>
-      <div className="hidden md:flex"><Content /></div>
+      <div className="hidden md:flex">{aside}</div>
 
       <button onClick={() => setOpen(true)}
         className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center rounded-lg"
@@ -162,7 +161,7 @@ export default function Sidebar({ admin, collapsed = false }) {
               transition={{ type: 'spring', stiffness: 320, damping: 32 }}
               className="md:hidden fixed top-0 left-0 z-50 h-full">
               <div className="relative">
-                <Content />
+                {aside}
                 <button onClick={() => setOpen(false)}
                   className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center z-20 rounded"
                   style={{ border: `1px solid ${BORDER}`, color: DIM, background: 'rgba(251,245,230,0.05)' }}>
