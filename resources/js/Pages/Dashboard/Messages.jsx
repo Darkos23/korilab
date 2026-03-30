@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { router } from "@inertiajs/react";
 import { motion } from "framer-motion";
 import { MessageSquare, Trash2, Mail, MailOpen, Building2, DollarSign, Calendar } from "lucide-react";
@@ -20,15 +21,7 @@ function formatDate(dateStr) {
   return d.toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
 }
 
-export default function DashboardMessages({ admin, messages }) {
-  const [collapsed, setCollapsed] = useState(false);
-  const unread = messages.filter(m => !m.read_at);
-  const read   = messages.filter(m => m.read_at);
-
-  const markRead = (id) => router.patch(`/dashboard/messages/${id}/read`);
-  const destroy  = (id) => { if (confirm("Supprimer ce message ?")) router.delete(`/dashboard/messages/${id}`); };
-
-  const MessageCard = ({ msg }) => {
+function MessageCard({ msg, onMarkRead, onDestroy }) {
     const isUnread = !msg.read_at;
     return (
       <motion.div
@@ -97,7 +90,7 @@ export default function DashboardMessages({ admin, messages }) {
         {/* Actions */}
         <div className="flex items-center gap-2">
           {isUnread && (
-            <button onClick={() => markRead(msg.id)}
+            <button onClick={() => onMarkRead(msg.id)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200"
               style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 10, color: '#FFFFFF', background: TERRA, border: 'none', cursor: 'pointer' }}
               onMouseEnter={e => { e.currentTarget.style.background = TERRA2; }}
@@ -112,7 +105,7 @@ export default function DashboardMessages({ admin, messages }) {
             onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.color = INK2; }}>
             <Mail className="w-3 h-3" /> Répondre
           </a>
-          <button onClick={() => destroy(msg.id)}
+          <button onClick={() => onDestroy(msg.id)}
             className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200"
             style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 10, color: INK2, background: 'transparent', border: `1px solid transparent`, cursor: 'pointer' }}
             onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; }}
@@ -122,7 +115,15 @@ export default function DashboardMessages({ admin, messages }) {
         </div>
       </motion.div>
     );
-  };
+}
+
+export default function DashboardMessages({ admin, messages }) {
+  const [collapsed, setCollapsed] = useState(false);
+  const unread = messages.filter(m => !m.read_at);
+  const read   = messages.filter(m => m.read_at);
+
+  const markRead = (id) => router.patch(`/dashboard/messages/${id}/read`);
+  const destroy  = (id) => { if (confirm("Supprimer ce message ?")) router.delete(`/dashboard/messages/${id}`); };
 
   return (
     <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
@@ -166,7 +167,7 @@ export default function DashboardMessages({ admin, messages }) {
                 <div className="space-y-3 mb-8">
                   {unread.map((msg, i) => (
                     <motion.div key={msg.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.05 }}>
-                      <MessageCard msg={msg} />
+                      <MessageCard msg={msg} onMarkRead={markRead} onDestroy={destroy} />
                     </motion.div>
                   ))}
                 </div>
@@ -179,7 +180,7 @@ export default function DashboardMessages({ admin, messages }) {
                 <div className="space-y-3">
                   {read.map((msg, i) => (
                     <motion.div key={msg.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.05 }}>
-                      <MessageCard msg={msg} />
+                      <MessageCard msg={msg} onMarkRead={markRead} onDestroy={destroy} />
                     </motion.div>
                   ))}
                 </div>
