@@ -105,7 +105,9 @@ export default function Contrats({ admin }) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <Field label="Nom / Entreprise" name="client_name" value={form.client_name} onChange={handle} placeholder="Ex : Saly Immobilier" required />
                       <Field label="Activité" name="client_activity" value={form.client_activity} onChange={handle} placeholder="Ex : Agence immobilière" required />
-                      <Field label="Email" name="client_email" value={form.client_email} onChange={handle} placeholder="contact@exemple.sn" type="email" required />
+                      <div className="sm:col-span-2">
+                        <Field label="Email" name="client_email" value={form.client_email} onChange={handle} placeholder="contact@exemple.sn" type="email" required />
+                      </div>
                       <Field label="Téléphone" name="client_phone" value={form.client_phone} onChange={handle} placeholder="+221 77 XXX XX XX" required />
                       <div className="sm:col-span-2">
                         <Field label="Adresse" name="client_address" value={form.client_address} onChange={handle} placeholder="Ex : Médina, Dakar, Sénégal" required />
