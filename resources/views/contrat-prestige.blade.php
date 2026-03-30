@@ -97,7 +97,29 @@
 
   <div class="header">
     <div>
-      <div class="logo">Kori<span>Lab</span></div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <svg width="22" height="32" viewBox="0 0 60 84" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+          <ellipse cx="30" cy="42" rx="21" ry="30" fill="none" stroke="#C84818" stroke-width="2"/>
+          <path d="M30,14 L26,20 L34,26 L26,32 L34,38 L26,44 L34,50 L26,56 L34,62 L30,70" stroke="#C84818" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <line x1="17" y1="24" x2="24" y2="24" stroke="#C84818" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="16" y1="29" x2="23" y2="29" stroke="#C84818" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M13,35 L20,40 L13,45" stroke="#C84818" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M17,35 L24,40 L17,45" stroke="#C84818" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="11" cy="42" r="2" fill="#C84818"/>
+          <path d="M13,47 L20,52 L13,57" stroke="#C84818" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M17,47 L24,52 L17,57" stroke="#C84818" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <line x1="16" y1="60" x2="23" y2="60" stroke="#C84818" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="43" y1="24" x2="36" y2="24" stroke="#C84818" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="44" y1="29" x2="37" y2="29" stroke="#C84818" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M47,35 L40,40 L47,45" stroke="#C84818" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M43,35 L36,40 L43,45" stroke="#C84818" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="49" cy="42" r="2" fill="#C84818"/>
+          <path d="M47,47 L40,52 L47,57" stroke="#C84818" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M43,47 L36,52 L43,57" stroke="#C84818" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <line x1="44" y1="60" x2="37" y2="60" stroke="#C84818" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <div class="logo">Kori<span>Lab</span></div>
+      </div>
       <div class="tagline">Studio digital · Dakar, Sénégal</div>
     </div>
     <div class="doc-meta">
