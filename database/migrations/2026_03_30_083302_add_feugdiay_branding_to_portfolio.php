@@ -18,7 +18,7 @@ return new class extends Migration
             'tags'       => json_encode(['Logo', 'Charte', 'Design System']),
             'emoji'      => '🎨',
             'gradient'   => 'from-orange-700 to-amber-600',
-            'image'      => null,
+            'image'      => '/portfolio/feugdiay.png',
             'images'     => null,
             'link'       => '/portfolio/feugdiay/',
             'comingSoon' => false,
