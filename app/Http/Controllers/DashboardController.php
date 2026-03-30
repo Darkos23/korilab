@@ -216,4 +216,60 @@ class DashboardController extends Controller
 
         return response()->view('contrat-prestige', $data);
     }
+
+    // ── Suivi de projets ───────────────────────────────────────
+    public function projets()
+    {
+        $projects = \App\Models\Project::orderBy('deadline')->orderBy('status')->get();
+        return \Inertia\Inertia::render('Dashboard/Projets', [
+            'admin'    => session('admin'),
+            'projects' => $projects,
+        ]);
+    }
+
+    public function storeProjet(\Illuminate\Http\Request $request)
+    {
+        $data = $request->validate([
+            'client_name'  => 'required|string|max:255',
+            'client_email' => 'nullable|email',
+            'project_type' => 'required|string|max:255',
+            'formule'      => 'nullable|string',
+            'status'       => 'required|string',
+            'start_date'   => 'nullable|date',
+            'deadline'     => 'nullable|date',
+            'amount'       => 'nullable|integer',
+            'notes'        => 'nullable|string',
+        ]);
+        \App\Models\Project::create($data);
+        return back();
+    }
+
+    public function updateProjet(\Illuminate\Http\Request $request, \App\Models\Project $project)
+    {
+        $data = $request->validate([
+            'client_name'  => 'required|string|max:255',
+            'client_email' => 'nullable|email',
+            'project_type' => 'required|string|max:255',
+            'formule'      => 'nullable|string',
+            'status'       => 'required|string',
+            'start_date'   => 'nullable|date',
+            'deadline'     => 'nullable|date',
+            'amount'       => 'nullable|integer',
+            'notes'        => 'nullable|string',
+        ]);
+        $project->update($data);
+        return back();
+    }
+
+    public function destroyProjet(\App\Models\Project $project)
+    {
+        $project->delete();
+        return back();
+    }
+
+    public function updateProjetStatus(\Illuminate\Http\Request $request, \App\Models\Project $project)
+    {
+        $project->update(['status' => $request->status]);
+        return back();
+    }
 }

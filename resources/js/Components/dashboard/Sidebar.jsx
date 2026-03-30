@@ -1,6 +1,6 @@
 import { Link, router, usePage } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, MessageSquare, FileText } from "lucide-react";
+import { LayoutDashboard, Briefcase, Wrench, Globe, LogOut, Users, Menu, X, MessageSquare, FileText, FolderKanban } from "lucide-react";
 import { useState } from "react";
 
 /* ─── Tokens sidebar (washi soft) ────────────────────────── */
@@ -14,6 +14,7 @@ const GOLD       = '#8A5A18';
 
 const nav = [
   { href: '/dashboard',           icon: LayoutDashboard, label: "Vue d'ensemble", sub: 'Tableau central'    },
+  { href: '/dashboard/projets',   icon: FolderKanban,    label: 'Projets',        sub: 'Suivi'              },
   { href: '/dashboard/portfolio', icon: Briefcase,       label: 'Portfolio',      sub: 'Réalisations'       },
   { href: '/dashboard/services',  icon: Wrench,          label: 'Services',       sub: 'Offres & capacités' },
   { href: '/dashboard/team',      icon: Users,           label: 'Équipe / CV',    sub: 'Profils'            },

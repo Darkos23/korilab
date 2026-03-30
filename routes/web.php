@@ -62,6 +62,13 @@ Route::middleware('auth.admin')->prefix('dashboard')->group(function () {
     Route::get('/contrats', [DashboardController::class, 'contrats']);
     Route::get('/contrats/generer', [DashboardController::class, 'generateContrat']);
 
+    // Suivi de projets
+    Route::get('/projets', [DashboardController::class, 'projets']);
+    Route::post('/projets', [DashboardController::class, 'storeProjet']);
+    Route::put('/projets/{project}', [DashboardController::class, 'updateProjet']);
+    Route::delete('/projets/{project}', [DashboardController::class, 'destroyProjet']);
+    Route::patch('/projets/{project}/status', [DashboardController::class, 'updateProjetStatus']);
+
     // Messages de contact
     Route::get('/messages', [DashboardController::class, 'messages']);
     Route::patch('/messages/{id}/read', [DashboardController::class, 'markMessageRead']);
