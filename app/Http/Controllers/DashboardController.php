@@ -15,7 +15,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $now = now();
+        $today       = \Carbon\Carbon::today()->toDateString();
+        $in7days     = \Carbon\Carbon::today()->addDays(7)->toDateString();
+        $activeStats = ['livre', 'pause'];
 
         return Inertia::render('Dashboard/Index', [
             'admin'           => session('admin'),
@@ -23,14 +25,14 @@ class DashboardController extends Controller
             'servicesCount'   => Service::count(),
             'unreadMessages'  => ContactMessage::whereNull('read_at')->count(),
             'members'         => TeamMember::select('name', 'role', 'initials')->get(),
-            'projetsEnCours'  => Project::whereNotIn('status', ['livre', 'pause'])->count(),
-            'projetsEnRetard' => Project::whereNotIn('status', ['livre', 'pause'])
+            'projetsEnCours'  => Project::whereNotIn('status', $activeStats)->count(),
+            'projetsEnRetard' => Project::whereNotIn('status', $activeStats)
                                     ->whereNotNull('deadline')
-                                    ->where('deadline', '<', $now)
+                                    ->whereDate('deadline', '<', $today)
                                     ->count(),
-            'urgentProjects'  => Project::whereNotIn('status', ['livre', 'pause'])
+            'urgentProjects'  => Project::whereNotIn('status', $activeStats)
                                     ->whereNotNull('deadline')
-                                    ->where('deadline', '<=', $now->copy()->addDays(7))
+                                    ->whereDate('deadline', '<=', $in7days)
                                     ->orderBy('deadline')
                                     ->limit(4)
                                     ->get(['id', 'client_name', 'project_type', 'deadline', 'status']),
