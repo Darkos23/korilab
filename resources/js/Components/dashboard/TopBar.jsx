@@ -38,8 +38,11 @@ export default function TopBar({ admin, collapsed, onToggle }) {
           : <PanelLeftClose size={14} />}
       </button>
 
+      {/* Right group: messages + profile */}
+      <div className="flex items-center gap-2">
+
       {/* Messages icon */}
-      <Link href="/dashboard/messages" className="relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 mr-1"
+      <Link href="/dashboard/messages" className="relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150"
         style={{ color: INK2, border: `1px solid ${BORDER}` }}
         onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; }}>
@@ -122,6 +125,8 @@ export default function TopBar({ admin, collapsed, onToggle }) {
           )}
         </AnimatePresence>
       </div>
+
+      </div>{/* end right group */}
     </div>
   );
 }
