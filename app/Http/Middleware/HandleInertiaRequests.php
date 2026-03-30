@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use App\Models\Message;
+use App\Models\ContactMessage;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -49,7 +49,7 @@ class HandleInertiaRequests extends Middleware
                 ] : null,
             ],
             'unreadMessages' => $request->session()->has('admin')
-                ? Message::whereNull('read_at')->count()
+                ? ContactMessage::whereNull('read_at')->count()
                 : 0,
         ];
     }
