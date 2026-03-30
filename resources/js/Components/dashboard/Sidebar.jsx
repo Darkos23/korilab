@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Briefcase, Wrench, LogOut, Users, Menu, X, FileText, FolderKanban } from "lucide-react";
 import { useState } from "react";
 
-/* ─── Tokens sidebar (washi soft) ────────────────────────── */
+/* ─── Tokens ────────────────────────────────────────────────── */
 const SIDEBAR_BG = '#FDFBF7';
 const TEXT       = '#1C1A16';
 const DIM        = '#5A5448';
@@ -11,6 +11,7 @@ const MUTED      = '#8A8478';
 const BORDER     = 'rgba(0,0,0,0.06)';
 const TERRA      = '#B43028';
 const GOLD       = '#8A5A18';
+const FONT       = "'Century Gothic', 'Trebuchet MS', sans-serif";
 
 const nav = [
   { href: '/dashboard',           icon: LayoutDashboard, label: "Vue d'ensemble", sub: 'Tableau central'    },
@@ -18,26 +19,35 @@ const nav = [
   { href: '/dashboard/portfolio', icon: Briefcase,       label: 'Portfolio',      sub: 'Réalisations'       },
   { href: '/dashboard/services',  icon: Wrench,          label: 'Services',       sub: 'Offres & capacités' },
   { href: '/dashboard/team',      icon: Users,           label: 'Équipe / CV',    sub: 'Profils'            },
-  { href: '/dashboard/contrats', icon: FileText,        label: 'Contrats',       sub: 'Prestige'            },
+  { href: '/dashboard/contrats',  icon: FileText,        label: 'Contrats',       sub: 'Prestige'           },
 ];
 
-export default function Sidebar({ admin, collapsed = false }) {
+/* ─── Section label ─────────────────────────────────────────── */
+function SectionLabel({ children }) {
+  return (
+    <p style={{ fontFamily: FONT, fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.3em' }}
+      className="px-3 pb-2 pt-1">
+      {children}
+    </p>
+  );
+}
+
+/* ─── Sidebar content ────────────────────────────────────────── */
+function SidebarContent({ admin, sidebarProjects = [] }) {
   const { url } = usePage();
   const logout = () => router.post('/logout');
-  const [open, setOpen] = useState(false);
 
-  const aside = (
+  return (
     <aside
-      className="min-h-screen flex flex-col relative z-20 transition-all duration-200"
+      className="min-h-screen flex flex-col relative z-20"
       style={{
-        width: collapsed ? 0 : 224,
-        overflow: 'hidden',
+        width: 224,
         background: SIDEBAR_BG,
-        borderRight: collapsed ? 'none' : `1px solid ${BORDER}`,
+        borderRight: `1px solid ${BORDER}`,
         flexShrink: 0,
       }}>
 
-      {/* Logo */}
+      {/* ── Logo ── */}
       <div className="px-5 pt-6 pb-5 border-b" style={{ borderColor: BORDER }}>
         <div className="mb-4">
           <div className="flex items-center gap-2">
@@ -61,11 +71,11 @@ export default function Sidebar({ admin, collapsed = false }) {
               <path d="M43,47 L36,52 L43,57" stroke={TERRA} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
               <line x1="44" y1="60" x2="37" y2="60" stroke={TERRA} strokeWidth="1.4" strokeLinecap="round"/>
             </svg>
-            <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 16, color: TEXT, letterSpacing: '0.02em' }}>
+            <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 16, color: TEXT, letterSpacing: '0.02em' }}>
               KoriLab
             </div>
           </div>
-          <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 10, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 2 }}>
+          <div style={{ fontFamily: FONT, fontWeight: 300, fontSize: 10, color: MUTED, letterSpacing: '0.2em', textTransform: 'uppercase', marginTop: 2 }}>
             Dakar · Studio
           </div>
         </div>
@@ -74,14 +84,14 @@ export default function Sidebar({ admin, collapsed = false }) {
         <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg"
           style={{ background: 'rgba(0,0,0,0.03)', border: `1px solid ${BORDER}` }}>
           <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ background: 'rgba(180,48,40,0.09)', color: TERRA, fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 11, border: `1px solid rgba(180,48,40,0.2)` }}>
+            style={{ background: 'rgba(180,48,40,0.09)', color: TERRA, fontFamily: FONT, fontWeight: 700, fontSize: 11, border: `1px solid rgba(180,48,40,0.2)` }}>
             {(admin?.name ?? 'A').charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
-            <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 12, color: TEXT }} className="truncate">
+            <div style={{ fontFamily: FONT, fontWeight: 600, fontSize: 12, color: TEXT }} className="truncate">
               {admin?.name ?? '—'}
             </div>
-            <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            <div style={{ fontFamily: FONT, fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
               Admin
             </div>
           </div>
@@ -93,12 +103,9 @@ export default function Sidebar({ admin, collapsed = false }) {
         </div>
       </div>
 
-      {/* Nav */}
-      <nav className="flex-1 px-3 py-4 space-y-0.5">
-        <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.3em' }}
-          className="px-3 pb-2">
-          Navigation
-        </p>
+      {/* ── Nav ── */}
+      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-0.5">
+        <SectionLabel>Navigation</SectionLabel>
         {nav.map((item, i) => {
           const active = url.startsWith(item.href) && (item.href !== '/dashboard' || url === '/dashboard');
           return (
@@ -110,13 +117,12 @@ export default function Sidebar({ admin, collapsed = false }) {
                   : { borderLeft: '3px solid transparent', paddingLeft: 9, color: DIM }
                 }
               >
-                <item.icon className="w-4 h-4 flex-shrink-0"
-                  style={{ color: active ? TERRA : MUTED }} />
+                <item.icon className="w-4 h-4 flex-shrink-0" style={{ color: active ? TERRA : MUTED }} />
                 <div className="flex-1 min-w-0">
-                  <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: active ? 600 : 400, fontSize: 12, color: active ? TEXT : DIM }}>
+                  <div style={{ fontFamily: FONT, fontWeight: active ? 600 : 400, fontSize: 12, color: active ? TEXT : DIM }}>
                     {item.label}
                   </div>
-                  <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }} className="truncate">
+                  <div style={{ fontFamily: FONT, fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }} className="truncate">
                     {item.sub}
                   </div>
                 </div>
@@ -124,9 +130,46 @@ export default function Sidebar({ admin, collapsed = false }) {
             </motion.div>
           );
         })}
+
+        {/* ── Actifs ── */}
+        {sidebarProjects.length > 0 && (
+          <div className="pt-3">
+            <SectionLabel>Actifs</SectionLabel>
+            {sidebarProjects.map((p, i) => {
+              const dl = p.deadline ? new Date(p.deadline) : null;
+              const overdue = dl && dl < new Date();
+              return (
+                <motion.div key={p.id} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.04 }}>
+                  <Link href="/dashboard/projets"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-150 group"
+                    style={{ borderLeft: '3px solid transparent', paddingLeft: 9 }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.03)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                      style={{ background: overdue ? TERRA : GOLD }} />
+                    <div className="flex-1 min-w-0">
+                      <div className="truncate" style={{ fontFamily: FONT, fontWeight: 500, fontSize: 12, color: DIM }}>
+                        {p.client_name}
+                      </div>
+                      <div className="truncate" style={{ fontFamily: FONT, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                        {p.project_type}
+                      </div>
+                    </div>
+                    {dl && (
+                      <span style={{ fontFamily: 'monospace', fontSize: 9, color: overdue ? TERRA : MUTED, flexShrink: 0 }}>
+                        {overdue ? 'retard' : `J-${Math.ceil((dl - new Date()) / 86400000)}`}
+                      </span>
+                    )}
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
       </nav>
 
-      {/* Footer */}
+      {/* ── Footer ── */}
       <div className="px-3 py-4 border-t" style={{ borderColor: BORDER }}>
         <button onClick={logout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150"
@@ -135,15 +178,24 @@ export default function Sidebar({ admin, collapsed = false }) {
           onMouseLeave={e => { e.currentTarget.style.color = MUTED; e.currentTarget.style.background = 'transparent'; }}
         >
           <LogOut className="w-4 h-4" />
-          <span style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 12 }}>Déconnexion</span>
+          <span style={{ fontFamily: FONT, fontWeight: 400, fontSize: 12 }}>Déconnexion</span>
         </button>
       </div>
     </aside>
   );
+}
+
+/* ─── Export ─────────────────────────────────────────────────── */
+export default function Sidebar({ admin }) {
+  const { props } = usePage();
+  const sidebarProjects = props.sidebarProjects ?? [];
+  const [open, setOpen] = useState(false);
 
   return (
     <>
-      <div className="hidden md:flex">{aside}</div>
+      <div className="hidden md:flex">
+        <SidebarContent admin={admin} sidebarProjects={sidebarProjects} />
+      </div>
 
       <button onClick={() => setOpen(true)}
         className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center rounded-lg"
@@ -160,7 +212,7 @@ export default function Sidebar({ admin, collapsed = false }) {
               transition={{ type: 'spring', stiffness: 320, damping: 32 }}
               className="md:hidden fixed top-0 left-0 z-50 h-full">
               <div className="relative">
-                {aside}
+                <SidebarContent admin={admin} sidebarProjects={sidebarProjects} />
                 <button onClick={() => setOpen(false)}
                   className="absolute top-4 right-4 w-7 h-7 flex items-center justify-center z-20 rounded"
                   style={{ border: `1px solid ${BORDER}`, color: DIM, background: 'rgba(251,245,230,0.05)' }}>

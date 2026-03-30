@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use App\Models\ContactMessage;
+use App\Models\Project;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -51,6 +52,12 @@ class HandleInertiaRequests extends Middleware
             'unreadMessages' => $request->session()->has('admin')
                 ? ContactMessage::whereNull('read_at')->count()
                 : 0,
+            'sidebarProjects' => $request->session()->has('admin')
+                ? Project::where('status', 'en_cours')
+                    ->orderBy('deadline')
+                    ->limit(5)
+                    ->get(['id', 'client_name', 'project_type', 'deadline'])
+                : [],
         ];
     }
 }
