@@ -34,7 +34,6 @@ class AuthController extends Controller
                 'username' => $username,
                 'name'     => $users[$username]['name'],
                 'title'    => $users[$username]['title'] ?? 'Admin KoriLab',
-                'rank'     => $users[$username]['rank'],
                 'slug'     => $users[$username]['slug'],
             ]]);
             return redirect('/dashboard');

@@ -23,8 +23,6 @@ const ACTIONS = [
   { href: "/dashboard/messages",  icon: MessageSquare, label: "Messages reçus",        desc: "Demandes clients via le formulaire",  tag: "INBOX"     },
 ];
 
-const RANK_DOT = { S: '#3A6840', A: '#3A6840', B: '#8A5A18', C: '#B4AEA4' };
-
 /* ── Stat Card ── */
 function StatCard({ label, value, icon: Icon, sub, delay }) {
   return (
@@ -97,25 +95,19 @@ function RightSidebar({ admin, members }) {
           <span style={{ fontFamily: FONT, fontSize: 11, fontWeight: 600, color: '#B4AEA4' }}>{members.length}</span>
         </div>
         <div className="px-3 py-1">
-          {members.map((m, i) => {
-            const isLead = m.rank === 'S';
-            return (
+          {members.map((m, i) => (
               <div key={i} className="flex items-center gap-3 py-2.5 border-b last:border-0" style={{ borderColor: INK3 }}>
                 <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 font-mono text-[10px] font-bold"
-                  style={isLead
-                    ? { background: 'rgba(180,48,40,0.09)', color: TERRA }
-                    : { background: '#F2EDE5', color: '#8A8478' }
-                  }>
+                  style={{ background: '#F2EDE5', color: '#8A8478' }}>
                   {m.initials || (m.name ?? '?').charAt(0)}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="truncate" style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: INK }}>{m.name}</div>
                   <div className="truncate" style={{ fontFamily: FONT, fontSize: 11, color: '#B4AEA4', marginTop: 1 }}>{m.role}</div>
                 </div>
-                <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: RANK_DOT[m.rank] ?? '#B4AEA4' }} />
+                <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#B4AEA4' }} />
               </div>
-            );
-          })}
+          ))}
           {members.length === 0 && (
             <p className="text-xs py-4 text-center" style={{ color: '#B4AEA4', fontFamily: FONT }}>Aucun membre</p>
           )}

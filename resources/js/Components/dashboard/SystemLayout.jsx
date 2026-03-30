@@ -234,20 +234,6 @@ export function SysBtn({ children, variant = 'primary', className = '', ...props
   );
 }
 
-/* ─── Rank Badge ─────────────────────────────────────────── */
-const RC = { S: GOLD, A: '#8b6010', B: RED, C: '#5a3a9a', D: '#2a7a6a', E: '#6b7280' };
-export function RankBadge({ rank }) {
-  const c = RC[rank] ?? TEXT;
-  return (
-    <span
-      className="inline-flex items-center justify-center w-6 h-6 font-mono text-[10px] font-black uppercase"
-      style={{ color: c, border: `1px solid ${c}50`, background: `${c}10`, borderRadius: 4 }}
-    >
-      {rank}
-    </span>
-  );
-}
-
 /* ─── Status Bar ─────────────────────────────────────────── */
 export function StatusBar({ admin }) {
   const [t, setT] = useState(() => new Date().toLocaleTimeString('fr-FR'));
@@ -255,7 +241,6 @@ export function StatusBar({ admin }) {
     const i = setInterval(() => setT(new Date().toLocaleTimeString('fr-FR')), 1000);
     return () => clearInterval(i);
   }, []);
-  const rc = RC[admin?.rank] ?? TEXT;
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-50 flex items-center px-5 gap-4"
