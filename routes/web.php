@@ -58,6 +58,10 @@ Route::middleware('auth.admin')->prefix('dashboard')->group(function () {
     Route::patch('/team/{id}', [DashboardController::class, 'updateTeamMember']);
     Route::delete('/team/{id}', [DashboardController::class, 'destroyTeamMember']);
 
+    // Contrats Prestige
+    Route::get('/contrats', [DashboardController::class, 'contrats']);
+    Route::get('/contrats/generer', [DashboardController::class, 'generateContrat']);
+
     // Messages de contact
     Route::get('/messages', [DashboardController::class, 'messages']);
     Route::patch('/messages/{id}/read', [DashboardController::class, 'markMessageRead']);

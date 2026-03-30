@@ -189,4 +189,31 @@ class DashboardController extends Controller
         TeamMember::findOrFail($id)->delete();
         return back()->with('success', 'Membre supprimé.');
     }
+
+    public function contrats()
+    {
+        return Inertia::render('Dashboard/Contrats', [
+            'admin' => session('admin'),
+        ]);
+    }
+
+    public function generateContrat(Request $request)
+    {
+        $data = $request->validate([
+            'client_name'     => 'required|string|max:255',
+            'client_activity' => 'required|string|max:255',
+            'client_address'  => 'required|string|max:255',
+            'client_email'    => 'required|email|max:255',
+            'client_phone'    => 'required|string|max:50',
+            'formule'         => 'required|in:starter,business,premium',
+            'date'            => 'required|date',
+            'ninea'           => 'nullable|string|max:50',
+            'ref_number'      => 'nullable|string|max:10',
+        ]);
+
+        $data['ref_number'] = $data['ref_number'] ?: '001';
+        $data['ninea']      = $data['ninea'] ?? '';
+
+        return response()->view('contrat-prestige', $data);
+    }
 }
