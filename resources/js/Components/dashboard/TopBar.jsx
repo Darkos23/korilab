@@ -88,7 +88,7 @@ export default function TopBar({ admin, collapsed, onToggle }) {
               <div className="px-4 py-3 border-b" style={{ borderColor: BORDER }}>
                 <div style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: INK }}>{admin?.name}</div>
                 <div style={{ fontFamily: FONT, fontSize: 10, color: INK2, marginTop: 2 }}>
-                  Rang {admin?.rank} · Admin KoriLab
+                  Admin KoriLab
                 </div>
                 <div className="flex items-center gap-1.5 mt-2">
                   <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#3A6840' }} />

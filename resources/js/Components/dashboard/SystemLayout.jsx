@@ -273,7 +273,7 @@ export function StatusBar({ admin }) {
       <span className="font-mono text-[7px]" style={{ color: MUTED }}>·</span>
       <span className="font-mono text-[7px] uppercase tracking-widest" style={{ color: DIM }}>{admin?.name ?? '—'}</span>
       <span className="font-mono text-[7px]" style={{ color: MUTED }}>·</span>
-      <span className="font-mono text-[7px] uppercase tracking-widest" style={{ color: rc }}>{admin?.rank ?? '—'}</span>
+      <span className="font-mono text-[7px] uppercase tracking-widest" style={{ color: MUTED }}>Admin KoriLab</span>
       <div className="ml-auto">
         <span className="font-mono text-[7px] tabular-nums" style={{ color: MUTED }}>{t}</span>
       </div>

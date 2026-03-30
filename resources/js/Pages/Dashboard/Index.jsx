@@ -158,10 +158,6 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
               Bienvenue, <span style={{ color: TERRA }}>{admin?.name}</span>
             </h1>
             <div className="flex items-center gap-2 mt-1">
-              <span className="font-mono text-[10px] px-2 py-0.5 rounded"
-                style={{ background: 'rgba(180,48,40,0.08)', color: TERRA, border: '1px solid rgba(180,48,40,0.18)' }}>
-                {admin?.rank}-Class
-              </span>
               <span style={{ fontFamily: FONT, fontSize: 11, color: INK2 }}>Admin KoriLab</span>
             </div>
           </div>
