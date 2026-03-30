@@ -158,7 +158,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
               Bienvenue, <span style={{ color: TERRA }}>{admin?.name}</span>
             </h1>
             <div className="flex items-center gap-2 mt-1">
-              <span style={{ fontFamily: FONT, fontSize: 11, color: INK2 }}>Admin KoriLab</span>
+              <span style={{ fontFamily: FONT, fontSize: 11, color: INK2 }}>{admin?.title ?? 'Admin KoriLab'}</span>
             </div>
           </div>
           <a href="/" target="_blank" rel="noopener noreferrer"
