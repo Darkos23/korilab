@@ -23,14 +23,14 @@ class DashboardController extends Controller
             'servicesCount'   => Service::count(),
             'unreadMessages'  => ContactMessage::whereNull('read_at')->count(),
             'members'         => TeamMember::select('name', 'role', 'initials')->get(),
-            'projetsEnCours'  => Project::whereNotIn('status', ['terminé', 'annulé'])->count(),
-            'projetsEnRetard' => Project::whereNotIn('status', ['terminé', 'annulé'])
+            'projetsEnCours'  => Project::whereNotIn('status', ['livre', 'pause'])->count(),
+            'projetsEnRetard' => Project::whereNotIn('status', ['livre', 'pause'])
                                     ->whereNotNull('deadline')
                                     ->where('deadline', '<', $now)
                                     ->count(),
-            'urgentProjects'  => Project::whereNotIn('status', ['terminé', 'annulé'])
+            'urgentProjects'  => Project::whereNotIn('status', ['livre', 'pause'])
                                     ->whereNotNull('deadline')
-                                    ->where('deadline', '<', $now->copy()->addDays(7))
+                                    ->where('deadline', '<=', $now->copy()->addDays(7))
                                     ->orderBy('deadline')
                                     ->limit(4)
                                     ->get(['id', 'client_name', 'project_type', 'deadline', 'status']),
