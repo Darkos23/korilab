@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" fill="none">
+  <!-- FeugDiay White version (for dark backgrounds) -->
+  <g transform="translate(10, 8)">
+    <path d="M32 6 C32 2.7 34.7 0 38 0 C41.3 0 44 2.7 44 6 C44 8 43 9.5 41.5 10.5"
+          stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M38 10 L12 32 C8 35 10 40 14 40 L62 40 C66 40 68 35 64 32 L38 10Z"
+          stroke="white" stroke-width="3" stroke-linejoin="round" fill="none"/>
+  </g>
+  <text x="88" y="52" font-family="'Fraunces', Georgia, serif" font-weight="900" font-size="42" letter-spacing="-1.5" fill="white">Feug</text>
+  <text x="220" y="52" font-family="'Fraunces', Georgia, serif" font-weight="900" font-size="42" letter-spacing="-1.5" fill="#D9921E">Diay</text>
+  <text x="88" y="70" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-weight="500" font-size="11" letter-spacing="3" fill="white" opacity="0.6">LA FRIPERIE NUMERIQUE</text>
+</svg>
