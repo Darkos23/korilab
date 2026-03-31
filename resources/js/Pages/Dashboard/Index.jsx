@@ -92,35 +92,6 @@ function RightSidebar({ admin, members, factures }) {
   return (
     <div className="flex flex-col" style={{ width: '100%', height: '100%' }}>
 
-      {/* ── Top bar ── */}
-      <div className="flex items-center justify-between pb-4 mb-4" style={{ borderBottom: `1px solid ${INK3}` }}>
-        <div className="flex items-center gap-3">
-          <span style={{ fontFamily: FONT, fontSize: 10, color: '#4CAF50' }}>● prod</span>
-          <span style={{ fontFamily: FONT, fontSize: 10, color: GOLD }}>● staging</span>
-        </div>
-        <div className="w-7 h-7 rounded-full flex items-center justify-center font-mono text-[10px] font-bold"
-          style={{ background: GOLD, color: '#fff', border: `2px solid rgba(138,90,24,0.3)` }}>
-          {(admin?.name ?? 'A').charAt(0).toUpperCase()}
-        </div>
-      </div>
-
-      {/* ── Action buttons ── */}
-      <div className="flex gap-2 mb-5">
-        <button className="flex-1 py-2 rounded-lg text-center transition-all duration-150"
-          style={{ fontFamily: FONT, fontSize: 11, fontWeight: 600, color: INK2, background: CARD, border: `1px solid ${INK3}` }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; }}>
-          Exporter
-        </button>
-        <Link href="/dashboard/projets"
-          className="flex-1 py-2 rounded-lg text-center transition-all duration-150 no-underline"
-          style={{ fontFamily: FONT, fontSize: 11, fontWeight: 700, color: '#fff', background: INK, border: `1px solid ${INK}`, textDecoration: 'none' }}
-          onMouseEnter={e => { e.currentTarget.style.background = TERRA; e.currentTarget.style.borderColor = TERRA; }}
-          onMouseLeave={e => { e.currentTarget.style.background = INK; e.currentTarget.style.borderColor = INK; }}>
-          + Projet
-        </Link>
-      </div>
-
       {/* ── Hero card ── */}
       <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}
         className="rounded-xl p-4 mb-4"
@@ -209,13 +180,20 @@ export default function DashboardIndex({
   ];
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden" style={{ background: '#F8F5EF' }}>
+    <div className="min-h-screen flex flex-col relative overflow-hidden" style={{ background: '#F8F5EF' }}>
       <SLSystemBG />
-      <Sidebar admin={admin} />
 
-      <main className="relative z-10 flex-1 overflow-auto flex flex-col min-w-0">
+      {/* TopBar pleine largeur */}
+      <div className="relative z-20">
         <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
-        <div className="p-6 md:p-8 pb-10 flex-1">
+      </div>
+
+      {/* Corps — sidebar gauche + contenu + sidebar droite */}
+      <div className="flex flex-1 overflow-hidden relative z-10">
+        <Sidebar admin={admin} />
+
+        <main className="flex-1 overflow-auto flex flex-col min-w-0">
+          <div className="p-6 md:p-8 pb-10 flex-1">
 
           {/* ── Header ── */}
           <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
@@ -253,11 +231,11 @@ export default function DashboardIndex({
             {ACTIONS.map((a, i) => <ActionCard key={a.href} {...a} delay={0.25 + i * 0.05} />)}
           </div>
 
-        </div>
-      </main>
+          </div>
+        </main>
 
-      {/* ── Right Sidebar ── */}
-      <div className="hidden xl:flex flex-col relative z-10 overflow-y-auto"
+        {/* ── Right Sidebar ── */}
+        <div className="hidden xl:flex flex-col relative z-10 overflow-y-auto"
         style={{
           width: 272,
           flexShrink: 0,
@@ -271,6 +249,8 @@ export default function DashboardIndex({
           members={members}
           factures={factures}
         />
+        </div>
+
       </div>
 
       <StatusBar admin={admin} />
