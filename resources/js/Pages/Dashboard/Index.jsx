@@ -88,7 +88,7 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
 /* ── Right Sidebar ── */
 function RightSidebar({ admin, members, urgentProjects, recentMessages }) {
   return (
-    <div className="flex flex-col gap-4" style={{ width: 252, flexShrink: 0 }}>
+    <div className="flex flex-col gap-4" style={{ width: '100%' }}>
 
       {/* Site card */}
       <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}
@@ -220,7 +220,7 @@ export default function DashboardIndex({
       <SLSystemBG />
       <Sidebar admin={admin} />
 
-      <main className="relative z-10 flex-1 overflow-auto flex flex-col">
+      <main className="relative z-10 flex-1 overflow-auto flex flex-col min-w-0">
         <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
         <div className="p-6 md:p-8 pb-10 flex-1">
 
@@ -255,28 +255,32 @@ export default function DashboardIndex({
             {stats.map(s => <StatCard key={s.label} {...s} />)}
           </div>
 
-          {/* ── Main grid ── */}
-          <div className="flex gap-6 items-start">
-
-            {/* Actions */}
-            <div className="flex-1 min-w-0 flex flex-col gap-3">
-              {ACTIONS.map((a, i) => <ActionCard key={a.href} {...a} delay={0.25 + i * 0.05} />)}
-            </div>
-
-            {/* Right sidebar */}
-            <div className="hidden lg:block">
-              <RightSidebar
-                admin={admin}
-                members={members}
-                urgentProjects={urgentProjects}
-                recentMessages={recentMessages}
-              />
-            </div>
-
+          {/* ── Actions ── */}
+          <div className="flex flex-col gap-3">
+            {ACTIONS.map((a, i) => <ActionCard key={a.href} {...a} delay={0.25 + i * 0.05} />)}
           </div>
 
         </div>
       </main>
+
+      {/* ── Right Sidebar ── */}
+      <div className="hidden xl:flex flex-col relative z-10 overflow-y-auto"
+        style={{
+          width: 272,
+          flexShrink: 0,
+          borderLeft: `1px solid ${INK3}`,
+          background: 'rgba(253,251,247,0.85)',
+          backdropFilter: 'blur(8px)',
+          padding: '24px 16px 80px',
+          gap: 16,
+        }}>
+        <RightSidebar
+          admin={admin}
+          members={members}
+          urgentProjects={urgentProjects}
+          recentMessages={recentMessages}
+        />
+      </div>
 
       <StatusBar admin={admin} />
     </div>
