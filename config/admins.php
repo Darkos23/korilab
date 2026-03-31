@@ -4,19 +4,19 @@ return [
     env('ADMIN_IBRAHIMA_USERNAME', 'ibrahima') => [
         'password' => env('ADMIN_IBRAHIMA_PASSWORD'),
         'name'     => 'Ibrahima',
-        'title'    => 'Fondateur KoriLab',
+        'title'    => 'Fondateur',
         'slug'     => 'ibrahima-sarr',
     ],
     env('ADMIN_BABACAR_USERNAME', 'babacar') => [
         'password' => env('ADMIN_BABACAR_PASSWORD'),
         'name'     => 'Babacar',
-        'title'    => 'Co-fondateur KoriLab',
+        'title'    => 'Co-fondateur',
         'slug'     => 'babacar-ndiaye',
     ],
     env('ADMIN_CHEIKH_USERNAME', 'cheikh') => [
         'password' => env('ADMIN_CHEIKH_PASSWORD'),
         'name'     => 'Cheikh',
-        'title'    => 'Exécutif KoriLab',
+        'title'    => 'Exécutif',
         'slug'     => 'cheikh-anta-kane',
     ],
 ];
