@@ -107,8 +107,8 @@ function RightSidebar({ admin, members, factures }) {
       <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
         className="mb-4">
         <div className="flex items-center gap-2 mb-3">
-          <span style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: INK2, textTransform: 'uppercase', letterSpacing: '0.25em' }}>Équipe</span>
-          <span style={{ fontFamily: FONT, fontSize: 10, color: '#B4AEA4' }}>· {members.length}</span>
+          <span style={{ fontFamily: FONT, fontSize: 11, fontWeight: 600, color: INK2 }}>Équipe</span>
+          <span style={{ fontFamily: FONT, fontSize: 11, color: '#B4AEA4' }}>· {members.length}</span>
         </div>
         <div className="flex flex-col gap-2">
           {members.map((m, i) => (
@@ -133,7 +133,7 @@ function RightSidebar({ admin, members, factures }) {
       {factures.length > 0 && (
         <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
           <div className="flex items-center gap-2 mb-3">
-            <span style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: INK2, textTransform: 'uppercase', letterSpacing: '0.25em' }}>Factures</span>
+            <span style={{ fontFamily: FONT, fontSize: 11, fontWeight: 600, color: INK2 }}>Factures</span>
           </div>
           <div className="flex flex-col gap-2">
             {factures.map((f, i) => {
@@ -142,14 +142,14 @@ function RightSidebar({ admin, members, factures }) {
                 ? new Date(f.due_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })
                 : null;
               return (
-                <div key={f.id} className="p-3 rounded-xl"
-                  style={{ background: '#FFFFFF', border: `1px solid ${overdue ? 'rgba(180,48,40,0.2)' : INK3}`, borderLeft: `3px solid ${overdue ? TERRA : GOLD}` }}>
-                  <div style={{ fontFamily: FONT, fontSize: 11, color: INK2, marginBottom: 4 }}>{f.client_name}</div>
-                  <div style={{ fontFamily: FONT, fontSize: 20, fontWeight: 800, color: overdue ? TERRA : GOLD, letterSpacing: '-0.02em' }}>
+                <div key={f.id} className="p-4 rounded-xl"
+                  style={{ background: '#FFFFFF', border: `1px solid ${overdue ? 'rgba(180,48,40,0.15)' : INK3}`, borderLeft: `3px solid ${overdue ? TERRA : GOLD}` }}>
+                  <div style={{ fontFamily: FONT, fontSize: 11, color: INK2, marginBottom: 6 }}>{f.client_name}</div>
+                  <div style={{ fontFamily: 'Georgia, serif', fontSize: 26, fontWeight: 700, color: overdue ? TERRA : GOLD, letterSpacing: '-0.02em', lineHeight: 1 }}>
                     {Number(f.amount).toLocaleString('fr-FR')} €
                   </div>
                   {dateLabel && (
-                    <div style={{ fontFamily: FONT, fontSize: 10, color: overdue ? TERRA : '#B4AEA4', marginTop: 3 }}>
+                    <div style={{ fontFamily: FONT, fontSize: 10, color: overdue ? TERRA : '#B4AEA4', marginTop: 6 }}>
                       {overdue ? `En retard · ${dateLabel}` : `Échéance · ${dateLabel}`}
                     </div>
                   )}
