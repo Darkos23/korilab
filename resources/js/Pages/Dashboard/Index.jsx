@@ -237,10 +237,10 @@ export default function DashboardIndex({
         {/* ── Right Sidebar ── */}
         <div className="hidden xl:flex flex-col relative z-10 overflow-y-auto"
         style={{
-          width: 272,
+          width: 280,
           flexShrink: 0,
           borderLeft: `1px solid ${INK3}`,
-          background: 'transparent',
+          background: '#FDFBF7',
           padding: '24px 16px 80px',
           gap: 16,
         }}>
