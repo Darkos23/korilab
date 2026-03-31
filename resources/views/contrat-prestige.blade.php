@@ -86,6 +86,21 @@
     .page { box-shadow: none; border-radius: 0; padding: 48px 56px; max-width: 100%; }
     .print-btn, .back-btn { display: none; }
   }
+  @media (max-width: 640px) {
+    body { padding: 0.75rem; padding-bottom: 100px; }
+    .page { padding: 24px 20px; }
+    .header { flex-direction: column; gap: 16px; padding-bottom: 20px; margin-bottom: 28px; }
+    .doc-meta { text-align: left; }
+    .logo { font-size: 18pt; }
+    .contract-title h1 { font-size: 16pt; }
+    .contract-title { margin-bottom: 28px; }
+    .parties { grid-template-columns: 1fr; gap: 16px; margin-bottom: 24px; }
+    .formule-grid { grid-template-columns: 1fr; gap: 10px; }
+    .signatures-grid { grid-template-columns: 1fr; gap: 32px; }
+    .print-btn { bottom: 16px; right: 16px; padding: 12px 18px; font-size: 13px; }
+    .back-btn { bottom: 16px; left: 16px; padding: 12px 18px; font-size: 13px; }
+    .page-footer { flex-direction: column; gap: 6px; }
+  }
 </style>
 </head>
 <body>
