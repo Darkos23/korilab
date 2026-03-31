@@ -86,69 +86,43 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
 }
 
 /* ── Right Sidebar ── */
-function RightSidebar({ admin, members, factures }) {
-  const C = '#EDE8DC'; // card bg
-  const DOT = ['#4CAF50', '#4CAF50', '#C89030'];
+const PF = "'Playfair Display', serif";
+const JO = "'Jost', sans-serif";
+const DM = "'DM Mono', monospace";
+const DOT_COLORS = ['#5A9860', '#5A9860', '#8B6914'];
 
+function RightSidebar({ admin, members }) {
   return (
-    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
 
       {/* Hero */}
-      <div style={{ background: C, border: '1px solid rgba(0,0,0,0.07)', borderLeft: '3px solid #8A5A18', borderRadius: 10, padding: 16 }}>
-        <div style={{ fontFamily: 'monospace', fontSize: 9, color: '#B4AEA4', marginBottom: 8, letterSpacing: '0.05em' }}>korilab.dev</div>
-        <p style={{ margin: 0, fontSize: 16, lineHeight: 1.45 }}>
-          <span style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontWeight: 400, color: '#1C1A16' }}>Nous créons des projets </span>
-          <span style={{ fontFamily: 'Georgia, serif', fontWeight: 700, color: '#8A5A18' }}>hauts de gammes</span>
+      <div style={{ background: '#F8F5F0', border: '0.5px solid #E8E4DC', borderLeft: '2px solid #1A1714', borderRadius: 2, padding: '0.8rem' }}>
+        <div style={{ fontFamily: DM, fontSize: 8, color: '#B0A898', letterSpacing: '1px', marginBottom: '0.4rem' }}>korilab.dev</div>
+        <p style={{ margin: 0, fontFamily: PF, fontSize: 16, fontWeight: 400, color: '#1A1714', lineHeight: 1.3, fontStyle: 'italic' }}>
+          Nous créons des projets <b style={{ fontStyle: 'normal', color: '#8B6914', fontWeight: 700 }}>hauts de gammes</b>
         </p>
-        <p style={{ margin: '8px 0 0', fontSize: 11, color: '#B4AEA4', fontFamily: FONT }}>Design · Dev · Stratégie · Dakar</p>
+        <p style={{ margin: '0.4rem 0 0', fontFamily: JO, fontSize: 11, fontWeight: 300, color: '#A8A098', letterSpacing: '0.2px' }}>Design · Dev · Stratégie · Dakar</p>
       </div>
+
+      {/* Séparateur */}
+      <div style={{ height: '0.5px', background: '#E8E4DC', margin: '0.2rem 0' }} />
 
       {/* Équipe */}
       <div>
-        <div style={{ fontFamily: FONT, fontSize: 11, color: '#5A5448', marginBottom: 12 }}>
-          Équipe <span style={{ color: '#B4AEA4' }}>· {members.length}</span>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {members.map((m, i) => (
-            <div key={i} style={{ background: C, border: '1px solid rgba(0,0,0,0.07)', borderRadius: 10, padding: '10px 12px', display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#F5EFE4', border: '1px solid rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontFamily: 'monospace', fontWeight: 700, color: '#5A5448', flexShrink: 0 }}>
-                {m.initials || (m.name ?? '?').slice(0, 2).toUpperCase()}
-              </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: '#1C1A16', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.name}</div>
-                <div style={{ fontFamily: FONT, fontSize: 10, color: '#B4AEA4', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.role}</div>
-              </div>
-              <div style={{ width: 8, height: 8, borderRadius: '50%', background: DOT[i % 3], flexShrink: 0 }} />
+        <div style={{ fontFamily: DM, fontSize: 8, color: '#8B6914', letterSpacing: '2px', opacity: 0.5, marginBottom: '0.5rem' }}>Équipe</div>
+        {members.map((m, i) => (
+          <div key={i} style={{ background: '#F8F5F0', border: '0.5px solid #E8E4DC', borderRadius: 2, padding: '0.65rem 0.75rem', display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+            <div style={{ width: 26, height: 26, borderRadius: '50%', background: '#F8F5F0', border: '0.5px solid #D8D4CC', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 500, color: '#8A8278', flexShrink: 0 }}>
+              {m.initials || (m.name ?? '?').slice(0, 2).toUpperCase()}
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Factures */}
-      {factures.length > 0 && (
-        <div>
-          <div style={{ fontFamily: FONT, fontSize: 11, color: '#5A5448', marginBottom: 12 }}>Factures</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {factures.map((f) => {
-              const overdue = f.status === 'en_retard' || (f.due_date && new Date(f.due_date) < new Date() && f.status !== 'payée');
-              const dateLabel = f.due_date ? new Date(f.due_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) : null;
-              return (
-                <div key={f.id} style={{ background: C, border: '1px solid rgba(0,0,0,0.07)', borderLeft: `3px solid ${overdue ? '#B43028' : '#8A5A18'}`, borderRadius: 10, padding: 16 }}>
-                  <div style={{ fontFamily: FONT, fontSize: 11, color: '#5A5448', marginBottom: 6 }}>{f.client_name}</div>
-                  <div style={{ fontFamily: 'Georgia, serif', fontSize: 26, fontWeight: 700, color: overdue ? '#B43028' : '#8A5A18', letterSpacing: '-0.02em', lineHeight: 1 }}>
-                    {Number(f.amount).toLocaleString('fr-FR')} €
-                  </div>
-                  {dateLabel && (
-                    <div style={{ fontFamily: FONT, fontSize: 10, color: overdue ? '#B43028' : '#B4AEA4', marginTop: 6 }}>
-                      {overdue ? `En retard · ${dateLabel}` : `Échéance · ${dateLabel}`}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+            <div style={{ flex: 1 }}>
+              <div style={{ fontFamily: JO, fontSize: 12, fontWeight: 400, color: '#3A3630' }}>{m.name}</div>
+              <div style={{ fontFamily: JO, fontSize: 10, color: '#A8A098' }}>{m.role}</div>
+            </div>
+            <div style={{ width: 5, height: 5, borderRadius: '50%', background: DOT_COLORS[i % DOT_COLORS.length], flexShrink: 0 }} />
           </div>
-        </div>
-      )}
+        ))}
+      </div>
 
     </div>
   );
@@ -237,7 +211,6 @@ export default function DashboardIndex({
         <RightSidebar
           admin={admin}
           members={members}
-          factures={factures}
         />
         </div>
 
