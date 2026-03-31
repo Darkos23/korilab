@@ -86,71 +86,60 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
 }
 
 /* ── Right Sidebar ── */
-const DOT_COLORS = ['#4CAF50', '#4CAF50', '#C89030'];
-
 function RightSidebar({ admin, members, factures }) {
+  const C = '#EDE8DC'; // card bg
+  const DOT = ['#4CAF50', '#4CAF50', '#C89030'];
+
   return (
-    <div className="flex flex-col" style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 20 }}>
 
-      {/* ── Hero card ── */}
-      <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}
-        className="rounded-xl p-4 mb-4"
-        style={{ background: '#F5EFE4', border: `1px solid rgba(0,0,0,0.07)`, borderLeft: `3px solid ${GOLD}` }}>
-        <div className="font-mono text-[9px] tracking-widest mb-2" style={{ color: '#B4AEA4' }}>korilab.dev</div>
-        <p style={{ fontSize: 15, lineHeight: 1.45 }}>
-          <span style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontStyle: 'italic', fontWeight: 400, color: INK }}>Nous créons des projets </span>
-          <span style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, color: GOLD, fontStyle: 'normal' }}>hauts de gammes</span>
+      {/* Hero */}
+      <div style={{ background: C, border: '1px solid rgba(0,0,0,0.07)', borderLeft: '3px solid #8A5A18', borderRadius: 10, padding: 16 }}>
+        <div style={{ fontFamily: 'monospace', fontSize: 9, color: '#B4AEA4', marginBottom: 8, letterSpacing: '0.05em' }}>korilab.dev</div>
+        <p style={{ margin: 0, fontSize: 16, lineHeight: 1.45 }}>
+          <span style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontWeight: 400, color: '#1C1A16' }}>Nous créons des projets </span>
+          <span style={{ fontFamily: 'Georgia, serif', fontWeight: 700, color: '#8A5A18' }}>hauts de gammes</span>
         </p>
-        <p style={{ fontFamily: FONT, fontSize: 11, color: '#B4AEA4', marginTop: 8 }}>Design · Dev · Stratégie · Dakar</p>
-      </motion.div>
+        <p style={{ margin: '8px 0 0', fontSize: 11, color: '#B4AEA4', fontFamily: FONT }}>Design · Dev · Stratégie · Dakar</p>
+      </div>
 
-      {/* ── Équipe ── */}
-      <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
-        className="mb-4">
-        <div className="flex items-center gap-2 mb-3">
-          <span style={{ fontFamily: FONT, fontSize: 11, fontWeight: 600, color: INK2 }}>Équipe</span>
-          <span style={{ fontFamily: FONT, fontSize: 11, color: '#B4AEA4' }}>· {members.length}</span>
+      {/* Équipe */}
+      <div>
+        <div style={{ fontFamily: FONT, fontSize: 11, color: '#5A5448', marginBottom: 12 }}>
+          Équipe <span style={{ color: '#B4AEA4' }}>· {members.length}</span>
         </div>
-        <div className="flex flex-col gap-2">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {members.map((m, i) => (
-            <div key={i} className="flex items-center gap-3 p-3 rounded-xl"
-              style={{ background: '#F5EFE4', border: `1px solid rgba(0,0,0,0.07)` }}>
-              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 font-mono text-[10px] font-bold"
-                style={{ background: '#EDE9E2', color: INK2 }}>
+            <div key={i} style={{ background: C, border: '1px solid rgba(0,0,0,0.07)', borderRadius: 10, padding: '10px 12px', display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#F5EFE4', border: '1px solid rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontFamily: 'monospace', fontWeight: 700, color: '#5A5448', flexShrink: 0 }}>
                 {m.initials || (m.name ?? '?').slice(0, 2).toUpperCase()}
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="truncate" style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: INK }}>{m.name}</div>
-                <div className="truncate" style={{ fontFamily: FONT, fontSize: 10, color: '#B4AEA4' }}>{m.role}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: '#1C1A16', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.name}</div>
+                <div style={{ fontFamily: FONT, fontSize: 10, color: '#B4AEA4', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.role}</div>
               </div>
-              <div className="w-2 h-2 rounded-full flex-shrink-0"
-                style={{ background: DOT_COLORS[i % DOT_COLORS.length] }} />
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: DOT[i % 3], flexShrink: 0 }} />
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
-      {/* ── Factures ── */}
+      {/* Factures */}
       {factures.length > 0 && (
-        <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
-          <div className="flex items-center gap-2 mb-3">
-            <span style={{ fontFamily: FONT, fontSize: 11, fontWeight: 600, color: INK2 }}>Factures</span>
-          </div>
-          <div className="flex flex-col gap-2">
-            {factures.map((f, i) => {
+        <div>
+          <div style={{ fontFamily: FONT, fontSize: 11, color: '#5A5448', marginBottom: 12 }}>Factures</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {factures.map((f) => {
               const overdue = f.status === 'en_retard' || (f.due_date && new Date(f.due_date) < new Date() && f.status !== 'payée');
-              const dateLabel = f.due_date
-                ? new Date(f.due_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })
-                : null;
+              const dateLabel = f.due_date ? new Date(f.due_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) : null;
               return (
-                <div key={f.id} className="p-4 rounded-xl"
-                  style={{ background: '#F5EFE4', border: `1px solid rgba(0,0,0,0.07)`, borderLeft: `3px solid ${overdue ? TERRA : GOLD}` }}>
-                  <div style={{ fontFamily: FONT, fontSize: 11, color: INK2, marginBottom: 6 }}>{f.client_name}</div>
-                  <div style={{ fontFamily: 'Georgia, serif', fontSize: 26, fontWeight: 700, color: overdue ? TERRA : GOLD, letterSpacing: '-0.02em', lineHeight: 1 }}>
+                <div key={f.id} style={{ background: C, border: '1px solid rgba(0,0,0,0.07)', borderLeft: `3px solid ${overdue ? '#B43028' : '#8A5A18'}`, borderRadius: 10, padding: 16 }}>
+                  <div style={{ fontFamily: FONT, fontSize: 11, color: '#5A5448', marginBottom: 6 }}>{f.client_name}</div>
+                  <div style={{ fontFamily: 'Georgia, serif', fontSize: 26, fontWeight: 700, color: overdue ? '#B43028' : '#8A5A18', letterSpacing: '-0.02em', lineHeight: 1 }}>
                     {Number(f.amount).toLocaleString('fr-FR')} €
                   </div>
                   {dateLabel && (
-                    <div style={{ fontFamily: FONT, fontSize: 10, color: overdue ? TERRA : '#B4AEA4', marginTop: 6 }}>
+                    <div style={{ fontFamily: FONT, fontSize: 10, color: overdue ? '#B43028' : '#B4AEA4', marginTop: 6 }}>
                       {overdue ? `En retard · ${dateLabel}` : `Échéance · ${dateLabel}`}
                     </div>
                   )}
@@ -158,7 +147,7 @@ function RightSidebar({ admin, members, factures }) {
               );
             })}
           </div>
-        </motion.div>
+        </div>
       )}
 
     </div>
