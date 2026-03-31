@@ -131,42 +131,6 @@ function SidebarContent({ admin, sidebarProjects = [] }) {
           );
         })}
 
-        {/* ── Actifs ── */}
-        {sidebarProjects.length > 0 && (
-          <div className="pt-3">
-            <SectionLabel>Actifs</SectionLabel>
-            {sidebarProjects.map((p, i) => {
-              const dl = p.deadline ? new Date(p.deadline) : null;
-              const overdue = dl && dl < new Date();
-              return (
-                <motion.div key={p.id} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.04 }}>
-                  <Link href="/dashboard/projets"
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-150 group"
-                    style={{ borderLeft: '3px solid transparent', paddingLeft: 9 }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.03)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}
-                  >
-                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                      style={{ background: overdue ? TERRA : GOLD }} />
-                    <div className="flex-1 min-w-0">
-                      <div className="truncate" style={{ fontFamily: FONT, fontWeight: 500, fontSize: 12, color: DIM }}>
-                        {p.client_name}
-                      </div>
-                      <div className="truncate" style={{ fontFamily: FONT, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                        {p.project_type}
-                      </div>
-                    </div>
-                    {dl && (
-                      <span style={{ fontFamily: 'monospace', fontSize: 9, color: overdue ? TERRA : MUTED, flexShrink: 0 }}>
-                        {overdue ? 'retard' : `J-${Math.ceil((dl - new Date()) / 86400000)}`}
-                      </span>
-                    )}
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        )}
       </nav>
 
       {/* ── Footer ── */}
