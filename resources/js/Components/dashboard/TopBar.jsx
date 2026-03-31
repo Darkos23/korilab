@@ -1,6 +1,6 @@
 import { router, usePage, Link } from "@inertiajs/react";
 import { useState, useRef, useEffect } from "react";
-import { Settings, LogOut, ChevronDown, PanelLeftClose, PanelLeftOpen, MessageSquare, Menu } from "lucide-react";
+import { Settings, LogOut, ChevronDown, MessageSquare, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FONT   = "'Century Gothic', 'Trebuchet MS', sans-serif";
@@ -68,14 +68,6 @@ export default function TopBar({ admin, collapsed, onToggle }) {
         korilab.dev · studio créatif · Dakar
       </span>
 
-      {/* Toggle sidebar — desktop only */}
-      <button onClick={onToggle}
-        className="hidden md:flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 flex-shrink-0"
-        style={{ color: INK2, border: `1px solid ${BORDER}`, marginLeft: '0.5rem' }}
-        onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
-        onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; }}>
-        {collapsed ? <PanelLeftOpen size={14} /> : <PanelLeftClose size={14} />}
-      </button>
 
       <div className="flex-1" />
 
