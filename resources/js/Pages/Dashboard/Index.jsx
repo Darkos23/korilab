@@ -147,10 +147,7 @@ export default function DashboardIndex({
     <div className="min-h-screen w-full max-w-full flex flex-col relative overflow-hidden" style={{ background: '#F8F5EF' }}>
       <SLSystemBG />
 
-      {/* TopBar pleine largeur */}
-      <div className="relative z-20">
-        <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
-      </div>
+      <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
 
       {/* Corps — sidebar gauche + contenu + sidebar droite */}
       <div className="flex flex-1 overflow-hidden relative z-10">

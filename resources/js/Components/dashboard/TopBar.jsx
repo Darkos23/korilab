@@ -24,7 +24,9 @@ export default function TopBar({ admin, collapsed, onToggle }) {
   }, []);
 
   return (
-    <div className="sticky top-0 z-30 flex items-center gap-4 px-5 border-b"
+    <>
+    <div style={{ height: 44, flexShrink: 0 }} />
+    <div className="fixed top-0 left-0 right-0 z-30 flex items-center gap-4 px-5 border-b"
       style={{ height: 44, background: BG, borderColor: BORDER, backdropFilter: 'blur(8px)' }}>
 
       {/* Hamburger mobile */}
@@ -158,5 +160,6 @@ export default function TopBar({ admin, collapsed, onToggle }) {
 
       </div>
     </div>
+    </>
   );
 }
