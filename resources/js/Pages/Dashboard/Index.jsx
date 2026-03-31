@@ -144,7 +144,7 @@ function RightSidebar({ admin, members, factures }) {
                 : null;
               return (
                 <div key={f.id} className="p-4 rounded-xl"
-                  style={{ background: '#FFFFFF', border: `1px solid ${overdue ? 'rgba(180,48,40,0.15)' : INK3}`, borderLeft: `3px solid ${overdue ? TERRA : GOLD}` }}>
+                  style={{ background: '#F5EFE4', border: `1px solid rgba(0,0,0,0.07)`, borderLeft: `3px solid ${overdue ? TERRA : GOLD}` }}>
                   <div style={{ fontFamily: FONT, fontSize: 11, color: INK2, marginBottom: 6 }}>{f.client_name}</div>
                   <div style={{ fontFamily: 'Georgia, serif', fontSize: 26, fontWeight: 700, color: overdue ? TERRA : GOLD, letterSpacing: '-0.02em', lineHeight: 1 }}>
                     {Number(f.amount).toLocaleString('fr-FR')} €
