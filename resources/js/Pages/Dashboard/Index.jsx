@@ -114,7 +114,7 @@ function RightSidebar({ admin, members, factures }) {
         <div className="flex flex-col gap-2">
           {members.map((m, i) => (
             <div key={i} className="flex items-center gap-3 p-3 rounded-xl"
-              style={{ background: '#FFFFFF', border: `1px solid ${INK3}` }}>
+              style={{ background: '#F5EFE4', border: `1px solid rgba(0,0,0,0.07)` }}>
               <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 font-mono text-[10px] font-bold"
                 style={{ background: '#EDE9E2', color: INK2 }}>
                 {m.initials || (m.name ?? '?').slice(0, 2).toUpperCase()}
