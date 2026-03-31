@@ -1,7 +1,7 @@
 import { Link, router, usePage } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Briefcase, Wrench, LogOut, Users, Menu, X, FileText, FolderKanban } from "lucide-react";
-import { useState } from "react";
+import { LayoutDashboard, Briefcase, Wrench, LogOut, Users, X, FileText, FolderKanban } from "lucide-react";
+import { useState, useEffect } from "react";
 
 /* ─── Tokens ────────────────────────────────────────────────── */
 const SIDEBAR_BG = '#FDFBF7';
@@ -124,17 +124,17 @@ export default function Sidebar({ admin }) {
   const sidebarProjects = props.sidebarProjects ?? [];
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const handler = () => setOpen(true);
+    window.addEventListener('open-sidebar', handler);
+    return () => window.removeEventListener('open-sidebar', handler);
+  }, []);
+
   return (
     <>
       <div className="hidden md:flex">
         <SidebarContent admin={admin} sidebarProjects={sidebarProjects} />
       </div>
-
-      <button onClick={() => setOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center rounded-lg"
-        style={{ background: SIDEBAR_BG, color: TEXT, border: `1px solid ${BORDER}` }}>
-        <Menu size={16} />
-      </button>
 
       <AnimatePresence>
         {open && (

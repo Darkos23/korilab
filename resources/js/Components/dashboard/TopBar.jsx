@@ -1,6 +1,6 @@
 import { router, usePage, Link } from "@inertiajs/react";
 import { useState, useRef, useEffect } from "react";
-import { Settings, LogOut, ChevronDown, PanelLeftClose, PanelLeftOpen, MessageSquare } from "lucide-react";
+import { Settings, LogOut, ChevronDown, PanelLeftClose, PanelLeftOpen, MessageSquare, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FONT   = "'Century Gothic', 'Trebuchet MS', sans-serif";
@@ -26,6 +26,15 @@ export default function TopBar({ admin, collapsed, onToggle }) {
   return (
     <div className="sticky top-0 z-30 flex items-center gap-4 px-5 border-b"
       style={{ height: 44, background: BG, borderColor: BORDER, backdropFilter: 'blur(8px)' }}>
+
+      {/* Hamburger mobile */}
+      <button
+        className="md:hidden flex items-center justify-center w-8 h-8 rounded-lg flex-shrink-0"
+        style={{ color: INK2, border: `1px solid ${BORDER}` }}
+        onClick={() => window.dispatchEvent(new CustomEvent('open-sidebar'))}
+      >
+        <Menu size={15} />
+      </button>
 
       {/* Logo */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginRight: '1.8rem', flexShrink: 0 }}>
