@@ -16,8 +16,8 @@
     -webkit-user-drag: none;
     pointer-events: none;
   }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body { background: #010a14; color: #b8d8f8; overflow-x: hidden; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; max-width: 100vw; overflow-x: hidden; }
+  body { background: #010a14; color: #b8d8f8; overflow-x: hidden; max-width: 100vw; }
 }
 
 @layer utilities {

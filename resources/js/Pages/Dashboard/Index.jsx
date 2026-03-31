@@ -144,7 +144,7 @@ export default function DashboardIndex({
   ];
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden" style={{ background: '#F8F5EF' }}>
+    <div className="min-h-screen w-full max-w-full flex flex-col relative overflow-hidden" style={{ background: '#F8F5EF' }}>
       <SLSystemBG />
 
       {/* TopBar pleine largeur */}

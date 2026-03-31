@@ -97,7 +97,7 @@ export default function TopBar({ admin, collapsed, onToggle }) {
               style={{ background: 'rgba(180,48,40,0.09)', color: TERRA, border: '1px solid rgba(180,48,40,0.22)' }}>
               {(admin?.name ?? 'A').charAt(0).toUpperCase()}
             </div>
-            <span style={{ fontFamily: FONT, fontSize: 12, fontWeight: 600, color: INK }}>
+            <span className="max-w-[100px] truncate" style={{ fontFamily: FONT, fontSize: 12, fontWeight: 600, color: INK }}>
               {admin?.name ?? '—'}
             </span>
             <ChevronDown size={12} style={{ color: INK2, transition: 'transform 0.15s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
