@@ -24,103 +24,103 @@ export default function TopBar({ admin, collapsed, onToggle }) {
   }, []);
 
   return (
-    <div className="sticky top-0 z-30 flex items-center justify-between px-5 border-b"
+    <div className="sticky top-0 z-30 flex items-center gap-4 px-5 border-b"
       style={{ height: 44, background: BG, borderColor: BORDER, backdropFilter: 'blur(8px)' }}>
 
       {/* Toggle sidebar */}
       <button onClick={onToggle}
-        className="flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150"
+        className="flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 flex-shrink-0"
         style={{ color: INK2, border: `1px solid ${BORDER}` }}
         onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; }}>
-        {collapsed
-          ? <PanelLeftOpen size={14} />
-          : <PanelLeftClose size={14} />}
+        {collapsed ? <PanelLeftOpen size={14} /> : <PanelLeftClose size={14} />}
       </button>
 
-      {/* Right group: messages + profile */}
+      {/* Studio tagline */}
+      <span className="hidden sm:block font-mono text-[10px]" style={{ color: '#B4AEA4', letterSpacing: '0.08em' }}>
+        korilab.dev · studio créatif · Dakar
+      </span>
+
+      <div className="flex-1" />
+
+      {/* Right group */}
       <div className="flex items-center gap-2">
 
-      {/* Messages icon */}
-      <Link href="/dashboard/messages" className="relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150"
-        style={{ color: INK2, border: `1px solid ${BORDER}` }}
-        onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
-        onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; }}>
-        <MessageSquare size={14} />
-        {unreadMessages > 0 && (
-          <span className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 rounded-full font-mono text-[9px] font-bold"
-            style={{ background: TERRA, color: 'white' }}>
-            {unreadMessages > 9 ? '9+' : unreadMessages}
-          </span>
-        )}
-      </Link>
-
-      {/* Profile dropdown */}
-      <div className="relative" ref={ref}>
-        <button onClick={() => setOpen(v => !v)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-150"
-          style={{ border: `1px solid ${open ? 'rgba(180,48,40,0.3)' : BORDER}`, background: 'transparent', cursor: 'pointer' }}>
-
-          {/* Avatar */}
-          <div className="w-6 h-6 rounded-full flex items-center justify-center font-mono text-[10px] font-bold flex-shrink-0"
-            style={{ background: 'rgba(180,48,40,0.09)', color: TERRA, border: '1px solid rgba(180,48,40,0.22)' }}>
-            {(admin?.name ?? 'A').charAt(0).toUpperCase()}
-          </div>
-
-          <span style={{ fontFamily: FONT, fontSize: 12, fontWeight: 600, color: INK }}>
-            {admin?.name ?? '—'}
-          </span>
-
-          <ChevronDown size={12} style={{ color: INK2, transition: 'transform 0.15s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
-        </button>
-
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, y: -6, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -6, scale: 0.97 }}
-              transition={{ duration: 0.12 }}
-              className="absolute right-0 top-full mt-2 w-52 rounded-xl overflow-hidden z-50"
-              style={{ background: BG, border: `1px solid ${BORDER}`, boxShadow: '0 8px 24px rgba(0,0,0,0.09)' }}>
-
-              {/* User info */}
-              <div className="px-4 py-3 border-b" style={{ borderColor: BORDER }}>
-                <div style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: INK }}>{admin?.name}</div>
-                <div style={{ fontFamily: FONT, fontSize: 10, color: INK2, marginTop: 2 }}>
-                  {admin?.title ?? 'Admin KoriLab'}
-                </div>
-                <div className="flex items-center gap-1.5 mt-2">
-                  <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#3A6840' }} />
-                  <span className="font-mono text-[9px]" style={{ color: '#3A6840' }}>En ligne</span>
-                </div>
-              </div>
-
-              {/* Links */}
-              <div className="p-1.5 flex flex-col gap-0.5">
-                <a href="/dashboard/site"
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100"
-                  style={{ fontFamily: FONT, fontSize: 12, color: INK2, textDecoration: 'none' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.04)'; e.currentTarget.style.color = INK; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = INK2; }}>
-                  <Settings size={13} />
-                  Paramètres du site
-                </a>
-                <button onClick={logout}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100"
-                  style={{ fontFamily: FONT, fontSize: 12, color: TERRA, background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(180,48,40,0.06)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}>
-                  <LogOut size={13} />
-                  Déconnexion
-                </button>
-              </div>
-            </motion.div>
+        {/* Messages */}
+        <Link href="/dashboard/messages"
+          className="relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150"
+          style={{ color: INK2, border: `1px solid ${BORDER}` }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; }}>
+          <MessageSquare size={14} />
+          {unreadMessages > 0 && (
+            <span className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 rounded-full font-mono text-[9px] font-bold"
+              style={{ background: TERRA, color: 'white' }}>
+              {unreadMessages > 9 ? '9+' : unreadMessages}
+            </span>
           )}
-        </AnimatePresence>
-      </div>
+        </Link>
 
-      </div>{/* end right group */}
+        {/* Profile dropdown */}
+        <div className="relative" ref={ref}>
+          <button onClick={() => setOpen(v => !v)}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-150"
+            style={{ border: `1px solid ${open ? 'rgba(180,48,40,0.3)' : BORDER}`, background: 'transparent', cursor: 'pointer' }}>
+            <div className="w-6 h-6 rounded-full flex items-center justify-center font-mono text-[10px] font-bold flex-shrink-0"
+              style={{ background: 'rgba(180,48,40,0.09)', color: TERRA, border: '1px solid rgba(180,48,40,0.22)' }}>
+              {(admin?.name ?? 'A').charAt(0).toUpperCase()}
+            </div>
+            <span style={{ fontFamily: FONT, fontSize: 12, fontWeight: 600, color: INK }}>
+              {admin?.name ?? '—'}
+            </span>
+            <ChevronDown size={12} style={{ color: INK2, transition: 'transform 0.15s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+          </button>
+
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                transition={{ duration: 0.12 }}
+                className="absolute right-0 top-full mt-2 w-52 rounded-xl overflow-hidden z-50"
+                style={{ background: BG, border: `1px solid ${BORDER}`, boxShadow: '0 8px 24px rgba(0,0,0,0.09)' }}>
+
+                <div className="px-4 py-3 border-b" style={{ borderColor: BORDER }}>
+                  <div style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: INK }}>{admin?.name}</div>
+                  <div style={{ fontFamily: FONT, fontSize: 10, color: INK2, marginTop: 2 }}>
+                    {admin?.title ?? 'Admin KoriLab'}
+                  </div>
+                  <div className="flex items-center gap-1.5 mt-2">
+                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#3A6840' }} />
+                    <span className="font-mono text-[9px]" style={{ color: '#3A6840' }}>En ligne</span>
+                  </div>
+                </div>
+
+                <div className="p-1.5 flex flex-col gap-0.5">
+                  <a href="/dashboard/site"
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100"
+                    style={{ fontFamily: FONT, fontSize: 12, color: INK2, textDecoration: 'none' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.04)'; e.currentTarget.style.color = INK; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = INK2; }}>
+                    <Settings size={13} />
+                    Paramètres du site
+                  </a>
+                  <button onClick={logout}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg w-full transition-all duration-100"
+                    style={{ fontFamily: FONT, fontSize: 12, color: TERRA, background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(180,48,40,0.06)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; }}>
+                    <LogOut size={13} />
+                    Déconnexion
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+      </div>
     </div>
   );
 }
