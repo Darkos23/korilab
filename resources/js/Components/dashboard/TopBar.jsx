@@ -29,17 +29,15 @@ export default function TopBar({ admin, collapsed, onToggle }) {
     <div className="fixed top-0 left-0 right-0 z-30 flex items-center gap-4 px-5 border-b"
       style={{ height: 44, background: BG, borderColor: BORDER, backdropFilter: 'blur(8px)' }}>
 
-      {/* Hamburger mobile */}
-      <button
-        className="md:hidden flex items-center justify-center w-8 h-8 rounded-lg flex-shrink-0"
-        style={{ color: INK2, border: `1px solid ${BORDER}` }}
-        onClick={() => window.dispatchEvent(new CustomEvent('open-sidebar'))}
-      >
-        <Menu size={15} />
-      </button>
-
-      {/* Logo */}
+      {/* Logo + hamburger mobile */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginRight: '1.8rem', flexShrink: 0 }}>
+        <button
+          className="md:hidden flex items-center justify-center w-7 h-7 rounded-md flex-shrink-0"
+          style={{ color: INK2, border: `1px solid ${BORDER}` }}
+          onClick={() => window.dispatchEvent(new CustomEvent('open-sidebar'))}
+        >
+          <Menu size={14} />
+        </button>
         <svg width="14" height="20" viewBox="0 0 60 84" fill="none" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="30" cy="42" rx="21" ry="30" fill="none" stroke="#8B6914" strokeWidth="2"/>
           <path d="M30,14 L26,20 L34,26 L26,32 L34,38 L26,44 L34,50 L26,56 L34,62 L30,70" stroke="#8B6914" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
@@ -60,7 +58,7 @@ export default function TopBar({ admin, collapsed, onToggle }) {
           <path d="M43,47 L36,52 L43,57" stroke="#8B6914" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
           <line x1="44" y1="60" x2="37" y2="60" stroke="#8B6914" strokeWidth="1.4" strokeLinecap="round"/>
         </svg>
-        <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, fontWeight: 700, letterSpacing: 3, color: '#1A1714', fontStyle: 'italic' }}>
+        <div className="hidden sm:block" style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, fontWeight: 700, letterSpacing: 3, color: '#1A1714', fontStyle: 'italic' }}>
           <em style={{ color: '#8B6914', fontStyle: 'normal' }}>KORI</em>lab
         </div>
       </div>
