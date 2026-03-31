@@ -59,9 +59,9 @@ export default function TopBar({ admin, collapsed, onToggle }) {
         korilab.dev · studio créatif · Dakar
       </span>
 
-      {/* Toggle sidebar */}
+      {/* Toggle sidebar — desktop only */}
       <button onClick={onToggle}
-        className="flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 flex-shrink-0"
+        className="hidden md:flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 flex-shrink-0"
         style={{ color: INK2, border: `1px solid ${BORDER}`, marginLeft: '0.5rem' }}
         onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; }}>

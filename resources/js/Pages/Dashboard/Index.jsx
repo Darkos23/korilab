@@ -60,7 +60,7 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay }}>
       <Link href={href}
-        className="group flex items-center gap-4 p-4 rounded-xl transition-all duration-200 paper-card"
+        className="group flex items-center gap-3 p-3 md:p-4 rounded-xl transition-all duration-200 paper-card"
         style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}
         onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.boxShadow = '0 4px 14px rgba(180,48,40,0.08)'; }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.boxShadow = '0 1px 4px rgba(0,0,0,0.04)'; }}
@@ -157,11 +157,11 @@ export default function DashboardIndex({
         <Sidebar admin={admin} />
 
         <main className="flex-1 overflow-auto flex flex-col min-w-0">
-          <div className="p-6 md:p-8 pb-10 flex-1">
+          <div className="p-4 md:p-6 lg:p-8 pb-20 flex-1">
 
           {/* ── Header ── */}
           <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
-            className="mb-6 flex items-center justify-between">
+            className="mb-5 flex items-start justify-between gap-3">
             <div>
               <div className="flex items-center gap-2 mb-1.5">
                 <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: TERRA }} />
@@ -169,7 +169,7 @@ export default function DashboardIndex({
                   KoriLab — Tableau de bord
                 </span>
               </div>
-              <h1 style={{ fontFamily: FONT, fontSize: 30, fontWeight: 800, color: INK }}>
+              <h1 style={{ fontFamily: FONT, fontSize: 24, fontWeight: 800, color: INK }}>
                 Bienvenue, <span style={{ color: TERRA }}>{admin?.name}</span>
               </h1>
               <div className="flex items-center gap-2 mt-1">
@@ -177,7 +177,7 @@ export default function DashboardIndex({
               </div>
             </div>
             <a href="/" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200"
+              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 flex-shrink-0"
               style={{ background: CARD, border: `1px solid ${INK3}`, color: INK, fontFamily: FONT, fontSize: 12, fontWeight: 600 }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; e.currentTarget.style.color = TERRA; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; e.currentTarget.style.color = INK; }}>
@@ -186,7 +186,7 @@ export default function DashboardIndex({
           </motion.div>
 
           {/* ── Stats ── */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
             {stats.map(s => <StatCard key={s.label} {...s} />)}
           </div>
 
