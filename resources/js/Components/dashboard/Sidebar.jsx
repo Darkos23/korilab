@@ -61,7 +61,7 @@ function SidebarContent({ admin, sidebarProjects = [] }) {
               {admin?.name ?? '—'}
             </div>
             <div style={{ fontFamily: FONT, fontWeight: 300, fontSize: 9, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-              Admin
+              {admin?.title ?? 'Admin'}
             </div>
           </div>
           <motion.div className="w-1.5 h-1.5 rounded-full flex-shrink-0"
