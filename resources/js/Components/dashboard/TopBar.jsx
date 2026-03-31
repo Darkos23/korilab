@@ -27,19 +27,24 @@ export default function TopBar({ admin, collapsed, onToggle }) {
     <div className="sticky top-0 z-30 flex items-center gap-4 px-5 border-b"
       style={{ height: 44, background: BG, borderColor: BORDER, backdropFilter: 'blur(8px)' }}>
 
+      {/* Logo */}
+      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, fontWeight: 700, letterSpacing: 3, color: '#1A1714', fontStyle: 'italic', marginRight: '1.8rem', flexShrink: 0 }}>
+        <em style={{ color: '#8B6914', fontStyle: 'normal' }}>KORI</em>lab
+      </div>
+
+      {/* Tagline */}
+      <span className="hidden sm:block" style={{ fontFamily: "'DM Mono', monospace", fontSize: 9, color: '#B0A898', letterSpacing: '0.5px' }}>
+        korilab.dev · studio créatif · Dakar
+      </span>
+
       {/* Toggle sidebar */}
       <button onClick={onToggle}
         className="flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150 flex-shrink-0"
-        style={{ color: INK2, border: `1px solid ${BORDER}` }}
+        style={{ color: INK2, border: `1px solid ${BORDER}`, marginLeft: '0.5rem' }}
         onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; }}>
         {collapsed ? <PanelLeftOpen size={14} /> : <PanelLeftClose size={14} />}
       </button>
-
-      {/* Studio tagline */}
-      <span className="hidden sm:block font-mono text-[10px]" style={{ color: '#B4AEA4', letterSpacing: '0.08em' }}>
-        korilab.dev · studio créatif · Dakar
-      </span>
 
       <div className="flex-1" />
 
