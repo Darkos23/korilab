@@ -86,115 +86,108 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
 }
 
 /* ── Right Sidebar ── */
-function RightSidebar({ admin, members, urgentProjects, recentMessages }) {
-  return (
-    <div className="flex flex-col gap-4" style={{ width: '100%' }}>
+const DOT_COLORS = ['#4CAF50', '#4CAF50', '#C89030'];
 
-      {/* Site card */}
+function RightSidebar({ admin, members, factures }) {
+  return (
+    <div className="flex flex-col" style={{ width: '100%', height: '100%' }}>
+
+      {/* ── Top bar ── */}
+      <div className="flex items-center justify-between pb-4 mb-4" style={{ borderBottom: `1px solid ${INK3}` }}>
+        <div className="flex items-center gap-3">
+          <span style={{ fontFamily: FONT, fontSize: 10, color: '#4CAF50' }}>● prod</span>
+          <span style={{ fontFamily: FONT, fontSize: 10, color: GOLD }}>● staging</span>
+        </div>
+        <div className="w-7 h-7 rounded-full flex items-center justify-center font-mono text-[10px] font-bold"
+          style={{ background: GOLD, color: '#fff', border: `2px solid rgba(138,90,24,0.3)` }}>
+          {(admin?.name ?? 'A').charAt(0).toUpperCase()}
+        </div>
+      </div>
+
+      {/* ── Action buttons ── */}
+      <div className="flex gap-2 mb-5">
+        <button className="flex-1 py-2 rounded-lg text-center transition-all duration-150"
+          style={{ fontFamily: FONT, fontSize: 11, fontWeight: 600, color: INK2, background: CARD, border: `1px solid ${INK3}` }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = TERRA; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = INK3; }}>
+          Exporter
+        </button>
+        <Link href="/dashboard/projets"
+          className="flex-1 py-2 rounded-lg text-center transition-all duration-150 no-underline"
+          style={{ fontFamily: FONT, fontSize: 11, fontWeight: 700, color: '#fff', background: INK, border: `1px solid ${INK}`, textDecoration: 'none' }}
+          onMouseEnter={e => { e.currentTarget.style.background = TERRA; e.currentTarget.style.borderColor = TERRA; }}
+          onMouseLeave={e => { e.currentTarget.style.background = INK; e.currentTarget.style.borderColor = INK; }}>
+          + Projet
+        </Link>
+      </div>
+
+      {/* ── Hero card ── */}
       <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}
-        className="rounded-xl p-4 paper-card"
-        style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
+        className="rounded-xl p-4 mb-4"
+        style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 6px rgba(0,0,0,0.04)' }}>
         <div className="font-mono text-[9px] uppercase tracking-widest mb-2" style={{ color: '#B4AEA4' }}>korilab.dev</div>
-        <p style={{ fontFamily: FONT, fontSize: 15, fontWeight: 700, color: INK, lineHeight: 1.35, fontStyle: 'italic' }}>
+        <p style={{ fontFamily: FONT, fontSize: 15, fontWeight: 700, color: INK, lineHeight: 1.4, fontStyle: 'italic' }}>
           Nous créons des projets <span style={{ color: TERRA }}>hauts de gammes</span>
         </p>
         <p style={{ fontFamily: FONT, fontSize: 11, color: '#B4AEA4', marginTop: 8 }}>Design · Dev · Stratégie · Dakar</p>
       </motion.div>
 
-      {/* Projets urgents */}
-      {urgentProjects.length > 0 && (
-        <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
-          className="rounded-xl overflow-hidden paper-card"
-          style={{ background: CARD, border: `1px solid rgba(180,48,40,0.18)`, boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
-          <div className="flex items-center gap-2 px-4 py-3 border-b" style={{ borderColor: 'rgba(180,48,40,0.12)' }}>
-            <AlertTriangle size={11} style={{ color: TERRA }} />
-            <span style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.3em' }}>
-              Urgents
-            </span>
+      {/* ── Équipe ── */}
+      <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
+        className="mb-4">
+        <div className="flex items-center gap-2 mb-3">
+          <span style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: INK2, textTransform: 'uppercase', letterSpacing: '0.25em' }}>Équipe</span>
+          <span style={{ fontFamily: FONT, fontSize: 10, color: '#B4AEA4' }}>· {members.length}</span>
+        </div>
+        <div className="flex flex-col gap-2">
+          {members.map((m, i) => (
+            <div key={i} className="flex items-center gap-3 p-3 rounded-xl"
+              style={{ background: CARD, border: `1px solid ${INK3}` }}>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 font-mono text-[10px] font-bold"
+                style={{ background: '#EDE9E2', color: INK2 }}>
+                {m.initials || (m.name ?? '?').slice(0, 2).toUpperCase()}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="truncate" style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: INK }}>{m.name}</div>
+                <div className="truncate" style={{ fontFamily: FONT, fontSize: 10, color: '#B4AEA4' }}>{m.role}</div>
+              </div>
+              <div className="w-2 h-2 rounded-full flex-shrink-0"
+                style={{ background: DOT_COLORS[i % DOT_COLORS.length] }} />
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* ── Factures ── */}
+      {factures.length > 0 && (
+        <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
+          <div className="flex items-center gap-2 mb-3">
+            <span style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: INK2, textTransform: 'uppercase', letterSpacing: '0.25em' }}>Factures</span>
           </div>
-          <div className="px-3 py-1">
-            {urgentProjects.map((p, i) => {
-              const dl = new Date(p.deadline);
-              const overdue = dl < new Date();
+          <div className="flex flex-col gap-2">
+            {factures.map((f, i) => {
+              const overdue = f.status === 'en_retard' || (f.due_date && new Date(f.due_date) < new Date() && f.status !== 'payée');
+              const dateLabel = f.due_date
+                ? new Date(f.due_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })
+                : null;
               return (
-                <Link key={p.id} href="/dashboard/projets"
-                  className="flex items-center gap-3 py-2.5 border-b last:border-0 no-underline"
-                  style={{ borderColor: INK3, textDecoration: 'none' }}>
-                  <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: overdue ? TERRA : GOLD }} />
-                  <div className="flex-1 min-w-0">
-                    <div className="truncate" style={{ fontFamily: FONT, fontSize: 12, fontWeight: 700, color: INK }}>{p.client_name}</div>
-                    <div className="truncate" style={{ fontFamily: FONT, fontSize: 10, color: overdue ? TERRA : '#B4AEA4', marginTop: 1 }}>
-                      {overdue ? 'En retard — ' : ''}{dl.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
-                    </div>
+                <div key={f.id} className="p-3 rounded-xl"
+                  style={{ background: CARD, border: `1px solid ${overdue ? 'rgba(180,48,40,0.2)' : INK3}` }}>
+                  <div style={{ fontFamily: FONT, fontSize: 11, color: INK2, marginBottom: 4 }}>{f.client_name}</div>
+                  <div style={{ fontFamily: FONT, fontSize: 20, fontWeight: 800, color: overdue ? TERRA : GOLD, letterSpacing: '-0.02em' }}>
+                    {Number(f.amount).toLocaleString('fr-FR')} €
                   </div>
-                  <span className="font-mono text-[8px] uppercase tracking-wider px-1.5 py-0.5 rounded flex-shrink-0"
-                    style={{ color: INK2, background: INK3 }}>
-                    {p.project_type ?? '—'}
-                  </span>
-                </Link>
+                  {dateLabel && (
+                    <div style={{ fontFamily: FONT, fontSize: 10, color: overdue ? TERRA : '#B4AEA4', marginTop: 3 }}>
+                      {overdue ? `En retard · ${dateLabel}` : `Échéance · ${dateLabel}`}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>
         </motion.div>
       )}
-
-      {/* Derniers messages non lus */}
-      {recentMessages.length > 0 && (
-        <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
-          className="rounded-xl overflow-hidden paper-card"
-          style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
-          <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: INK3 }}>
-            <span style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: INK2, textTransform: 'uppercase', letterSpacing: '0.3em' }}>Messages</span>
-            <Link href="/dashboard/messages" style={{ fontFamily: FONT, fontSize: 10, color: TERRA, textDecoration: 'none' }}>Voir tout</Link>
-          </div>
-          <div className="px-3 py-1">
-            {recentMessages.map((m, i) => (
-              <Link key={m.id} href="/dashboard/messages"
-                className="flex items-start gap-3 py-2.5 border-b last:border-0"
-                style={{ borderColor: INK3, textDecoration: 'none' }}>
-                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 font-mono text-[9px] font-bold mt-0.5"
-                  style={{ background: 'rgba(180,48,40,0.08)', color: TERRA }}>
-                  {(m.name ?? '?').charAt(0).toUpperCase()}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="truncate" style={{ fontFamily: FONT, fontSize: 12, fontWeight: 700, color: INK }}>{m.name}</div>
-                  <div className="truncate" style={{ fontFamily: FONT, fontSize: 10, color: '#B4AEA4', marginTop: 1 }}>
-                    {(m.message ?? '').slice(0, 40)}{(m.message ?? '').length > 40 ? '…' : ''}
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </motion.div>
-      )}
-
-      {/* Équipe */}
-      <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.35 }}
-        className="rounded-xl overflow-hidden paper-card"
-        style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
-        <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: INK3 }}>
-          <span style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: INK2, textTransform: 'uppercase', letterSpacing: '0.3em' }}>Équipe</span>
-          <span style={{ fontFamily: FONT, fontSize: 11, fontWeight: 600, color: '#B4AEA4' }}>{members.length}</span>
-        </div>
-        <div className="px-3 py-1">
-          {members.map((m, i) => (
-            <div key={i} className="flex items-center gap-3 py-2.5 border-b last:border-0" style={{ borderColor: INK3 }}>
-              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 font-mono text-[10px] font-bold"
-                style={{ background: '#F2EDE5', color: '#8A8478' }}>
-                {m.initials || (m.name ?? '?').charAt(0)}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="truncate" style={{ fontFamily: FONT, fontSize: 13, fontWeight: 700, color: INK }}>{m.name}</div>
-                <div className="truncate" style={{ fontFamily: FONT, fontSize: 11, color: '#B4AEA4', marginTop: 1 }}>{m.role}</div>
-              </div>
-              <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: '#B4AEA4' }} />
-            </div>
-          ))}
-          {members.length === 0 && (
-            <p className="text-xs py-4 text-center" style={{ color: '#B4AEA4', fontFamily: FONT }}>Aucun membre</p>
-          )}
-        </div>
-      </motion.div>
 
     </div>
   );
@@ -204,7 +197,7 @@ function RightSidebar({ admin, members, urgentProjects, recentMessages }) {
 export default function DashboardIndex({
   admin, portfolioCount, servicesCount, unreadMessages,
   members = [], projetsEnCours = 0, projetsEnRetard = 0,
-  urgentProjects = [], recentMessages = [],
+  urgentProjects = [], recentMessages = [], factures = [],
 }) {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -277,8 +270,7 @@ export default function DashboardIndex({
         <RightSidebar
           admin={admin}
           members={members}
-          urgentProjects={urgentProjects}
-          recentMessages={recentMessages}
+          factures={factures}
         />
       </div>
 

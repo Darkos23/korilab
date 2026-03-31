@@ -10,6 +10,7 @@ use App\Models\Site;
 use App\Models\TeamMember;
 use App\Models\ContactMessage;
 use App\Models\Project;
+use App\Models\Facture;
 
 class DashboardController extends Controller
 {
@@ -40,6 +41,11 @@ class DashboardController extends Controller
                                     ->latest()
                                     ->limit(3)
                                     ->get(['id', 'name', 'company', 'message', 'created_at']),
+            'factures'        => Facture::whereNotIn('status', ['payée', 'annulée'])
+                                    ->orderByRaw("CASE WHEN due_date < CURDATE() THEN 0 ELSE 1 END")
+                                    ->orderBy('due_date')
+                                    ->limit(4)
+                                    ->get(['id', 'client_name', 'amount', 'status', 'due_date']),
         ]);
     }
 
