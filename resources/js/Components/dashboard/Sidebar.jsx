@@ -141,16 +141,12 @@ export default function Sidebar({ admin }) {
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setOpen(false)} className="md:hidden fixed inset-0 z-40 bg-black/60" />
-            <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
+            <motion.div initial={{ x: -260 }} animate={{ x: 0 }} exit={{ x: -260 }}
               transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-              className="md:hidden fixed top-0 left-0 z-50 h-full w-full">
-              <div className="relative h-full" style={{ background: SIDEBAR_BG }}>
+              className="md:hidden fixed left-0 z-50"
+              style={{ top: 44, bottom: 0, width: 260 }}>
+              <div className="relative h-full overflow-y-auto" style={{ background: SIDEBAR_BG, borderRight: `1px solid ${BORDER}` }}>
                 <SidebarContent admin={admin} sidebarProjects={sidebarProjects} />
-                <button onClick={() => setOpen(false)}
-                  className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center z-20 rounded-lg"
-                  style={{ border: `1px solid ${BORDER}`, color: DIM, background: SIDEBAR_BG }}>
-                  <X size={14} />
-                </button>
               </div>
             </motion.div>
           </>
