@@ -97,8 +97,9 @@ function RightSidebar({ admin, members, factures }) {
         className="rounded-xl p-4 mb-4"
         style={{ background: '#FFFFFF', border: `1px solid ${INK3}`, borderLeft: `3px solid ${GOLD}`, boxShadow: '0 1px 6px rgba(0,0,0,0.04)' }}>
         <div className="font-mono text-[9px] tracking-widest mb-2" style={{ color: '#B4AEA4' }}>korilab.dev</div>
-        <p style={{ fontFamily: FONT, fontSize: 15, fontWeight: 700, color: INK, lineHeight: 1.4, fontStyle: 'italic' }}>
-          Nous créons des projets <span style={{ color: TERRA }}>hauts de gammes</span>
+        <p style={{ fontFamily: FONT, fontSize: 15, lineHeight: 1.4 }}>
+          <span style={{ fontStyle: 'italic', fontWeight: 400, color: INK }}>Nous créons des projets </span>
+          <span style={{ fontWeight: 700, color: TERRA, fontStyle: 'normal' }}>hauts de gammes</span>
         </p>
         <p style={{ fontFamily: FONT, fontSize: 11, color: '#B4AEA4', marginTop: 8 }}>Design · Dev · Stratégie · Dakar</p>
       </motion.div>
