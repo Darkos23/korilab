@@ -15,18 +15,10 @@ const GOLD      = '#8A5A18';
 
 /* ─── Background Kente / Dakar ───────────────────────────── */
 export function SLSystemBG() {
-  const kente = `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23B43028' stroke-width='0.5' opacity='0.05'%3E%3Crect x='10' y='10' width='20' height='20'/%3E%3Crect x='50' y='10' width='20' height='20'/%3E%3Crect x='10' y='50' width='20' height='20'/%3E%3Crect x='50' y='50' width='20' height='20'/%3E%3Cline x1='0' y1='40' x2='80' y2='40'/%3E%3Cline x1='40' y1='0' x2='40' y2='80'/%3E%3Cpath d='M10 10 L30 30 M50 10 L70 30 M10 50 L30 70 M50 50 L70 70'/%3E%3C/g%3E%3C/svg%3E")`;
-
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Base sable */}
       <div className="absolute inset-0" style={{ background: BG }} />
-
-      {/* Motif kente */}
-      <div className="absolute inset-0" style={{
-        backgroundImage: kente,
-        backgroundSize: '80px 80px',
-      }} />
 
       {/* Halo soleil terracotta — haut */}
       <div className="absolute inset-x-0 top-0" style={{
