@@ -262,8 +262,7 @@ export default function DashboardIndex({
           width: 272,
           flexShrink: 0,
           borderLeft: `1px solid ${INK3}`,
-          background: 'rgba(253,251,247,0.85)',
-          backdropFilter: 'blur(8px)',
+          background: 'transparent',
           padding: '24px 16px 80px',
           gap: 16,
         }}>
