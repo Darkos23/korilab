@@ -95,7 +95,7 @@ function RightSidebar({ admin, members, factures }) {
       {/* ── Hero card ── */}
       <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}
         className="rounded-xl p-4 mb-4"
-        style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 6px rgba(0,0,0,0.04)' }}>
+        style={{ background: '#FFFFFF', border: `1px solid ${INK3}`, borderLeft: `3px solid ${GOLD}`, boxShadow: '0 1px 6px rgba(0,0,0,0.04)' }}>
         <div className="font-mono text-[9px] uppercase tracking-widest mb-2" style={{ color: '#B4AEA4' }}>korilab.dev</div>
         <p style={{ fontFamily: FONT, fontSize: 15, fontWeight: 700, color: INK, lineHeight: 1.4, fontStyle: 'italic' }}>
           Nous créons des projets <span style={{ color: TERRA }}>hauts de gammes</span>
@@ -113,7 +113,7 @@ function RightSidebar({ admin, members, factures }) {
         <div className="flex flex-col gap-2">
           {members.map((m, i) => (
             <div key={i} className="flex items-center gap-3 p-3 rounded-xl"
-              style={{ background: CARD, border: `1px solid ${INK3}` }}>
+              style={{ background: '#FFFFFF', border: `1px solid ${INK3}`, borderLeft: `3px solid ${GOLD}` }}>
               <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 font-mono text-[10px] font-bold"
                 style={{ background: '#EDE9E2', color: INK2 }}>
                 {m.initials || (m.name ?? '?').slice(0, 2).toUpperCase()}
@@ -143,7 +143,7 @@ function RightSidebar({ admin, members, factures }) {
                 : null;
               return (
                 <div key={f.id} className="p-3 rounded-xl"
-                  style={{ background: CARD, border: `1px solid ${overdue ? 'rgba(180,48,40,0.2)' : INK3}` }}>
+                  style={{ background: '#FFFFFF', border: `1px solid ${overdue ? 'rgba(180,48,40,0.2)' : INK3}`, borderLeft: `3px solid ${overdue ? TERRA : GOLD}` }}>
                   <div style={{ fontFamily: FONT, fontSize: 11, color: INK2, marginBottom: 4 }}>{f.client_name}</div>
                   <div style={{ fontFamily: FONT, fontSize: 20, fontWeight: 800, color: overdue ? TERRA : GOLD, letterSpacing: '-0.02em' }}>
                     {Number(f.amount).toLocaleString('fr-FR')} €
