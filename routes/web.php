@@ -8,12 +8,6 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DemoController;
 
-// Migration temporaire (à supprimer après usage)
-Route::get('/run-migrate-kl2026b', function () {
-    \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-    return '<pre>' . \Illuminate\Support\Facades\Artisan::output() . '</pre>';
-});
-
 // Public
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/missions', [HomeController::class, 'missions']);
