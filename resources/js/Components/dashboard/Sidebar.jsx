@@ -40,13 +40,12 @@ function SidebarContent({ admin, sidebarProjects = [] }) {
 
   return (
     <aside
-      className="flex flex-col sticky top-0 z-20"
+      className="flex flex-col fixed top-0 left-0 z-20"
       style={{
         width: 224,
         height: '100vh',
         background: SIDEBAR_BG,
         borderRight: `1px solid ${BORDER}`,
-        flexShrink: 0,
       }}>
 
       {/* ── User card ── */}
@@ -134,6 +133,8 @@ export default function Sidebar({ admin }) {
 
   return (
     <>
+      {/* Spacer pour compenser le fixed sidebar */}
+      <div className="hidden md:block flex-shrink-0" style={{ width: 224 }} />
       <div className="hidden md:flex">
         <SidebarContent admin={admin} sidebarProjects={sidebarProjects} />
       </div>
