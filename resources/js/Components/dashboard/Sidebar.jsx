@@ -40,9 +40,10 @@ function SidebarContent({ admin, sidebarProjects = [] }) {
 
   return (
     <aside
-      className="min-h-screen flex flex-col relative z-20"
+      className="flex flex-col sticky top-0 z-20"
       style={{
         width: 224,
+        height: '100vh',
         background: SIDEBAR_BG,
         borderRight: `1px solid ${BORDER}`,
         flexShrink: 0,
