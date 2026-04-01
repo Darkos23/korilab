@@ -270,6 +270,7 @@ class DashboardController extends Controller
         return \Inertia\Inertia::render('Dashboard/Projets', [
             'admin'    => session('admin'),
             'projects' => $projects,
+            'members'  => TeamMember::select('name')->orderBy('name')->pluck('name'),
         ]);
     }
 
@@ -285,6 +286,7 @@ class DashboardController extends Controller
             'deadline'     => 'nullable|date',
             'amount'       => 'nullable|integer',
             'notes'        => 'nullable|string',
+            'assigned_to'  => 'nullable|string',
         ]);
         \App\Models\Project::create($data);
         return back();
@@ -302,6 +304,7 @@ class DashboardController extends Controller
             'deadline'     => 'nullable|date',
             'amount'       => 'nullable|integer',
             'notes'        => 'nullable|string',
+            'assigned_to'  => 'nullable|string',
         ]);
         $project->update($data);
         return back();

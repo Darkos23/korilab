@@ -16,6 +16,7 @@ class Project extends Model
         'deadline',
         'amount',
         'notes',
+        'assigned_to',
     ];
 
     protected $casts = [

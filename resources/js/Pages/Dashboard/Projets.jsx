@@ -93,16 +93,17 @@ function Select({ options, ...props }) {
   );
 }
 
-const EMPTY = { client_name: '', client_email: '', project_type: '', formule: '', status: 'en_attente', start_date: '', deadline: '', amount: '', notes: '' };
+const EMPTY = { client_name: '', client_email: '', project_type: '', formule: '', status: 'en_attente', start_date: '', deadline: '', amount: '', notes: '', assigned_to: '' };
 
-function ProjectModal({ project, onClose }) {
+function ProjectModal({ project, onClose, members = [] }) {
   const editing = !!project?.id;
   const [form, setForm] = useState(editing ? {
     ...project,
-    start_date: project.start_date ?? '',
-    deadline: project.deadline ?? '',
-    amount: project.amount ?? '',
-    notes: project.notes ?? '',
+    start_date:  project.start_date  ?? '',
+    deadline:    project.deadline    ?? '',
+    amount:      project.amount      ?? '',
+    notes:       project.notes       ?? '',
+    assigned_to: project.assigned_to ?? '',
   } : { ...EMPTY });
 
   const handle = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
@@ -180,6 +181,10 @@ function ProjectModal({ project, onClose }) {
           </div>
           <Field label="Montant (FCFA)">
             <Input name="amount" type="number" value={form.amount} onChange={handle} placeholder="35000" />
+          </Field>
+          <Field label="Assigné à">
+            <Select name="assigned_to" value={form.assigned_to} onChange={handle}
+              options={[{ value: '', label: '— Non assigné —' }, ...members.map(m => ({ value: m, label: m }))]} />
           </Field>
           <Field label="Notes">
             <textarea name="notes" value={form.notes} onChange={handle} rows={2}
@@ -281,6 +286,15 @@ function ProjectCard({ project, onEdit }) {
         </div>
       </div>
 
+      {project.assigned_to && (
+        <div className="mt-2 pt-2 border-t flex items-center gap-1.5" style={{ borderColor: INK3 }}>
+          <div className="w-4 h-4 rounded-full flex items-center justify-center font-mono text-[8px] font-bold flex-shrink-0"
+            style={{ background: 'rgba(138,90,24,0.12)', color: GOLD }}>
+            {project.assigned_to.charAt(0).toUpperCase()}
+          </div>
+          <span className="font-mono text-[10px]" style={{ color: GOLD }}>{project.assigned_to}</span>
+        </div>
+      )}
       {project.notes && (
         <div className="mt-2 pt-2 border-t font-mono text-[10px] italic line-clamp-1" style={{ borderColor: INK3, color: '#8A8478' }}>
           {project.notes}
@@ -290,7 +304,7 @@ function ProjectCard({ project, onEdit }) {
   );
 }
 
-export default function Projets({ admin, projects = [] }) {
+export default function Projets({ admin, projects = [], members = [] }) {
   const [filter, setFilter] = useState('tous');
   const [modal, setModal] = useState(null); // null | 'new' | project object
 
@@ -393,6 +407,7 @@ export default function Projets({ admin, projects = [] }) {
           <ProjectModal
             project={modal === 'new' ? null : modal}
             onClose={() => setModal(null)}
+            members={members}
           />
         )}
       </AnimatePresence>
