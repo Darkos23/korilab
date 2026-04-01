@@ -318,4 +318,48 @@ class DashboardController extends Controller
         $project->update(['status' => $request->status]);
         return back();
     }
+
+    // ── Factures ────────────────────────────────────────────────
+    public function factures()
+    {
+        return Inertia::render('Dashboard/Factures', [
+            'admin'    => session('admin'),
+            'factures' => Facture::orderBy('issued_date', 'desc')->get(),
+        ]);
+    }
+
+    public function storeFacture(Request $request)
+    {
+        $year  = now()->year;
+        $count = Facture::whereYear('created_at', $year)->count() + 1;
+        $numero = 'KL-' . $year . '-' . str_pad($count, 3, '0', STR_PAD_LEFT);
+
+        Facture::create([
+            'numero'       => $numero,
+            'client_name'  => $request->client_name,
+            'client_email' => $request->client_email,
+            'description'  => $request->description,
+            'amount'       => $request->amount,
+            'status'       => $request->status ?? 'en_attente',
+            'issued_date'  => $request->issued_date ?? now()->toDateString(),
+            'due_date'     => $request->due_date,
+            'project_id'   => $request->project_id,
+        ]);
+        return back();
+    }
+
+    public function updateFacture(Request $request, Facture $facture)
+    {
+        $facture->update($request->only([
+            'client_name', 'client_email', 'description',
+            'amount', 'status', 'issued_date', 'due_date', 'project_id',
+        ]));
+        return back();
+    }
+
+    public function destroyFacture(Facture $facture)
+    {
+        $facture->delete();
+        return back();
+    }
 }

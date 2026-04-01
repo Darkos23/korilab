@@ -70,6 +70,12 @@ Route::middleware('auth.admin')->prefix('dashboard')->group(function () {
     Route::delete('/projets/{project}', [DashboardController::class, 'destroyProjet']);
     Route::patch('/projets/{project}/status', [DashboardController::class, 'updateProjetStatus']);
 
+    // Factures
+    Route::get('/factures', [DashboardController::class, 'factures']);
+    Route::post('/factures', [DashboardController::class, 'storeFacture']);
+    Route::put('/factures/{facture}', [DashboardController::class, 'updateFacture']);
+    Route::delete('/factures/{facture}', [DashboardController::class, 'destroyFacture']);
+
     // Messages de contact
     Route::get('/messages', [DashboardController::class, 'messages']);
     Route::patch('/messages/{id}/read', [DashboardController::class, 'markMessageRead']);

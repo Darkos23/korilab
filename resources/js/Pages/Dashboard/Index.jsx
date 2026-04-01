@@ -91,7 +91,15 @@ const JO = "'Jost', sans-serif";
 const DM = "'DM Mono', monospace";
 const DOT_COLORS = ['#5A9860', '#5A9860', '#8B6914'];
 
-function RightSidebar({ admin, members }) {
+const FMT = (n) => new Intl.NumberFormat('fr-FR').format(n ?? 0) + ' F';
+const FACTURE_STATUS = {
+  en_attente: { label: 'En attente', color: '#8A8478' },
+  payée:      { label: 'Payée',      color: '#16a34a' },
+  en_retard:  { label: 'En retard',  color: '#B43028' },
+  partielle:  { label: 'Partielle',  color: '#d97706' },
+};
+
+function RightSidebar({ admin, members, factures = [] }) {
   return (
     <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
 
@@ -104,7 +112,6 @@ function RightSidebar({ admin, members }) {
         <p style={{ margin: '0.4rem 0 0', fontFamily: JO, fontSize: 11, fontWeight: 300, color: '#A8A098', letterSpacing: '0.2px' }}>Design · Dev · Stratégie · Dakar</p>
       </div>
 
-      {/* Séparateur */}
       <div style={{ height: '0.5px', background: '#E8E4DC', margin: '0.2rem 0' }} />
 
       {/* Équipe */}
@@ -122,6 +129,40 @@ function RightSidebar({ admin, members }) {
             <div style={{ width: 5, height: 5, borderRadius: '50%', background: DOT_COLORS[i % DOT_COLORS.length], flexShrink: 0 }} />
           </div>
         ))}
+      </div>
+
+      <div style={{ height: '0.5px', background: '#E8E4DC', margin: '0.2rem 0' }} />
+
+      {/* Factures */}
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <div style={{ fontFamily: DM, fontSize: 8, color: '#8B6914', letterSpacing: '2px', opacity: 0.5 }}>Factures</div>
+          <Link href="/dashboard/factures" style={{ fontFamily: JO, fontSize: 10, color: '#8B6914', textDecoration: 'none', opacity: 0.7 }}>Voir tout</Link>
+        </div>
+        {factures.length === 0 ? (
+          <div style={{ fontFamily: JO, fontSize: 11, color: '#A8A098', textAlign: 'center', padding: '12px 0' }}>Aucune facture</div>
+        ) : factures.map((f) => {
+          const st = FACTURE_STATUS[f.status] ?? FACTURE_STATUS.en_attente;
+          const dl = f.due_date ? new Date(f.due_date) : null;
+          const overdue = dl && dl < new Date() && f.status !== 'payée';
+          return (
+            <Link key={f.id} href="/dashboard/factures"
+              style={{ display: 'block', background: '#F8F5F0', border: '0.5px solid #E8E4DC', borderRadius: 2, padding: '0.65rem 0.75rem', marginBottom: 4, textDecoration: 'none' }}>
+              <div className="flex items-center justify-between">
+                <div style={{ fontFamily: JO, fontSize: 12, fontWeight: 500, color: '#3A3630' }}>{f.client_name}</div>
+                <div style={{ fontFamily: JO, fontSize: 11, fontWeight: 700, color: '#1A1714' }}>{FMT(f.amount)}</div>
+              </div>
+              <div className="flex items-center justify-between mt-1">
+                <div style={{ fontFamily: JO, fontSize: 10, color: st.color }}>{st.label}</div>
+                {dl && (
+                  <div style={{ fontFamily: JO, fontSize: 10, color: overdue ? '#B43028' : '#A8A098' }}>
+                    Échéance · {dl.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
+                  </div>
+                )}
+              </div>
+            </Link>
+          );
+        })}
       </div>
 
     </div>
@@ -208,6 +249,7 @@ export default function DashboardIndex({
         <RightSidebar
           admin={admin}
           members={members}
+          factures={factures}
         />
         </div>
 

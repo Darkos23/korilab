@@ -1,6 +1,6 @@
 import { Link, router, usePage } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LayoutDashboard, Briefcase, Wrench, LogOut, Users, X, FileText, FolderKanban } from "lucide-react";
+import { LayoutDashboard, Briefcase, Wrench, LogOut, Users, X, FileText, FolderKanban, Receipt } from "lucide-react";
 import { useState, useEffect } from "react";
 
 /* ─── Tokens ────────────────────────────────────────────────── */
@@ -20,6 +20,7 @@ const nav = [
   { href: '/dashboard/services',  icon: Wrench,          label: 'Services',       sub: 'Offres & capacités' },
   { href: '/dashboard/team',      icon: Users,           label: 'Équipe / CV',    sub: 'Profils'            },
   { href: '/dashboard/contrats',  icon: FileText,        label: 'Contrats',       sub: 'Prestige'           },
+  { href: '/dashboard/factures',  icon: Receipt,         label: 'Factures',       sub: 'Comptabilité'       },
 ];
 
 /* ─── Section label ─────────────────────────────────────────── */
