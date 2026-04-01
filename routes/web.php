@@ -58,9 +58,10 @@ Route::middleware('auth.admin')->prefix('dashboard')->group(function () {
     Route::patch('/team/{id}', [DashboardController::class, 'updateTeamMember']);
     Route::delete('/team/{id}', [DashboardController::class, 'destroyTeamMember']);
 
-    // Contrats Prestige
+    // Contrats & Devis
     Route::get('/contrats', [DashboardController::class, 'contrats']);
     Route::get('/contrats/generer', [DashboardController::class, 'generateContrat']);
+    Route::get('/devis/generer', [DashboardController::class, 'generateDevis']);
 
     // Suivi de projets
     Route::get('/projets', [DashboardController::class, 'projets']);

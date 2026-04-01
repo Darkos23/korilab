@@ -223,6 +223,26 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function generateDevis(Request $request)
+    {
+        $data = $request->validate([
+            'client_name'         => 'required|string|max:255',
+            'client_activity'     => 'required|string|max:255',
+            'client_email'        => 'nullable|email|max:255',
+            'client_phone'        => 'nullable|string|max:50',
+            'project_title'       => 'required|string|max:255',
+            'project_description' => 'required|string',
+            'amount'              => 'required|numeric|min:0',
+            'validity_days'       => 'required|integer|in:15,30,45,60',
+            'date'                => 'required|date',
+            'ref_number'          => 'nullable|string|max:10',
+        ]);
+
+        $data['ref_number'] = $data['ref_number'] ?: '001';
+
+        return response()->view('devis-prestige', $data);
+    }
+
     public function generateContrat(Request $request)
     {
         $data = $request->validate([
