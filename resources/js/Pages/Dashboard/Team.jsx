@@ -409,15 +409,8 @@ function AddMemberForm({ onClose }) {
 }
 
 /* ─── Page ──────────────────────────────────────────────────── */
-export default function DashboardTeam({ admin, members }) {
+export default function DashboardTeam({ admin, member }) {
     const [collapsed, setCollapsed] = useState(false);
-    const [showAdd, setShowAdd] = useState(false);
-
-    const deleteMember = (id, name) => {
-        if (confirm(`Supprimer "${name}" ? Cette action est irréversible.`)) {
-            router.delete(`/dashboard/team/${id}`);
-        }
-    };
 
     return (
         <div className="min-h-screen flex relative overflow-hidden" style={{ background: BG }}>
@@ -427,50 +420,29 @@ export default function DashboardTeam({ admin, members }) {
             <main className="relative z-10 flex-1 overflow-auto flex flex-col">
                 <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
                 <div className="p-4 md:p-8 flex-1">
-                <div className="flex items-start justify-between mb-8">
-                    <div>
-                        <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
-                            Équipe
-                        </div>
-                        <h1 style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
-                            Équipe / CV
-                        </h1>
-                        <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
-                            {members.length} membre{members.length !== 1 ? 's' : ''} enregistré{members.length !== 1 ? 's' : ''}
-                        </p>
+                <div className="mb-8">
+                    <div style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 400, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.25em', marginBottom: 4 }}>
+                        Équipe
                     </div>
-                    <button onClick={() => setShowAdd(p => !p)}
-                        className="flex items-center gap-2 transition-all duration-200"
-                        style={{
-                            fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 12,
-                            color: '#FFFFFF', background: TERRA,
-                            border: 'none', borderRadius: 10, padding: '10px 18px', cursor: 'pointer',
-                        }}
-                        onMouseEnter={e => { e.currentTarget.style.background = TERRA2; }}
-                        onMouseLeave={e => { e.currentTarget.style.background = TERRA; }}>
-                        <Plus className="w-3.5 h-3.5" /> Ajouter un membre
-                    </button>
+                    <h1 style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 700, fontSize: 24, color: INK }}>
+                        Mon CV
+                    </h1>
+                    <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 12, color: INK2, marginTop: 4 }}>
+                        Votre profil public sur korilab.dev
+                    </p>
                 </div>
 
-                {showAdd && <AddMemberForm onClose={() => setShowAdd(false)} />}
+                <SysDivider label="Profil" />
 
-                <SysDivider label="Membres" />
-
+                {!member ? (
+                    <div className="text-center py-16" style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontSize: 13, color: INK2 }}>
+                        Aucun profil associé à ce compte.
+                    </div>
+                ) : (
                 <div className="space-y-6">
-                    {members.map(member => (
-                        <div key={member.id} className="relative">
-                            <MemberEditor member={member} />
-                            <button
-                                onClick={() => deleteMember(member.id, member.name)}
-                                className="absolute top-4 right-36 flex items-center gap-1.5 px-3 py-1.5 rounded-lg z-20 transition-all duration-200"
-                                style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontSize: 10, color: INK2, background: 'transparent', border: `1px solid transparent`, cursor: 'pointer' }}
-                                onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; }}
-                                onMouseLeave={e => { e.currentTarget.style.color = INK2; e.currentTarget.style.borderColor = 'transparent'; }}>
-                                <Trash2 className="w-3 h-3" /> Supprimer
-                            </button>
-                        </div>
-                    ))}
+                    <MemberEditor member={member} />
                 </div>
+                )}
                 </div>
             </main>
             <StatusBar admin={admin} />

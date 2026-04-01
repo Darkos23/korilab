@@ -160,9 +160,12 @@ class DashboardController extends Controller
     // ── Team Members (CV) ──────────────────────────────────────
     public function team()
     {
+        $slug = session('admin.slug');
+        $member = $slug ? TeamMember::where('slug', $slug)->first() : null;
+
         return Inertia::render('Dashboard/Team', [
-            'admin'   => session('admin'),
-            'members' => TeamMember::orderBy('name')->get(),
+            'admin'  => session('admin'),
+            'member' => $member,
         ]);
     }
 
