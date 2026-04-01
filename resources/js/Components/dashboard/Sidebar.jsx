@@ -40,10 +40,11 @@ function SidebarContent({ admin, sidebarProjects = [] }) {
 
   return (
     <aside
-      className="flex flex-col fixed top-0 left-0 z-20"
+      className="flex flex-col fixed left-0 z-20"
       style={{
+        top: 44,
         width: 224,
-        height: '100vh',
+        height: 'calc(100vh - 44px)',
         background: SIDEBAR_BG,
         borderRight: `1px solid ${BORDER}`,
       }}>
