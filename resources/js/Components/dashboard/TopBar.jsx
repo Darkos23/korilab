@@ -1,6 +1,6 @@
-import { router, usePage, Link } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 import { useState, useRef, useEffect } from "react";
-import { Settings, LogOut, ChevronDown, MessageSquare, Menu } from "lucide-react";
+import { Settings, LogOut, ChevronDown, MessageSquare, Menu, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FONT   = "'Century Gothic', 'Trebuchet MS', sans-serif";
@@ -13,12 +13,17 @@ const BG     = '#FDFBF7';
 
 export default function TopBar({ admin, collapsed, onToggle }) {
   const [open, setOpen] = useState(false);
+  const [msgOpen, setMsgOpen] = useState(false);
   const ref = useRef(null);
+  const msgRef = useRef(null);
   const logout = () => router.post('/logout');
-  const { unreadMessages = 0 } = usePage().props;
+  const { unreadMessages = 0, recentMessages = [] } = usePage().props;
 
   useEffect(() => {
-    const handler = e => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    const handler = e => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+      if (msgRef.current && !msgRef.current.contains(e.target)) setMsgOpen(false);
+    };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
@@ -74,20 +79,82 @@ export default function TopBar({ admin, collapsed, onToggle }) {
       {/* Right group */}
       <div className="flex items-center gap-2">
 
-        {/* Messages */}
-        <Link href="/dashboard/messages"
-          className="relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150"
-          style={{ color: INK2, border: `1px solid ${BORDER}` }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; }}>
-          <MessageSquare size={14} />
-          {unreadMessages > 0 && (
-            <span className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 rounded-full font-mono text-[9px] font-bold"
-              style={{ background: TERRA, color: 'white' }}>
-              {unreadMessages > 9 ? '9+' : unreadMessages}
-            </span>
-          )}
-        </Link>
+        {/* Messages toggle */}
+        <div className="relative" ref={msgRef}>
+          <button onClick={() => setMsgOpen(v => !v)}
+            className="relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-150"
+            style={{ color: msgOpen ? TERRA : INK2, border: `1px solid ${msgOpen ? 'rgba(180,48,40,0.25)' : BORDER}`, background: 'transparent', cursor: 'pointer' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(180,48,40,0.25)'; e.currentTarget.style.color = TERRA; }}
+            onMouseLeave={e => { if (!msgOpen) { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.color = INK2; } }}>
+            <MessageSquare size={14} />
+            {unreadMessages > 0 && (
+              <span className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 rounded-full font-mono text-[9px] font-bold"
+                style={{ background: TERRA, color: 'white' }}>
+                {unreadMessages > 9 ? '9+' : unreadMessages}
+              </span>
+            )}
+          </button>
+
+          <AnimatePresence>
+            {msgOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                transition={{ duration: 0.12 }}
+                className="absolute right-0 top-full mt-2 z-50 rounded-xl overflow-hidden"
+                style={{ width: 300, background: BG, border: `1px solid ${BORDER}`, boxShadow: '0 8px 24px rgba(0,0,0,0.09)' }}>
+
+                <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: BORDER }}>
+                  <span style={{ fontFamily: FONT, fontSize: 12, fontWeight: 700, color: INK }}>Messages</span>
+                  {unreadMessages > 0 && (
+                    <span className="font-mono text-[9px] px-2 py-0.5 rounded-full" style={{ background: 'rgba(180,48,40,0.08)', color: TERRA }}>
+                      {unreadMessages} non lu{unreadMessages > 1 ? 's' : ''}
+                    </span>
+                  )}
+                </div>
+
+                <div className="max-h-64 overflow-y-auto">
+                  {recentMessages.length === 0 ? (
+                    <div className="px-4 py-6 text-center" style={{ fontFamily: FONT, fontSize: 12, color: INK2 }}>
+                      Aucun message non lu
+                    </div>
+                  ) : recentMessages.map(m => (
+                    <div key={m.id} className="flex items-start gap-3 px-4 py-3 border-b last:border-0" style={{ borderColor: BORDER }}>
+                      <div className="w-7 h-7 rounded-full flex items-center justify-center font-mono text-[10px] font-bold flex-shrink-0 mt-0.5"
+                        style={{ background: 'rgba(180,48,40,0.08)', color: TERRA }}>
+                        {(m.name ?? '?').charAt(0).toUpperCase()}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div style={{ fontFamily: FONT, fontSize: 12, fontWeight: 600, color: INK }}>{m.name}</div>
+                        {m.company && <div style={{ fontFamily: FONT, fontSize: 10, color: INK2 }}>{m.company}</div>}
+                        <div className="truncate mt-0.5" style={{ fontFamily: FONT, fontSize: 11, color: INK2 }}>
+                          {(m.message ?? '').slice(0, 60)}{(m.message ?? '').length > 60 ? '…' : ''}
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => router.patch(`/dashboard/messages/${m.id}/read`, {}, { preserveScroll: true })}
+                        className="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 transition-all"
+                        style={{ color: INK2, border: `1px solid ${BORDER}` }}
+                        title="Marquer comme lu"
+                        onMouseEnter={e => { e.currentTarget.style.color = '#16a34a'; e.currentTarget.style.borderColor = 'rgba(22,163,74,0.3)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.color = INK2; e.currentTarget.style.borderColor = BORDER; }}>
+                        <Check size={11} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="px-4 py-2.5 border-t" style={{ borderColor: BORDER }}>
+                  <a href="/dashboard/messages"
+                    style={{ fontFamily: FONT, fontSize: 11, color: TERRA, textDecoration: 'none', fontWeight: 600 }}>
+                    Voir tous les messages →
+                  </a>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* Profile dropdown */}
         <div className="relative" ref={ref}>

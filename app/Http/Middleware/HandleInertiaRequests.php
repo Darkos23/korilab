@@ -52,6 +52,9 @@ class HandleInertiaRequests extends Middleware
             'unreadMessages' => $request->session()->has('admin')
                 ? ContactMessage::whereNull('read_at')->count()
                 : 0,
+            'recentMessages' => $request->session()->has('admin')
+                ? ContactMessage::whereNull('read_at')->latest()->limit(5)->get(['id', 'name', 'company', 'message', 'created_at'])
+                : [],
             'sidebarProjects' => $request->session()->has('admin')
                 ? Project::where('status', 'en_cours')
                     ->orderBy('deadline')
