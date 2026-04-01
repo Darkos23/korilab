@@ -254,7 +254,7 @@ function MemberEditor({ member }) {
                         {member.name}
                     </h2>
                     <p style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 300, fontSize: 11, color: INK2, marginTop: 2 }}>
-                        {member.role} — Rang {member.rank}
+                        {member.role}
                     </p>
                 </div>
 
@@ -287,12 +287,6 @@ function MemberEditor({ member }) {
                         <div><label style={labelStyle}>Nom complet</label><input name="name" value={form.name} onChange={handleChange} style={inputStyle} /></div>
                         <div><label style={labelStyle}>Poste / Rôle</label><input name="role" value={form.role} onChange={handleChange} style={inputStyle} /></div>
                         <div><label style={labelStyle}>Initiales</label><input name="initials" value={form.initials} onChange={handleChange} style={inputStyle} /></div>
-                        <div>
-                            <label style={labelStyle}>Rang</label>
-                            <select name="rank" value={form.rank} onChange={handleChange} style={inputStyle}>
-                                {RANKS.map(r => <option key={r}>{r}</option>)}
-                            </select>
-                        </div>
                         <div><label style={labelStyle}>Localisation</label><input name="location" value={form.location ?? ''} onChange={handleChange} style={inputStyle} /></div>
                         <div><label style={labelStyle}>Téléphone</label><input name="phone" value={form.phone ?? ''} onChange={handleChange} style={inputStyle} /></div>
                         <div><label style={labelStyle}>Email</label><input name="email" value={form.email ?? ''} onChange={handleChange} style={inputStyle} /></div>
@@ -377,12 +371,6 @@ function AddMemberForm({ onClose }) {
                 <div><label style={labelStyle}>Nom complet</label><input name="name" value={form.name} onChange={set} required style={inputStyle} /></div>
                 <div><label style={labelStyle}>Poste / Rôle</label><input name="role" value={form.role} onChange={set} required style={inputStyle} /></div>
                 <div><label style={labelStyle}>Initiales</label><input name="initials" value={form.initials} onChange={set} style={inputStyle} /></div>
-                <div>
-                    <label style={labelStyle}>Rang</label>
-                    <select name="rank" value={form.rank} onChange={set} style={inputStyle}>
-                        {['S','A','B','C'].map(r => <option key={r}>{r}</option>)}
-                    </select>
-                </div>
                 <div>
                     <label style={labelStyle}>Thème</label>
                     <select name="theme" value={form.theme} onChange={set} style={inputStyle}>
