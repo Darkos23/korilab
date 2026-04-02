@@ -30,8 +30,6 @@ $commands = [
     "cd {$projectRoot} && php artisan migrate --force 2>&1",
     "cd {$projectRoot} && php artisan optimize:clear 2>&1",
     "cd {$projectRoot} && php artisan config:cache 2>&1",
-    "cd {$projectRoot} && php artisan route:cache 2>&1",
-    "cd {$projectRoot} && php artisan view:cache 2>&1",
 ];
 
 $output = [];
