@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+Disallow: /dashboard
+Disallow: /login
+Disallow: /demo
+
+Sitemap: https://korilab.dev/sitemap.xml

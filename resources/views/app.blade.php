@@ -25,6 +25,55 @@
     <meta name="twitter:title" content="KoriLab — Studio de développement web, mobile & desktop">
     <meta name="twitter:description" content="KoriLab conçoit des applications web, mobile et desktop ultra-performantes pour les startups et entreprises. React, Laravel, Next.js, Flutter.">
     <meta name="twitter:image" content="https://korilab.dev/images/og-preview.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://korilab.dev/#website",
+          "url": "https://korilab.dev",
+          "name": "KoriLab",
+          "description": "Studio de design et développement web à Dakar, Sénégal.",
+          "inLanguage": "fr-SN"
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://korilab.dev/#business",
+          "name": "KoriLab",
+          "alternateName": "KoriLab Studio",
+          "description": "Studio créatif spécialisé en développement web, mobile et desktop. Nous créons des expériences digitales de haut niveau pour les startups et entreprises en Afrique.",
+          "url": "https://korilab.dev",
+          "logo": "https://korilab.dev/icon-192.png",
+          "image": "https://korilab.dev/images/og-preview.jpg",
+          "telephone": "+221775341954",
+          "email": "contact@korilab.dev",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dakar",
+            "addressCountry": "SN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 14.6937,
+            "longitude": -17.4441
+          },
+          "areaServed": ["Sénégal", "Afrique de l'Ouest", "France"],
+          "serviceType": [
+            "Développement web",
+            "Développement mobile",
+            "Design UI/UX",
+            "Branding",
+            "Applications desktop"
+          ],
+          "priceRange": "$$",
+          "sameAs": [
+            "https://github.com/KoriLab"
+          ]
+        }
+      ]
+    }
+    </script>
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
     @inertiaHead
