@@ -35,7 +35,7 @@ export default function TopBar({ admin, collapsed, onToggle }) {
       style={{ height: 44, background: BG, borderColor: BORDER, backdropFilter: 'blur(8px)' }}>
 
       {/* Logo + hamburger mobile */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginRight: '1.8rem', flexShrink: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginRight: '1.8rem', flexShrink: 0, lineHeight: 1 }}>
         <button
           className="md:hidden flex items-center justify-center w-7 h-7 rounded-md flex-shrink-0"
           style={{ color: INK2, border: `1px solid ${BORDER}` }}
@@ -64,7 +64,7 @@ export default function TopBar({ admin, collapsed, onToggle }) {
           <line x1="44" y1="60" x2="37" y2="60" stroke="#8B6914" strokeWidth="1.4" strokeLinecap="round"/>
         </svg>
         <div className="hidden sm:block" style={{ fontFamily: "'Playfair Display', serif", fontSize: 14, fontWeight: 700, letterSpacing: 3, color: '#1A1714', fontStyle: 'italic' }}>
-          <em style={{ color: '#8B6914', fontStyle: 'normal' }}>KORI</em>lab
+          <em style={{ color: '#8B6914', fontStyle: 'normal' }}>KORI</em>Lab
         </div>
       </div>
 
