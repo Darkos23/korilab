@@ -26,6 +26,7 @@
     <meta name="twitter:description" content="KoriLab conçoit des applications web, mobile et desktop ultra-performantes pour les startups et entreprises. React, Laravel, Next.js, Flutter.">
     <meta name="twitter:image" content="https://korilab.dev/images/og-preview.jpg">
     <script type="application/ld+json">
+    @verbatim
     {
       "@context": "https://schema.org",
       "@graph": [
@@ -73,6 +74,7 @@
         }
       ]
     }
+    @endverbatim
     </script>
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
