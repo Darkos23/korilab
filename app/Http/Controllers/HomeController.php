@@ -79,9 +79,16 @@ class HomeController extends Controller
         if (!empty($ci['phone']))    $contactInfo[] = ['icon' => 'Phone',  'label' => 'Téléphone',    'value' => $ci['phone']];
         if (!empty($ci['location'])) $contactInfo[] = ['icon' => 'MapPin', 'label' => 'Localisation', 'value' => $ci['location']];
 
+        $defaultPlans = [
+            ['key' => 'starter',  'label' => 'Starter',  'price' => '35 000',  'desc' => 'Site vitrine 5 pages · 2 modif./mois'],
+            ['key' => 'business', 'label' => 'Business', 'price' => '75 000',  'desc' => 'Site avancé · 6 modif./mois'],
+            ['key' => 'premium',  'label' => 'Premium',  'price' => '250 000', 'desc' => 'Application sur-mesure · 12 modif./mois'],
+        ];
+
         return Inertia::render('Prestige', [
             'site'        => $site,
             'contactInfo' => $contactInfo,
+            'dbPlans'     => $site?->plans ?? $defaultPlans,
         ]);
     }
 

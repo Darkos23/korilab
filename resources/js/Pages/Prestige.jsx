@@ -120,8 +120,15 @@ function PlanCard({ plan, index }) {
   );
 }
 
-export default function Prestige({ site, contactInfo }) {
+export default function Prestige({ site, contactInfo, dbPlans = [] }) {
   const logoName = site?.header?.logoName ?? "KoriLab";
+
+  // Merge DB prices/names with local plan structure (features, colors, etc.)
+  const mergedPlans = plans.map(p => {
+    const db = dbPlans.find(d => d.key === p.name.toLowerCase());
+    if (!db) return p;
+    return { ...p, name: db.label, price: db.price };
+  });
 
   return (
     <>
@@ -167,7 +174,7 @@ export default function Prestige({ site, contactInfo }) {
         {/* Pricing */}
         <section className="pb-24 px-6">
           <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8">
-            {plans.map((plan, i) => (
+            {mergedPlans.map((plan, i) => (
               <PlanCard key={plan.name} plan={plan} index={i} />
             ))}
           </div>
