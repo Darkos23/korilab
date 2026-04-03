@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { Link } from "@inertiajs/react";
 import { Crown, ArrowRight } from "lucide-react";
 
-export default function PrestigeBanner() {
+export default function PrestigeBanner({ starterPrice = '35 000' }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
@@ -38,7 +38,7 @@ export default function PrestigeBanner() {
 
                 <div className="flex items-center gap-5 shrink-0">
                   <div className="text-right hidden sm:block">
-                    <div className="text-2xl font-bold text-amber-400">35 000 <span className="text-sm font-normal text-slate-500">FCFA/mois</span></div>
+                    <div className="text-2xl font-bold text-amber-400">{starterPrice} <span className="text-sm font-normal text-slate-500">FCFA/mois</span></div>
                     <div className="text-xs text-slate-600 font-mono">à partir de</div>
                   </div>
                   <div className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-600 group-hover:bg-amber-500 text-white text-sm font-semibold transition-colors whitespace-nowrap">

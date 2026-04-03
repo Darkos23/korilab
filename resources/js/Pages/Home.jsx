@@ -14,7 +14,7 @@ import PrestigeBanner from "../Components/sections/PrestigeBanner";
 import Testimonials from "../Components/sections/Testimonials";
 import { team } from "../data/team";
 
-export default function Home({ site, hero, heroStats, services, portfolio, associates, contactInfo }) {
+export default function Home({ site, hero, heroStats, services, portfolio, associates, contactInfo, dbPlans = [] }) {
   const availabilityMessage = site?.availabilityMessage ?? "Disponible pour de nouveaux projets";
   const availabilitySlots   = site?.availabilitySlots   ?? "2 créneaux disponibles ce mois-ci";
 
@@ -31,7 +31,7 @@ export default function Home({ site, hero, heroStats, services, portfolio, assoc
         <Hero hero={hero} heroStats={heroStats} />
         <About about={site?.about} />
         <Services services={services ?? []} />
-        <PrestigeBanner />
+        <PrestigeBanner starterPrice={dbPlans.find(p => p.key === 'starter')?.price ?? '35 000'} />
         <Portfolio projects={portfolio ?? []} />
         <Team teamMembers={team} associates={associates ?? []} />
         <Testimonials testimonials={site?.testimonials ?? []} />
