@@ -62,6 +62,7 @@ Route::middleware('auth.admin')->prefix('dashboard')->group(function () {
     Route::get('/contrats', [DashboardController::class, 'contrats']);
     Route::get('/contrats/generer', [DashboardController::class, 'generateContrat']);
     Route::get('/devis/generer', [DashboardController::class, 'generateDevis']);
+    Route::patch('/plans', [DashboardController::class, 'updatePlans']);
 
     // Suivi de projets
     Route::get('/projets', [DashboardController::class, 'projets']);

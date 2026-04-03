@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Site extends Model
 {
     protected $table = 'site';
-    protected $fillable = ['header', 'hero', 'heroStats', 'about', 'footer', 'contactInfo', 'availabilityMessage', 'availabilitySlots'];
-    protected $casts = ['header' => 'array', 'hero' => 'array', 'heroStats' => 'array', 'about' => 'array', 'footer' => 'array', 'contactInfo' => 'array'];
+    protected $fillable = ['header', 'hero', 'heroStats', 'about', 'footer', 'contactInfo', 'availabilityMessage', 'availabilitySlots', 'plans'];
+    protected $casts = ['header' => 'array', 'hero' => 'array', 'heroStats' => 'array', 'about' => 'array', 'footer' => 'array', 'contactInfo' => 'array', 'plans' => 'array'];
 }

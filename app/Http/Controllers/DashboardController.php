@@ -221,9 +221,32 @@ class DashboardController extends Controller
 
     public function contrats()
     {
+        $site = Site::first();
+        $defaultPlans = [
+            ['key' => 'starter',  'label' => 'Starter',  'price' => '35 000 F/mois',  'desc' => 'Site vitrine 5 pages · 2 modif./mois'],
+            ['key' => 'business', 'label' => 'Business', 'price' => '75 000 F/mois',  'desc' => 'Site avancé · 6 modif./mois'],
+            ['key' => 'premium',  'label' => 'Premium',  'price' => '250 000 F/mois', 'desc' => 'Application sur-mesure · 12 modif./mois'],
+        ];
+
         return Inertia::render('Dashboard/Contrats', [
             'admin' => session('admin'),
+            'plans' => $site?->plans ?? $defaultPlans,
         ]);
+    }
+
+    public function updatePlans(Request $request)
+    {
+        $request->validate([
+            'plans'          => 'required|array|min:1',
+            'plans.*.key'   => 'required|string|max:50',
+            'plans.*.label' => 'required|string|max:100',
+            'plans.*.price' => 'required|string|max:100',
+            'plans.*.desc'  => 'required|string|max:255',
+        ]);
+
+        $site = Site::firstOrCreate([]);
+        $site->update(['plans' => $request->plans]);
+        return back()->with('success', 'Plans mis à jour.');
     }
 
     public function generateDevis(Request $request)

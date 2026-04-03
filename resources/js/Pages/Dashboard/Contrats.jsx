@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, Send, Receipt } from "lucide-react";
+import { FileText, Send, Receipt, Pencil, Check, X } from "lucide-react";
+import { router, usePage } from "@inertiajs/react";
 import Sidebar from "@/Components/dashboard/Sidebar";
 import TopBar from "@/Components/dashboard/TopBar";
 import { SLSystemBG, StatusBar } from "@/Components/dashboard/SystemLayout";
@@ -13,11 +14,6 @@ const GOLD  = '#8A5A18';
 const CARD  = '#FDFBF7';
 const FONT  = "'Century Gothic', 'Trebuchet MS', sans-serif";
 
-const FORMULES = [
-  { key: 'starter',  label: 'Starter',  price: '35 000 F/mois', desc: 'Site vitrine 5 pages · 2 modif./mois' },
-  { key: 'business', label: 'Business', price: '75 000 F/mois', desc: 'Site avancé · 6 modif./mois' },
-  { key: 'premium',  label: 'Premium',  price: '250 000 F/mois', desc: 'Application sur-mesure · 12 modif./mois' },
-];
 
 function Field({ label, name, value, onChange, placeholder, type = 'text', required }) {
   return (
@@ -54,10 +50,10 @@ function TextArea({ label, name, value, onChange, placeholder, required }) {
 }
 
 /* ── Onglet Contrat ── */
-function ContratTab() {
+function ContratTab({ plans }) {
   const [form, setForm] = useState({
     client_name: '', client_activity: '', client_address: '',
-    client_email: '', client_phone: '', formule: 'starter',
+    client_email: '', client_phone: '', formule: plans[0]?.key ?? 'starter',
     date: new Date().toISOString().slice(0, 10), ninea: '', ref_number: '',
   });
   const handle = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
@@ -65,6 +61,18 @@ function ContratTab() {
     e.preventDefault();
     window.open(`/dashboard/contrats/generer?${new URLSearchParams(form)}`, '_blank');
   };
+
+  /* ── Edition des plans ── */
+  const [editing, setEditing] = useState(false);
+  const [editPlans, setEditPlans] = useState(plans);
+  const handlePlan = (i, field, val) => setEditPlans(prev => prev.map((p, idx) => idx === i ? { ...p, [field]: val } : p));
+  const savePlans = () => {
+    router.patch('/dashboard/plans', { plans: editPlans }, {
+      preserveScroll: true,
+      onSuccess: () => setEditing(false),
+    });
+  };
+  const cancelEdit = () => { setEditPlans(plans); setEditing(false); };
 
   return (
     <form onSubmit={generate}>
@@ -84,17 +92,67 @@ function ContratTab() {
           </div>
 
           <div className="rounded-xl p-6" style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 8px rgba(0,0,0,0.04)' }}>
-            <div style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.3em', marginBottom: 16 }}>Formule souscrite</div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {FORMULES.map(f => (
-                <button key={f.key} type="button" onClick={() => setForm(prev => ({ ...prev, formule: f.key }))}
-                  className="text-left p-4 rounded-xl transition-all"
-                  style={{ border: form.formule === f.key ? `2px solid ${TERRA}` : `1px solid rgba(0,0,0,0.1)`, background: form.formule === f.key ? `rgba(180,48,40,0.05)` : 'white', cursor: 'pointer' }}>
-                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: INK, marginBottom: 2 }}>{f.label}</div>
-                  <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 15, color: TERRA, marginBottom: 4 }}>{f.price}</div>
-                  <div style={{ fontFamily: FONT, fontSize: 10, color: INK2, lineHeight: 1.5 }}>{f.desc}</div>
-                  {form.formule === f.key && <div style={{ fontFamily: FONT, fontSize: 9, fontWeight: 700, color: TERRA, marginTop: 6, textTransform: 'uppercase', letterSpacing: '0.1em' }}>✓ Sélectionnée</div>}
+            {/* Header avec bouton édition */}
+            <div className="flex items-center justify-between mb-4">
+              <div style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.3em' }}>Formule souscrite</div>
+              {!editing ? (
+                <button type="button" onClick={() => setEditing(true)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all"
+                  style={{ fontFamily: FONT, fontSize: 10, color: INK2, border: `1px solid ${INK3}`, background: 'transparent', cursor: 'pointer' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = TERRA; e.currentTarget.style.borderColor = 'rgba(180,48,40,0.3)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = INK2; e.currentTarget.style.borderColor = INK3; }}>
+                  <Pencil size={11} /> Modifier les plans
                 </button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <button type="button" onClick={cancelEdit}
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg"
+                    style={{ fontFamily: FONT, fontSize: 10, color: INK2, border: `1px solid ${INK3}`, background: 'transparent', cursor: 'pointer' }}>
+                    <X size={11} /> Annuler
+                  </button>
+                  <button type="button" onClick={savePlans}
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg"
+                    style={{ fontFamily: FONT, fontSize: 10, color: 'white', background: TERRA, border: 'none', cursor: 'pointer' }}>
+                    <Check size={11} /> Sauvegarder
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Cards plans */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {(editing ? editPlans : plans).map((f, i) => (
+                editing ? (
+                  /* Mode édition */
+                  <div key={f.key} className="p-4 rounded-xl space-y-2"
+                    style={{ border: `1px solid rgba(180,48,40,0.25)`, background: 'rgba(180,48,40,0.03)' }}>
+                    <input
+                      value={f.label} onChange={e => handlePlan(i, 'label', e.target.value)}
+                      placeholder="Nom du plan"
+                      style={{ width: '100%', padding: '6px 10px', border: `1px solid rgba(0,0,0,0.12)`, borderRadius: 6, fontFamily: FONT, fontSize: 13, fontWeight: 700, color: INK, background: CARD, outline: 'none' }}
+                    />
+                    <input
+                      value={f.price} onChange={e => handlePlan(i, 'price', e.target.value)}
+                      placeholder="Prix (ex: 35 000 F/mois)"
+                      style={{ width: '100%', padding: '6px 10px', border: `1px solid rgba(0,0,0,0.12)`, borderRadius: 6, fontFamily: FONT, fontSize: 13, fontWeight: 700, color: TERRA, background: CARD, outline: 'none' }}
+                    />
+                    <input
+                      value={f.desc} onChange={e => handlePlan(i, 'desc', e.target.value)}
+                      placeholder="Description courte"
+                      style={{ width: '100%', padding: '6px 10px', border: `1px solid rgba(0,0,0,0.12)`, borderRadius: 6, fontFamily: FONT, fontSize: 11, color: INK2, background: CARD, outline: 'none' }}
+                    />
+                  </div>
+                ) : (
+                  /* Mode sélection normal */
+                  <button key={f.key} type="button" onClick={() => setForm(prev => ({ ...prev, formule: f.key }))}
+                    className="text-left p-4 rounded-xl transition-all"
+                    style={{ border: form.formule === f.key ? `2px solid ${TERRA}` : `1px solid rgba(0,0,0,0.1)`, background: form.formule === f.key ? `rgba(180,48,40,0.05)` : 'white', cursor: 'pointer' }}>
+                    <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 13, color: INK, marginBottom: 2 }}>{f.label}</div>
+                    <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 15, color: TERRA, marginBottom: 4 }}>{f.price}</div>
+                    <div style={{ fontFamily: FONT, fontSize: 10, color: INK2, lineHeight: 1.5 }}>{f.desc}</div>
+                    {form.formule === f.key && <div style={{ fontFamily: FONT, fontSize: 9, fontWeight: 700, color: TERRA, marginTop: 6, textTransform: 'uppercase', letterSpacing: '0.1em' }}>✓ Sélectionnée</div>}
+                  </button>
+                )
               ))}
             </div>
           </div>
@@ -220,7 +278,7 @@ function DevisTab() {
 }
 
 /* ── Page ── */
-export default function Contrats({ admin }) {
+export default function Contrats({ admin, plans }) {
   const [tab, setTab] = useState('contrat');
 
   const tabs = [
@@ -272,7 +330,7 @@ export default function Contrats({ admin }) {
             {/* Contenu */}
             <AnimatePresence mode="wait">
               <motion.div key={tab} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15 }}>
-                {tab === 'contrat' ? <ContratTab /> : <DevisTab />}
+                {tab === 'contrat' ? <ContratTab plans={plans} /> : <DevisTab />}
               </motion.div>
             </AnimatePresence>
 

@@ -6,8 +6,8 @@
       "_vendor-motion-BhniRuxm.js"
     ]
   },
-  "_vendor-lucide-CWeTF7bY.js": {
-    "file": "assets/vendor-lucide-CWeTF7bY.js",
+  "_vendor-lucide-BjQodUyo.js": {
+    "file": "assets/vendor-lucide-BjQodUyo.js",
     "name": "vendor-lucide",
     "imports": [
       "_vendor-motion-BhniRuxm.js"
@@ -31,14 +31,14 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-C3I0HIsz.js",
+    "file": "assets/app-Bfthbz0B.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "imports": [
       "_vendor-motion-BhniRuxm.js",
       "_vendor-inertia-yb_NfDMD.js",
-      "_vendor-lucide-CWeTF7bY.js"
+      "_vendor-lucide-BjQodUyo.js"
     ],
     "css": [
       "assets/app-BP04DjbH.css"
