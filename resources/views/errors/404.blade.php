@@ -47,7 +47,7 @@
       animation: float 3.5s ease-in-out infinite;
       filter: drop-shadow(0 0 30px rgba(0,168,255,0.35));
     }
-    @keyframes float {
+    @@keyframes float {
       0%,100% { transform: translateY(0); }
       50%      { transform: translateY(-14px); }
     }
@@ -56,7 +56,7 @@
     .eye-glow {
       animation: eye-pulse 1.8s ease-in-out infinite;
     }
-    @keyframes eye-pulse {
+    @@keyframes eye-pulse {
       0%,100% { opacity: 1; r: 7; }
       50%      { opacity: 0.6; r: 9; }
     }
@@ -66,7 +66,7 @@
       animation: flicker 0.8s ease-in-out infinite alternate;
       transform-origin: 50% 100%;
     }
-    @keyframes flicker {
+    @@keyframes flicker {
       0%   { transform: scaleX(1)   scaleY(1)   rotate(-3deg); opacity: 1; }
       100% { transform: scaleX(0.85) scaleY(1.15) rotate(3deg); opacity: 0.8; }
     }
@@ -75,7 +75,7 @@
     .accent-glow {
       animation: accent 2.5s ease-in-out infinite;
     }
-    @keyframes accent {
+    @@keyframes accent {
       0%,100% { opacity: 0.6; }
       50%      { opacity: 1; }
     }
@@ -90,7 +90,7 @@
       margin-top: 6px;
       animation: arise-pulse 2s ease-in-out infinite;
     }
-    @keyframes arise-pulse {
+    @@keyframes arise-pulse {
       0%,100% { text-shadow: 0 0 12px #00a8ff, 0 0 30px rgba(0,168,255,0.5); }
       50%      { text-shadow: 0 0 20px #00a8ff, 0 0 50px rgba(0,168,255,0.8); }
     }
