@@ -172,7 +172,7 @@ function ContratTab({ plans }) {
             <div style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: 12 }}>Aperçu</div>
             <div style={{ fontFamily: FONT, fontSize: 11, color: INK2, lineHeight: 1.8 }}>
               <div><span style={{ color: INK, fontWeight: 600 }}>Client :</span> {form.client_name || '—'}</div>
-              <div><span style={{ color: INK, fontWeight: 600 }}>Formule :</span> {FORMULES.find(f => f.key === form.formule)?.label}</div>
+              <div><span style={{ color: INK, fontWeight: 600 }}>Formule :</span> {plans.find(f => f.key === form.formule)?.label}</div>
               <div><span style={{ color: INK, fontWeight: 600 }}>Date :</span> {form.date ? new Date(form.date).toLocaleDateString('fr-FR') : '—'}</div>
               <div><span style={{ color: INK, fontWeight: 600 }}>Réf. :</span> KL-PREST-{new Date().getFullYear()}-{form.ref_number.padStart ? form.ref_number.padStart(3, '0') : '000'}</div>
             </div>
