@@ -1,10 +1,10 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Head, Link } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronRight, ChevronLeft, Plus, X, Check,
   User, Briefcase, GraduationCap, Palette, CreditCard,
-  Phone, Mail, MapPin, Globe, Download, Eye,
+  Download, Eye,
 } from "lucide-react";
 import Navbar from "../../Components/Navbar";
 
@@ -805,35 +805,45 @@ export default function CvGenerator() {
   const [data, setData] = useState(INIT);
   const [paid, setPaid] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
-  const printRef = useRef(null);
+  const [downloading, setDownloading] = useState(false);
 
   const canNext = () => {
     if (step === 1) return data.prenom.trim() && data.nom.trim() && data.titre.trim();
     return true;
   };
 
-  const handleDownload = () => {
-    window.print();
+  const handleDownload = async () => {
+    setDownloading(true);
+    try {
+      const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+      const res = await fetch('/services/cv/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': token || '',
+          'Accept': 'application/pdf',
+        },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error('Erreur serveur');
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `CV-${data.prenom}-${data.nom}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      alert('Erreur lors de la génération du PDF. Réessaie.');
+    } finally {
+      setDownloading(false);
+    }
   };
 
   return (
     <>
       <Head title="Générateur de CV — KoriLab" />
       <Navbar />
-
-      {/* Print styles */}
-      <style>{`
-        @media print {
-          body > *:not(#cv-print-area) { display: none !important; }
-          #cv-print-area { display: block !important; position: fixed; inset: 0; z-index: 9999; }
-        }
-        #cv-print-area { display: none; }
-      `}</style>
-
-      {/* Hidden print area */}
-      <div id="cv-print-area">
-        <CvPreview data={data} />
-      </div>
 
       <main className="min-h-screen pt-24 pb-16" style={{ background: "#040d1a" }}>
         <div className="section-padding mx-auto max-w-7xl">
@@ -941,14 +951,16 @@ export default function CvGenerator() {
                 ) : paid ? (
                   <button
                     onClick={handleDownload}
+                    disabled={downloading}
                     type="button"
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-[1.02]"
+                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-[1.02] disabled:opacity-60 disabled:scale-100"
                     style={{
                       background: "linear-gradient(135deg, rgba(52,211,153,0.2), rgba(52,211,153,0.08))",
                       border: "1px solid rgba(52,211,153,0.35)",
                       color: "#34d399",
                     }}>
-                    <Download className="w-4 h-4" /> Télécharger PDF
+                    <Download className="w-4 h-4" />
+                    {downloading ? "Génération..." : "Télécharger PDF"}
                   </button>
                 ) : null}
               </div>
