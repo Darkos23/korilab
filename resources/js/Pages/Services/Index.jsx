@@ -13,7 +13,7 @@ const TOOLS = [
     label: "Générateur de CV",
     description: "Crée un CV professionnel en quelques minutes. Remplis le formulaire, choisis ton thème, paye et télécharge.",
     price: "2 000",
-    tag: "Rang F",
+    tag: "Disponible",
     href: "/services/cv",
     active: true,
     rune: "ᚠ",
@@ -25,7 +25,7 @@ const TOOLS = [
     label: "Carte de Visite",
     description: "Génère une carte de visite digitale et imprimable avec ton identité et tes coordonnées.",
     price: "2 500",
-    tag: "Rang E",
+    tag: "Prochainement",
     locked: true,
     rune: "ᚱ",
     color: "#818cf8",
@@ -36,7 +36,7 @@ const TOOLS = [
     label: "Audit SEO",
     description: "Analyse SEO instantanée de ton site. Score, recommandations et rapport PDF en sortie.",
     price: "5 000",
-    tag: "Rang D",
+    tag: "Prochainement",
     locked: true,
     rune: "ᚦ",
     color: "#34d399",
@@ -47,7 +47,7 @@ const TOOLS = [
     label: "Générateur de Logo",
     description: "Construis un logo vectoriel à partir de tes initiales, couleurs et style en quelques clics.",
     price: "4 000",
-    tag: "Rang C",
+    tag: "Prochainement",
     locked: true,
     rune: "ᚷ",
     color: "#fbbf24",
@@ -295,10 +295,10 @@ export default function ServicesIndex({ site }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="text-center font-mono text-[11px] tracking-widest mt-16"
-            style={{ color: "rgba(56,189,248,0.25)" }}
+            className="text-center text-xs mt-16"
+            style={{ color: "rgba(148,163,184,0.3)" }}
           >
-            ᚠ — D'autres quêtes seront débloquées prochainement — ᚠ
+            D'autres services seront disponibles prochainement.
           </motion.p>
         </div>
       </main>
