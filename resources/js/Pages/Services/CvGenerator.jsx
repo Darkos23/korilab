@@ -13,15 +13,16 @@ const THEMES = [
   {
     id: "classic",
     label: "Classic",
-    desc: "Sobre et élégant, fond blanc",
-    accent: "#1e40af",
+    desc: "Colonne latérale navy, style corporate",
+    accent: "#1e3a5f",
     bg: "#ffffff",
     text: "#1e293b",
+    sidebar: "#1e3a5f",
   },
   {
     id: "modern",
     label: "Modern",
-    desc: "Bandeau coloré, typographie bold",
+    desc: "Header pleine largeur, deux colonnes",
     accent: "#0ea5e9",
     bg: "#f8fafc",
     text: "#0f172a",
@@ -29,17 +30,18 @@ const THEMES = [
   {
     id: "dark",
     label: "Dark",
-    desc: "Fond sombre, accents bleus",
+    desc: "Sidebar sombre, timeline tech",
     accent: "#38bdf8",
-    bg: "#0f172a",
+    bg: "#0d1117",
     text: "#e2e8f0",
+    sidebar: "#161b22",
   },
   {
     id: "minimal",
     label: "Minimal",
-    desc: "Épuré, beaucoup d'espace blanc",
+    desc: "Typographie pure, une seule colonne",
     accent: "#6366f1",
-    bg: "#fafafa",
+    bg: "#ffffff",
     text: "#111827",
   },
 ];
@@ -152,120 +154,332 @@ function RemoveBtn({ onClick }) {
   );
 }
 
-/* ─── CV Preview ─────────────────────────────────────── */
-function CvPreview({ data }) {
-  const theme = THEMES.find(t => t.id === data.theme) || THEMES[1];
+/* ─── CV Layouts ─────────────────────────────────────── */
+
+// Shared section heading styles per theme
+function SecHead({ theme, children, s = "7.5px" }) {
+  const styles = {
+    classic: { fontWeight: 700, fontSize: s, color: theme.accent, textTransform: "uppercase", letterSpacing: "0.15em", borderBottom: `1.5px solid ${theme.accent}`, paddingBottom: 2, marginBottom: 5 },
+    modern:  { fontWeight: 800, fontSize: s, color: theme.accent, textTransform: "uppercase", letterSpacing: "0.12em", borderLeft: `2.5px solid ${theme.accent}`, paddingLeft: 5, marginBottom: 5 },
+    dark:    { fontWeight: 700, fontSize: s, color: theme.accent, textTransform: "uppercase", letterSpacing: "0.12em", borderBottom: `1px solid ${theme.accent}30`, paddingBottom: 2, marginBottom: 5 },
+    minimal: { fontWeight: 400, fontSize: s, color: theme.accent, textTransform: "uppercase", letterSpacing: "0.25em", marginBottom: 6 },
+  };
+  return <div style={styles[theme.id] || styles.modern}>{children}</div>;
+}
+
+function CvClassic({ data, s, theme }) {
   const fullName = [data.prenom, data.nom].filter(Boolean).join(" ") || "Ton Nom";
-
+  const muted = "#94a3b8";
   return (
-    <div className="w-full overflow-hidden rounded-xl shadow-2xl"
-      style={{
-        background: theme.bg,
-        color: theme.text,
-        fontFamily: "'Segoe UI', sans-serif",
-        fontSize: "7.5px",
-        lineHeight: 1.4,
-        minHeight: "360px",
-        border: `1px solid ${theme.accent}22`,
-      }}>
-
-      {/* Header */}
-      <div style={{
-        background: theme.id === "dark"
-          ? `linear-gradient(135deg, ${theme.accent}22, ${theme.accent}08)`
-          : theme.id === "minimal" || theme.id === "classic"
-          ? "transparent"
-          : `linear-gradient(135deg, ${theme.accent}18, transparent)`,
-        borderBottom: `2px solid ${theme.accent}`,
-        padding: "14px 16px 10px",
-      }}>
-        <div style={{ fontWeight: 900, fontSize: "14px", color: theme.id === "dark" ? theme.text : theme.accent, letterSpacing: "-0.3px" }}>
-          {fullName}
+    <div style={{ display: "flex", minHeight: "100%", fontFamily: "'Segoe UI', sans-serif", fontSize: s, background: theme.bg, color: theme.text }}>
+      {/* Sidebar */}
+      <div style={{ width: "32%", background: theme.sidebar, padding: "14px 10px", flexShrink: 0 }}>
+        {/* Avatar placeholder */}
+        <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.12)", border: "2px solid rgba(255,255,255,0.2)", margin: "0 auto 10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <span style={{ color: "rgba(255,255,255,0.5)", fontSize: "14px", fontWeight: 700 }}>{(data.prenom || "T").charAt(0)}</span>
         </div>
-        {data.titre && (
-          <div style={{ fontSize: "7px", color: theme.id === "dark" ? `${theme.accent}cc` : theme.accent, fontWeight: 600, marginTop: 2, letterSpacing: "0.05em", textTransform: "uppercase" }}>
-            {data.titre}
+        {/* Contact */}
+        <div style={{ marginBottom: 10 }}>
+          {[data.email, data.telephone, data.localisation, data.portfolio].filter(Boolean).map((v, i) => (
+            <div key={i} style={{ color: "rgba(255,255,255,0.65)", fontSize: s === "7.5px" ? "6px" : "4px", marginBottom: 2, wordBreak: "break-all" }}>{v}</div>
+          ))}
+        </div>
+        {/* Compétences */}
+        {data.competences.length > 0 && (
+          <div style={{ marginBottom: 10 }}>
+            <div style={{ fontWeight: 700, color: "rgba(255,255,255,0.5)", fontSize: s === "7.5px" ? "6px" : "4px", textTransform: "uppercase", letterSpacing: "0.15em", borderBottom: "1px solid rgba(255,255,255,0.15)", paddingBottom: 2, marginBottom: 5 }}>Compétences</div>
+            {data.competences.map((c, i) => (
+              <div key={i} style={{ color: "rgba(255,255,255,0.8)", fontSize: s === "7.5px" ? "6px" : "4px", marginBottom: 2, paddingLeft: 6, position: "relative" }}>
+                <span style={{ position: "absolute", left: 0, color: "rgba(255,255,255,0.3)" }}>›</span>{c}
+              </div>
+            ))}
           </div>
         )}
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 6 }}>
-          {data.email     && <span style={{ color: theme.id === "dark" ? "#94a3b8" : "#64748b" }}>{data.email}</span>}
-          {data.telephone && <span style={{ color: theme.id === "dark" ? "#94a3b8" : "#64748b" }}>{data.telephone}</span>}
-          {data.localisation && <span style={{ color: theme.id === "dark" ? "#94a3b8" : "#64748b" }}>{data.localisation}</span>}
+        {/* Langues */}
+        {data.langues.some(l => l.langue) && (
+          <div>
+            <div style={{ fontWeight: 700, color: "rgba(255,255,255,0.5)", fontSize: s === "7.5px" ? "6px" : "4px", textTransform: "uppercase", letterSpacing: "0.15em", borderBottom: "1px solid rgba(255,255,255,0.15)", paddingBottom: 2, marginBottom: 5 }}>Langues</div>
+            {data.langues.filter(l => l.langue).map((l, i) => (
+              <div key={i} style={{ color: "rgba(255,255,255,0.75)", fontSize: s === "7.5px" ? "6px" : "4px", marginBottom: 2 }}>{l.langue} <span style={{ color: "rgba(255,255,255,0.35)" }}>· {l.niveau}</span></div>
+            ))}
+          </div>
+        )}
+      </div>
+      {/* Main */}
+      <div style={{ flex: 1, padding: "14px 12px" }}>
+        <div style={{ marginBottom: 10, borderBottom: `3px solid ${theme.accent}`, paddingBottom: 8 }}>
+          <div style={{ fontWeight: 900, fontSize: s === "7.5px" ? "15px" : "10px", color: theme.text, letterSpacing: "-0.5px" }}>{fullName}</div>
+          {data.titre && <div style={{ fontSize: s === "7.5px" ? "7px" : "4.5px", color: theme.accent, fontWeight: 600, marginTop: 2, textTransform: "uppercase", letterSpacing: "0.1em" }}>{data.titre}</div>}
+        </div>
+        {data.resume && (
+          <div style={{ marginBottom: 10 }}>
+            <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>Profil</SecHead>
+            <p style={{ color: "#475569", fontSize: s === "7.5px" ? "6.5px" : "4px" }}>{data.resume}</p>
+          </div>
+        )}
+        {data.experiences.some(e => e.poste || e.entreprise) && (
+          <div style={{ marginBottom: 10 }}>
+            <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>Expériences</SecHead>
+            {data.experiences.filter(e => e.poste || e.entreprise).map((e, i) => (
+              <div key={i} style={{ marginBottom: 6 }}>
+                <div style={{ fontWeight: 700, fontSize: s === "7.5px" ? "7px" : "4.5px", color: theme.text }}>{e.poste}</div>
+                <div style={{ fontSize: s === "7.5px" ? "6.5px" : "4px", color: theme.accent, fontWeight: 600 }}>{e.entreprise}{e.periode ? ` · ${e.periode}` : ""}</div>
+                {e.description && <p style={{ fontSize: s === "7.5px" ? "6px" : "3.5px", color: muted, marginTop: 1 }}>{e.description}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+        {data.formations.some(f => f.diplome || f.etablissement) && (
+          <div>
+            <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>Formation</SecHead>
+            {data.formations.filter(f => f.diplome || f.etablissement).map((f, i) => (
+              <div key={i} style={{ marginBottom: 4 }}>
+                <div style={{ fontWeight: 700, fontSize: s === "7.5px" ? "7px" : "4.5px", color: theme.text }}>{f.diplome}</div>
+                <div style={{ fontSize: s === "7.5px" ? "6.5px" : "4px", color: theme.accent }}>{f.etablissement}{f.annee ? ` · ${f.annee}` : ""}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function CvModern({ data, s, theme }) {
+  const fullName = [data.prenom, data.nom].filter(Boolean).join(" ") || "Ton Nom";
+  return (
+    <div style={{ fontFamily: "'Segoe UI', sans-serif", fontSize: s, background: theme.bg, color: theme.text }}>
+      {/* Full-width accent header */}
+      <div style={{ background: `linear-gradient(135deg, ${theme.accent}, #0369a1)`, padding: s === "7.5px" ? "16px 16px 12px" : "10px 10px 8px" }}>
+        <div style={{ fontWeight: 900, fontSize: s === "7.5px" ? "18px" : "12px", color: "#fff", letterSpacing: "-0.5px" }}>{fullName}</div>
+        {data.titre && <div style={{ fontSize: s === "7.5px" ? "7.5px" : "5px", color: "rgba(255,255,255,0.85)", fontWeight: 500, marginTop: 2, letterSpacing: "0.08em" }}>{data.titre}</div>}
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 6 }}>
+          {[data.email, data.telephone, data.localisation].filter(Boolean).map((v, i) => (
+            <span key={i} style={{ background: "rgba(255,255,255,0.18)", color: "#fff", padding: s === "7.5px" ? "1.5px 6px" : "1px 4px", borderRadius: 20, fontSize: s === "7.5px" ? "5.5px" : "3.5px" }}>{v}</span>
+          ))}
         </div>
       </div>
-
-      <div style={{ padding: "10px 16px", display: "grid", gridTemplateColumns: "1fr 0.55fr", gap: 12 }}>
-        {/* Colonne gauche */}
-        <div>
+      {/* Two columns */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 0.5fr", gap: 0 }}>
+        {/* Left */}
+        <div style={{ padding: s === "7.5px" ? "10px 12px" : "6px 8px", borderRight: "1px solid #e2e8f0" }}>
           {data.resume && (
-            <div style={{ marginBottom: 10 }}>
-              <div style={{ fontWeight: 700, fontSize: "7.5px", color: theme.accent, textTransform: "uppercase", letterSpacing: "0.12em", borderBottom: `1px solid ${theme.accent}30`, paddingBottom: 2, marginBottom: 5 }}>
-                À propos
-              </div>
-              <p style={{ color: theme.id === "dark" ? "#94a3b8" : "#475569", fontSize: "6.5px" }}>{data.resume}</p>
+            <div style={{ marginBottom: 8 }}>
+              <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>À propos</SecHead>
+              <p style={{ color: "#475569", fontSize: s === "7.5px" ? "6.5px" : "4px" }}>{data.resume}</p>
             </div>
           )}
-
           {data.experiences.some(e => e.poste || e.entreprise) && (
-            <div style={{ marginBottom: 10 }}>
-              <div style={{ fontWeight: 700, fontSize: "7.5px", color: theme.accent, textTransform: "uppercase", letterSpacing: "0.12em", borderBottom: `1px solid ${theme.accent}30`, paddingBottom: 2, marginBottom: 5 }}>
-                Expériences
-              </div>
+            <div style={{ marginBottom: 8 }}>
+              <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>Expériences</SecHead>
               {data.experiences.filter(e => e.poste || e.entreprise).map((e, i) => (
-                <div key={i} style={{ marginBottom: 7 }}>
-                  <div style={{ fontWeight: 700, fontSize: "7px", color: theme.text }}>{e.poste || "—"}</div>
-                  <div style={{ fontSize: "6.5px", color: theme.accent, fontWeight: 600 }}>{e.entreprise}{e.periode ? ` · ${e.periode}` : ""}</div>
-                  {e.description && <p style={{ fontSize: "6px", color: theme.id === "dark" ? "#94a3b8" : "#64748b", marginTop: 2 }}>{e.description}</p>}
+                <div key={i} style={{ marginBottom: 6 }}>
+                  <div style={{ fontWeight: 800, fontSize: s === "7.5px" ? "7px" : "4.5px", color: theme.text }}>{e.poste}</div>
+                  <div style={{ fontSize: s === "7.5px" ? "6px" : "4px", color: theme.accent, fontWeight: 600 }}>{e.entreprise}{e.periode ? ` · ${e.periode}` : ""}</div>
+                  {e.description && <p style={{ fontSize: s === "7.5px" ? "5.5px" : "3.5px", color: "#64748b", marginTop: 1 }}>{e.description}</p>}
                 </div>
               ))}
             </div>
           )}
-
           {data.formations.some(f => f.diplome || f.etablissement) && (
             <div>
-              <div style={{ fontWeight: 700, fontSize: "7.5px", color: theme.accent, textTransform: "uppercase", letterSpacing: "0.12em", borderBottom: `1px solid ${theme.accent}30`, paddingBottom: 2, marginBottom: 5 }}>
-                Formation
-              </div>
+              <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>Formation</SecHead>
               {data.formations.filter(f => f.diplome || f.etablissement).map((f, i) => (
-                <div key={i} style={{ marginBottom: 5 }}>
-                  <div style={{ fontWeight: 700, fontSize: "7px", color: theme.text }}>{f.diplome || "—"}</div>
-                  <div style={{ fontSize: "6.5px", color: theme.accent }}>{f.etablissement}{f.annee ? ` · ${f.annee}` : ""}</div>
+                <div key={i} style={{ marginBottom: 4 }}>
+                  <div style={{ fontWeight: 700, fontSize: s === "7.5px" ? "7px" : "4.5px", color: theme.text }}>{f.diplome}</div>
+                  <div style={{ fontSize: s === "7.5px" ? "6px" : "4px", color: theme.accent }}>{f.etablissement}{f.annee ? ` · ${f.annee}` : ""}</div>
                 </div>
               ))}
             </div>
           )}
         </div>
-
-        {/* Colonne droite */}
-        <div>
+        {/* Right */}
+        <div style={{ padding: s === "7.5px" ? "10px 10px" : "6px 7px" }}>
           {data.competences.length > 0 && (
-            <div style={{ marginBottom: 10 }}>
-              <div style={{ fontWeight: 700, fontSize: "7.5px", color: theme.accent, textTransform: "uppercase", letterSpacing: "0.12em", borderBottom: `1px solid ${theme.accent}30`, paddingBottom: 2, marginBottom: 5 }}>
-                Compétences
-              </div>
+            <div style={{ marginBottom: 8 }}>
+              <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>Compétences</SecHead>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>
                 {data.competences.map((c, i) => (
-                  <span key={i} style={{ background: `${theme.accent}15`, color: theme.accent, padding: "1.5px 5px", borderRadius: 3, fontSize: "6px", fontWeight: 600 }}>{c}</span>
+                  <span key={i} style={{ background: `${theme.accent}15`, color: theme.accent, padding: s === "7.5px" ? "2px 5px" : "1px 3px", borderRadius: 4, fontSize: s === "7.5px" ? "6px" : "3.5px", fontWeight: 600 }}>{c}</span>
                 ))}
               </div>
             </div>
           )}
-
           {data.langues.some(l => l.langue) && (
             <div>
-              <div style={{ fontWeight: 700, fontSize: "7.5px", color: theme.accent, textTransform: "uppercase", letterSpacing: "0.12em", borderBottom: `1px solid ${theme.accent}30`, paddingBottom: 2, marginBottom: 5 }}>
-                Langues
-              </div>
+              <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>Langues</SecHead>
               {data.langues.filter(l => l.langue).map((l, i) => (
-                <div key={i} style={{ display: "flex", justifyContent: "space-between", marginBottom: 3, fontSize: "6.5px" }}>
-                  <span style={{ color: theme.text, fontWeight: 600 }}>{l.langue}</span>
-                  <span style={{ color: theme.id === "dark" ? "#94a3b8" : "#64748b" }}>{l.niveau}</span>
+                <div key={i} style={{ marginBottom: 3 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: s === "7.5px" ? "6px" : "4px" }}>
+                    <span style={{ fontWeight: 600, color: theme.text }}>{l.langue}</span>
+                    <span style={{ color: "#94a3b8" }}>{l.niveau}</span>
+                  </div>
+                  <div style={{ height: 2, background: "#e2e8f0", borderRadius: 1, marginTop: 1 }}>
+                    <div style={{ height: "100%", background: theme.accent, borderRadius: 1, width: l.niveau === "Bilingue/Natif" ? "100%" : l.niveau === "Courant" ? "80%" : l.niveau === "Intermédiaire" ? "55%" : "30%" }} />
+                  </div>
                 </div>
               ))}
             </div>
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function CvDark({ data, s, theme }) {
+  const fullName = [data.prenom, data.nom].filter(Boolean).join(" ") || "Ton Nom";
+  return (
+    <div style={{ display: "flex", fontFamily: "'Segoe UI', sans-serif", fontSize: s, background: theme.bg, color: theme.text, minHeight: "100%" }}>
+      {/* Dark sidebar */}
+      <div style={{ width: "35%", background: theme.sidebar, padding: s === "7.5px" ? "14px 10px" : "8px 7px", flexShrink: 0 }}>
+        <div style={{ fontWeight: 900, fontSize: s === "7.5px" ? "12px" : "8px", color: theme.accent, letterSpacing: "-0.3px", marginBottom: 2 }}>{fullName}</div>
+        {data.titre && <div style={{ fontSize: s === "7.5px" ? "6px" : "3.5px", color: "rgba(226,232,240,0.5)", fontWeight: 500, marginBottom: 10, textTransform: "uppercase", letterSpacing: "0.1em" }}>{data.titre}</div>}
+        <div style={{ borderTop: `1px solid ${theme.accent}30`, paddingTop: 8, marginBottom: 10 }}>
+          {[data.email, data.telephone, data.localisation, data.portfolio].filter(Boolean).map((v, i) => (
+            <div key={i} style={{ color: "rgba(226,232,240,0.55)", fontSize: s === "7.5px" ? "5.5px" : "3.5px", marginBottom: 2, wordBreak: "break-all" }}>{v}</div>
+          ))}
+        </div>
+        {data.competences.length > 0 && (
+          <div style={{ marginBottom: 10 }}>
+            <div style={{ fontWeight: 700, color: theme.accent, fontSize: s === "7.5px" ? "6px" : "4px", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 5 }}>Stack</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+              {data.competences.map((c, i) => (
+                <span key={i} style={{ background: `${theme.accent}18`, color: theme.accent, padding: s === "7.5px" ? "1.5px 4px" : "1px 3px", borderRadius: 3, fontSize: s === "7.5px" ? "5.5px" : "3.5px", fontWeight: 600, border: `1px solid ${theme.accent}30` }}>{c}</span>
+              ))}
+            </div>
+          </div>
+        )}
+        {data.langues.some(l => l.langue) && (
+          <div>
+            <div style={{ fontWeight: 700, color: theme.accent, fontSize: s === "7.5px" ? "6px" : "4px", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 5 }}>Langues</div>
+            {data.langues.filter(l => l.langue).map((l, i) => (
+              <div key={i} style={{ color: "rgba(226,232,240,0.65)", fontSize: s === "7.5px" ? "5.5px" : "3.5px", marginBottom: 2 }}>{l.langue} <span style={{ color: theme.accent, opacity: 0.6 }}>/ {l.niveau}</span></div>
+            ))}
+          </div>
+        )}
+      </div>
+      {/* Main */}
+      <div style={{ flex: 1, padding: s === "7.5px" ? "14px 12px" : "8px 8px" }}>
+        {data.resume && (
+          <div style={{ marginBottom: 10, padding: s === "7.5px" ? "6px 8px" : "4px 5px", background: `${theme.accent}08`, borderLeft: `2px solid ${theme.accent}`, borderRadius: "0 4px 4px 0" }}>
+            <p style={{ color: "rgba(226,232,240,0.7)", fontSize: s === "7.5px" ? "6px" : "3.5px" }}>{data.resume}</p>
+          </div>
+        )}
+        {data.experiences.some(e => e.poste || e.entreprise) && (
+          <div style={{ marginBottom: 10 }}>
+            <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>Expériences</SecHead>
+            {data.experiences.filter(e => e.poste || e.entreprise).map((e, i) => (
+              <div key={i} style={{ marginBottom: 7, paddingLeft: 10, position: "relative" }}>
+                <div style={{ position: "absolute", left: 0, top: 2, width: 5, height: 5, borderRadius: "50%", background: theme.accent, border: `1px solid ${theme.bg}` }} />
+                {i < data.experiences.filter(x => x.poste || x.entreprise).length - 1 && (
+                  <div style={{ position: "absolute", left: 2, top: 7, width: 1, bottom: -5, background: `${theme.accent}25` }} />
+                )}
+                <div style={{ fontWeight: 700, fontSize: s === "7.5px" ? "7px" : "4.5px", color: "#e2e8f0" }}>{e.poste}</div>
+                <div style={{ fontSize: s === "7.5px" ? "6px" : "3.5px", color: theme.accent, fontWeight: 600, marginBottom: 1 }}>{e.entreprise}{e.periode ? ` · ${e.periode}` : ""}</div>
+                {e.description && <p style={{ fontSize: s === "7.5px" ? "5.5px" : "3.5px", color: "rgba(226,232,240,0.5)" }}>{e.description}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+        {data.formations.some(f => f.diplome || f.etablissement) && (
+          <div>
+            <SecHead theme={theme} s={s === "7.5px" ? "7px" : "4.5px"}>Formation</SecHead>
+            {data.formations.filter(f => f.diplome || f.etablissement).map((f, i) => (
+              <div key={i} style={{ marginBottom: 5 }}>
+                <div style={{ fontWeight: 700, fontSize: s === "7.5px" ? "7px" : "4.5px", color: "#e2e8f0" }}>{f.diplome}</div>
+                <div style={{ fontSize: s === "7.5px" ? "6px" : "3.5px", color: theme.accent }}>{f.etablissement}{f.annee ? ` · ${f.annee}` : ""}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function CvMinimal({ data, s, theme }) {
+  const fullName = [data.prenom, data.nom].filter(Boolean).join(" ") || "Ton Nom";
+  return (
+    <div style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontSize: s, background: theme.bg, color: theme.text, padding: s === "7.5px" ? "18px 20px" : "10px 12px" }}>
+      {/* Header — typographic only */}
+      <div style={{ marginBottom: s === "7.5px" ? 12 : 7 }}>
+        <div style={{ fontWeight: 700, fontSize: s === "7.5px" ? "20px" : "13px", color: "#111", letterSpacing: "-0.5px", fontFamily: "Georgia, serif" }}>{fullName}</div>
+        {data.titre && <div style={{ fontSize: s === "7.5px" ? "7.5px" : "5px", color: theme.accent, fontWeight: 400, marginTop: 2, letterSpacing: "0.18em", textTransform: "uppercase", fontFamily: "'Segoe UI', sans-serif" }}>{data.titre}</div>}
+        <div style={{ marginTop: 5, display: "flex", gap: 10, flexWrap: "wrap" }}>
+          {[data.email, data.telephone, data.localisation, data.portfolio].filter(Boolean).map((v, i) => (
+            <span key={i} style={{ color: "#6b7280", fontSize: s === "7.5px" ? "6px" : "4px" }}>{v}</span>
+          ))}
+        </div>
+        <div style={{ height: 1, background: "#111", marginTop: 8 }} />
+      </div>
+      {/* Single column, generous spacing */}
+      {data.resume && (
+        <div style={{ marginBottom: 10 }}>
+          <SecHead theme={theme} s={s === "7.5px" ? "6.5px" : "4px"}>Profil</SecHead>
+          <p style={{ color: "#374151", fontSize: s === "7.5px" ? "6.5px" : "4px", fontFamily: "Georgia, serif", lineHeight: 1.6 }}>{data.resume}</p>
+        </div>
+      )}
+      {data.experiences.some(e => e.poste || e.entreprise) && (
+        <div style={{ marginBottom: 10 }}>
+          <SecHead theme={theme} s={s === "7.5px" ? "6.5px" : "4px"}>Expériences</SecHead>
+          {data.experiences.filter(e => e.poste || e.entreprise).map((e, i) => (
+            <div key={i} style={{ marginBottom: 7, display: "grid", gridTemplateColumns: "1fr auto" }}>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: s === "7.5px" ? "7px" : "4.5px", color: "#111", fontFamily: "Georgia, serif" }}>{e.poste}</div>
+                <div style={{ fontSize: s === "7.5px" ? "6px" : "3.5px", color: theme.accent, fontStyle: "italic", fontFamily: "Georgia, serif" }}>{e.entreprise}</div>
+                {e.description && <p style={{ fontSize: s === "7.5px" ? "5.5px" : "3.5px", color: "#6b7280", marginTop: 1, lineHeight: 1.5 }}>{e.description}</p>}
+              </div>
+              {e.periode && <div style={{ fontSize: s === "7.5px" ? "5.5px" : "3.5px", color: "#9ca3af", whiteSpace: "nowrap", marginLeft: 6, marginTop: 1 }}>{e.periode}</div>}
+            </div>
+          ))}
+        </div>
+      )}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+        {data.competences.length > 0 && (
+          <div>
+            <SecHead theme={theme} s={s === "7.5px" ? "6.5px" : "4px"}>Compétences</SecHead>
+            <p style={{ color: "#374151", fontSize: s === "7.5px" ? "6px" : "3.5px", lineHeight: 1.8 }}>
+              {data.competences.join(" · ")}
+            </p>
+          </div>
+        )}
+        <div>
+          {data.formations.some(f => f.diplome || f.etablissement) && (
+            <div style={{ marginBottom: 6 }}>
+              <SecHead theme={theme} s={s === "7.5px" ? "6.5px" : "4px"}>Formation</SecHead>
+              {data.formations.filter(f => f.diplome || f.etablissement).map((f, i) => (
+                <div key={i} style={{ marginBottom: 3 }}>
+                  <div style={{ fontWeight: 700, fontSize: s === "7.5px" ? "6.5px" : "4px", color: "#111", fontFamily: "Georgia, serif" }}>{f.diplome}</div>
+                  <div style={{ fontSize: s === "7.5px" ? "6px" : "3.5px", color: theme.accent, fontStyle: "italic" }}>{f.etablissement}{f.annee ? `, ${f.annee}` : ""}</div>
+                </div>
+              ))}
+            </div>
+          )}
+          {data.langues.some(l => l.langue) && (
+            <div>
+              <SecHead theme={theme} s={s === "7.5px" ? "6.5px" : "4px"}>Langues</SecHead>
+              {data.langues.filter(l => l.langue).map((l, i) => (
+                <div key={i} style={{ fontSize: s === "7.5px" ? "6px" : "3.5px", color: "#374151", marginBottom: 1 }}>{l.langue} <span style={{ color: "#9ca3af" }}>— {l.niveau}</span></div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── CV Preview (panel droit) ───────────────────────── */
+function CvPreview({ data }) {
+  const theme = THEMES.find(t => t.id === data.theme) || THEMES[1];
+  const props = { data, s: "7.5px", theme };
+  return (
+    <div className="w-full overflow-hidden rounded-xl shadow-2xl" style={{ border: `1px solid ${theme.accent}20` }}>
+      {data.theme === "classic"  && <CvClassic  {...props} />}
+      {data.theme === "modern"   && <CvModern   {...props} />}
+      {data.theme === "dark"     && <CvDark     {...props} />}
+      {data.theme === "minimal"  && <CvMinimal  {...props} />}
     </div>
   );
 }
@@ -428,60 +642,31 @@ function StepCompetences({ data, set }) {
 }
 
 function MiniCvPreview({ theme, name, titre }) {
+  const demoData = {
+    prenom: name?.split(" ")[0] || "Ibrahima",
+    nom: name?.split(" ").slice(1).join(" ") || "Sarr",
+    titre: titre || "Développeur Full Stack",
+    email: "ibrahima@email.com",
+    telephone: "+221 77 000 00 00",
+    localisation: "Dakar",
+    portfolio: "",
+    resume: "Développeur passionné, spécialisé en web et mobile.",
+    experiences: [
+      { poste: "Développeur Web", entreprise: "KoriLab", periode: "2023–Présent", description: "" },
+      { poste: "Stagiaire Dev", entreprise: "Startup Dakar", periode: "2022", description: "" },
+    ],
+    formations: [{ diplome: "Licence Informatique", etablissement: "UCAD", annee: "2022" }],
+    competences: ["React", "Laravel", "Figma", "SQL"],
+    langues: [{ langue: "Français", niveau: "Bilingue/Natif" }, { langue: "Anglais", niveau: "Courant" }],
+    theme: theme.id,
+  };
+  const props = { data: demoData, s: "5px", theme };
   return (
-    <div style={{
-      background: theme.bg,
-      color: theme.text,
-      borderRadius: 6,
-      overflow: "hidden",
-      fontSize: "5px",
-      lineHeight: 1.4,
-      border: `1px solid ${theme.accent}22`,
-      pointerEvents: "none",
-      userSelect: "none",
-    }}>
-      {/* Header */}
-      <div style={{
-        background: theme.id === "dark"
-          ? `linear-gradient(135deg, ${theme.accent}18, transparent)`
-          : theme.id === "modern"
-          ? `linear-gradient(135deg, ${theme.accent}14, transparent)`
-          : "transparent",
-        borderBottom: `1.5px solid ${theme.accent}`,
-        padding: "6px 8px 5px",
-      }}>
-        <div style={{ fontWeight: 900, fontSize: "9px", color: theme.id === "dark" ? theme.text : theme.accent }}>
-          {name || "Prénom Nom"}
-        </div>
-        <div style={{ fontSize: "5px", color: theme.accent, fontWeight: 600, marginTop: 1, textTransform: "uppercase", letterSpacing: "0.04em" }}>
-          {titre || "Titre professionnel"}
-        </div>
-        <div style={{ marginTop: 3, display: "flex", gap: 6 }}>
-          {["email@exemple.com", "+221 77 000 00 00", "Dakar"].map((v, i) => (
-            <span key={i} style={{ color: theme.id === "dark" ? "#94a3b8" : "#64748b", fontSize: "4.5px" }}>{v}</span>
-          ))}
-        </div>
-      </div>
-      {/* Body */}
-      <div style={{ padding: "5px 8px", display: "grid", gridTemplateColumns: "1fr 0.5fr", gap: 6 }}>
-        <div>
-          <div style={{ fontWeight: 700, fontSize: "5px", color: theme.accent, textTransform: "uppercase", borderBottom: `1px solid ${theme.accent}25`, paddingBottom: 1, marginBottom: 3 }}>Expériences</div>
-          {[["Développeur Web", "KoriLab · 2023–Présent"], ["Stagiaire Dev", "Startup · 2022"]].map(([p, e], i) => (
-            <div key={i} style={{ marginBottom: 3 }}>
-              <div style={{ fontWeight: 700, fontSize: "5px", color: theme.text }}>{p}</div>
-              <div style={{ fontSize: "4.5px", color: theme.accent }}>{e}</div>
-            </div>
-          ))}
-        </div>
-        <div>
-          <div style={{ fontWeight: 700, fontSize: "5px", color: theme.accent, textTransform: "uppercase", borderBottom: `1px solid ${theme.accent}25`, paddingBottom: 1, marginBottom: 3 }}>Compétences</div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-            {["React", "Laravel", "Figma", "SQL"].map((s, i) => (
-              <span key={i} style={{ background: `${theme.accent}15`, color: theme.accent, padding: "1px 3px", borderRadius: 2, fontSize: "4px", fontWeight: 600 }}>{s}</span>
-            ))}
-          </div>
-        </div>
-      </div>
+    <div style={{ overflow: "hidden", borderRadius: 5, border: `1px solid ${theme.accent}22`, pointerEvents: "none", userSelect: "none" }}>
+      {theme.id === "classic"  && <CvClassic  {...props} />}
+      {theme.id === "modern"   && <CvModern   {...props} />}
+      {theme.id === "dark"     && <CvDark     {...props} />}
+      {theme.id === "minimal"  && <CvMinimal  {...props} />}
     </div>
   );
 }
