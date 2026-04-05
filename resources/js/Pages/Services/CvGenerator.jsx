@@ -427,31 +427,89 @@ function StepCompetences({ data, set }) {
   );
 }
 
+function MiniCvPreview({ theme, name, titre }) {
+  return (
+    <div style={{
+      background: theme.bg,
+      color: theme.text,
+      borderRadius: 6,
+      overflow: "hidden",
+      fontSize: "5px",
+      lineHeight: 1.4,
+      border: `1px solid ${theme.accent}22`,
+      pointerEvents: "none",
+      userSelect: "none",
+    }}>
+      {/* Header */}
+      <div style={{
+        background: theme.id === "dark"
+          ? `linear-gradient(135deg, ${theme.accent}18, transparent)`
+          : theme.id === "modern"
+          ? `linear-gradient(135deg, ${theme.accent}14, transparent)`
+          : "transparent",
+        borderBottom: `1.5px solid ${theme.accent}`,
+        padding: "6px 8px 5px",
+      }}>
+        <div style={{ fontWeight: 900, fontSize: "9px", color: theme.id === "dark" ? theme.text : theme.accent }}>
+          {name || "Prénom Nom"}
+        </div>
+        <div style={{ fontSize: "5px", color: theme.accent, fontWeight: 600, marginTop: 1, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+          {titre || "Titre professionnel"}
+        </div>
+        <div style={{ marginTop: 3, display: "flex", gap: 6 }}>
+          {["email@exemple.com", "+221 77 000 00 00", "Dakar"].map((v, i) => (
+            <span key={i} style={{ color: theme.id === "dark" ? "#94a3b8" : "#64748b", fontSize: "4.5px" }}>{v}</span>
+          ))}
+        </div>
+      </div>
+      {/* Body */}
+      <div style={{ padding: "5px 8px", display: "grid", gridTemplateColumns: "1fr 0.5fr", gap: 6 }}>
+        <div>
+          <div style={{ fontWeight: 700, fontSize: "5px", color: theme.accent, textTransform: "uppercase", borderBottom: `1px solid ${theme.accent}25`, paddingBottom: 1, marginBottom: 3 }}>Expériences</div>
+          {[["Développeur Web", "KoriLab · 2023–Présent"], ["Stagiaire Dev", "Startup · 2022"]].map(([p, e], i) => (
+            <div key={i} style={{ marginBottom: 3 }}>
+              <div style={{ fontWeight: 700, fontSize: "5px", color: theme.text }}>{p}</div>
+              <div style={{ fontSize: "4.5px", color: theme.accent }}>{e}</div>
+            </div>
+          ))}
+        </div>
+        <div>
+          <div style={{ fontWeight: 700, fontSize: "5px", color: theme.accent, textTransform: "uppercase", borderBottom: `1px solid ${theme.accent}25`, paddingBottom: 1, marginBottom: 3 }}>Compétences</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
+            {["React", "Laravel", "Figma", "SQL"].map((s, i) => (
+              <span key={i} style={{ background: `${theme.accent}15`, color: theme.accent, padding: "1px 3px", borderRadius: 2, fontSize: "4px", fontWeight: 600 }}>{s}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function StepTheme({ data, set }) {
+  const name = [data.prenom, data.nom].filter(Boolean).join(" ");
   return (
     <div>
       <SectionTitle>Choisis ton thème</SectionTitle>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         {THEMES.map(theme => (
           <button key={theme.id} type="button"
             onClick={() => set({ ...data, theme: theme.id })}
-            className="relative rounded-xl p-4 text-left transition-all"
+            className="relative rounded-xl p-3 text-left transition-all"
             style={{
-              background: data.theme === theme.id ? "rgba(56,189,248,0.08)" : "rgba(255,255,255,0.02)",
-              border: `1px solid ${data.theme === theme.id ? "rgba(56,189,248,0.4)" : "rgba(255,255,255,0.06)"}`,
-              boxShadow: data.theme === theme.id ? "0 0 20px rgba(56,189,248,0.1)" : "none",
+              background: data.theme === theme.id ? "rgba(56,189,248,0.06)" : "rgba(255,255,255,0.02)",
+              border: `1px solid ${data.theme === theme.id ? "rgba(56,189,248,0.35)" : "rgba(255,255,255,0.06)"}`,
+              boxShadow: data.theme === theme.id ? "0 0 20px rgba(56,189,248,0.08)" : "none",
             }}>
             {data.theme === theme.id && (
-              <span className="absolute top-3 right-3 w-5 h-5 rounded-full flex items-center justify-center"
+              <span className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full flex items-center justify-center z-10"
                 style={{ background: "#38bdf8" }}>
                 <Check className="w-3 h-3 text-white" />
               </span>
             )}
-            {/* Mini palette */}
-            <div className="flex gap-1.5 mb-3">
-              <div className="w-6 h-6 rounded-md" style={{ background: theme.bg, border: "1px solid rgba(255,255,255,0.1)" }} />
-              <div className="w-6 h-6 rounded-md" style={{ background: theme.accent }} />
-              <div className="w-6 h-6 rounded-md" style={{ background: theme.text }} />
+            {/* Mini CV preview */}
+            <div className="mb-3 overflow-hidden rounded-md" style={{ maxHeight: 90 }}>
+              <MiniCvPreview theme={theme} name={name} titre={data.titre} />
             </div>
             <div className="font-bold text-white text-sm">{theme.label}</div>
             <div className="text-xs text-slate-500 mt-0.5">{theme.desc}</div>
