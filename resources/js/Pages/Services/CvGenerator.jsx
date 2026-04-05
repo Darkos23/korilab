@@ -79,22 +79,23 @@ function ClassicPdf({ data }) {
     skillName:  { color: "rgba(255,255,255,0.8)", fontSize: 7.5 },
     langName:   { color: "rgba(255,255,255,0.85)", fontSize: 8, fontFamily: "Helvetica-Bold" },
     langLevel:  { color: "rgba(201,168,76,0.7)", fontSize: 7, marginBottom: 4 },
-    main:       { flex: 1, padding: "26 22" },
-    mainHdr:    { borderBottomWidth: 3, borderBottomColor: "#c9a84c", paddingBottom: 12, marginBottom: 18 },
-    mainName:   { fontSize: 26, fontFamily: "Helvetica-Bold", color: "#1a1a2e", letterSpacing: -0.5 },
-    mainTitre:  { fontSize: 8.5, color: "#c9a84c", fontFamily: "Helvetica-Bold", textTransform: "uppercase", letterSpacing: 1.5, marginTop: 5 },
-    sec:        { fontSize: 7, fontFamily: "Helvetica-Bold", color: "#1a1a2e", textTransform: "uppercase", letterSpacing: 2, borderBottomWidth: 1.5, borderBottomColor: "#1a1a2e", paddingBottom: 3, marginBottom: 10, marginTop: 18 },
-    resumeTxt:  { fontSize: 9, color: "#4a4a6a", lineHeight: 1.65 },
-    expRole:    { fontSize: 10, fontFamily: "Helvetica-Bold", color: "#1a1a2e" },
-    expRow:     { flexDirection: "row", justifyContent: "space-between" },
-    expCompany: { fontSize: 8.5, color: "#c9a84c", fontFamily: "Helvetica-Bold", marginTop: 2 },
-    expPeriod:  { fontSize: 7.5, color: "#9a9ab0" },
-    expDesc:    { fontSize: 8, color: "#4a4a6a", marginTop: 3, lineHeight: 1.55 },
-    expBlock:   { marginBottom: 10 },
-    dot:        { width: 5, height: 5, borderRadius: 2.5, backgroundColor: "#c9a84c", marginRight: 6, marginTop: 3 },
-    formRole:   { fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#1a1a2e" },
-    formSchool: { fontSize: 8, color: "#c9a84c", fontFamily: "Helvetica-Bold", marginTop: 2 },
-    formBlock:  { marginBottom: 8 },
+    main:       { flex: 1, padding: "28 24" },
+    mainHdr:    { borderBottomWidth: 2, borderBottomColor: "#c9a84c", paddingBottom: 14, marginBottom: 22 },
+    nameFirst:  { fontSize: 30, fontFamily: "Helvetica", color: "#1a1a2e", letterSpacing: -0.5 },
+    nameBold:   { fontSize: 30, fontFamily: "Helvetica-Bold", color: "#1a1a2e", letterSpacing: -0.5 },
+    mainTitre:  { fontSize: 8, color: "#c9a84c", fontFamily: "Helvetica-Bold", textTransform: "uppercase", letterSpacing: 2, marginTop: 7 },
+    sec:        { fontSize: 6.5, fontFamily: "Helvetica-Bold", color: "#1a1a2e", textTransform: "uppercase", letterSpacing: 2.5, borderBottomWidth: 1, borderBottomColor: "#c9a84c", paddingBottom: 4, marginBottom: 12, marginTop: 20 },
+    resumeTxt:  { fontSize: 9, color: "#4a4a6a", lineHeight: 1.7 },
+    expRole:    { fontSize: 10.5, fontFamily: "Helvetica-Bold", color: "#1a1a2e" },
+    expRow:     { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" },
+    expCompany: { fontSize: 8.5, color: "#c9a84c", fontFamily: "Helvetica-Bold", marginTop: 3 },
+    expPeriod:  { fontSize: 7, color: "#9a9ab0", marginTop: 2 },
+    expDesc:    { fontSize: 8.5, color: "#4a4a6a", marginTop: 5, lineHeight: 1.65 },
+    expBlock:   { marginBottom: 14 },
+    dot:        { width: 5, height: 5, borderRadius: 2.5, backgroundColor: "#c9a84c", marginRight: 7, marginTop: 4, flexShrink: 0 },
+    formRole:   { fontSize: 10, fontFamily: "Helvetica-Bold", color: "#1a1a2e" },
+    formSchool: { fontSize: 8, color: "#c9a84c", fontFamily: "Helvetica-Bold", marginTop: 3 },
+    formBlock:  { marginBottom: 10 },
   });
   const exps = data.experiences.filter(e => e.poste || e.entreprise);
   const forms = data.formations.filter(f => f.diplome || f.etablissement);
@@ -139,7 +140,7 @@ function ClassicPdf({ data }) {
 
       <View style={s.main}>
         <View style={s.mainHdr}>
-          <Text style={s.mainName}>{data.prenom} {data.nom}</Text>
+          <Text><Text style={s.nameFirst}>{data.prenom} </Text><Text style={s.nameBold}>{data.nom.toUpperCase()}</Text></Text>
           {data.titre ? <Text style={s.mainTitre}>{data.titre}</Text> : null}
         </View>
         {data.resume ? <><Text style={s.sec}>Profil</Text><Text style={s.resumeTxt}>{data.resume}</Text></> : null}
@@ -148,14 +149,15 @@ function ClassicPdf({ data }) {
           {exps.map((e, i) => (
             <View key={i} style={s.expBlock}>
               <View style={s.expRow}>
-                <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
+                <View style={{ flexDirection: "row", alignItems: "flex-start", flex: 1 }}>
                   <View style={s.dot} />
-                  <Text style={s.expRole}>{e.poste}</Text>
+                  <View style={{ flex: 1 }}>
+                    <Text style={s.expRole}>{e.poste}{e.entreprise ? <Text style={s.expCompany}> · {e.entreprise}</Text> : null}</Text>
+                    {e.description ? <Text style={s.expDesc}>{e.description}</Text> : null}
+                  </View>
                 </View>
                 {e.periode ? <Text style={s.expPeriod}>{e.periode}</Text> : null}
               </View>
-              <Text style={s.expCompany}>{e.entreprise}</Text>
-              {e.description ? <Text style={s.expDesc}>{e.description}</Text> : null}
             </View>
           ))}
         </> : null}
@@ -177,9 +179,10 @@ function ModernPdf({ data }) {
   const blue = "#0057ff";
   const s = StyleSheet.create({
     page:       { backgroundColor: "#f0f4ff", fontFamily: "Helvetica" },
-    hero:       { backgroundColor: blue, padding: "28 26 0" },
-    heroName:   { fontSize: 28, fontFamily: "Helvetica-Bold", color: "#fff", letterSpacing: -1, lineHeight: 0.95 },
-    heroTitre:  { fontSize: 8.5, color: "rgba(255,255,255,0.78)", textTransform: "uppercase", letterSpacing: 1.8, marginTop: 6, fontFamily: "Helvetica" },
+    hero:       { backgroundColor: blue, padding: "30 28 0" },
+    heroFirst:  { fontSize: 34, fontFamily: "Helvetica", color: "rgba(255,255,255,0.75)", letterSpacing: -1, lineHeight: 1 },
+    heroBold:   { fontSize: 34, fontFamily: "Helvetica-Bold", color: "#ffffff", letterSpacing: -1, lineHeight: 1 },
+    heroTitre:  { fontSize: 8, color: "rgba(255,255,255,0.65)", textTransform: "uppercase", letterSpacing: 2.5, marginTop: 8, fontFamily: "Helvetica" },
     chipBar:    { flexDirection: "row", backgroundColor: "#fff", padding: "9 26", flexWrap: "wrap" },
     chip:       { fontSize: 7.5, color: blue, fontFamily: "Helvetica-Bold", marginRight: 18 },
     chipLabel:  { fontSize: 6, color: "#9a9ab0", textTransform: "uppercase", letterSpacing: 0.6 },
@@ -188,16 +191,17 @@ function ModernPdf({ data }) {
     colAside:   { width: "34%", padding: "20 16", backgroundColor: "#f0f4ff" },
     sec:        { fontSize: 7, fontFamily: "Helvetica-Bold", color: blue, textTransform: "uppercase", letterSpacing: 2, marginBottom: 4, marginTop: 18 },
     secLine:    { height: 2, backgroundColor: blue, width: 28, marginBottom: 10 },
-    resumeTxt:  { fontSize: 9, color: "#4a4a6a", lineHeight: 1.65 },
+    resumeTxt:  { fontSize: 9, color: "#4a4a6a", lineHeight: 1.7 },
     expRole:    { fontSize: 10.5, fontFamily: "Helvetica-Bold", color: "#0a0a1a" },
-    expBadge:   { fontSize: 6.5, color: "#fff", backgroundColor: blue, paddingHorizontal: 5, paddingVertical: 2, borderRadius: 3, marginLeft: 6 },
+    expPipe:    { fontSize: 10.5, color: "#9a9ab0", marginHorizontal: 5 },
+    expCompanyInline: { fontSize: 10.5, color: blue, fontFamily: "Helvetica-Bold" },
+    expBadge:   { fontSize: 6.5, color: "#fff", backgroundColor: blue, paddingHorizontal: 5, paddingVertical: 2, borderRadius: 3 },
     expRow:     { flexDirection: "row", alignItems: "flex-start", justifyContent: "space-between" },
-    expCompany: { fontSize: 8.5, color: blue, fontFamily: "Helvetica-Bold", marginTop: 2 },
-    expDesc:    { fontSize: 8, color: "#4a4a6a", marginTop: 4, lineHeight: 1.6 },
-    expBlock:   { marginBottom: 12 },
-    formRole:   { fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0a0a1a" },
-    formSchool: { fontSize: 8, color: blue, fontFamily: "Helvetica-Bold", marginTop: 2 },
-    formBlock:  { marginBottom: 9 },
+    expDesc:    { fontSize: 8.5, color: "#4a4a6a", marginTop: 5, lineHeight: 1.65 },
+    expBlock:   { marginBottom: 14 },
+    formRole:   { fontSize: 10, fontFamily: "Helvetica-Bold", color: "#0a0a1a" },
+    formSchool: { fontSize: 8, color: blue, fontFamily: "Helvetica-Bold", marginTop: 3 },
+    formBlock:  { marginBottom: 10 },
     pill:       { fontSize: 7, color: "#fff", backgroundColor: blue, borderRadius: 20, paddingHorizontal: 7, paddingVertical: 3, marginRight: 4, marginBottom: 5 },
     pillWrap:   { flexDirection: "row", flexWrap: "wrap" },
     langName:   { fontSize: 8.5, fontFamily: "Helvetica-Bold", color: "#0a0a1a" },
@@ -214,7 +218,7 @@ function ModernPdf({ data }) {
   return (
     <Document><Page size="A4" style={s.page}>
       <View style={s.hero}>
-        <Text style={s.heroName}>{data.prenom}{"\n"}{data.nom}</Text>
+        <Text><Text style={s.heroFirst}>{data.prenom} </Text><Text style={s.heroBold}>{data.nom.toUpperCase()}</Text></Text>
         {data.titre ? <Text style={s.heroTitre}>{data.titre}</Text> : null}
       </View>
       <View style={s.chipBar}>
@@ -231,10 +235,12 @@ function ModernPdf({ data }) {
             {exps.map((e, i) => (
               <View key={i} style={s.expBlock}>
                 <View style={s.expRow}>
-                  <Text style={s.expRole}>{e.poste}</Text>
+                  <Text style={{ flex: 1 }}>
+                    <Text style={s.expRole}>{e.poste}</Text>
+                    {e.entreprise ? <><Text style={s.expPipe}> | </Text><Text style={s.expCompanyInline}>{e.entreprise}</Text></> : null}
+                  </Text>
                   {e.periode ? <Text style={s.expBadge}>{e.periode}</Text> : null}
                 </View>
-                <Text style={s.expCompany}>{e.entreprise}</Text>
                 {e.description ? <Text style={s.expDesc}>{e.description}</Text> : null}
               </View>
             ))}
@@ -293,9 +299,10 @@ function DarkPdf({ data }) {
     langName:  { color: "rgba(200,216,240,0.9)", fontSize: 8, fontFamily: "Helvetica-Bold" },
     langLevel: { color: "rgba(0,200,255,0.6)", fontSize: 7, marginBottom: 4 },
     main:      { flex: 1, padding: "24 20" },
-    mainHdr:   { borderLeftWidth: 4, borderLeftColor: cyan, backgroundColor: "#0a1628", padding: "12 14", marginBottom: 20 },
-    mainName:  { fontSize: 22, fontFamily: "Helvetica-Bold", color: "#fff", letterSpacing: -0.5 },
-    mainTitre: { fontSize: 8, color: cyan, textTransform: "uppercase", letterSpacing: 1.8, marginTop: 5, opacity: 0.85 },
+    mainHdr:   { borderLeftWidth: 4, borderLeftColor: cyan, backgroundColor: "#0a1628", padding: "12 14", marginBottom: 22 },
+    nameFirst: { fontSize: 24, fontFamily: "Helvetica", color: "rgba(255,255,255,0.65)", letterSpacing: -0.5 },
+    nameBold:  { fontSize: 24, fontFamily: "Helvetica-Bold", color: "#ffffff", letterSpacing: -0.5 },
+    mainTitre: { fontSize: 7.5, color: cyan, textTransform: "uppercase", letterSpacing: 2, marginTop: 6, opacity: 0.85 },
     sec:       { fontSize: 6.5, fontFamily: "Helvetica-Bold", color: cyan, textTransform: "uppercase", letterSpacing: 2, marginBottom: 4, marginTop: 18 },
     secRule:   { height: 1, backgroundColor: "rgba(0,200,255,0.15)", marginBottom: 10 },
     resumeBox: { backgroundColor: "rgba(0,200,255,0.06)", borderLeftWidth: 2, borderLeftColor: cyan, padding: "7 10", marginBottom: 14 },
@@ -351,7 +358,7 @@ function DarkPdf({ data }) {
 
       <View style={s.main}>
         <View style={s.mainHdr}>
-          <Text style={s.mainName}>{data.prenom} {data.nom}</Text>
+          <Text><Text style={s.nameFirst}>{data.prenom} </Text><Text style={s.nameBold}>{data.nom.toUpperCase()}</Text></Text>
           {data.titre ? <Text style={s.mainTitre}>{data.titre}</Text> : null}
         </View>
         {data.resume ? <><View style={s.resumeBox}><Text style={s.resumeTxt}>{data.resume}</Text></View></> : null}
@@ -387,10 +394,10 @@ function MinimalPdf({ data }) {
   const indigo = "#6366f1";
   const s = StyleSheet.create({
     page:      { backgroundColor: "#fff", padding: "36 42", fontFamily: "Helvetica" },
-    hdrRow:    { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 0, paddingBottom: 14 },
-    nameFirst: { fontSize: 32, fontFamily: "Helvetica-Bold", color: "#111", letterSpacing: -1, lineHeight: 0.9 },
-    nameLast:  { fontSize: 32, color: "#111", letterSpacing: -1, lineHeight: 0.9 },
-    titre:     { fontSize: 9, color: indigo, fontFamily: "Helvetica-Bold", textTransform: "uppercase", letterSpacing: 2.5, marginTop: 10 },
+    hdrRow:    { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 0, paddingBottom: 16 },
+    nameFirst: { fontSize: 36, fontFamily: "Helvetica", color: "#111", letterSpacing: -1.5, lineHeight: 0.9 },
+    nameLast:  { fontSize: 36, fontFamily: "Helvetica-Bold", color: "#111", letterSpacing: -1.5, lineHeight: 0.9 },
+    titre:     { fontSize: 8, color: indigo, fontFamily: "Helvetica-Bold", textTransform: "uppercase", letterSpacing: 3, marginTop: 12 },
     contactBlk:{ alignItems: "flex-end" },
     cLabel:    { fontSize: 6, color: indigo, textTransform: "uppercase", letterSpacing: 1, fontFamily: "Helvetica-Bold", marginTop: 5 },
     cVal:      { fontSize: 7.5, color: "#6b7280" },
@@ -402,12 +409,13 @@ function MinimalPdf({ data }) {
     sec:       { fontSize: 6.5, fontFamily: "Helvetica-Bold", color: indigo, textTransform: "uppercase", letterSpacing: 2.5, marginBottom: 4, marginTop: 20 },
     secLine:   { height: 1, backgroundColor: "#e5e7eb", marginBottom: 10 },
     resumeTxt: { fontSize: 9, color: "#374151", lineHeight: 1.7 },
-    expRow:    { flexDirection: "row", justifyContent: "space-between", marginBottom: 12 },
-    expLeft:   { flex: 1 },
+    expBlock:  { marginBottom: 14 },
+    expTitleRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" },
     expRole:   { fontSize: 10.5, fontFamily: "Helvetica-Bold", color: "#111" },
-    expCompany:{ fontSize: 8.5, color: indigo, fontStyle: "italic", marginTop: 2 },
-    expPeriod: { fontSize: 7.5, color: "#9ca3af" },
-    expDesc:   { fontSize: 8, color: "#6b7280", marginTop: 4, lineHeight: 1.65 },
+    expPipe:   { fontSize: 10.5, color: "#d1d5db", marginHorizontal: 4 },
+    expCompanyInline: { fontSize: 10.5, color: indigo, fontStyle: "italic" },
+    expPeriod: { fontSize: 7, color: "#9ca3af", marginTop: 2 },
+    expDesc:   { fontSize: 8.5, color: "#6b7280", marginTop: 5, lineHeight: 1.7 },
     formRole:  { fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#111" },
     formSchool:{ fontSize: 8, color: indigo, fontStyle: "italic", marginTop: 2 },
     formBlock: { marginBottom: 9 },
@@ -447,13 +455,15 @@ function MinimalPdf({ data }) {
           {exps.length > 0 ? <>
             <Text style={s.sec}>Expériences</Text><View style={s.secLine}/>
             {exps.map((e, i) => (
-              <View key={i} style={s.expRow}>
-                <View style={s.expLeft}>
-                  <Text style={s.expRole}>{e.poste}</Text>
-                  <Text style={s.expCompany}>{e.entreprise}</Text>
-                  {e.description ? <Text style={s.expDesc}>{e.description}</Text> : null}
+              <View key={i} style={s.expBlock}>
+                <View style={s.expTitleRow}>
+                  <Text style={{ flex: 1 }}>
+                    <Text style={s.expRole}>{e.poste}</Text>
+                    {e.entreprise ? <><Text style={s.expPipe}> | </Text><Text style={s.expCompanyInline}>{e.entreprise}</Text></> : null}
+                  </Text>
+                  {e.periode ? <Text style={s.expPeriod}>{e.periode}</Text> : null}
                 </View>
-                {e.periode ? <Text style={s.expPeriod}>{e.periode}</Text> : null}
+                {e.description ? <Text style={s.expDesc}>{e.description}</Text> : null}
               </View>
             ))}
           </> : null}
