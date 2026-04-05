@@ -30,7 +30,7 @@
     "name": "vendor-react"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DlDwCNnK.css",
+    "file": "assets/app-sdJ0yUbV.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -39,7 +39,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-bregsgoX.js",
+    "file": "assets/app-Cjf0DKVk.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -50,7 +50,7 @@
       "_vendor-pdf-Cta8y9RP.js"
     ],
     "css": [
-      "assets/app-DlDwCNnK.css"
+      "assets/app-sdJ0yUbV.css"
     ]
   }
 }

@@ -644,53 +644,147 @@ function StepCompetences({ data, set }) {
   );
 }
 
+function ThemeMiniPreview({ id }) {
+  /* Classic — sidebar navy/gold, main white */
+  if (id === "classic") return (
+    <div style={{ height: 90, display: "flex", borderRadius: 6, overflow: "hidden", background: "#fff" }}>
+      <div style={{ width: "32%", background: "#1a1a2e", padding: "6px 5px", flexShrink: 0 }}>
+        <div style={{ width: 18, height: 18, borderRadius: 9, background: "#c9a84c", margin: "0 auto 5px" }} />
+        <div style={{ height: 3, background: "rgba(201,168,76,0.5)", borderRadius: 2, marginBottom: 3 }} />
+        <div style={{ height: 2, background: "rgba(255,255,255,0.15)", borderRadius: 2, marginBottom: 2 }} />
+        <div style={{ height: 2, background: "rgba(255,255,255,0.15)", borderRadius: 2, width: "70%", marginBottom: 7 }} />
+        <div style={{ height: 2, background: "rgba(201,168,76,0.4)", borderRadius: 2, marginBottom: 3 }} />
+        <div style={{ height: 2, background: "rgba(255,255,255,0.15)", borderRadius: 2, marginBottom: 2 }} />
+        <div style={{ height: 2, background: "rgba(255,255,255,0.15)", borderRadius: 2, width: "60%", marginBottom: 2 }} />
+      </div>
+      <div style={{ flex: 1, padding: "7px 6px" }}>
+        <div style={{ height: 7, background: "#1a1a2e", borderRadius: 1, width: "60%", marginBottom: 2 }} />
+        <div style={{ height: 3, background: "#c9a84c", borderRadius: 1, width: "40%", marginBottom: 5 }} />
+        <div style={{ height: 1.5, background: "#1a1a2e", marginBottom: 5 }} />
+        <div style={{ height: 2.5, background: "#1a1a2e", borderRadius: 1, width: "50%", marginBottom: 2 }} />
+        <div style={{ height: 2, background: "rgba(26,26,46,0.2)", borderRadius: 1, marginBottom: 1.5 }} />
+        <div style={{ height: 2, background: "rgba(26,26,46,0.2)", borderRadius: 1, width: "80%", marginBottom: 1.5 }} />
+        <div style={{ height: 2, background: "rgba(26,26,46,0.2)", borderRadius: 1, width: "65%", marginBottom: 5 }} />
+        <div style={{ height: 2.5, background: "#1a1a2e", borderRadius: 1, width: "45%", marginBottom: 2 }} />
+        <div style={{ height: 2, background: "rgba(26,26,46,0.2)", borderRadius: 1, width: "90%", marginBottom: 1.5 }} />
+      </div>
+    </div>
+  );
+
+  /* Modern — header bleu pleine largeur, deux colonnes */
+  if (id === "modern") return (
+    <div style={{ height: 90, borderRadius: 6, overflow: "hidden", background: "#f0f4ff", display: "flex", flexDirection: "column" }}>
+      <div style={{ background: "#0057ff", padding: "6px 7px 0" }}>
+        <div style={{ height: 6, background: "rgba(255,255,255,0.95)", borderRadius: 1, width: "45%", marginBottom: 2 }} />
+        <div style={{ height: 3, background: "rgba(255,255,255,0.5)", borderRadius: 1, width: "30%", marginBottom: 0 }} />
+        <div style={{ background: "#fff", marginTop: 5, padding: "3px 5px", display: "flex", gap: 8 }}>
+          {["35%","30%","25%"].map((w,i) => <div key={i} style={{ height: 2.5, background: "#0057ff", borderRadius: 1, width: w }} />)}
+        </div>
+      </div>
+      <div style={{ flex: 1, display: "flex" }}>
+        <div style={{ flex: 1, padding: "5px 6px", background: "#fff", borderRight: "1px solid #e8eaf0" }}>
+          <div style={{ height: 2.5, background: "#0057ff", borderRadius: 1, width: "40%", marginBottom: 2 }} />
+          <div style={{ height: 1.5, background: "rgba(10,10,26,0.15)", borderRadius: 1, marginBottom: 1.5 }} />
+          <div style={{ height: 1.5, background: "rgba(10,10,26,0.15)", borderRadius: 1, width: "80%", marginBottom: 4 }} />
+          <div style={{ height: 2.5, background: "#0a0a1a", borderRadius: 1, width: "55%", marginBottom: 1.5 }} />
+          <div style={{ display: "inline-block", height: 5, background: "#0057ff", borderRadius: 2, width: "28%", marginBottom: 2 }} />
+          <div style={{ height: 1.5, background: "rgba(10,10,26,0.15)", borderRadius: 1, width: "90%", marginBottom: 1.5 }} />
+        </div>
+        <div style={{ width: "35%", padding: "5px 5px", background: "#f0f4ff" }}>
+          <div style={{ height: 2.5, background: "#0057ff", borderRadius: 1, width: "60%", marginBottom: 3 }} />
+          {["#0057ff","#0057ff","#0057ff"].map((c,i) => (
+            <div key={i} style={{ height: 6, background: c, borderRadius: 10, width: ["55%","70%","45%"][i], marginBottom: 3, opacity: 0.85 }} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  /* Dark — fond nuit, sidebar, accents cyan */
+  if (id === "dark") return (
+    <div style={{ height: 90, display: "flex", borderRadius: 6, overflow: "hidden", background: "#060d1a" }}>
+      <div style={{ width: "32%", background: "#0a1628", padding: "6px 5px", flexShrink: 0, borderRight: "1px solid #1a3050" }}>
+        <div style={{ width: 18, height: 18, borderRadius: 9, background: "#060d1a", border: "2px solid #00c8ff", margin: "0 auto 5px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: 6, height: 6, background: "#00c8ff", borderRadius: 3 }} />
+        </div>
+        <div style={{ height: 2.5, background: "#00c8ff", borderRadius: 1, opacity: 0.6, marginBottom: 3 }} />
+        {[2,1.5,1.5].map((h,i) => <div key={i} style={{ height: h, background: "rgba(200,216,240,0.2)", borderRadius: 1, marginBottom: 3, width: ["90%","70%","80%"][i] }} />)}
+        <div style={{ height: 2, background: "rgba(0,200,255,0.4)", borderRadius: 1, marginBottom: 3 }} />
+        {[4,4,4].map((h,i) => (
+          <div key={i} style={{ display: "inline-block", height: h, background: "rgba(0,200,255,0.15)", border: "1px solid rgba(0,200,255,0.3)", borderRadius: 2, width: ["45%","40%","35%"][i], marginRight: 2, marginBottom: 2 }} />
+        ))}
+      </div>
+      <div style={{ flex: 1, padding: "7px 6px" }}>
+        <div style={{ borderLeft: "3px solid #00c8ff", paddingLeft: 5, marginBottom: 6, background: "#0a1628", padding: "4px 5px" }}>
+          <div style={{ height: 6, background: "#fff", borderRadius: 1, width: "55%", marginBottom: 2 }} />
+          <div style={{ height: 2.5, background: "#00c8ff", borderRadius: 1, width: "35%", opacity: 0.7 }} />
+        </div>
+        <div style={{ height: 2, background: "#00c8ff", borderRadius: 1, width: "40%", marginBottom: 3, opacity: 0.6 }} />
+        {[1.5,1.5,1.5].map((h,i) => <div key={i} style={{ height: h, background: "rgba(200,216,240,0.2)", borderRadius: 1, marginBottom: 2, width: ["95%","80%","70%"][i] }} />)}
+        <div style={{ height: 2, background: "#00c8ff", borderRadius: 1, width: "40%", marginBottom: 3, marginTop: 3, opacity: 0.6 }} />
+        <div style={{ display: "flex", gap: 3, alignItems: "center", marginBottom: 2 }}>
+          <div style={{ width: 5, height: 5, borderRadius: 2.5, background: "#00c8ff" }} />
+          <div style={{ height: 2.5, background: "#fff", borderRadius: 1, width: "50%" }} />
+        </div>
+      </div>
+    </div>
+  );
+
+  /* Minimal — blanc, indigo, typographie */
+  if (id === "minimal") return (
+    <div style={{ height: 90, borderRadius: 6, overflow: "hidden", background: "#fff", padding: "7px 7px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5, alignItems: "flex-end" }}>
+        <div>
+          <div style={{ height: 9, background: "#111", borderRadius: 1, width: 70, marginBottom: 2, fontWeight: 900 }} />
+          <div style={{ height: 9, background: "#111", borderRadius: 1, width: 55, opacity: 0.2 }} />
+          <div style={{ height: 2.5, background: "#6366f1", borderRadius: 1, width: 45, marginTop: 3 }} />
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ height: 2, background: "rgba(107,114,128,0.4)", borderRadius: 1, width: 40, marginBottom: 2 }} />
+          <div style={{ height: 2, background: "rgba(107,114,128,0.4)", borderRadius: 1, width: 55, marginBottom: 2 }} />
+          <div style={{ height: 2, background: "rgba(107,114,128,0.4)", borderRadius: 1, width: 35 }} />
+        </div>
+      </div>
+      <div style={{ height: 2, background: "#111", marginBottom: 1 }} />
+      <div style={{ height: 1, background: "#111", marginBottom: 5, opacity: 0.3 }} />
+      <div style={{ display: "flex", gap: 6 }}>
+        <div style={{ flex: 1 }}>
+          <div style={{ height: 2.5, background: "#6366f1", borderRadius: 1, width: "50%", marginBottom: 2 }} />
+          <div style={{ height: 1.5, background: "rgba(55,65,81,0.25)", borderRadius: 1, marginBottom: 1.5 }} />
+          <div style={{ height: 1.5, background: "rgba(55,65,81,0.25)", borderRadius: 1, width: "80%", marginBottom: 1.5 }} />
+          <div style={{ height: 1.5, background: "rgba(55,65,81,0.25)", borderRadius: 1, width: "65%", marginBottom: 5 }} />
+          <div style={{ height: 2.5, background: "#111", borderRadius: 1, width: "45%", marginBottom: 1.5 }} />
+          <div style={{ height: 1.5, background: "rgba(55,65,81,0.25)", borderRadius: 1, width: "90%", marginBottom: 1.5 }} />
+        </div>
+        <div style={{ width: "32%" }}>
+          <div style={{ height: 2.5, background: "#6366f1", borderRadius: 1, width: "70%", marginBottom: 3 }} />
+          {["85%","65%","75%","55%"].map((w,i) => (
+            <div key={i} style={{ height: 2.5, background: "rgba(99,102,241,0.12)", borderRadius: 1, width: w, marginBottom: 2.5, borderBottom: "1px solid rgba(243,244,246,1)", paddingBottom: 1 }}>
+              <span style={{ display: "inline-block", width: 4, height: 4, background: "#6366f1", borderRadius: 1, marginRight: 2 }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  return null;
+}
+
 function StepTheme({ data, set }) {
   return (
     <div>
       <SectionTitle>Choisis ton thème</SectionTitle>
       <div className="grid grid-cols-2 gap-4">
         {THEMES.map(theme => {
-          const p = theme.preview;
           const active = data.theme === theme.id;
           return (
             <button key={theme.id} type="button" onClick={() => set({ ...data, theme: theme.id })}
               className="relative rounded-xl p-3 text-left transition-all"
               style={{ background: active ? "rgba(56,189,248,0.06)" : "rgba(255,255,255,0.02)", border: `1px solid ${active ? "rgba(56,189,248,0.35)" : "rgba(255,255,255,0.06)"}`, boxShadow: active ? "0 0 20px rgba(56,189,248,0.08)" : "none" }}>
               {active && <span className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full flex items-center justify-center z-10" style={{ background: "#38bdf8" }}><Check className="w-3 h-3 text-white" /></span>}
-              {/* Mini preview */}
-              <div className="mb-3 rounded-md overflow-hidden" style={{ height: 80, background: p.bg, border: `1px solid ${p.accent}22`, display: "flex" }}>
-                {theme.id !== "minimal" && (
-                  <div style={{ width: theme.id === "modern" ? "100%" : "32%", background: p.sidebar, padding: 6, flexShrink: 0 }}>
-                    {theme.id === "modern" ? (
-                      <>
-                        <div style={{ height: 7, background: "rgba(255,255,255,0.9)", borderRadius: 2, width: "60%", marginBottom: 4 }} />
-                        <div style={{ height: 4, background: "rgba(255,255,255,0.5)", borderRadius: 2, width: "40%" }} />
-                      </>
-                    ) : (
-                      <>
-                        <div style={{ width: 18, height: 18, borderRadius: 9, background: p.accent, margin: "0 auto 5px", opacity: 0.8 }} />
-                        {[80, 60, 70].map((w, i) => <div key={i} style={{ height: 3, background: "rgba(255,255,255,0.25)", borderRadius: 2, width: `${w}%`, marginBottom: 3 }} />)}
-                      </>
-                    )}
-                  </div>
-                )}
-                <div style={{ flex: 1, padding: 6 }}>
-                  {theme.id === "minimal" ? (
-                    <>
-                      <div style={{ height: 8, background: p.text, borderRadius: 1, width: "55%", marginBottom: 3 }} />
-                      <div style={{ height: 8, background: p.text, borderRadius: 1, width: "40%", opacity: 0.3, marginBottom: 6 }} />
-                      <div style={{ height: 1.5, background: p.text, marginBottom: 1 }} />
-                      <div style={{ height: 0.5, background: p.text, marginBottom: 6, opacity: 0.4 }} />
-                    </>
-                  ) : (
-                    <>
-                      <div style={{ height: 5, background: p.accent, borderRadius: 1, width: "45%", marginBottom: 5 }} />
-                    </>
-                  )}
-                  {[90, 70, 80, 60].map((w, i) => (
-                    <div key={i} style={{ height: 3, background: p.text, borderRadius: 1, width: `${w}%`, marginBottom: 3, opacity: theme.id === "dark" ? 0.3 : 0.15 }} />
-                  ))}
-                </div>
+              <div className="mb-3 rounded-md overflow-hidden" style={{ border: `1px solid rgba(255,255,255,0.06)` }}>
+                <ThemeMiniPreview id={theme.id} />
               </div>
               <div className="font-bold text-white text-sm">{theme.label}</div>
               <div className="text-xs text-slate-500 mt-0.5">{theme.desc}</div>
