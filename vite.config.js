@@ -18,6 +18,7 @@ export default defineConfig({
             workbox: {
                 globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}'],
                 cleanupOutdatedCaches: true,
+                maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
             },
             manifest: {
                 name: 'KoriLab',
@@ -42,6 +43,7 @@ export default defineConfig({
                     'vendor-motion':  ['framer-motion'],
                     'vendor-inertia': ['@inertiajs/react'],
                     'vendor-lucide':  ['lucide-react'],
+                    'vendor-pdf':     ['@react-pdf/renderer'],
                 },
             },
         },

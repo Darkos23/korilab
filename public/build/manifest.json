@@ -1,28 +1,36 @@
 {
-  "_vendor-inertia-yb_NfDMD.js": {
-    "file": "assets/vendor-inertia-yb_NfDMD.js",
+  "_vendor-inertia-Bcif9PfL.js": {
+    "file": "assets/vendor-inertia-Bcif9PfL.js",
     "name": "vendor-inertia",
     "imports": [
-      "_vendor-motion-BhniRuxm.js"
+      "_vendor-motion-DXyuNSnw.js"
     ]
   },
-  "_vendor-lucide-PymVZp6k.js": {
-    "file": "assets/vendor-lucide-PymVZp6k.js",
+  "_vendor-lucide-BXxNyEGx.js": {
+    "file": "assets/vendor-lucide-BXxNyEGx.js",
     "name": "vendor-lucide",
     "imports": [
-      "_vendor-motion-BhniRuxm.js"
+      "_vendor-motion-DXyuNSnw.js"
     ]
   },
-  "_vendor-motion-BhniRuxm.js": {
-    "file": "assets/vendor-motion-BhniRuxm.js",
+  "_vendor-motion-DXyuNSnw.js": {
+    "file": "assets/vendor-motion-DXyuNSnw.js",
     "name": "vendor-motion"
+  },
+  "_vendor-pdf-Cta8y9RP.js": {
+    "file": "assets/vendor-pdf-Cta8y9RP.js",
+    "name": "vendor-pdf",
+    "imports": [
+      "_vendor-motion-DXyuNSnw.js",
+      "_vendor-inertia-Bcif9PfL.js"
+    ]
   },
   "_vendor-react-l0sNRNKZ.js": {
     "file": "assets/vendor-react-l0sNRNKZ.js",
     "name": "vendor-react"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BoN8kts8.css",
+    "file": "assets/app-DlDwCNnK.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -31,17 +39,18 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-Bvq4fGog.js",
+    "file": "assets/app-bregsgoX.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "imports": [
-      "_vendor-motion-BhniRuxm.js",
-      "_vendor-inertia-yb_NfDMD.js",
-      "_vendor-lucide-PymVZp6k.js"
+      "_vendor-motion-DXyuNSnw.js",
+      "_vendor-inertia-Bcif9PfL.js",
+      "_vendor-lucide-BXxNyEGx.js",
+      "_vendor-pdf-Cta8y9RP.js"
     ],
     "css": [
-      "assets/app-BoN8kts8.css"
+      "assets/app-DlDwCNnK.css"
     ]
   }
 }
