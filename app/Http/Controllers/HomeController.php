@@ -99,6 +99,11 @@ class HomeController extends Controller
         ]);
     }
 
+    public function services()
+    {
+        return Inertia::render('Services/Index');
+    }
+
     public function cgv()
     {
         $site = Site::first();
