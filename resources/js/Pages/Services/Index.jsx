@@ -12,7 +12,7 @@ const TOOLS = [
     icon: FileText,
     label: "Générateur de CV",
     description: "Crée un CV professionnel en quelques minutes. Remplis le formulaire, choisis ton thème, paye et télécharge.",
-    price: "3 000",
+    price: "2 000",
     tag: "Rang F",
     href: "/services/cv",
     active: true,

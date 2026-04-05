@@ -480,7 +480,7 @@ function StepPaiement({ data, onPaid, paid }) {
           </div>
         </div>
         <div className="font-extrabold text-white text-xl">
-          3 000 <span className="text-sm font-normal text-slate-500">FCFA</span>
+          2 000 <span className="text-sm font-normal text-slate-500">FCFA</span>
         </div>
       </div>
 
