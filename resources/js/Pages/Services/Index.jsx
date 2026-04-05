@@ -271,8 +271,8 @@ export default function ServicesIndex({ site }) {
             style={{ borderColor: "rgba(56,189,248,0.08)" }}
           >
             {[
-              { label: "Quêtes actives", value: "1" },
-              { label: "Quêtes à venir", value: "3" },
+              { label: "Services disponibles", value: "1" },
+              { label: "Bientôt disponibles", value: "3" },
               { label: "Délai moyen", value: "< 5 min" },
               { label: "Paiement", value: "Wave · OM" },
             ].map((stat, i) => (
