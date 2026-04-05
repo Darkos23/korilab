@@ -3,152 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; color: #0f172a; background: #f8fafc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, Helvetica, sans-serif; font-size:9.5pt; background:#f0f4ff; color:#0a0a1a; }
 
-  /* Header pleine largeur */
-  .header {
-    background: #0ea5e9;
-    padding: 24px 24px 18px;
-  }
-  .header-name { font-size: 26pt; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1; }
-  .header-title { font-size: 9pt; color: rgba(255,255,255,0.85); margin-top: 4px; font-weight: 500; letter-spacing: 0.06em; }
-  .chips { margin-top: 10px; }
-  .chip {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    color: #fff;
-    font-size: 7.5pt;
-    padding: 2px 8px;
-    border-radius: 20px;
-    margin-right: 5px;
-    margin-top: 3px;
-  }
+/* ── HEADER BLOC PLEINE LARGEUR ── */
+.hero {
+  background:#0057ff;
+  padding:30px 28px 0;
+  position:relative;
+}
+.hero-name  { font-size:28pt; font-weight:900; color:#fff; letter-spacing:-1px; line-height:0.95; }
+.hero-titre {
+  font-size:8.5pt; color:rgba(255,255,255,0.75);
+  text-transform:uppercase; letter-spacing:0.2em;
+  font-weight:500; margin-top:7px;
+}
+/* Bandeau blanc coupé en biais via table */
+table.hero-bar { width:100%; border-collapse:collapse; margin-top:16px; }
+.hero-bar-left  { background:#fff; padding:10px 28px; width:70%; }
+.hero-bar-right { background:#003cc7; padding:10px 14px; }
+.contact-item  { display:inline-block; font-size:7.5pt; color:#0057ff; font-weight:600; margin-right:16px; }
+.contact-label { font-size:6pt; color:#9a9ab0; display:block; text-transform:uppercase; letter-spacing:0.08em; }
 
-  /* Body : deux colonnes via table */
-  table.body { width: 100%; border-collapse: collapse; }
-  td.left { width: 62%; padding: 18px 16px 18px 20px; vertical-align: top; border-right: 1px solid #e2e8f0; }
-  td.right { padding: 18px 16px 18px 14px; vertical-align: top; }
+/* ── BODY ── */
+table.body-wrap { width:100%; border-collapse:collapse; }
+td.col-main  { width:64%; padding:22px 24px; vertical-align:top; background:#fff; border-right:1px solid #e8eaf0; }
+td.col-aside { padding:22px 18px; vertical-align:top; background:#f0f4ff; }
 
-  .section-title {
-    font-size: 8pt; font-weight: 800; color: #0ea5e9;
-    text-transform: uppercase; letter-spacing: 0.12em;
-    border-left: 3px solid #0ea5e9; padding-left: 7px;
-    margin-bottom: 10px; margin-top: 16px;
-  }
-  .section-title:first-child { margin-top: 0; }
+/* ── SECTION TITLES ── */
+.sec { font-size:7pt; font-weight:800; color:#0057ff; text-transform:uppercase; letter-spacing:0.22em; margin-bottom:10px; margin-top:20px; }
+.sec:first-child { margin-top:0; }
+.sec-line { height:2px; background:#0057ff; margin-bottom:10px; width:32px; }
 
-  .exp-role { font-size: 9.5pt; font-weight: 800; color: #0f172a; }
-  .exp-company { font-size: 8.5pt; font-weight: 600; color: #0ea5e9; margin-top: 1px; }
-  .exp-desc { font-size: 8pt; color: #64748b; margin-top: 3px; line-height: 1.5; }
-  .exp-block { margin-bottom: 10px; }
+/* ── EXPÉRIENCES ── */
+table.exp { width:100%; border-collapse:collapse; margin-bottom:12px; }
+.exp-role    { font-size:10pt; font-weight:800; color:#0a0a1a; }
+.exp-badge   {
+  display:inline-block; background:#0057ff; color:#fff;
+  font-size:6.5pt; font-weight:700; padding:2px 7px; border-radius:3px;
+  margin-left:6px; vertical-align:middle; letter-spacing:0.04em;
+}
+.exp-company { font-size:8.5pt; color:#0057ff; font-weight:700; margin-top:3px; }
+.exp-period  { font-size:7.5pt; color:#9a9ab0; text-align:right; white-space:nowrap; vertical-align:top; padding-top:2px; }
+.exp-desc    { font-size:8pt; color:#4a4a6a; margin-top:4px; line-height:1.6; }
 
-  .form-role { font-size: 9pt; font-weight: 700; color: #0f172a; }
-  .form-school { font-size: 8pt; color: #0ea5e9; margin-top: 1px; }
-  .form-block { margin-bottom: 7px; }
+.form-role   { font-size:9.5pt; font-weight:700; color:#0a0a1a; }
+.form-school { font-size:8pt; color:#0057ff; font-weight:600; margin-top:2px; }
+.form-block  { margin-bottom:9px; }
 
-  .resume-text { font-size: 8.5pt; color: #475569; line-height: 1.6; }
+.resume-text { font-size:9pt; color:#4a4a6a; line-height:1.65; }
 
-  /* Skills pills */
-  .skill-pill {
-    display: inline-block;
-    background: rgba(14,165,233,0.1);
-    color: #0ea5e9;
-    font-size: 7.5pt; font-weight: 600;
-    padding: 3px 7px; border-radius: 5px;
-    margin: 0 3px 4px 0;
-  }
+/* ── ASIDE ── */
+.skill-pill {
+  display:inline-block; background:#0057ff; color:#fff;
+  font-size:7pt; font-weight:700; padding:3px 8px;
+  border-radius:20px; margin:0 3px 5px 0;
+}
 
-  /* Language bar */
-  .lang-block { margin-bottom: 7px; }
-  .lang-row { display: block; }
-  .lang-name { font-size: 8.5pt; font-weight: 600; color: #0f172a; }
-  .lang-level { font-size: 7.5pt; color: #94a3b8; float: right; }
-  .lang-bar-bg { background: #e2e8f0; height: 3px; border-radius: 2px; margin-top: 3px; }
-  .lang-bar { height: 3px; background: #0ea5e9; border-radius: 2px; }
+.lang-name  { font-size:8.5pt; font-weight:700; color:#0a0a1a; }
+.lang-level { font-size:7pt; color:#9a9ab0; margin-bottom:2px; }
+.lang-bar   { background:#dde3f0; height:4px; border-radius:2px; margin-bottom:8px; margin-top:3px; }
+.lang-fill  { height:4px; border-radius:2px; background:#0057ff; }
+
+.aside-num { font-size:20pt; font-weight:900; color:#0057ff; line-height:1; }
+.aside-num-label { font-size:7pt; color:#9a9ab0; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px; }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-name">{{ $data['prenom'] }} {{ $data['nom'] }}</div>
-  @if($data['titre'])<div class="header-title">{{ $data['titre'] }}</div>@endif
-  <div class="chips">
-    @if($data['email'])<span class="chip">{{ $data['email'] }}</span>@endif
-    @if($data['telephone'])<span class="chip">{{ $data['telephone'] }}</span>@endif
-    @if($data['localisation'])<span class="chip">{{ $data['localisation'] }}</span>@endif
-    @if($data['portfolio'])<span class="chip">{{ $data['portfolio'] }}</span>@endif
-  </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-name">{{ $data['prenom'] }}<br>{{ $data['nom'] }}</div>
+  @if($data['titre'])<div class="hero-titre">{{ $data['titre'] }}</div>@endif
+  <table class="hero-bar"><tr>
+    <td class="hero-bar-left">
+      @if($data['email'])<span class="contact-item"><span class="contact-label">Email</span>{{ $data['email'] }}</span>@endif
+      @if($data['telephone'])<span class="contact-item"><span class="contact-label">Tél</span>{{ $data['telephone'] }}</span>@endif
+      @if($data['localisation'])<span class="contact-item"><span class="contact-label">Lieu</span>{{ $data['localisation'] }}</span>@endif
+    </td>
+    <td class="hero-bar-right">
+      @if($data['portfolio'])<span style="color:rgba(255,255,255,0.7);font-size:7pt;">{{ $data['portfolio'] }}</span>@endif
+    </td>
+  </tr></table>
 </div>
 
-<table class="body">
-<tr>
-  <td class="left">
-    @if($data['resume'])
-    <div class="section-title">À propos</div>
-    <div class="resume-text">{{ $data['resume'] }}</div>
-    @endif
+<!-- BODY -->
+<table class="body-wrap"><tr>
 
-    @if(count(array_filter($data['experiences'], fn($e) => !empty($e['poste']) || !empty($e['entreprise']))) > 0)
-    <div class="section-title">Expériences</div>
-    @foreach($data['experiences'] as $exp)
-      @if(!empty($exp['poste']) || !empty($exp['entreprise']))
-      <div class="exp-block">
-        <div class="exp-role">{{ $exp['poste'] ?? '' }}</div>
-        <div class="exp-company">{{ $exp['entreprise'] ?? '' }}{{ !empty($exp['periode']) ? ' · '.$exp['periode'] : '' }}</div>
+<td class="col-main">
+  @if($data['resume'])
+  <div class="sec">À propos</div>
+  <div class="sec-line"></div>
+  <div class="resume-text">{{ $data['resume'] }}</div>
+  @endif
+
+  @if(count(array_filter($data['experiences'],fn($e)=>!empty($e['poste'])||!empty($e['entreprise'])))>0)
+  <div class="sec">Expériences</div>
+  <div class="sec-line"></div>
+  @foreach($data['experiences'] as $exp)
+    @if(!empty($exp['poste'])||!empty($exp['entreprise']))
+    <table class="exp"><tr>
+      <td>
+        <div class="exp-role">{{ $exp['poste']??'' }}
+          @if(!empty($exp['periode']))<span class="exp-badge">{{ $exp['periode'] }}</span>@endif
+        </div>
+        <div class="exp-company">{{ $exp['entreprise']??'' }}</div>
         @if(!empty($exp['description']))<div class="exp-desc">{{ $exp['description'] }}</div>@endif
-      </div>
-      @endif
-    @endforeach
+      </td>
+    </tr></table>
     @endif
+  @endforeach
+  @endif
 
-    @if(count(array_filter($data['formations'], fn($f) => !empty($f['diplome']) || !empty($f['etablissement']))) > 0)
-    <div class="section-title">Formation</div>
-    @foreach($data['formations'] as $form)
-      @if(!empty($form['diplome']) || !empty($form['etablissement']))
-      <div class="form-block">
-        <div class="form-role">{{ $form['diplome'] ?? '' }}</div>
-        <div class="form-school">{{ $form['etablissement'] ?? '' }}{{ !empty($form['annee']) ? ' · '.$form['annee'] : '' }}</div>
-      </div>
-      @endif
-    @endforeach
-    @endif
-  </td>
-
-  <td class="right">
-    @if(count($data['competences']) > 0)
-    <div class="section-title">Compétences</div>
-    <div style="margin-bottom: 14px;">
-      @foreach($data['competences'] as $skill)
-      <span class="skill-pill">{{ $skill }}</span>
-      @endforeach
+  @if(count(array_filter($data['formations'],fn($f)=>!empty($f['diplome'])||!empty($f['etablissement'])))>0)
+  <div class="sec">Formation</div>
+  <div class="sec-line"></div>
+  @foreach($data['formations'] as $f)
+    @if(!empty($f['diplome'])||!empty($f['etablissement']))
+    <div class="form-block">
+      <div class="form-role">{{ $f['diplome']??'' }}</div>
+      <div class="form-school">{{ $f['etablissement']??'' }}@if(!empty($f['annee'])) — {{ $f['annee'] }}@endif</div>
     </div>
     @endif
+  @endforeach
+  @endif
+</td>
 
-    @if(count(array_filter($data['langues'], fn($l) => !empty($l['langue']))) > 0)
-    <div class="section-title">Langues</div>
-    @foreach($data['langues'] as $lang)
-      @if(!empty($lang['langue']))
-      @php
-        $width = match($lang['niveau'] ?? '') {
-          'Bilingue/Natif' => '100%',
-          'Courant'        => '80%',
-          'Intermédiaire'  => '55%',
-          default          => '30%',
-        };
-      @endphp
-      <div class="lang-block">
-        <div style="font-size:8.5pt; font-weight:600; color:#0f172a;">
-          {{ $lang['langue'] }}
-          <span style="font-size:7.5pt; color:#94a3b8; font-weight:400;"> · {{ $lang['niveau'] ?? '' }}</span>
-        </div>
-        <div class="lang-bar-bg"><div class="lang-bar" style="width:{{ $width }};"></div></div>
-      </div>
-      @endif
+<td class="col-aside">
+  @if(count($data['competences'])>0)
+  <div class="sec">Compétences</div>
+  <div class="sec-line"></div>
+  <div style="margin-bottom:16px;">
+    @foreach($data['competences'] as $skill)
+    <span class="skill-pill">{{ $skill }}</span>
     @endforeach
+  </div>
+  @endif
+
+  @if(count(array_filter($data['langues'],fn($l)=>!empty($l['langue'])))>0)
+  <div class="sec">Langues</div>
+  <div class="sec-line"></div>
+  @foreach($data['langues'] as $l)
+    @if(!empty($l['langue']))
+    @php $w = match($l['niveau']??'') { 'Bilingue/Natif'=>'100%','Courant'=>'80%','Intermédiaire'=>'55%',default=>'30%' }; @endphp
+    <div class="lang-name">{{ $l['langue'] }}</div>
+    <div class="lang-level">{{ $l['niveau']??'' }}</div>
+    <div class="lang-bar"><div class="lang-fill" style="width:{{ $w }};"></div></div>
     @endif
-  </td>
-</tr>
-</table>
+  @endforeach
+  @endif
+</td>
+
+</tr></table>
 </body>
 </html>

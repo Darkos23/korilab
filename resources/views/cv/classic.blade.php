@@ -3,138 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; color: #1e293b; background: #fff; }
-  table.layout { width: 100%; border-collapse: collapse; min-height: 100%; }
-  td.sidebar {
-    width: 32%;
-    background-color: #1e3a5f;
-    padding: 24px 14px;
-    vertical-align: top;
-  }
-  td.main { padding: 24px 18px; vertical-align: top; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, Helvetica, sans-serif; font-size:9.5pt; color:#1a1a2e; background:#fff; }
 
-  /* Sidebar */
-  .avatar {
-    width: 60px; height: 60px; border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    border: 2px solid rgba(255,255,255,0.25);
-    display: table; margin: 0 auto 14px;
-    text-align: center; line-height: 60px;
-    font-size: 22pt; font-weight: 700; color: rgba(255,255,255,0.6);
-  }
-  .sidebar-section-title {
-    font-size: 7pt; font-weight: 700; color: rgba(255,255,255,0.45);
-    text-transform: uppercase; letter-spacing: 0.15em;
-    border-bottom: 1px solid rgba(255,255,255,0.12);
-    padding-bottom: 3px; margin-bottom: 8px; margin-top: 14px;
-  }
-  .sidebar-item { color: rgba(255,255,255,0.7); font-size: 7.5pt; margin-bottom: 3px; word-break: break-all; }
-  .skill-item { color: rgba(255,255,255,0.8); font-size: 8pt; margin-bottom: 3px; padding-left: 10px; position: relative; }
-  .skill-bullet { color: rgba(255,255,255,0.35); margin-right: 4px; }
-  .lang-item { font-size: 8pt; margin-bottom: 4px; }
-  .lang-name { color: rgba(255,255,255,0.8); }
-  .lang-level { color: rgba(255,255,255,0.4); font-size: 7pt; }
+/* ── LAYOUT ── */
+table.root { width:100%; border-collapse:collapse; height:100%; }
+td.sidebar { width:30%; background:#1a1a2e; vertical-align:top; padding:0; }
+td.main    { vertical-align:top; padding:0; }
 
-  /* Main */
-  .header-name {
-    font-size: 22pt; font-weight: 900; color: #1e293b;
-    letter-spacing: -0.5px; line-height: 1;
-  }
-  .header-title {
-    font-size: 9pt; color: #1e3a5f; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px;
-  }
-  .header-divider {
-    border: none; border-top: 3px solid #1e3a5f;
-    margin: 10px 0 14px;
-  }
-  .section-title {
-    font-size: 8pt; font-weight: 700; color: #1e3a5f;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    border-bottom: 1.5px solid #1e3a5f;
-    padding-bottom: 3px; margin-bottom: 10px; margin-top: 16px;
-  }
-  .exp-role { font-size: 9.5pt; font-weight: 700; color: #1e293b; }
-  .exp-company { font-size: 8.5pt; font-weight: 600; color: #1e3a5f; margin-top: 1px; }
-  .exp-desc { font-size: 8pt; color: #475569; margin-top: 3px; line-height: 1.5; }
-  .exp-block { margin-bottom: 10px; }
-  .form-role { font-size: 9pt; font-weight: 700; color: #1e293b; }
-  .form-school { font-size: 8pt; color: #1e3a5f; margin-top: 1px; }
-  .form-block { margin-bottom: 8px; }
-  .resume-text { font-size: 8.5pt; color: #475569; line-height: 1.6; }
+/* ── SIDEBAR ── */
+.sb-top { background:#c9a84c; padding:28px 16px 20px; }
+.sb-initial {
+  width:52px; height:52px; border-radius:50%;
+  background:#1a1a2e; border:2.5px solid rgba(255,255,255,0.4);
+  text-align:center; line-height:52px;
+  font-size:18pt; font-weight:900; color:#c9a84c;
+  margin:0 auto 12px;
+  display:table;
+}
+.sb-name  { font-size:11.5pt; font-weight:900; color:#1a1a2e; text-align:center; letter-spacing:-0.3px; }
+.sb-titre { font-size:7pt; color:rgba(26,26,46,0.65); text-align:center; text-transform:uppercase; letter-spacing:0.12em; margin-top:4px; }
+
+.sb-body { padding:18px 14px; }
+.sb-section {
+  font-size:6.5pt; font-weight:700; color:#c9a84c;
+  text-transform:uppercase; letter-spacing:0.2em;
+  padding-bottom:4px; margin-bottom:8px; margin-top:18px;
+  border-bottom:1px solid rgba(201,168,76,0.3);
+}
+.sb-section:first-child { margin-top:0; }
+
+.sb-contact { color:rgba(255,255,255,0.6); font-size:7.5pt; margin-bottom:4px; word-break:break-all; }
+.sb-contact-label { color:rgba(201,168,76,0.8); font-size:6pt; text-transform:uppercase; letter-spacing:0.1em; }
+
+.skill-row { display:table; width:100%; margin-bottom:5px; }
+.skill-name { display:table-cell; color:rgba(255,255,255,0.8); font-size:7.5pt; }
+.skill-bar-bg { display:table-cell; width:50%; vertical-align:middle; padding-left:6px; }
+.skill-bar-wrap { background:rgba(255,255,255,0.1); height:3px; border-radius:2px; }
+.skill-bar-fill { height:3px; border-radius:2px; background:#c9a84c; }
+
+.lang-name  { color:rgba(255,255,255,0.85); font-size:8pt; font-weight:600; }
+.lang-level { color:rgba(201,168,76,0.7); font-size:7pt; }
+.lang-row   { margin-bottom:5px; }
+
+/* ── MAIN ── */
+.main-wrap { padding:28px 24px 24px; }
+
+.main-header { border-bottom:3px solid #c9a84c; padding-bottom:14px; margin-bottom:20px; }
+.main-name   { font-size:24pt; font-weight:900; color:#1a1a2e; letter-spacing:-0.8px; line-height:1; }
+.main-titre  { font-size:9pt; color:#c9a84c; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; margin-top:5px; }
+
+.section-title {
+  font-size:7pt; font-weight:700; color:#1a1a2e;
+  text-transform:uppercase; letter-spacing:0.22em;
+  border-bottom:2px solid #1a1a2e;
+  padding-bottom:4px; margin-bottom:12px; margin-top:22px;
+}
+.section-title:first-child { margin-top:0; }
+
+.resume-text { font-size:9pt; color:#4a4a6a; line-height:1.65; }
+
+table.exp { width:100%; border-collapse:collapse; margin-bottom:10px; }
+.exp-role    { font-size:10pt; font-weight:800; color:#1a1a2e; }
+.exp-company { font-size:8.5pt; color:#c9a84c; font-weight:700; margin-top:2px; }
+.exp-period  { font-size:7.5pt; color:#9a9ab0; text-align:right; white-space:nowrap; vertical-align:top; }
+.exp-desc    { font-size:8pt; color:#4a4a6a; margin-top:4px; line-height:1.55; }
+
+.form-role   { font-size:9.5pt; font-weight:700; color:#1a1a2e; }
+.form-school { font-size:8pt; color:#c9a84c; font-weight:600; margin-top:2px; }
+.form-block  { margin-bottom:9px; }
+
+/* Dot accent decoratif */
+.dot { display:inline-block; width:5px; height:5px; border-radius:50%; background:#c9a84c; vertical-align:middle; margin-right:6px; }
 </style>
 </head>
 <body>
-<table class="layout">
-  <tr>
-    <td class="sidebar">
-      <div class="avatar">{{ strtoupper(substr($data['prenom'], 0, 1)) }}</div>
+<table class="root">
+<tr>
+<td class="sidebar">
+  <div class="sb-top">
+    <div class="sb-initial">{{ strtoupper(substr($data['prenom'],0,1)) }}</div>
+    <div class="sb-name">{{ $data['prenom'] }} {{ $data['nom'] }}</div>
+    @if($data['titre'])<div class="sb-titre">{{ $data['titre'] }}</div>@endif
+  </div>
+  <div class="sb-body">
+    @if($data['email']||$data['telephone']||$data['localisation']||$data['portfolio'])
+    <div class="sb-section">Contact</div>
+    @if($data['email'])<div class="sb-contact-label">Email</div><div class="sb-contact">{{ $data['email'] }}</div>@endif
+    @if($data['telephone'])<div class="sb-contact-label" style="margin-top:6px;">Téléphone</div><div class="sb-contact">{{ $data['telephone'] }}</div>@endif
+    @if($data['localisation'])<div class="sb-contact-label" style="margin-top:6px;">Localisation</div><div class="sb-contact">{{ $data['localisation'] }}</div>@endif
+    @if($data['portfolio'])<div class="sb-contact-label" style="margin-top:6px;">Portfolio</div><div class="sb-contact">{{ $data['portfolio'] }}</div>@endif
+    @endif
 
-      @if($data['email'] || $data['telephone'] || $data['localisation'] || $data['portfolio'])
-      <div class="sidebar-section-title">Contact</div>
-      @if($data['email'])<div class="sidebar-item">{{ $data['email'] }}</div>@endif
-      @if($data['telephone'])<div class="sidebar-item">{{ $data['telephone'] }}</div>@endif
-      @if($data['localisation'])<div class="sidebar-item">{{ $data['localisation'] }}</div>@endif
-      @if($data['portfolio'])<div class="sidebar-item">{{ $data['portfolio'] }}</div>@endif
+    @if(count($data['competences'])>0)
+    <div class="sb-section">Compétences</div>
+    @foreach($data['competences'] as $skill)
+    <div class="skill-row">
+      <div class="skill-name">{{ $skill }}</div>
+    </div>
+    @endforeach
+    @endif
+
+    @if(count(array_filter($data['langues'],fn($l)=>!empty($l['langue'])))>0)
+    <div class="sb-section">Langues</div>
+    @foreach($data['langues'] as $l)
+      @if(!empty($l['langue']))
+      <div class="lang-row">
+        <div class="lang-name">{{ $l['langue'] }}</div>
+        <div class="lang-level">{{ $l['niveau']??'' }}</div>
+      </div>
       @endif
+    @endforeach
+    @endif
+  </div>
+</td>
 
-      @if(count($data['competences']) > 0)
-      <div class="sidebar-section-title">Compétences</div>
-      @foreach($data['competences'] as $skill)
-      <div class="skill-item"><span class="skill-bullet">›</span> {{ $skill }}</div>
-      @endforeach
-      @endif
+<td class="main">
+<div class="main-wrap">
+  <div class="main-header">
+    <div class="main-name">{{ $data['prenom'] }}<br>{{ $data['nom'] }}</div>
+    @if($data['titre'])<div class="main-titre">{{ $data['titre'] }}</div>@endif
+  </div>
 
-      @if(count(array_filter($data['langues'], fn($l) => !empty($l['langue']))) > 0)
-      <div class="sidebar-section-title">Langues</div>
-      @foreach($data['langues'] as $lang)
-        @if(!empty($lang['langue']))
-        <div class="lang-item">
-          <span class="lang-name">{{ $lang['langue'] }}</span>
-          <span class="lang-level"> · {{ $lang['niveau'] ?? '' }}</span>
-        </div>
-        @endif
-      @endforeach
-      @endif
-    </td>
+  @if($data['resume'])
+  <div class="section-title">Profil</div>
+  <div class="resume-text">{{ $data['resume'] }}</div>
+  @endif
 
-    <td class="main">
-      <div class="header-name">{{ $data['prenom'] }} {{ $data['nom'] }}</div>
-      @if($data['titre'])<div class="header-title">{{ $data['titre'] }}</div>@endif
-      <hr class="header-divider">
+  @if(count(array_filter($data['experiences'],fn($e)=>!empty($e['poste'])||!empty($e['entreprise'])))>0)
+  <div class="section-title">Expériences</div>
+  @foreach($data['experiences'] as $exp)
+    @if(!empty($exp['poste'])||!empty($exp['entreprise']))
+    <table class="exp"><tr>
+      <td>
+        <div class="exp-role"><span class="dot"></span>{{ $exp['poste']??'' }}</div>
+        <div class="exp-company">{{ $exp['entreprise']??'' }}</div>
+        @if(!empty($exp['description']))<div class="exp-desc">{{ $exp['description'] }}</div>@endif
+      </td>
+      @if(!empty($exp['periode']))<td class="exp-period">{{ $exp['periode'] }}</td>@endif
+    </tr></table>
+    @endif
+  @endforeach
+  @endif
 
-      @if($data['resume'])
-      <div class="section-title">Profil</div>
-      <div class="resume-text">{{ $data['resume'] }}</div>
-      @endif
-
-      @if(count(array_filter($data['experiences'], fn($e) => !empty($e['poste']) || !empty($e['entreprise']))) > 0)
-      <div class="section-title">Expériences</div>
-      @foreach($data['experiences'] as $exp)
-        @if(!empty($exp['poste']) || !empty($exp['entreprise']))
-        <div class="exp-block">
-          <div class="exp-role">{{ $exp['poste'] ?? '' }}</div>
-          <div class="exp-company">{{ $exp['entreprise'] ?? '' }}{{ !empty($exp['periode']) ? ' · '.$exp['periode'] : '' }}</div>
-          @if(!empty($exp['description']))<div class="exp-desc">{{ $exp['description'] }}</div>@endif
-        </div>
-        @endif
-      @endforeach
-      @endif
-
-      @if(count(array_filter($data['formations'], fn($f) => !empty($f['diplome']) || !empty($f['etablissement']))) > 0)
-      <div class="section-title">Formation</div>
-      @foreach($data['formations'] as $form)
-        @if(!empty($form['diplome']) || !empty($form['etablissement']))
-        <div class="form-block">
-          <div class="form-role">{{ $form['diplome'] ?? '' }}</div>
-          <div class="form-school">{{ $form['etablissement'] ?? '' }}{{ !empty($form['annee']) ? ' · '.$form['annee'] : '' }}</div>
-        </div>
-        @endif
-      @endforeach
-      @endif
-    </td>
-  </tr>
+  @if(count(array_filter($data['formations'],fn($f)=>!empty($f['diplome'])||!empty($f['etablissement'])))>0)
+  <div class="section-title">Formation</div>
+  @foreach($data['formations'] as $f)
+    @if(!empty($f['diplome'])||!empty($f['etablissement']))
+    <div class="form-block">
+      <div class="form-role">{{ $f['diplome']??'' }}</div>
+      <div class="form-school">{{ $f['etablissement']??'' }}@if(!empty($f['annee'])) · {{ $f['annee'] }}@endif</div>
+    </div>
+    @endif
+  @endforeach
+  @endif
+</div>
+</td>
+</tr>
 </table>
 </body>
 </html>
