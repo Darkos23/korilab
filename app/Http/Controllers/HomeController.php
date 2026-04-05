@@ -104,6 +104,11 @@ class HomeController extends Controller
         return Inertia::render('Services/Index');
     }
 
+    public function cvGenerator()
+    {
+        return Inertia::render('Services/CvGenerator');
+    }
+
     public function cgv()
     {
         $site = Site::first();
