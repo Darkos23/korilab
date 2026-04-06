@@ -971,47 +971,9 @@ export default function CvGenerator() {
                 </button>
               </div>
               <div className={showPreview ? "block" : "hidden lg:block"}>
-                {/* Theme colour preview */}
-                {(() => {
-                  const t = THEMES.find(th => th.id === data.theme);
-                  const p = t?.preview;
-                  return (
-                    <div className="rounded-xl overflow-hidden shadow-2xl" style={{ border: `1px solid ${p?.accent}22`, aspectRatio: "1/1.414", background: p?.bg, display: "flex" }}>
-                      {data.theme !== "minimal" && (
-                        <div style={{ width: data.theme === "modern" ? "100%" : "32%", background: p?.sidebar, padding: 12, flexShrink: 0, display: "flex", flexDirection: "column" }}>
-                          {data.theme === "modern" ? (
-                            <>
-                              <div style={{ height: 14, background: "rgba(255,255,255,0.9)", borderRadius: 3, width: "50%", marginBottom: 7 }} />
-                              <div style={{ height: 8, background: "rgba(255,255,255,0.5)", borderRadius: 3, width: "35%", marginBottom: 20 }} />
-                              <div style={{ display: "flex", gap: 6 }}>
-                                {[60, 45, 55].map((w, i) => <div key={i} style={{ height: 5, background: "rgba(255,255,255,0.3)", borderRadius: 2, width: `${w}px` }} />)}
-                              </div>
-                            </>
-                          ) : (
-                            <>
-                              <div style={{ width: 30, height: 30, borderRadius: 15, background: p?.accent, margin: "0 auto 10px", opacity: 0.8 }} />
-                              {[70, 55, 65, 50].map((w, i) => <div key={i} style={{ height: 4, background: "rgba(255,255,255,0.2)", borderRadius: 2, width: `${w}%`, marginBottom: 5 }} />)}
-                            </>
-                          )}
-                        </div>
-                      )}
-                      <div style={{ flex: 1, padding: 14, display: "flex", flexDirection: "column", gap: 6 }}>
-                        {data.theme === "minimal" && (
-                          <>
-                            <div style={{ height: 14, background: "#111", borderRadius: 2, width: "60%" }} />
-                            <div style={{ height: 14, background: "#111", borderRadius: 2, width: "45%", opacity: 0.3, marginBottom: 6 }} />
-                            <div style={{ height: 2, background: "#111", marginBottom: 2 }} />
-                            <div style={{ height: 1, background: "#111", marginBottom: 10, opacity: 0.4 }} />
-                          </>
-                        )}
-                        <div style={{ height: 5, background: p?.accent, borderRadius: 1, width: "35%", marginBottom: 4 }} />
-                        {[90, 75, 85, 70, 80, 65, 75, 60, 85, 70].map((w, i) => (
-                          <div key={i} style={{ height: 4, background: p?.text, borderRadius: 1, width: `${w}%`, opacity: data.theme === "dark" ? 0.25 : 0.12 }} />
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })()}
+                <div className="rounded-xl overflow-hidden shadow-2xl" style={{ border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <ThemeMiniPreview id={data.theme} />
+                </div>
                 <div className="mt-3 text-center">
                   <div className="text-xs font-bold text-white">{THEMES.find(t => t.id === data.theme)?.label}</div>
                   <p className="text-[10px] text-slate-600 mt-1">Le PDF sera généré côté navigateur, aucune donnée envoyée au serveur.</p>
