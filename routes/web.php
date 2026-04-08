@@ -6,7 +6,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CvController;
 use App\Http\Controllers\DemoController;
 
 // Public
@@ -18,9 +17,6 @@ Route::get('/mentions-legales', [HomeController::class, 'mentions'])->name('ment
 Route::get('/confidentialite', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/cgv', [HomeController::class, 'cgv'])->name('cgv');
 Route::get('/prestige', [HomeController::class, 'prestige'])->name('prestige');
-Route::get('/services', [HomeController::class, 'services'])->name('services');
-Route::get('/services/cv', [HomeController::class, 'cvGenerator'])->name('services.cv');
-Route::post('/services/cv/generate', [CvController::class, 'generate'])->name('services.cv.generate');
 
 // Demo Starter Template
 Route::prefix('demo')->group(function () {

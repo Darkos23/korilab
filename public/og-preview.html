@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 630px;
+    background: #060916;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Glow blobs */
+  .blob1 {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%);
+    top: -100px; left: -80px;
+    border-radius: 50%;
+  }
+  .blob2 {
+    position: absolute;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+    bottom: -80px; right: 100px;
+    border-radius: 50%;
+  }
+
+  /* Grid lines */
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 0 90px;
+  }
+
+  .label {
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    color: rgba(56,189,248,0.6);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .logo-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .logo-text {
+    font-size: 52px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -1px;
+  }
+
+  .tagline {
+    font-size: 22px;
+    color: rgba(148,163,184,0.85);
+    max-width: 620px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+  }
+
+  .tags {
+    display: flex;
+    gap: 10px;
+  }
+
+  .tag {
+    padding: 6px 16px;
+    background: rgba(56,189,248,0.07);
+    border: 1px solid rgba(56,189,248,0.15);
+    color: rgba(56,189,248,0.8);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .url {
+    position: absolute;
+    bottom: 36px;
+    right: 90px;
+    font-size: 14px;
+    color: rgba(56,189,248,0.4);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+  }
+
+  /* Cauri SVG on the right */
+  .cauri {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.08;
+    width: 280px;
+    height: 280px;
+  }
+</style>
+</head>
+<body>
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="grid"></div>
+
+  <!-- Big background cauri -->
+  <svg class="cauri" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="256" cy="256" rx="170" ry="240" fill="none" stroke="#38bdf8" stroke-width="8"/>
+    <path d="M256,56 L220,110 L292,164 L220,218 L292,272 L220,326 L292,380 L256,456"
+      stroke="#38bdf8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </svg>
+
+  <div class="content">
+    <div class="label">[ studio digital ]</div>
+    <div class="logo-row">
+      <svg class="logo-icon" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="512" height="512" rx="80" fill="#0d1829"/>
+        <ellipse cx="256" cy="256" rx="120" ry="168" fill="none" stroke="#38bdf8" stroke-width="14" stroke-opacity="0.9"/>
+        <path d="M256,88 L224,134 L288,180 L224,226 L288,272 L224,318 L288,364 L256,424"
+          stroke="#38bdf8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+      </svg>
+      <span class="logo-text">KoriLab</span>
+    </div>
+    <p class="tagline">Applications web, mobile & desktop<br>ultra-performantes pour votre business.</p>
+    <div class="tags">
+      <span class="tag">React</span>
+      <span class="tag">Laravel</span>
+      <span class="tag">Next.js</span>
+      <span class="tag">Flutter</span>
+    </div>
+  </div>
+
+  <div class="url">korilab.dev</div>
+</body>
+</html>

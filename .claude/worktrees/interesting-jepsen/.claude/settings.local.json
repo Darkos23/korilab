@@ -12,7 +12,8 @@
       "Bash(for f:*)",
       "Bash(do sed:*)",
       "Bash(sed -i 's/<WhatsAppFloat \\\\/>//g' \"$f\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(del \"D:\\\\www\\\\KoriLab\\\\.git\\\\index.lock\")"
     ]
   }
 }

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV — Ibrahima Sarr</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0f1c2e;
+      --navy2:  #1a2e45;
+      --blue:   #2563eb;
+      --accent: #38bdf8;
+      --ink:    #0f172a;
+      --ink2:   #475569;
+      --ink3:   #94a3b8;
+      --line:   #e2e8f0;
+      --bg:     #f8fafc;
+    }
+
+    html { font-size: 14px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: white;
+      display: grid;
+      grid-template-columns: 68mm 1fr;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--navy);
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--navy2);
+      border: 2.5px solid rgba(56,189,248,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -1px;
+      margin: 0 auto 4px;
+    }
+
+    .s-section { display: flex; flex-direction: column; gap: 10px; }
+
+    .s-title {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(56,189,248,0.2);
+    }
+
+    /* Contact */
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: rgba(255,255,255,0.75);
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+    .contact-item .icon {
+      font-size: 12px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Formations */
+    .formation { margin-bottom: 6px; }
+    .formation-year {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1px;
+    }
+    .formation-school {
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2px;
+    }
+    .formation-degree {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.3;
+    }
+
+    /* Skills */
+    .skill-tag {
+      display: inline-block;
+      background: rgba(37,99,235,0.25);
+      border: 1px solid rgba(37,99,235,0.4);
+      color: rgba(255,255,255,0.85);
+      font-size: 10.5px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      margin: 2px 2px 2px 0;
+    }
+
+    /* Langues */
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(255,255,255,0.75);
+      font-size: 11px;
+    }
+    .lang-level {
+      font-size: 10px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ── MAIN ── */
+    .main {
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* Header */
+    .header-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .header-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+    }
+    .header-bar {
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-top: 10px;
+    }
+
+    /* Sections */
+    .section { display: flex; flex-direction: column; gap: 12px; }
+
+    .section-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--blue);
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid var(--line);
+    }
+
+    .summary {
+      font-size: 12.5px;
+      color: var(--ink2);
+      line-height: 1.7;
+    }
+
+    /* Expérience */
+    .exp-item { display: flex; flex-direction: column; gap: 6px; }
+    .exp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .exp-role {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .exp-period {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue);
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.15);
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .exp-company {
+      font-size: 11px;
+      color: var(--ink3);
+      font-weight: 500;
+    }
+    .exp-list {
+      padding-left: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .exp-list li {
+      font-size: 12px;
+      color: var(--ink2);
+      line-height: 1.5;
+    }
+
+    /* Projets */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .project-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: var(--bg);
+    }
+    .project-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+    .project-type {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 5px;
+    }
+    .project-desc {
+      font-size: 11px;
+      color: var(--ink2);
+      line-height: 1.5;
+    }
+
+    /* Freelance */
+    .freelance-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .freelance-year {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .freelance-name {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .freelance-desc {
+      font-size: 11.5px;
+      color: var(--ink2);
+    }
+    .freelance-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 3px;
+    }
+    .freelance-tag {
+      font-size: 10px;
+      color: var(--ink2);
+      background: var(--line);
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    /* Print */
+    @media print {
+      body { background: white; }
+      .page { box-shadow: none; margin: 0; }
+      @page { size: A4; margin: 0; }
+    }
+
+    @media screen {
+      body { padding: 20px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div>
+      <div class="avatar">IS</div>
+    </div>
+
+    <!-- Contact -->
+    <div class="s-section">
+      <div class="s-title">Contact</div>
+      <div class="contact-item">
+        <span class="icon">📞</span>
+        <span>+221 77-534-19-54</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">✉</span>
+        <span>sarriboo534@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <span>MTOA, Rufisque — Dakar, Sénégal</span>
+      </div>
+    </div>
+
+    <!-- Formations -->
+    <div class="s-section">
+      <div class="s-title">Formations</div>
+
+      <div class="formation">
+        <div class="formation-year">2025</div>
+        <div class="formation-school">4ITSEC AFRICA · Dakar</div>
+        <div class="formation-degree">Certification Cyber-Sécurité</div>
+      </div>
+
+      <div class="formation">
+        <div class="formation-year">2021</div>
+        <div class="formation-school">Sup' Info · Dakar</div>
+        <div class="formation-degree">Licence en Programmation &amp; Développement</div>
+      </div>
+
+      <div class="formation">
+        <div class="formation-year">2019</div>
+        <div class="formation-school">Lycée Étoile du Saloum · Sokone</div>
+        <div class="formation-degree">Baccalauréat</div>
+      </div>
+    </div>
+
+    <!-- Compétences -->
+    <div class="s-section">
+      <div class="s-title">Compétences</div>
+      <div>
+        <span class="skill-tag">PHP / Laravel</span>
+        <span class="skill-tag">C# / .NET</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">WordPress</span>
+        <span class="skill-tag">OJS</span>
+        <span class="skill-tag">Wix</span>
+        <span class="skill-tag">Infographie</span>
+        <span class="skill-tag">Maîtrise IA</span>
+        <span class="skill-tag">Voix off</span>
+        <span class="skill-tag">Maintenance IT</span>
+      </div>
+    </div>
+
+    <!-- Langues -->
+    <div class="s-section">
+      <div class="s-title">Langues</div>
+      <div class="lang-item">
+        <span>Français</span>
+        <span class="lang-level">Excellent</span>
+      </div>
+      <div class="lang-item">
+        <span>Anglais</span>
+        <span class="lang-level">Bon niveau</span>
+      </div>
+      <div class="lang-item">
+        <span>Wolof</span>
+        <span class="lang-level">Langue maternelle</span>
+      </div>
+      <div class="lang-item">
+        <span>Sérère</span>
+        <span class="lang-level">Langue maternelle</span>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- Header -->
+    <div>
+      <div class="header-name">IBRAHIMA SARR</div>
+      <div class="header-title">Développeur Web &amp; Desktop · Infographe</div>
+      <div class="header-bar"></div>
+    </div>
+
+    <!-- Résumé -->
+    <div class="section">
+      <div class="section-title">Profil</div>
+      <p class="summary">
+        Développeur passionné avec une solide expérience en développement web et desktop,
+        infographie et maintenance informatique. Habitué à travailler sur des projets complexes
+        en environnement universitaire et en freelance. Je combine des compétences techniques
+        étendues avec une maîtrise des outils IA pour livrer des solutions efficaces et modernes.
+      </p>
+    </div>
+
+    <!-- Expérience -->
+    <div class="section">
+      <div class="section-title">Expérience</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Technicien &amp; Développeur</div>
+            <div class="exp-company">FASTEF — Ex École Normale Supérieure · Dakar</div>
+          </div>
+          <span class="exp-period">Depuis 2023</span>
+        </div>
+        <ul class="exp-list">
+          <li>Développement d'applications web sur OJS pour le Département de Mathématiques (site de revues <em>Risadima</em>)</li>
+          <li>Développement d'applications pour le Service d'Approvisionnement</li>
+          <li>Application web de réservation des salles de classes</li>
+          <li>Support à la réalisation des outils de communication : bâches, roll-ups, flyers &amp; montage vidéo</li>
+          <li>Maintenance des outils informatiques (software &amp; hardware)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Projets -->
+    <div class="section">
+      <div class="section-title">Projets</div>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-name">KoriLab</div>
+          <div class="project-type">Studio · Web / Mobile / Desktop</div>
+          <div class="project-desc">
+            Fondateur du studio créatif KoriLab — développement de sites vitrines,
+            applications sur mesure et outils de gestion pour startups et PME à Dakar.
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-name">Rosmie</div>
+          <div class="project-type">Plateforme · Mise en relation</div>
+          <div class="project-desc">
+            Plateforme de mise en relation clients / prestataires de services.
+            Candidatures, sélection, gestion d'événements et paiements intégrés (Wave, Orange Money).
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Réalisations Freelance -->
+    <div class="section">
+      <div class="section-title">Réalisations Freelance</div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+
+        <div class="freelance-item">
+          <div class="freelance-year">2025</div>
+          <div class="freelance-name">Voix off — Page Instagram <em>kL_says</em></div>
+          <div class="freelance-desc">Production et enregistrement de voix off pour contenu digital.</div>
+        </div>
+
+        <div class="freelance-item">
+          <div class="freelance-year">2025</div>
+          <div class="freelance-name">Agence Emerite Canada</div>
+          <div class="freelance-desc">Réactualisation du site de l'agence <em>Emerite</em> · Site one page coiffure <em>Mendi's</em> · Site one page salon <em>Bergeron Esthétique</em></div>
+          <div class="freelance-list">
+            <span class="freelance-tag">WordPress</span>
+            <span class="freelance-tag">Design</span>
+            <span class="freelance-tag">SEO</span>
+          </div>
+        </div>
+
+        <div class="freelance-item">
+          <div class="freelance-year">2024</div>
+          <div class="freelance-name">Site e-commerce — <em>CTGHT</em></div>
+          <div class="freelance-desc">Création d'un site e-commerce complet avec catalogue produits et paiement en ligne.</div>
+          <div class="freelance-list">
+            <span class="freelance-tag">WooCommerce</span>
+            <span class="freelance-tag">PHP</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<div style="text-align:center;margin-top:16px;font-size:11px;color:#94a3b8;font-family:'Inter',sans-serif;">
+  Ctrl+P → Enregistrer en PDF · Format A4
+</div>
+
+</body>
+</html>

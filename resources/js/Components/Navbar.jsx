@@ -54,7 +54,7 @@ function CauriLogo({ color = "#38bdf8" }) {
 
 const NAV_LINKS = [
   { href: "/#about",         label: "À propos" },
-  { href: "/services",       label: "Services" },
+  { href: "/#services",      label: "Services" },
   { href: "/#portfolio",     label: "Portfolio" },
   { href: "/#team",          label: "Équipe" },
   { href: "/#testimonials",  label: "Avis" },

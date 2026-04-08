@@ -9,10 +9,9 @@
     },
     {
       "name": "korilab (Laravel)",
-      "runtimeExecutable": "php",
-      "runtimeArgs": ["artisan", "serve", "--port=8003"],
-      "port": 8003,
-      "cwd": "."
+      "runtimeExecutable": "F:/laragon/bin/php/php-8.3.30-Win32-vs16-x64/php.exe",
+      "runtimeArgs": ["D:/www/KoriLab/artisan", "serve", "--port=8003"],
+      "port": 8003
     }
   ]
 }
