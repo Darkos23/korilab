@@ -99,16 +99,6 @@ class HomeController extends Controller
         ]);
     }
 
-    public function services()
-    {
-        return Inertia::render('Services/Index');
-    }
-
-    public function cvGenerator()
-    {
-        return Inertia::render('Services/CvGenerator');
-    }
-
     public function cgv()
     {
         $site = Site::first();

@@ -1,0 +1,54 @@
+{
+  "_vendor-inertia-yb_NfDMD.js": {
+    "file": "assets/vendor-inertia-yb_NfDMD.js",
+    "name": "vendor-inertia",
+    "imports": [
+      "_vendor-motion-BhniRuxm.js"
+    ]
+  },
+  "_vendor-lucide-BjQodUyo.js": {
+    "file": "assets/vendor-lucide-BjQodUyo.js",
+    "name": "vendor-lucide",
+    "imports": [
+      "_vendor-motion-BhniRuxm.js"
+    ]
+  },
+  "_vendor-motion-BhniRuxm.js": {
+    "file": "assets/vendor-motion-BhniRuxm.js",
+    "name": "vendor-motion"
+  },
+  "_vendor-pdf-BVJr7Ydb.js": {
+    "file": "assets/vendor-pdf-BVJr7Ydb.js",
+    "name": "vendor-pdf",
+    "imports": [
+      "_vendor-motion-BhniRuxm.js"
+    ]
+  },
+  "_vendor-react-l0sNRNKZ.js": {
+    "file": "assets/vendor-react-l0sNRNKZ.js",
+    "name": "vendor-react"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-3AhIAaaJ.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-kyy9-3D6.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "imports": [
+      "_vendor-motion-BhniRuxm.js",
+      "_vendor-inertia-yb_NfDMD.js",
+      "_vendor-lucide-BjQodUyo.js"
+    ],
+    "css": [
+      "assets/app-3AhIAaaJ.css"
+    ]
+  }
+}
