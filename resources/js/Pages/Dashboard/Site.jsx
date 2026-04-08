@@ -28,6 +28,55 @@ const labelStyle = {
     display: 'block', marginBottom: 6,
 };
 
+const defaultTestimonial = { name: '', role: '', company: '', quote: '', stars: 5, initials: '', avatar: '' };
+
+function TestimonialsEditor({ items, onChange }) {
+    const update = (i, field, val) => { const n = [...items]; n[i] = { ...n[i], [field]: val }; onChange(n); };
+    const add    = () => onChange([...items, { ...defaultTestimonial }]);
+    const remove = i  => onChange(items.filter((_, j) => j !== i));
+    return (
+        <div className="space-y-4">
+            {items.map((t, i) => (
+                <div key={i} className="p-4 rounded-xl space-y-3" style={{ border: `1px solid ${INK3}`, background: 'rgba(0,0,0,0.02)' }}>
+                    <div className="flex justify-between items-center">
+                        <span style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 11, color: TERRA, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                            Témoignage {i + 1}
+                        </span>
+                        <button onClick={() => remove(i)} style={{ color: TERRA, background: 'none', border: 'none', cursor: 'pointer' }}>
+                            <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                        <div><label style={labelStyle}>Nom</label>
+                            <input value={t.name} onChange={e => update(i, 'name', e.target.value)} placeholder="Mary Katy Diagne" style={inputStyle} /></div>
+                        <div><label style={labelStyle}>Initiales</label>
+                            <input value={t.initials} onChange={e => update(i, 'initials', e.target.value)} placeholder="MKD" style={inputStyle} /></div>
+                        <div><label style={labelStyle}>Rôle</label>
+                            <input value={t.role} onChange={e => update(i, 'role', e.target.value)} placeholder="Fondatrice" style={inputStyle} /></div>
+                        <div><label style={labelStyle}>Entreprise</label>
+                            <input value={t.company} onChange={e => update(i, 'company', e.target.value)} placeholder="Rosmie Premium" style={inputStyle} /></div>
+                    </div>
+                    <div><label style={labelStyle}>Témoignage</label>
+                        <textarea value={t.quote} onChange={e => update(i, 'quote', e.target.value)} rows={3}
+                            placeholder="Ce que le client dit du studio..." style={{ ...inputStyle, resize: 'vertical' }} /></div>
+                    <div className="flex gap-3 items-center">
+                        <div style={{ flex: 1 }}><label style={labelStyle}>Avatar (chemin)</label>
+                            <input value={t.avatar} onChange={e => update(i, 'avatar', e.target.value)} placeholder="/testimonials/nom.jpg" style={inputStyle} /></div>
+                        <div style={{ width: 80 }}><label style={labelStyle}>Étoiles</label>
+                            <select value={t.stars} onChange={e => update(i, 'stars', Number(e.target.value))} style={inputStyle}>
+                                {[5,4,3,2,1].map(n => <option key={n} value={n}>{n} ★</option>)}
+                            </select></div>
+                    </div>
+                </div>
+            ))}
+            <button onClick={add} className="flex items-center gap-1 mt-1"
+                style={{ fontFamily: "'Century Gothic', 'Trebuchet MS', sans-serif", fontWeight: 600, fontSize: 10, color: TERRA, background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                <Plus className="w-3 h-3" /> Ajouter un témoignage
+            </button>
+        </div>
+    );
+}
+
 function StatsEditor({ stats, onChange }) {
     const update = (i, field, val) => { const n = [...stats]; n[i] = { ...n[i], [field]: val }; onChange(n); };
     const add    = () => onChange([...stats, { value: '', label: '' }]);
@@ -58,6 +107,10 @@ function StatsEditor({ stats, onChange }) {
 export default function DashboardSite({ admin, site }) {
     const [collapsed, setCollapsed] = useState(false);
     const [saved, setSaved] = useState(false);
+
+    const [testimonials, setTestimonials] = useState(
+        Array.isArray(site?.testimonials) && site.testimonials.length ? site.testimonials : []
+    );
 
     const [heroStats, setHeroStats] = useState(
         site?.heroStats?.length ? site.heroStats : [
@@ -116,6 +169,7 @@ export default function DashboardSite({ admin, site }) {
                 questCount:     form.aboutQuestCount,
             },
             contactInfo: { email: form.contactEmail, phone: form.contactPhone, location: form.contactLocation },
+            testimonials,
             footer:      { copyright: form.footerCopyright },
         }, {
             onSuccess: () => { setSaved(true); setTimeout(() => setSaved(false), 2500); },
@@ -166,6 +220,11 @@ export default function DashboardSite({ admin, site }) {
                 { label: 'Paragraphe 2',              name: 'aboutPara2',          placeholder: 'Notre équipe...', multiline: true },
                 { label: 'Compétences (virgules)',    name: 'aboutSkills',         placeholder: 'Design UI/UX, React, Branding...' },
             ],
+        },
+        {
+            title: 'Témoignages',
+            sub: 'Avis clients affichés sur le site',
+            testimonials: true,
         },
         {
             title: 'Contact',
@@ -226,7 +285,9 @@ export default function DashboardSite({ admin, site }) {
                     {sections.map((sec, si) => (
                         <div key={sec.title}>
                             <SysWin title={sec.title} subtitle={sec.sub} delay={si * 0.08}>
-                                {sec.stats
+                                {sec.testimonials
+                                    ? <TestimonialsEditor items={testimonials} onChange={setTestimonials} />
+                                    : sec.stats
                                     ? <StatsEditor stats={heroStats} onChange={setHeroStats} />
                                     : <div className="grid gap-4">
                                         {sec.fields.map(f => (
@@ -242,6 +303,7 @@ export default function DashboardSite({ admin, site }) {
                                             </div>
                                         ))}
                                     </div>
+                                  }
                                 }
                             </SysWin>
                         </div>

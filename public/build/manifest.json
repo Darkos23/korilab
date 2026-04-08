@@ -1,27 +1,20 @@
 {
-  "_vendor-inertia-yb_NfDMD.js": {
-    "file": "assets/vendor-inertia-yb_NfDMD.js",
-    "name": "vendor-inertia",
-    "imports": [
-      "_vendor-motion-BhniRuxm.js"
-    ]
+  "_vendor-inertia-x5TMZwdV.js": {
+    "file": "assets/vendor-inertia-x5TMZwdV.js",
+    "name": "vendor-inertia"
   },
-  "_vendor-lucide-BjQodUyo.js": {
-    "file": "assets/vendor-lucide-BjQodUyo.js",
+  "_vendor-lucide-kiEHQq__.js": {
+    "file": "assets/vendor-lucide-kiEHQq__.js",
     "name": "vendor-lucide",
     "imports": [
-      "_vendor-motion-BhniRuxm.js"
+      "_vendor-inertia-x5TMZwdV.js"
     ]
   },
-  "_vendor-motion-BhniRuxm.js": {
-    "file": "assets/vendor-motion-BhniRuxm.js",
-    "name": "vendor-motion"
-  },
-  "_vendor-pdf-BVJr7Ydb.js": {
-    "file": "assets/vendor-pdf-BVJr7Ydb.js",
-    "name": "vendor-pdf",
+  "_vendor-motion-C72kTcpW.js": {
+    "file": "assets/vendor-motion-C72kTcpW.js",
+    "name": "vendor-motion",
     "imports": [
-      "_vendor-motion-BhniRuxm.js"
+      "_vendor-inertia-x5TMZwdV.js"
     ]
   },
   "_vendor-react-l0sNRNKZ.js": {
@@ -29,7 +22,7 @@
     "name": "vendor-react"
   },
   "resources/css/app.css": {
-    "file": "assets/app-3AhIAaaJ.css",
+    "file": "assets/app-C9LnlQf4.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -38,17 +31,17 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-kyy9-3D6.js",
+    "file": "assets/app-NEXnNL3u.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "imports": [
-      "_vendor-motion-BhniRuxm.js",
-      "_vendor-inertia-yb_NfDMD.js",
-      "_vendor-lucide-BjQodUyo.js"
+      "_vendor-motion-C72kTcpW.js",
+      "_vendor-inertia-x5TMZwdV.js",
+      "_vendor-lucide-kiEHQq__.js"
     ],
     "css": [
-      "assets/app-3AhIAaaJ.css"
+      "assets/app-C9LnlQf4.css"
     ]
   }
 }
