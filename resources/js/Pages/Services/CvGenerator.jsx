@@ -3,7 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronRight, ChevronLeft, Plus, X, Check,
-  User, Briefcase, GraduationCap, Palette, CreditCard,
+  User, Briefcase, GraduationCap, Palette,
   Download, Eye,
 } from "lucide-react";
 import Navbar from "../../Components/Navbar";
@@ -45,7 +45,6 @@ const STEPS = [
   { id: 2, label: "Parcours",    icon: Briefcase },
   { id: 3, label: "Compétences", icon: GraduationCap },
   { id: 4, label: "Thème",       icon: Palette },
-  { id: 5, label: "Paiement",    icon: CreditCard },
 ];
 
 const INIT = {
@@ -867,7 +866,6 @@ function StepPaiement({ data, onPaid, paid }) {
 export default function CvGenerator() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState(INIT);
-  const [paid, setPaid] = useState(null);
   const [downloading, setDownloading] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
 
@@ -937,7 +935,6 @@ export default function CvGenerator() {
                   {step === 2 && <StepParcours data={data} set={setData} />}
                   {step === 3 && <StepCompetences data={data} set={setData} />}
                   {step === 4 && <StepTheme data={data} set={setData} />}
-                  {step === 5 && <StepPaiement data={data} onPaid={setPaid} paid={paid} />}
                 </motion.div>
               </AnimatePresence>
               <div className="flex items-center justify-between mt-8 pt-6" style={{ borderTop: "1px solid rgba(56,189,248,0.07)" }}>
@@ -946,19 +943,19 @@ export default function CvGenerator() {
                   style={{ color: "rgba(148,163,184,0.7)", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
                   <ChevronLeft className="w-4 h-4" /> Retour
                 </button>
-                {step < 5 ? (
+                {step < 4 ? (
                   <button onClick={() => canNext() && setStep(s => s + 1)} type="button" disabled={!canNext()}
                     className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all disabled:opacity-40"
                     style={{ background: "linear-gradient(135deg, rgba(56,189,248,0.2), rgba(56,189,248,0.08))", border: "1px solid rgba(56,189,248,0.3)", color: "#38bdf8" }}>
                     Continuer <ChevronRight className="w-4 h-4" />
                   </button>
-                ) : paid ? (
+                ) : (
                   <button onClick={handleDownload} disabled={downloading} type="button"
                     className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-[1.02] disabled:opacity-60 disabled:scale-100"
                     style={{ background: "linear-gradient(135deg, rgba(52,211,153,0.2), rgba(52,211,153,0.08))", border: "1px solid rgba(52,211,153,0.35)", color: "#34d399" }}>
                     <Download className="w-4 h-4" /> {downloading ? "Génération..." : "Télécharger PDF"}
                   </button>
-                ) : null}
+                )}
               </div>
             </div>
 
