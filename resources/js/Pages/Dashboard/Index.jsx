@@ -25,6 +25,14 @@ const ACTIONS = [
 
 const RANK_DOT = { S: '#3A6840', A: '#3A6840', B: '#8A5A18', C: '#B4AEA4' };
 
+const STATUS_STYLE = {
+  en_cours:   { label: 'En cours',   color: '#3A6840', bg: 'rgba(58,104,64,0.1)'   },
+  en_attente: { label: 'En attente', color: GOLD,      bg: 'rgba(138,90,24,0.1)'   },
+  urgent:     { label: 'Urgent',     color: TERRA,     bg: 'rgba(180,48,40,0.1)'   },
+  pause:      { label: 'Pause',      color: '#8A8478', bg: 'rgba(138,132,120,0.1)' },
+  livre:      { label: 'Livré',      color: '#3A6840', bg: 'rgba(58,104,64,0.08)'  },
+};
+
 /* ── Stat Card ── */
 function StatCard({ label, value, icon: Icon, sub, delay }) {
   return (
@@ -73,7 +81,7 @@ function ActionCard({ href, icon: Icon, label, desc, tag, delay }) {
 }
 
 /* ── Right Sidebar ── */
-function RightSidebar({ admin, members }) {
+function RightSidebar({ admin, members, urgentProjects = [], projetsEnCours = 0 }) {
   return (
     <div className="flex flex-col gap-4" style={{ width: 248, flexShrink: 0 }}>
 
@@ -86,6 +94,42 @@ function RightSidebar({ admin, members }) {
           Nous créons des projets <span style={{ color: TERRA }}>hauts de gammes</span>
         </p>
         <p style={{ fontFamily: FONT, fontSize: 11, color: '#B4AEA4', marginTop: 8 }}>Design · Dev · Stratégie · Dakar</p>
+      </motion.div>
+
+      {/* Projets en cours */}
+      <motion.div initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
+        className="rounded-xl overflow-hidden paper-card"
+        style={{ background: CARD, border: `1px solid ${INK3}`, boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
+        <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: INK3 }}>
+          <span style={{ fontFamily: FONT, fontSize: 10, fontWeight: 700, color: INK2, textTransform: 'uppercase', letterSpacing: '0.3em' }}>Projets</span>
+          <span style={{ fontFamily: FONT, fontSize: 11, fontWeight: 600, color: '#B4AEA4' }}>{projetsEnCours}</span>
+        </div>
+        <div className="px-3 py-1">
+          {urgentProjects.length === 0 ? (
+            <p className="text-xs py-4 text-center" style={{ color: '#B4AEA4', fontFamily: FONT }}>Aucun projet urgent</p>
+          ) : urgentProjects.map((p, i) => {
+            const s = STATUS_STYLE[p.status] ?? STATUS_STYLE.en_cours;
+            const days = p.deadline ? Math.ceil((new Date(p.deadline) - new Date()) / 86400000) : null;
+            return (
+              <div key={i} className="flex items-center gap-2 py-2.5 border-b last:border-0" style={{ borderColor: INK3 }}>
+                <div className="flex-1 min-w-0">
+                  <div className="truncate" style={{ fontFamily: FONT, fontSize: 12, fontWeight: 700, color: INK }}>{p.client_name}</div>
+                  <div className="truncate" style={{ fontFamily: FONT, fontSize: 10, color: '#B4AEA4', marginTop: 1 }}>{p.project_type}</div>
+                </div>
+                <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                  <span style={{ fontFamily: FONT, fontSize: 9, fontWeight: 700, color: s.color, background: s.bg, padding: '2px 6px', borderRadius: 4 }}>
+                    {s.label}
+                  </span>
+                  {days !== null && (
+                    <span style={{ fontFamily: FONT, fontSize: 9, color: days <= 2 ? TERRA : '#B4AEA4' }}>
+                      J{days >= 0 ? `-${days}` : `+${Math.abs(days)}`}
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </motion.div>
 
       {/* Équipe */}
@@ -127,7 +171,7 @@ function RightSidebar({ admin, members }) {
 }
 
 /* ── Page ── */
-export default function DashboardIndex({ admin, portfolioCount, servicesCount, unreadMessages, members = [] }) {
+export default function DashboardIndex({ admin, portfolioCount, servicesCount, unreadMessages, members = [], urgentProjects = [], projetsEnCours = 0 }) {
   const [collapsed, setCollapsed] = useState(false);
   const stats = [
     { label: "Projets actifs",   value: portfolioCount, icon: FolderOpen,    sub: "Réalisations en ligne", delay: 0.1  },
@@ -189,7 +233,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
 
           {/* Right sidebar */}
           <div className="hidden lg:block">
-            <RightSidebar admin={admin} members={members} />
+            <RightSidebar admin={admin} members={members} urgentProjects={urgentProjects} projetsEnCours={projetsEnCours} />
           </div>
 
         </div>
