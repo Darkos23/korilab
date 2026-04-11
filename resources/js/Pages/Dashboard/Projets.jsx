@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { router } from "@inertiajs/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FolderKanban, Plus, X, Pencil, Trash2, ChevronDown, Calendar, DollarSign } from "lucide-react";
+import { FolderKanban, Plus, X, Pencil, Trash2, ChevronDown, Calendar, Coins } from "lucide-react";
 import Sidebar from "@/Components/dashboard/Sidebar";
 import TopBar from "@/Components/dashboard/TopBar";
 import { SLSystemBG, StatusBar } from "@/Components/dashboard/SystemLayout";
@@ -271,7 +271,7 @@ function ProjectCard({ project, onEdit }) {
         <div className="flex items-center gap-3">
           {project.amount && (
             <div className="flex items-center gap-1">
-              <DollarSign size={10} style={{ color: GOLD }} />
+              <Coins size={10} style={{ color: GOLD }} />
               <span className="font-mono text-[10px]" style={{ color: GOLD }}>{Number(project.amount).toLocaleString('fr-FR')} F</span>
             </div>
           )}
