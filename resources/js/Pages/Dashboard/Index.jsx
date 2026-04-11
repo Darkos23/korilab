@@ -182,7 +182,7 @@ export default function DashboardIndex({ admin, portfolioCount, servicesCount, u
   return (
     <div className="min-h-screen flex relative overflow-hidden" style={{ background: '#F8F5EF' }}>
       <SLSystemBG />
-      <Sidebar admin={admin} />
+      <Sidebar admin={admin} collapsed={collapsed} />
 
       <main className="relative z-10 flex-1 overflow-auto flex flex-col">
         <TopBar admin={admin} collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
